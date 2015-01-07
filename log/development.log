@@ -514,3 +514,23 @@ ActionController::RoutingError (No route matches [GET] "/show"):
   Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/routes/_table.html.erb (41.7ms)
   Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.2ms)
   Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (149.8ms)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from block in tsort_each at /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/tsort.rb:226)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from block in tsort_each at /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/tsort.rb:226)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-07 14:46:36 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/railties-4.2.0/lib/rails/templates/rails/welcome/index.html.erb (15.8ms)
+Completed 200 OK in 56ms (Views: 34.9ms | ActiveRecord: 0.0ms)

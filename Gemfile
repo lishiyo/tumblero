@@ -36,7 +36,8 @@ gem 'unicorn-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'figaro'
+gem 'pusher'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
