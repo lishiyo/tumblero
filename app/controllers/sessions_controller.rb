@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       log_in!(@user)
       render json: @user
     else
-      render json: @user.errors.full_messages, status: 422
+			render json: ["wrong credentials"], status: 422
     end
   end
 

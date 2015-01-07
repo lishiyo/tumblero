@@ -22,7 +22,8 @@ Tumblero.Views.SessionNew = Backbone.View.extend({
 				Tumblero.current_user.fetch();
 //         Backbone.history.navigate("users/" + response.id, {trigger: true});
 				
-				window.location.replace("#/users/" + response.id);
+// 				window.location.replace("#/users/" + response.id);
+				window.location.replace("/blogs/new");
       }.bind(this),
 			
 			error: function(model, response, options){

@@ -21,7 +21,7 @@ Tumblero.Views.UserNew = Backbone.View.extend({
 				Tumblero.current_user = this.model;
 				Tumblero.current_user.fetch();
 //         Backbone.history.navigate("users/" + this.model.id, {trigger: true});
-        window.location.replace("#/users/" + this.model.id);
+        window.location.replace("/explore/blogs");
       }.bind(this),
 			error: function(model, response, options){
 				console.log(model, response, options);

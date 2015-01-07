@@ -11,7 +11,11 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+		transaction do
+			@user = User.new(user_params)
+			@user.dashboard.create!
+		end
+    
     if @user.save
       log_in!(@user)
       render json: @user
@@ -22,7 +26,8 @@ class Api::UsersController < ApplicationController
 
   def show
 		@user = current_user
-    render json: @user
+# 		render :show
+#     render json: @user
   end
 	
 	def edit

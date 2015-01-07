@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 	
 	namespace 'api' do
-		resources :users, only: [:new, :create, :show, :edit, :update, :destroy]
+		resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
+			
+		end
 	end
 	
 	resource :session, only: [:new, :create, :destroy]
@@ -9,10 +11,14 @@ Rails.application.routes.draw do
 	
 	resources :blogs, only: [:new, :create, :show] do 
 		resources :posts, only: [:index, :new]
+		resource :following, only: [:create, :destroy]
 	end
 	
-	get 'dashboard', to: 'api/users#dashboard', as: 'dashboard'
-	get 'signup/blogs', to: 'blogs#index'
+	resources :posts, only: [:show, :create] do
+	end
+	
+	resource :dashboard, only: [:show]
+	get 'explore/blogs', to: 'blogs#index'
 	
 	root to: "static_pages#index"
 	

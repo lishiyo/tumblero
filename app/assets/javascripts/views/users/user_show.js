@@ -1,7 +1,7 @@
 Tumblero.Views.UserShow = Backbone.View.extend({
 	template: JST['users/show'],
 		
-	initialize: function(){
+	initialize: function(opts){
 		this.listenTo(this.model, 'sync', this.render);
 	},
 	

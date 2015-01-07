@@ -1,0 +1,12 @@
+<li class="blog-profile">
+<h3><%= blog.name %> </h3>
+	<!-- follow button -->
+	<button class="follow-blog btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= current_user.follows?(blog) ? 'followed' : 'unfollowed' %>"></button>
+	
+<figure>
+	<%= filepicker_image_tag blog.avatar_url, w: 160, h: 160, fit: 'clip' %>
+	<figcaption><%= blog.description %></figcaption>
+</figure>
+
+
+</li>

@@ -9,4 +9,12 @@ class Dashboard < ActiveRecord::Base
 	
 	validates :user_id, presence: :true
 	
+	def all_posts
+		own_posts = Post.joins(blogs: :users).where(user_id: current_user.id)
+		
+# 		all_posts = self.own_posts.concat(self.followed_posts).sort_by {|post| post.created_at }
+		
+		own_posts.sort_by{|p| p.created_at}
+	end
+	
 end

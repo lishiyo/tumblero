@@ -1,0 +1,17 @@
+<h1>Create a Blog</h1>
+
+<%= bootstrap_form_for(@blog) do |f| %>
+	<div>
+		<%= f.text_field :name %>
+	</div>
+	<div>
+		<%= f.text_area :description, label: "Description", placeholder: "dedicated to kittens and rainbows... (max 140 char)"  %>
+	</div>
+
+  <div>
+    <%= f.label :avatar_url, "upload an avatar for your blog:" %>
+    <%= f.filepicker_field :avatar_url, dragdrop: true, store_location: 'S3' %> 
+  </div>
+
+  <%= f.submit "Create your Blog" %>
+<% end %>

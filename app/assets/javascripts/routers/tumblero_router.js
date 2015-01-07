@@ -5,9 +5,9 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	routes: {
-		"": "checkUser",
+		"#": "checkUser",
 		"users/new": "userNew",
-		"users/:id": "userShow",
+		"users/profile": "userShow",
 		"session/new": "sessionNew"
 	},
 	
