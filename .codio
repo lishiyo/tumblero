@@ -3,11 +3,11 @@
 
 // Run button configuration
   "commands": {
-        "Start Rails Server": "rails server"
+        "Start Rails Server": "TRUSTED_IP=172.17.42.1 rails s -b 0.0.0.0"
   },
 
 // Preview button configuration
   "preview": {
-        "Preview": "http://{{domain}}:3000/"
+        "Server": "http://{{domain}}:3000/"
   }
 }

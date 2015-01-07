@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -27,14 +28,41 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+gem 'unicorn-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'better_errors'
+gem 'binding_of_caller'
+gem 'pry-rails'
+gem 'quiet_assets'
+
+# UI
+gem 'bootstrap-sass',          '3.2.0.0'
+gem 'autoprefixer-rails'
+# gem 'bootstrap_form'
+gem 'will_paginate', '~> 3.0.5'
+gem 'will_paginate-bootstrap'
+gem "font-awesome-rails"
+gem 'formtastic', '~> 3.0'
+gem "mini_magick"
+gem 'bootsy'
+gem 'bootstrap-wysihtml5-rails'
+gem 'filepicker-rails'
+
+gem 'backbone-on-rails'
+gem 'js-routes'
+gem 'ejs'
+
+gem 'acts_as_votable', '~> 0.10.0'
+gem 'acts_as_commentable_with_threading'
+
 
