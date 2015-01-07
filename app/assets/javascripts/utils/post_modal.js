@@ -1,4 +1,4 @@
-FilepickerTest.PostModal = Backbone.View.extend({
+Tumblero.PostModal = Backbone.View.extend({
 	
 	setActive: function(opts) {
 		this.$('.bbm-modal__tab a').removeClass('active');
