@@ -70,6 +70,7 @@ GEM
       sass (~> 3.2)
     bootstrap-wysihtml5-rails (0.3.3.1)
       railties (>= 3.0)
+    bootstrap_form (2.2.0)
     bootsy (2.0.12)
       carrierwave (~> 0.10)
       mini_magick (~> 4.0)
@@ -236,6 +237,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (= 3.2.0.0)
   bootstrap-wysihtml5-rails
+  bootstrap_form
   bootsy
   coffee-rails (~> 4.0.0)
   ejs

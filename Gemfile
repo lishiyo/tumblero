@@ -49,7 +49,7 @@ gem 'quiet_assets'
 # UI
 gem 'bootstrap-sass',          '3.2.0.0'
 gem 'autoprefixer-rails'
-# gem 'bootstrap_form'
+gem 'bootstrap_form'
 gem 'will_paginate', '~> 3.0.5'
 gem 'will_paginate-bootstrap'
 gem "font-awesome-rails"

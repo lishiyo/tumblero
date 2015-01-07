@@ -42,6 +42,9 @@ Barebones tumblr - you can create multiple blogs and posts for each blog, and fo
   * :id, :user_id
   * belongs_to :user
   * has_many :posts, :followed_blogs
+3. DashboardBlog.rb - join table between dashboard and followed blogs
+  * :id, :dashboard_id, :blog_id
+	* optional -> should be following
 4. Post.rb
   * :id, :blog_id, :content (text), :filepicker_urls (optional)
   * belongs_to :blog (source blog)

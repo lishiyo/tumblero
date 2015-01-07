@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+	
+	namespace 'api' do
+		resources :users, only: [:new, :create, :show, :edit, :update, :destroy]
+	end
+	
+	resource :session, only: [:new, :create, :destroy]
+	resources :static_pages, only: [:index]
+	
+	resources :blogs, only: [:new, :create, :show] do 
+		resources :posts, only: [:index, :new]
+	end
+	
+	get 'dashboard', to: 'api/users#dashboard', as: 'dashboard'
+	get 'signup/blogs', to: 'blogs#index'
+	
+	root to: "static_pages#index"
+	
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

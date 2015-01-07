@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>tumblero</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= filepicker_js_include_tag %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<%= render 'layouts/header' %>
+	
+	<% flash.each do |type, message| %>
+		<% if type == 'errors' %>
+			<%= flash_errors %>
+		<% else %>
+			<div class="alert alert-#{type}">
+				<%= "#{message}" %>
+			</div>
+		<% end %>
+	<% end %>
 
 <%= yield %>
+	
+	<%= render 'layouts/footer' %>
+	
+	<% if current_user.present? %>
+		<script type="text/javascript">
+				Tumblero.current_user = new Tumblero.Models.User({id: <%= current_user.id %>});
 
+		</script>
+	<% end %>
+	
 </body>
 </html>
