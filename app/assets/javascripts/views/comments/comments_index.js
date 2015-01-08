@@ -9,24 +9,26 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	
 	initialize: function(opts){
 		// this.collection is all_comments
-		this.listenTo(this.collection, 'sync add', this.render);
+		this.listenTo(this.collection, 'sync', this.render);
+		this.listenTo(this.collection, 'add', this.addCommSubview);
 		this.post = this.collection.post;
-	
 		
-		collection = this.collection;
 		this.collection.forEach(function(comm){
-			
 			if (comm.get('parent_comment_id') === null ) {
-				console.log("attaching commsubview in idx", comm);
 				this.addCommSubview(comm);
 			}
     }.bind(this));
 	},
 	
+// 	addNewComment: function(){
+// 		console.log("add was called");
+// 		this.render();
+// 	},
 	
 	addCommSubview: function(comment) {
 		var commentSubview = new Tumblero.Views.CommentShow({
-      model: comment
+      model: comment,
+			post: this.post
     });
 
 		var contId = "#comments-index-"+this.post.id;
@@ -35,11 +37,6 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	},
 	
 	render: function(){
-		
-		var root_comments = this.collection.filter(function(comment){
-			return comment.child_comments().length === 0;
-		});
-		
 		var content = this.template({ 
 			post_id: this.post.id
 		});
@@ -63,20 +60,23 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	openReplyForm: function(event) {
 		event.preventDefault();
 		var $a = $(event.currentTarget);
+		
 		var newComment = new Tumblero.Models.Comment({
 			post: this.post
-		})
+		});
 		
 		if ($a.data("parent_id")) {
 			var newCommView = new Tumblero.Views.CommentNew({
 				model: newComment,
 				parent_id: $a.data("parent_id"),
-				collection: this.collection
+				collection: this.collection,
+				post_id: this.post.id
 			});
 		} else {
 			var newCommView = new Tumblero.Views.CommentNew({
 				model: newComment,
-				collection: this.collection
+				collection: this.collection,
+				post_id: this.post.id
 			});
 		}
 		
