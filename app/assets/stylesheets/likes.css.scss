@@ -1,0 +1,24 @@
+
+button.like-btn {
+/* 	position: absolute; */
+	right: 10px;
+	top: 10px;
+	border: none;
+	background-color: pink;
+}
+
+button.like-btn:hover {
+	background-color: red;
+	color: white;
+}
+
+button.liked {
+	@extend button.follow;
+	background-color: gray;
+	color: white;
+}
+
+button.liked:hover {
+	background-color: black;
+	color: white;
+}

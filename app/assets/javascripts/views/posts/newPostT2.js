@@ -7,13 +7,12 @@ Tumblero.Views.NewPostT2 = Tumblero.PostModal.extend({
 	},
 	
 	initialize: function(opts){
-		console.log("initialized T2");
 		$(".modal").removeClass("is-open");
-		this.blog_id = opts.blog_id;
+		this.blogs = opts.current_user.blogs();
 	},
 	
 	render: function(){
-		var content = this.template({ post: this.model, blog_id: this.blog_id });
+		var content = this.template({ post: this.model, blogs: this.blogs });
 		this.$el.html(content);
 		
 		this.setActive({ tabNum: 2 });

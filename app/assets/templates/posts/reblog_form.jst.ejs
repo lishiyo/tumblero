@@ -1,0 +1,35 @@
+<div class="bbm-modal__section modal">
+	
+	<form class='modal-form'>
+	<span class="modal-close js-modal-close">&times;</span>
+		
+	<div class="form-group">
+		<label for="post_blog_id">Reblog to:</label>
+		<select class="form-control" name="post[blog_id]" id="post_blog_id">
+			<% blogs.each(function(blog){ %>
+					<option value="<%= blog.id %>"><%= blog.escape('name') %></option>
+			<% }); %>
+		</select>
+	</div>
+	
+	<div class="form-group">
+		<input type="hidden" name="post[filepicker_urls]" id="post_filepicker_urls">
+		<div class="image-thumbnails">
+			<% if (post.escape('filepicker_urls').length > 0) { %>
+				<% post.escape('filepicker_urls').split(",").each(function(file_url) { %>
+					<img src="<%= file_url %>">
+				<% }); %>
+			<% } %>
+		</div>
+	</div>	
+	
+	<div class="form-group wysiwyg">
+    <textarea id="post-content" name="post[content]" value="<%= post.escape('content') %>">
+		 </textarea>
+	</div>
+	
+  <input type="submit" class="submit-el" value="POST">
+	</form>
+	
+	<div class="modal-screen js-modal-close"></div>
+</div>

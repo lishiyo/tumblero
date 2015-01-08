@@ -3,46 +3,97 @@ window.Tumblero = {
   Collections: {},
   Views: {},
   Routers: {},
+	
   initialize: function() {
-    console.log('Hello from Backbone!');
+		console.log("welcome to backbone");
 		
-		var $main = $("#main");
+    var $main = $("#main");
 		new Tumblero.Routers.Router({
-			$rootEl: $main
+			$rootEl: $main,
+			currentUser: this.currentUser()
 		});
 		Backbone.history.start();
+		
   },
+	
+	currentUser: function(){
+		if (!Tumblero.current_user) {
+			return new Tumblero.Models.User();
+		} else {
+			Tumblero.current_user.fetch({
+				success: function(){
+					this.setPostModal();
+					this.setReblogModal();
+				}.bind(this)
+			});
+			
+			return Tumblero.current_user;
+		}
+	},
+	
+	setReblogModal: function(){
+		
+		$("body").on("click", ".reblog-btn", function(event){
+			event.preventDefault();
+			
+			var postId = $(event.currentTarget).data("post-id"),
+					post = new Tumblero.Models.Post({ id: postId }),
+					user = this.currentUser();
+			
+			console.log("clicked reblog-btn with postId and user: ", postId, user);
+			
+			post.fetch({
+				success: function(model) {
+					console.log("setReblogModal got post: ", model);
+					
+					var reblogView = new Tumblero.Views.ReblogForm({
+						model: post,
+						current_user: user
+					});
+					
+					$('.modal-container').html(reblogView.render().$el);
+				}.bind(this), 
+				
+				error: function(model, resp) {
+					console.log("setReblogModal error", model, resp);
+				}
+			});
+			
+		}.bind(this));
+	},
 	
 	setPostModal: function(){
 		
 		$("body").on("click", ".js-modal-open-1", function(event){
 			event.preventDefault();
-
-			var post = new Tumblero.Models.Post();
-			var blog_id = $(event.currentTarget).data("id");
-			console.log(blog_id);
+			var post = new Tumblero.Models.Post(),
+					user = this.currentUser();
+			
+			console.log("currentUser: ", user);
+			
 			var newPostT1 = new Tumblero.Views.NewPostT1({
 				model: post,
-				blog_id: blog_id
+				current_user: user
 			});
 
 			$('.modal-container').html(newPostT1.render().$el);
-		});
+		}.bind(this));
 
 		$("body").on("click", ".js-modal-open-2", function(event){
+			
 			event.preventDefault();
-
-			// render new Post view
-			var post = new Tumblero.Models.Post();
-			var blog_id = $(event.currentTarget).data("id");
-			console.log(blog_id);
+			var post = new Tumblero.Models.Post(),
+					user = this.currentUser();
+			
+			console.log("currentUser: ", user);
+			
 			var newPostT2 = new Tumblero.Views.NewPostT2({
 				model: post,
-				blog_id: blog_id
+				current_user: user
 			});
 
 			$('.modal-container').html(newPostT2.render().$el);
-		});
+		}.bind(this));
 
 		$("body").on("click", ".js-modal-close", function(event){
 			event.preventDefault();
@@ -71,6 +122,5 @@ $(document).ready(function(){
 	bindNavHandlers();
 	
   Tumblero.initialize();
-	Tumblero.setPostModal();
 	
 });

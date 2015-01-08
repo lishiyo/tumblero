@@ -10,14 +10,19 @@ Rails.application.routes.draw do
 	resources :static_pages, only: [:index]
 	
 	resources :blogs, only: [:new, :create, :show] do 
-		resources :posts, only: [:index, :new]
+		resources :posts, only: [:index]
 		resource :following, only: [:create, :destroy]
 	end
 	
-	resources :posts, only: [:show, :create] do
+	resources :posts, only: [:new, :show, :create] do
+		member do
+			get 'reblog'
+		end
 	end
 	
 	resource :dashboard, only: [:show]
+	resource :like, only: [:create, :destroy] 
+	
 	get 'explore/blogs', to: 'blogs#index'
 	
 	root to: "static_pages#index"

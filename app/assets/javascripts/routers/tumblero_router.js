@@ -1,7 +1,8 @@
 Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	initialize: function(opts){
-		this.$rootEl = opts.$rootEl
+		this.$rootEl = opts.$rootEl;
+		this.currentUser = opts.currentUser;
 	},
 	
 	routes: {
@@ -37,10 +38,9 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id){
-//     var user = new Tumblero.Models.User({id: id});
 		var user = Tumblero.current_user;
     user.fetch();
-		console.log(user);
+		
 		var userShowView = new Tumblero.Views.UserShow({ model: user });
     this._swapView(userShowView);  
   },

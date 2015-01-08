@@ -3,11 +3,15 @@ class FollowingsController < ApplicationController
 
   def create
    
-		@follow = current_user.followings.create!(blog_id: params[:blog_id])
+		@follow = current_user.followings.build(blog_id: params[:blog_id])
 
     respond_to do |format|
-      format.html { redirect_to request.referrer }
-      format.json { render json: @follow }
+			if @follow.save
+      	format.html { redirect_to request.referrer }
+      	format.json { render json: @follow }
+			else			
+				format.json { render json: @follow.errors.full_messages, status: 422 }
+			end
     end
   end
 
@@ -18,7 +22,8 @@ class FollowingsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to request.referrer }
-      format.json { render json: @follow }
+      format.json { render json: nil }
     end
   end
+	
 end

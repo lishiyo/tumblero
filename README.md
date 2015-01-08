@@ -42,9 +42,7 @@ Barebones tumblr - you can create multiple blogs and posts for each blog, and fo
   * :id, :user_id
   * belongs_to :user
   * has_many :posts, :followed_blogs
-3. DashboardBlog.rb - join table between dashboard and followed blogs
-  * :id, :dashboard_id, :blog_id
-	* optional -> should be following
+  * displays only posts by followed_blogs (not own posts)
 4. Post.rb
   * :id, :blog_id, :content (text), :filepicker_urls (optional)
   * belongs_to :blog (source blog)
@@ -63,9 +61,13 @@ Barebones tumblr - you can create multiple blogs and posts for each blog, and fo
 8. Comment.rb
   * :id, :user_id, :post_id, :parent_comment_id
   * belongs_to :user, :post
-9. Reblog.rb (reblog post to a blog)
+	* you can simply "Comment" or "Comment + Reblog" onto your own blog(s)
+9. Reblog - this is a method, not a resource! The resource is a Post.
   * :id, :blog_id, :post_id 
-  * dashboard displays both blog’s own posts and reblogs
+  * a blog has_many reblogged_posts; a post has_many :reblogger_blogs
+  * a user's blog displays both blog’s own posts and reblogged posts
+  * you don't need to follow a blog to reblog a post (i.e. you can reblog any post)
+	* reblog means you create a new post onto your own blog via a copy
 10. Tag.rb (posts only)
   * :id, :name
   * has_many :taggings, :posts (through :taggings)

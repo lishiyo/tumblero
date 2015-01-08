@@ -20,7 +20,7 @@ body {
 }
 
 form {
-	max-width: 50%;
+	max-width: 55%;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -37,15 +37,4 @@ li.blog-profile {
 	float: left;
 	max-width: 200px;
 	position: relative; /* to place follow button */
-}
-
-button.follow {
-/* 	position: absolute; */
-	right: 10px;
-	top: 10px;
-}
-
-button.followed {
-	@extend button.follow;
-	background-color: gray;
 }

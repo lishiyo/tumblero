@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 	has_one :dashboard, inverse_of: :user, dependent: :destroy
 	has_many :followings, dependent: :destroy
 	has_many :followed_blogs, through: :followings, source: :blog, dependent: :destroy
+	
+	has_many :likings, class_name: "Like", foreign_key: :user_id, inverse_of: :user
+	has_many :liked_posts, through: :likings, source: :likeable, source_type: 'Post'
+	
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64
@@ -40,6 +44,14 @@ class User < ActiveRecord::Base
 	
 	def follows?(blog)
 		self.followed_blogs.include?(blog)
+	end
+	
+	def likes?(likeable)
+		if likeable.class == Post
+			return self.liked_posts.include?(likeable)
+		else
+			
+		end
 	end
 
   private

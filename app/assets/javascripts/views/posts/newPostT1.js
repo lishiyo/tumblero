@@ -7,8 +7,8 @@ Tumblero.Views.NewPostT1 = Tumblero.PostModal.extend({
 	},
 	
 	initialize: function(opts){
-		this.blog_id = opts.blog_id;
 		$(".modal").removeClass("is-open");
+		this.blogs = opts.current_user.blogs();
 	},
 	
 	onShow: function(){
@@ -28,7 +28,8 @@ Tumblero.Views.NewPostT1 = Tumblero.PostModal.extend({
 	},
 	
 	render: function(){
-		var content = this.template({ post: this.model, blog_id: this.blog_id });
+		console.log("blogs", this.blogs);
+		var content = this.template({ post: this.model, blogs: this.blogs });
 		this.$el.html(content);
 		
 		this.onShow();

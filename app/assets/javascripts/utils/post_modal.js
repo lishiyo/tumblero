@@ -41,16 +41,6 @@ Tumblero.PostModal = Backbone.View.extend({
 			container: 'modal'
 		}, function(blobs) {
 			this.processImages(blobs, this.imageOpts);
-// 			blobs.forEach(function(blob){	
-// 				inputVal = inputVal.split(",").concat(blob.url).filter(function(v){ return v!==''}).toString();
-				
-// 				$input.val(inputVal);
-// 				var $image = $('<img>').attr('src', blob.url);
-// 				$previews.append($image);
-				
-// 			});
-			
-// 			$previews.append(xBtn);
 		}.bind(this));
 		
 	},
@@ -67,6 +57,23 @@ Tumblero.PostModal = Backbone.View.extend({
 			
 		opts.$previews.append(opts.xBtn);
 	
+	},
+	
+	// editor for tab1 and reblog form
+	onShow: function(){
+		this.$('#post-content').wysihtml5({
+			toolbar: {
+				"font-styles": true, 
+				"emphasis": true, //Italics, bold, etc. Default true
+				"lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+				"html": false, //Button which allows you to edit the generated HTML. Default false
+				"link": false, 
+				"image": false, 
+				"color": true, //Button to change color of font  
+				"blockquote": true, //Blockquote  
+				"fa": true
+			}
+		});
 	},
 	
 	submitForm: function(event) {

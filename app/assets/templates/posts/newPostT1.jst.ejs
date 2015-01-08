@@ -4,7 +4,12 @@
 	<span class="modal-close js-modal-close">&times;</span>
 		
 	<div class="form-group">
-		<input type="hidden" name="post[blog_id]" value="<%= blog_id %>">
+		<select class="form-control" name="post[blog_id]">
+			<% blogs.each(function(blog){ %>
+					<option value="<%= blog.id %>"><%= blog.escape('name') %></option>
+			<% }); %>
+		</select>
+
 	</div>
 	
 	<div class="form-group">

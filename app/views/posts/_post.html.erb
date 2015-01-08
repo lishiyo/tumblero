@@ -7,9 +7,12 @@
 	
 <p><%= post.content.html_safe if post.content %></p>
 
+	<button class="btn like-btn" data-likeable-type="Post" data-likeable-id="<%= post.id %>" data-initial-like-state="<%= current_user.likes?(post) ? 'liked' : 'unliked' %>"></button>
+	
+	<button class="btn reblog-btn" data-post-id="<%= post.id %>">reblog</button>
+	
 	<a href="#/posts/<%= post.id %>/comments">comment</a>
-		<div id="post-comments-<%= post.id %>" class="comments-container">
-			
+		<div id="post-comments-<%= post.id %>" class="comments-container">	
 		</div>
 	
 </div>

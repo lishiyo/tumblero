@@ -3,7 +3,7 @@
 	<form class='modal-form'>
 	<span class="modal-close js-modal-close">&times;</span>
 		
-	<pre id="localDropResult hidden"></pre>
+	<div class="errors" id="localDropResult hidden"></div>
 	
 	<div id="dropPane">
 		drop images here
@@ -15,7 +15,11 @@
 	<div class="image-thumbnails"></div>
 		
 	<div class="form-group">
-		<input type="hidden" name="post[blog_id]" value="<%= blog_id %>">
+		<select class="form-control" name="post[blog_id]">
+			<% blogs.each(function(blog){ %>
+					<option value="<%= blog.id %>"><%= blog.escape('name') %></option>
+			<% }); %>
+		</select>
 	</div>
 	
 		

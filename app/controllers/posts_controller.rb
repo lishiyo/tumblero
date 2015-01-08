@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
 	
-	before_action :get_blog, only: [:index, :new]
-	before_action :get_post, only: [:show, :comments, :new_comment]
+	before_action :set_post, only: [:show, :comments, :reblog, :new_comment]
 	
 	def index
+		@blog = Blog.find(params[:blog_id])
 		@posts = @blog.posts
 	end
 	
-	def show
+	def show	
 		respond_to do |f| 
 			f.html { render 'show'}
 			f.json { render json: @post }
@@ -15,13 +15,14 @@ class PostsController < ApplicationController
 	end
 	
 	def new
-		@post = @blog.posts.new
+		@post = Post.new
 	end
 	
+	# post_params[:blog_id] comes from form
 	def create
-		blog = Blog.find(post_params[:blog_id])
+		@blog = Blog.find(post_params[:blog_id])
 		
-		@post = blog.posts.build(post_params)
+		@post = @blog.posts.build(post_params)
 		if @post.save
 			respond_to do |format|
 				format.html { redirect_to blog_url(blog) }
@@ -32,6 +33,12 @@ class PostsController < ApplicationController
 			flash.now[:errors] = "woops"
 			redirect_to :back
 		end
+	end
+	
+	# GET /posts/:id/reblog => open up reblog form
+	# button to url '/posts/'+post.id+'/reblog'
+	def reblog
+		@post = Post.new
 	end
 	
 	def comments
@@ -55,12 +62,9 @@ class PostsController < ApplicationController
 	end
 	
 	private
+
 	
-	def get_blog
-		@blog = Blog.find(params[:blog_id])
-	end
-	
-	def get_post
+	def set_post
 		@post = Post.find(params[:id])
 	end
 	
