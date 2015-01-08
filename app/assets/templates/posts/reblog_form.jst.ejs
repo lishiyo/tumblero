@@ -11,12 +11,18 @@
 			<% }); %>
 		</select>
 	</div>
+		
+	<div class="form-group">
+		<h3>
+				<%= post.escape('title') %>
+		</h3>
+	</div>
 	
 	<div class="form-group">
-		<input type="hidden" name="post[filepicker_urls]" id="post_filepicker_urls">
+		<input type="hidden" name="post[filepicker_urls]" id="post_filepicker_urls" value="<%= post.escape('filepicker_urls') %>">
 		<div class="image-thumbnails">
 			<% if (post.escape('filepicker_urls').length > 0) { %>
-				<% post.escape('filepicker_urls').split(",").each(function(file_url) { %>
+				<% post.get('filepicker_urls').split(",").forEach(function(file_url) { %>
 					<img src="<%= file_url %>">
 				<% }); %>
 			<% } %>
@@ -24,7 +30,7 @@
 	</div>	
 	
 	<div class="form-group wysiwyg">
-    <textarea id="post-content" name="post[content]" value="<%= post.escape('content') %>">
+    <textarea id="post-content" name="post[content]">
 		 </textarea>
 	</div>
 	

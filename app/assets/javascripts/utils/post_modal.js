@@ -100,7 +100,7 @@ Tumblero.PostModal = Backbone.View.extend({
 		console.log("clicked submit");
 		$(".modal").removeClass("is-open");
 		// add to collection
-		window.location.replace("/blogs/"+this.blog_id);
+		window.location.replace("/dashboard");
 	}
 	
 });

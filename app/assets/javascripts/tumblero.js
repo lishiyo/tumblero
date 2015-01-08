@@ -38,7 +38,7 @@ window.Tumblero = {
 			
 			var postId = $(event.currentTarget).data("post-id"),
 					post = new Tumblero.Models.Post({ id: postId }),
-					user = this.currentUser();
+					user = Tumblero.current_user;
 			
 			console.log("clicked reblog-btn with postId and user: ", postId, user);
 			
@@ -67,7 +67,7 @@ window.Tumblero = {
 		$("body").on("click", ".js-modal-open-1", function(event){
 			event.preventDefault();
 			var post = new Tumblero.Models.Post(),
-					user = this.currentUser();
+					user = Tumblero.current_user;
 			
 			console.log("currentUser: ", user);
 			
@@ -83,7 +83,7 @@ window.Tumblero = {
 			
 			event.preventDefault();
 			var post = new Tumblero.Models.Post(),
-					user = this.currentUser();
+					user = Tumblero.current_user;
 			
 			console.log("currentUser: ", user);
 			

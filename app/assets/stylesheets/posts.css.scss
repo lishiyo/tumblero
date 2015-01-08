@@ -5,13 +5,27 @@
 
 /* Edit Vendor */
 
-
 #filepicker_dialog_container {
 	left: 50% !important;
   transform: translateX(-50%) !important;
 	position: absolute !important;
 }
-/* New Post - Modal */
+
+/* Posts */
+
+.post {
+	margin: 20px auto;
+	padding: 20px;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.post image {
+	max-width: 600px;
+	max-height: 300px;
+}
+
+/* Post Modal */
 
 .modal {
   display: none;

@@ -22,12 +22,13 @@
 
 <%= yield %>
 	
+	<div class="modal-container"></div>
+	
 	<%= render 'layouts/footer' %>
 	
 	<% if current_user.present? %>
 		<script type="text/javascript">
 				Tumblero.current_user = new Tumblero.Models.User({id: <%= current_user.id %>});
-
 		</script>
 	<% end %>
 	

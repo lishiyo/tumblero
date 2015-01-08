@@ -11,11 +11,13 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 	},
 	
 	render: function(){
-		console.log("blogs", this.blogs);
+		console.log("blogs and model", this.blogs, this.model);
 		var content = this.template({ post: this.model, blogs: this.blogs });
 		this.$el.html(content);
 		
 		this.onShow();
+		var postContent = "<blockquote>" + this.model.escape('content') + "</blockquote><br>";
+		this.$('#post-content').html(postContent);
 		this.$(".modal").addClass("is-open");
 		
 		return this;

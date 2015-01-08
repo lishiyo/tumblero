@@ -1,5 +1,6 @@
 <div class="post">
-<h4><%= post.title.html_safe if post.title %></h4>
+	
+<h3><%= post.title.html_safe if post.title %></h3>
 	
 <% post.filepicker_urls.split(",").each do |file_url| %>
 	<%= filepicker_image_tag file_url, w: 300, h: 300, fit: 'clip' %>

@@ -1,6 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@import "mixins";
+
 /** reset **/
 
 .group:after {
@@ -11,12 +13,15 @@
 
 ul, li {
 	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 /** universal **/
 
 body {
 	text-align: center;
+	background-color: $lilac-light
 }
 
 form {

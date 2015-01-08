@@ -2,17 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-/* mixins, variables, etc. */
-
-$gray-medium-light: #eaeaea;
-$gray-light: #F0F8FF;
-$gray-darker: #778899;
-
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
-}
+@import "custom";
 
 /* universal */
 
@@ -58,7 +48,7 @@ textarea {
 }
 
 #main-nav li a {
-	color: white;
+	color: gray;
 }
 
 /* footer */
