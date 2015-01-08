@@ -1,0 +1,16 @@
+<p>
+  <%= comment.escape('body') %> | <a href="" class="reply-comment" data-parent_id="<%= comment.id %>">reply</a>
+</p>
+
+<ul>
+	<% if (comment.child_comments().length > 0) { %>
+	
+		<% comment.child_comments().forEach(function(child_comment) { %>
+
+			<li><%= JST['comments/_comment']({ comment: child_comment }) %></li>
+
+		<% }); %>
+	<% } %>
+	
+</ul>
+

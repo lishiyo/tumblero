@@ -42,25 +42,16 @@ class PostsController < ApplicationController
 		@post.reblogged = true
 	end
 	
+	# COMMENTS
+	# GET /posts/:id/comments
 	def comments
-		@all_comments = @post.comment_threads
-		
+		# for new comment form 
+# 		@comment = current_user.comments.new
+
+		# returns post.comment_ids hash
 		render 'comments'
 	end
 	
-	def new_comment
-		
-		@comment = Comment.build_from(@post, comment_params[:user_id], comment_params[:body])
-		@comment.parent_id = comment_params[:parent_id]
-		
-		if @comment.save
-			respond_to do |format|
-				format.json { render json: @comment }
-			end
-		else
-			render json: nil, status: 422
-		end
-	end
 	
 	private
 

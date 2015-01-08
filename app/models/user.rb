@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 	has_many :likings, class_name: "Like", foreign_key: :user_id, inverse_of: :user
 	has_many :liked_posts, through: :likings, source: :likeable, source_type: 'Post'
 	
+	has_many :comments, inverse_of: :user
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64

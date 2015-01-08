@@ -15,13 +15,16 @@ Rails.application.routes.draw do
 	end
 	
 	resources :posts, only: [:new, :show, :create] do
+		resources :comments, only: [:new]
 		member do
 			get 'reblog'
+			get 'comments'
 		end
 	end
 	
 	resource :dashboard, only: [:show]
 	resource :like, only: [:create, :destroy] 
+	resources :comments, only: [:create, :show, :destroy]
 	
 	get 'explore/blogs', to: 'blogs#index'
 	

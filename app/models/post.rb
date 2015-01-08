@@ -1,7 +1,5 @@
 class Post < ActiveRecord::Base
 	
-# 	acts_as_commentable
-	
 	belongs_to :blog
 	has_one :author, through: :blog, source: :user
 	has_many :likes, as: :likeable, dependent: :destroy
@@ -13,6 +11,19 @@ class Post < ActiveRecord::Base
 	validates :content, presence: true, unless: ->(post){ post.filepicker_urls.present? }
 	validates :filepicker_urls, presence: true, unless: ->(post){ post.content.present? }
 	validates :blog, presence: :true
+	
+	has_many :comments, inverse_of: :post, dependent: :destroy
+	
+	# { 0 => [1,2,3], 2 => [4,5,6] }
+	def comments_by_parent
+		comments_by_parent = Hash.new { |hash, key| hash[key] = [] }
+
+		self.comments.includes(:user).each do |comment|
+			comments_by_parent[comment.parent_comment_id] << comment
+    end
+
+    comments_by_parent
+	end
 	
 	def create_reblog_for!(blog_id)
 		if self.reblogged 

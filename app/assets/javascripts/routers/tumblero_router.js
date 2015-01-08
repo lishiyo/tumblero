@@ -9,7 +9,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"#": "checkUser",
 		"users/new": "userNew",
 		"users/profile": "userShow",
-		"session/new": "sessionNew"
+		"session/new": "sessionNew",
+		"posts/:post_id/comments": "showComments"
 	},
 	
 	checkUser: function() { 
@@ -47,6 +48,29 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		var userShowView = new Tumblero.Views.UserShow({ model: user });
     this._swapView(userShowView);  
   },
+	
+	showComments: function(post_id){
+		
+		var commCont = '#post-comments-' + post_id;
+		var $commCont = $(commCont);
+		var post = new Tumblero.Models.Post({id: post_id});
+		
+		post.fetch({
+			success: function(){
+				var root_comments = new Tumblero.Collections.Comments({ post: post });
+				root_comments.fetch();
+				
+				var commentsIndex = new FilepickerTest.Views.CommentsIndex({ collection: post_comments });
+			
+				$commCont.html(commentsIndex.render().$el);
+			},
+			error: function(){
+				console.log("something went wrong");
+			}
+		})
+		
+		
+	}
 	
 	_swapView: function(newView) {
     this._currentView && this._currentView.remove();
