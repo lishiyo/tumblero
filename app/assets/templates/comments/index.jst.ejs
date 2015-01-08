@@ -1,18 +1,7 @@
 <div class="comments-container">
 	
-<ul>
-
-	<% root_comments.each(function(root_comm, idx) { %>
- 		
-		<li><%= root_comm.escape('body') %> || <a href="" class="reply-comment">reply</a>
-		</li>
+<ol class="comments-index" id="comments-index-<%= post_id %>">
+</ol>
 	
-		<ul class="child-comments-cont"></ul>
-	
-	<% }); %>
-	
-	
-</ul>
-	
-	
+	<a href="" class="reply-comment">reply</a>
 </div>

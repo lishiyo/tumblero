@@ -11,15 +11,13 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 		// this.collection is all_comments
 		this.listenTo(this.collection, 'sync add', this.render);
 		this.post = this.collection.post;
-		
-		console.log("commentsIndex collection", this.collection);
+	
 		
 		collection = this.collection;
 		this.collection.forEach(function(comm){
 			
-			console.log("child_comments for", comm, comm.child_comments());
-			if (comm.child_comments().length > 0) {
-				console.log("attaching commsubview for room_comm:", comm);
+			if (comm.get('parent_comment_id') === null ) {
+				console.log("attaching commsubview in idx", comm);
 				this.addCommSubview(comm);
 			}
     }.bind(this));
@@ -31,19 +29,25 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
       model: comment
     });
 
-    this.addSubview("ul.child-comments-cont", commentSubview);
+		var contId = "#comments-index-"+this.post.id;
+	
+    this.addSubview(contId, commentSubview);
 	},
 	
 	render: function(){
-		var roots = this.collection.filter({
-			
-		})
-		var content = this.template({ root_comments: this.collection });
-		// attach child comments subviews
-		this.attachSubviews();
+		
+		var root_comments = this.collection.filter(function(comment){
+			return comment.child_comments().length === 0;
+		});
+		
+		var content = this.template({ 
+			post_id: this.post.id
+		});
 		
 		var $close = $('<a class="close-comments" href="">close</a>');
 		this.$el.html(content).append($close);
+		// attach child comments subviews
+		this.attachSubviews();
 		
 		return this;
 	},
@@ -53,24 +57,24 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 		var $commentCont = $(event.currentTarget).closest('.comments-container');
 		$commentCont.empty();
 		
-		Backbone.history.navigate("", { replace: true });
+// 		Backbone.history.navigate("", { replace: true });
 	},
 	
 	openReplyForm: function(event) {
 		event.preventDefault();
 		var $a = $(event.currentTarget);
-		var newComment = new FilepickerTest.Models.Comment({
+		var newComment = new Tumblero.Models.Comment({
 			post: this.post
 		})
 		
 		if ($a.data("parent_id")) {
-			var newCommView = new FilepickerTest.Views.CommentNew({
+			var newCommView = new Tumblero.Views.CommentNew({
 				model: newComment,
 				parent_id: $a.data("parent_id"),
 				collection: this.collection
 			});
 		} else {
-			var newCommView = new FilepickerTest.Views.CommentNew({
+			var newCommView = new Tumblero.Views.CommentNew({
 				model: newComment,
 				collection: this.collection
 			});

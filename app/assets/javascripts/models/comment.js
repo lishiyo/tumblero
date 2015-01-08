@@ -14,12 +14,10 @@ Tumblero.Models.Comment = Backbone.Model.extend({
       });
     }
 		
-// 		console.log("comment.js this._child_comments", this._child_comments);
     return this._child_comments;
 	},
 	
 	parse: function(resp) {
-// 		debugger
 		
 		if (resp.child_comments) {
 			this.child_comments().set(resp.child_comments, {parse: true});

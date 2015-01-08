@@ -24,8 +24,6 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 		var url = '/posts/'+this.model.post.id+'/new_comment';
 		
 		formData['comment']['parent_id'] = this.parent_id;
-		// placeholder for now
-		formData['comment']['user_id'] = 1; 
 		
 		
 		var commentsColl = this.collection;

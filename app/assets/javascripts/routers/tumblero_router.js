@@ -62,8 +62,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 					success: function(){
 						var commentsIndex = new Tumblero.Views.CommentsIndex({ collection: all_comments });
 
-					console.log("root_comments in router", post, all_comments);
-
 					$commCont.html(commentsIndex.render().$el);
 					}
 				});
