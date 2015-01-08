@@ -17,6 +17,12 @@ ul, li {
 	margin: 0;
 }
 
+/** vendor fix **/
+
+.container {
+	max-width: 900px;
+}
+
 /** universal **/
 
 body {

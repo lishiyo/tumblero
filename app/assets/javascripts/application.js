@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.serializejson.min
 //= require bootstrap-sprockets
+//= require js-routes
 //= require underscore
 //= require backbone
 //= require bootstrap-wysihtml5

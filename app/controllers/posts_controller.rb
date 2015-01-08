@@ -21,9 +21,9 @@ class PostsController < ApplicationController
 	# post_params[:blog_id] comes from form
 	def create
 		@blog = Blog.find(post_params[:blog_id])
-		
 		@post = @blog.posts.build(post_params)
-		if @post.save
+		
+		if full_transact?
 			respond_to do |format|
 				format.html { redirect_to blog_url(blog) }
 				format.json { render json: @post }
@@ -36,9 +36,10 @@ class PostsController < ApplicationController
 	end
 	
 	# GET /posts/:id/reblog => open up reblog form
-	# button to url '/posts/'+post.id+'/reblog'
+	# button_to '/posts/'+post.id+'/reblog'
 	def reblog
 		@post = Post.new
+		@post.reblogged = true
 	end
 	
 	def comments
@@ -63,13 +64,23 @@ class PostsController < ApplicationController
 	
 	private
 
+	def full_transact?
+		Post.transaction do
+			@post.save!
+			@post.create_reblog_for!(@blog.id)
+			
+			return true
+		end
+		
+		false
+	end
 	
 	def set_post
 		@post = Post.find(params[:id])
 	end
 	
 	def post_params
-		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls)
+		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :reblogged)
 	end
 	
 	def comment_params

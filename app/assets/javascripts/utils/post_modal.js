@@ -80,7 +80,7 @@ Tumblero.PostModal = Backbone.View.extend({
 		event.preventDefault();
 		
 		var formData = $(event.currentTarget).serializeJSON();
-		console.log("clicked submit", formData);
+		console.log("submitForm with: ", formData);
 		var modalView = this;
 		
 		var post = new Tumblero.Models.Post();

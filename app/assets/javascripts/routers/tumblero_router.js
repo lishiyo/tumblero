@@ -14,7 +14,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	checkUser: function() { 
 		// check if current_user is present and redirect
-		if (Tumblero.current_user){
+		console.log("checkUser", this.currentUser);
+		if (this.currentUser){
 			this.userShow();
 		} else {
 			this.sessionNew();
@@ -38,8 +39,10 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id){
-		var user = Tumblero.current_user;
-    user.fetch();
+// 		var user = Tumblero.current_user;
+    var user = this.currentUser;
+// 		user.fetch();
+		console.log("userShow", user);
 		
 		var userShowView = new Tumblero.Views.UserShow({ model: user });
     this._swapView(userShowView);  

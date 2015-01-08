@@ -18,7 +18,7 @@ window.Tumblero = {
 	
 	currentUser: function(){
 		if (!Tumblero.current_user) {
-			return new Tumblero.Models.User();
+			return null;
 		} else {
 			Tumblero.current_user.fetch({
 				success: function(){
