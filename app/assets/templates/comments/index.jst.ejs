@@ -4,11 +4,13 @@
 
 	<% root_comments.each(function(root_comm, idx) { %>
  		
-		<%= JST['comments/_comment']({ root_comment: root_comm }) %>
+		<li><%= root_comm.escape('body') %> || <a href="" class="reply-comment">reply</a>
+		</li>
+	
+		<ul class="child-comments-cont"></ul>
 	
 	<% }); %>
 	
-	<a href="" class="reply-comment">reply</a> | 
 	
 </ul>
 	

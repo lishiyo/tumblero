@@ -1,0 +1,16 @@
+<div class="comments-container">
+	
+<ul>
+
+	<% root_comments.each(function(root_comm, idx) { %>
+ 		
+		<%= JST['comments/_comment']({ comment: root_comm }) %>
+	
+	<% }); %>
+	
+	<a href="" class="reply-comment">reply</a> | 
+	
+</ul>
+	
+	
+</div>

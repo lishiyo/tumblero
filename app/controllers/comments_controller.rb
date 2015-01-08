@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
       post_id: @comment.post_id, parent_comment_id: @comment.id
     )
 
-		render :show # comments/show.json.jbuilder
+		render 'show' # comments/show.json.jbuilder
   end
 	
 	def destroy

@@ -15,5 +15,8 @@ class Comment < ActiveRecord::Base
 	scope :find_comments_for_post, lambda { |post| 
 		where(post_id: post.id).order('created_at DESC') }
 	
+	def ordered_child_comments
+		child_comments.sort_by{|comm| comm.created_at }
+	end
 	
 end

@@ -57,12 +57,17 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		post.fetch({
 			success: function(){
-				var root_comments = new Tumblero.Collections.Comments({ post: post });
-				root_comments.fetch();
+				var all_comments = new Tumblero.Collections.Comments({ post: post });
+				all_comments.fetch({
+					success: function(){
+						var commentsIndex = new Tumblero.Views.CommentsIndex({ collection: all_comments });
+
+					console.log("root_comments in router", post, all_comments);
+
+					$commCont.html(commentsIndex.render().$el);
+					}
+				});
 				
-				var commentsIndex = new FilepickerTest.Views.CommentsIndex({ collection: post_comments });
-			
-				$commCont.html(commentsIndex.render().$el);
 			},
 			error: function(){
 				console.log("something went wrong");
@@ -70,7 +75,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		})
 		
 		
-	}
+	},
 	
 	_swapView: function(newView) {
     this._currentView && this._currentView.remove();

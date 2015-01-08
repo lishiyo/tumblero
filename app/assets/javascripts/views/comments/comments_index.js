@@ -1,4 +1,4 @@
-FilepickerTest.Views.CommentsIndex = Backbone.View.extend({
+Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	
 	template: JST['comments/index'],
 	
@@ -8,16 +8,39 @@ FilepickerTest.Views.CommentsIndex = Backbone.View.extend({
 	},
 	
 	initialize: function(opts){
-		// this.collection is root comments
+		// this.collection is all_comments
 		this.listenTo(this.collection, 'sync add', this.render);
 		this.post = this.collection.post;
 		
-		this.collection.each
+		console.log("commentsIndex collection", this.collection);
+		
+		collection = this.collection;
+		this.collection.forEach(function(comm){
+			
+			console.log("child_comments for", comm, comm.child_comments());
+			if (comm.child_comments().length > 0) {
+				console.log("attaching commsubview for room_comm:", comm);
+				this.addCommSubview(comm);
+			}
+    }.bind(this));
+	},
+	
+	
+	addCommSubview: function(comment) {
+		var commentSubview = new Tumblero.Views.CommentShow({
+      model: comment
+    });
+
+    this.addSubview("ul.child-comments-cont", commentSubview);
 	},
 	
 	render: function(){
-		var content = this.template({ comments: this.collection });
-		
+		var roots = this.collection.filter({
+			
+		})
+		var content = this.template({ root_comments: this.collection });
+		// attach child comments subviews
+		this.attachSubviews();
 		
 		var $close = $('<a class="close-comments" href="">close</a>');
 		this.$el.html(content).append($close);

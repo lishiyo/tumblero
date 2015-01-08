@@ -49,6 +49,7 @@ class PostsController < ApplicationController
 # 		@comment = current_user.comments.new
 
 		# returns post.comment_ids hash
+		# render json: @post.comments.includes(:child_comments)
 		render 'comments'
 	end
 	

@@ -1,7 +1,1 @@
-json.extract! @post, :id
-
-json.comments_by_parent do
-	@post.comments_by_parent.each do |comm, array|
-		json.set!(comm, array)
-	end
-end
+json.array! @post.comments.includes(:child_comments), partial: 'comments/comment', as: :comment
