@@ -12,6 +12,8 @@
  *
  *= require custom
  *= require font-awesome
+ *= require backbone.modal
+ *= require backbone.modal.theme
  *= require bootsy
  *= require bootstrap-wysihtml5
  *= require rails_bootstrap_forms

@@ -1,0 +1,34 @@
+<div class="bbm-modal__section modal" id="tab1">
+	
+	<form class='modal-form'>
+	<span class="modal-close js-modal-close">&times;</span>
+		
+	<div class="form-group">
+		<input type="hidden" name="post[blog_id]" value="<%= blog_id %>">
+	</div>
+	
+	<div class="form-group">
+		<label for="post_title">Post Title: </label>
+		<input type="text" name="post[title]" class="form-control">
+	</div>
+	
+	<div class="form-group">
+		
+		<a href="#" class="upload-fp">upload images</a>
+		
+		<input type="hidden" name="post[filepicker_urls]" id="post_filepicker_urls">
+		<div class="image-thumbnails"></div>
+		
+	</div>	
+	
+	<div class="form-group wysiwyg">
+    <textarea id="post-content" name="post[content]">
+		 </textarea>
+	</div>
+	
+<!-- 	<button type="submit" class="createPost">POST</button> -->
+  <input type="submit" class="submit-el" value="POST">
+	</form>
+	
+	<div class="modal-screen js-modal-close"></div>
+</div>

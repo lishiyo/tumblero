@@ -1,3 +1,92 @@
-// Place all the styles related to the posts controller here.
+// Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/* Edit Vendor */
+
+
+#filepicker_dialog_container {
+	left: 50% !important;
+  transform: translateX(-50%) !important;
+	position: absolute !important;
+}
+/* New Post - Modal */
+
+.modal {
+  display: none;
+}
+
+.modal.is-open {
+  display: block;
+}
+
+.modal-screen {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.modal-form {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 66%;
+  padding: 20px;
+  background: #fff;
+  z-index: 3;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 36px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #f00;
+}
+
+.modal-form > h1 {
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.modal-form > p {
+  margin: 0 0 20px 0;
+}
+
+#dropPane {
+	width: 100%;
+	height: 200px;
+	background-color: yellow;
+	opacity: 0.8;
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+#dropPane .drag-enter {
+	background-color: #E0E0E0;
+	border: 1px dashed #000;
+}
+
+#dropPane .drag-leave {
+	background-color: #F6F6F6;
+	border: 1px dashed #666;
+}
+
+.hidden {
+	display: none;
+}

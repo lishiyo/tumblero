@@ -5,8 +5,14 @@
 </head>
 <body>
 
-	<% @dashboard.all_posts.each do |post| %>
-		<%= render partial: 'posts/post', locals: { post: post } %>
+	<section class="container dashboard-main">
+		
+	<% @dashboard.posts.each do |post| %>
+		<div class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3">
+			<%= render partial: 'posts/post', locals: { post: post } %>		
+		</div>
 	<% end %>
+		
+	</section>
 </body>
 </html>

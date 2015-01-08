@@ -18,7 +18,7 @@
                         <a href="#page-top"></a>
                     </li>
 										<li>
-											<%= link_to "Dashboard", root_url %>
+											<%= link_to "Dashboard", dashboard_url %>
 										</li>
                     <li>
 											<%= link_to "Post", root_url %>
@@ -28,7 +28,7 @@
                     </li>
 									<li>
 		<% if current_user.present? %>
-									<li><%= link_to "My Profile", "#/users/profile", method: :get %></li>
+									<li><%= link_to "My Profile", "#", class: "user-profile-btn" %></li>
 		<li><%= link_to "Logout", session_url, method: :delete, class: "logout-btn" %></li>
 									
 		<% else %>

@@ -53,10 +53,10 @@
 
 	$.FollowToggle.prototype.render = function () {
 		if (this.followState === "followed") {
-			this.$el.prop("disabled", false);
+			this.$el.prop("disabled", false).addClass("followed");
 			this.$el.html("unfollow");
 		} else if (this.followState == "unfollowed") {
-			this.$el.prop("disabled", false);
+			this.$el.prop("disabled", false).removeClass("followed");
 			this.$el.html("+ follow");
 		} else if (this.followState == "following") {
 			this.$el.prop("disabled", true);

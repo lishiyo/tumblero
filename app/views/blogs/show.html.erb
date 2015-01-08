@@ -6,17 +6,18 @@
 
 </section>
 
+
+<div class="container">
+	<div class="row">
+		
+<h2>Make a New Post</h2>
+		
 <button class="js-modal-open-1" data-id="<%= @blog.id %>">Open Modal T1
 </button>
 <button class="js-modal-open-2" data-id="<%= @blog.id %>">Open Modal T2
 </button>
-
-<div class="modal-container">
-</div>
-
-<div class="container">
-	<div class="row">
-<h2>Make a New Post</h2>
+		
+		
 	<%= render partial: "posts/new", locals: { post: Post.new } %>
 	</div>
 </div>
@@ -32,3 +33,6 @@
 </div>
 
 </section>
+
+<div class="modal-container">
+</div>

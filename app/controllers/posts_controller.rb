@@ -3,7 +3,6 @@ class PostsController < ApplicationController
 	before_action :get_blog, only: [:index, :new]
 	before_action :get_post, only: [:show, :comments, :new_comment]
 	
-	
 	def index
 		@posts = @blog.posts
 	end

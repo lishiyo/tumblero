@@ -13,6 +13,12 @@ ul, li {
 	list-style: none;
 }
 
+/** universal **/
+
+body {
+	text-align: center;
+}
+
 form {
 	max-width: 50%;
 	margin: 0 auto;
@@ -34,7 +40,12 @@ li.blog-profile {
 }
 
 button.follow {
-	position: absolute;
+/* 	position: absolute; */
 	right: 10px;
 	top: 10px;
+}
+
+button.followed {
+	@extend button.follow;
+	background-color: gray;
 }

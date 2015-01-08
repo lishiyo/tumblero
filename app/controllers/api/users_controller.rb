@@ -11,9 +11,9 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-		transaction do
+		User.transaction do
 			@user = User.new(user_params)
-			@user.dashboard.create!
+			@user.create_dashboard
 		end
     
     if @user.save

@@ -76,7 +76,7 @@ Tumblero.PostModal = Backbone.View.extend({
 		console.log("clicked submit", formData);
 		var modalView = this;
 		
-		var post = new FilepickerTest.Models.Post();
+		var post = new Tumblero.Models.Post();
 		post.save(formData, {
 			success: function(model) {
 				console.log("post saved!", post);
@@ -93,7 +93,7 @@ Tumblero.PostModal = Backbone.View.extend({
 		console.log("clicked submit");
 		$(".modal").removeClass("is-open");
 		// add to collection
-// 		window.location.replace("/blogs/"+this.blog_id);
+		window.location.replace("/blogs/"+this.blog_id);
 	}
 	
 });
