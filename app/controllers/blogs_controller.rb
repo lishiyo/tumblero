@@ -30,7 +30,7 @@ class BlogsController < ApplicationController
 		if @following.save
 			render json: @blog
 		else
-			render json: @blog 
+			render json: @blog.errors.full_messages: status: 422
 		end
 	end
 	

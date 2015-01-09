@@ -84,6 +84,6 @@
 		
 	$(function(){
 		
-		$("button.like-btn").likeToggle();
+// 		$("button.like-btn").likeToggle();
 		
 	});

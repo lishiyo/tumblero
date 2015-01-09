@@ -1,0 +1,12 @@
+<li class="blog-profile">
+<h3><%= blog.escape('name') %> </h3>
+	<!-- follow button -->
+	<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>"></button>
+	
+<figure>
+	<img src="<%= blog.escape('avatar_url') %>">
+	<figcaption><%= blog.escape('description') %></figcaption>
+</figure>
+
+
+</li>

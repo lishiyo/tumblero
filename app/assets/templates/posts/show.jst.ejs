@@ -18,7 +18,9 @@
 	</p>
 	
 	<p>
-		<%= tag_names %>
+		<% tag_names.forEach(function(tag){ %>
+			<span><a href=""><%= tag.escape('name') %></a></span>
+		<% }); %>
 	</p>
 
 	<span class="count-notes"><%= post.escape('count_notes') %> notes</span>

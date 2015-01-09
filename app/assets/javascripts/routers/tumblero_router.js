@@ -13,7 +13,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"blogs/new": "blogNew",
 		"blogs/:id": "blogShow",
 		"posts/:post_id/comments": "showComments",
-		"dashboard": "dashboardShow"
+		"dashboard": "dashboardShow",
+		"explore/blogs": "exploreBlogs"
 	},
 	
 	checkUser: function() { 
@@ -74,6 +75,21 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	blogNew: function(){
 
+	},
+	
+	exploreBlogs: function(){
+		var blogs = new Tumblero.Collections.Blogs({ user: this.currentUser });
+		blogs.fetch({
+			success: function(){			
+				var view = new Tumblero.Views.BlogsExplore ({
+					currentUser: this.currentUser,
+					collection: blogs
+				});
+
+				this._swapView(view);
+			}.bind(this)
+		});
+		
 	},
 	
 // 	showComments: function(post_id){

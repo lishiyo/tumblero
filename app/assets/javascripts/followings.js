@@ -11,7 +11,7 @@
 
 	$.FollowToggle.prototype.handleClick = function (event) {
 		var followToggle = this;
-
+		console.log("clicked followtoggle");
 		event.preventDefault();
 
 		if (this.followState === "followed") {
@@ -19,7 +19,7 @@
 			this.render();
 
 			$.ajax({
-				url: "/blogs/" + this.blogId + "/following",
+				url: "/api/blogs/" + this.blogId + "/following",
 				dataType: "json",
 				method: "DELETE",
 				success: function (data) {
@@ -36,7 +36,7 @@
 			this.render();
 
 			$.ajax({
-				url: "/blogs/" + this.blogId + "/following",
+				url: "/api/blogs/" + this.blogId + "/following",
 				dataType: "json",
 				method: "POST",
 				success: function (data) {
@@ -75,6 +75,6 @@
 		
 	$(function(){
 		
-		$("button.follow-btn").followToggle();
+// 		$("button.follow-btn").followToggle();
 		
 	});

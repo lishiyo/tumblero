@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 		resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
 		end
 		
-		resources :blogs, only: [:new, :create, :show] do 
+		resources :blogs, only: [:new, :create, :show, :index] do 
 			resources :posts, only: [:index]
 			resource :following, only: [:create, :destroy]
 		end

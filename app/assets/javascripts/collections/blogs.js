@@ -1,5 +1,5 @@
 Tumblero.Collections.Blogs = Backbone.Collection.extend({
-	url: '/blogs',
+	url: '/api/blogs',
 	
 	model: Tumblero.Models.Blog,
 	

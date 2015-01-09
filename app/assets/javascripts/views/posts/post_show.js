@@ -43,16 +43,11 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 		
 		var likeState = (isLiked) ? "liked" : "unliked";
 		
-		var tagArr = this.model.taggings().map(function(tagModel){
-			return tagModel.get('name');
-		});
-		
-		console.log("tagarr", this.model.taggings());
 		
 		var content = this.template({ 
 			post: this.model,
 			initialLikeState: likeState,
-			tag_names: tagArr
+			tag_names: this.model.taggings()
 		});
 		
     this.$el.html(content);

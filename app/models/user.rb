@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
 	def liked_comments_ids
 		self.liked_comments.map(&:id)
 	end
+	
+	def followed_blogs_ids
+		self.followed_blogs.map(&:id)
+	end
 
   private
 
