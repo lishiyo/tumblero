@@ -1,10 +1,48 @@
 Tumblero.PostModal = Backbone.View.extend({
 	
+	initialize: function(){
+		this.$tabEl = $('.tab-container');
+	},
+	
 	setActive: function(opts) {
-		this.$('.bbm-modal__tab a').removeClass('active');
-		this.$('#tab'+opts.tabNum).addClass('active'); 
+// 		this.$('.bbm-modal__tab a').removeClass('active');
+// 		this.$('#tab'+opts.tabNum).addClass('active'); 
+		
+		event.preventDefault();
+		console.log("setActive", this.current_user, this);
+		var post = this.model,
+				user = Tumblero.current_user;
+		
+		switch (opts.tabNum) {
+			case 1:
+				this.showTab1(post, user);
+				break;
+			case 2:
+				this.showTab2(post, user);
+				break;
+			default:
+				console.log("couldn't find tab");
+		}
 		
 		this.$(".modal").addClass("is-open");
+	},
+	
+	showTab1: function(post, user){
+		var newPostT1 = new Tumblero.Views.NewPostT1({
+			model: post,
+			current_user: user
+		});
+		
+		this.$tabEl(newPostT1.render().$el);
+	},
+	
+	showTab2: function(post, user){
+		var newPostT2 = new Tumblero.Views.NewPostT2({
+			model: post,
+			current_user: user
+		});
+		
+		this.$tabEl(newPostT2.render().$el);
 	},
 	
 	setImageOpts: function(){

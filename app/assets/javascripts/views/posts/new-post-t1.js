@@ -9,6 +9,7 @@ Tumblero.Views.NewPostT1 = Tumblero.PostModal.extend({
 	initialize: function(opts){
 		$(".modal").removeClass("is-open");
 		this.blogs = opts.current_user.blogs();
+		this.$tabEl = $('.tab-container');
 	},
 	
 	onShow: function(){
@@ -33,7 +34,7 @@ Tumblero.Views.NewPostT1 = Tumblero.PostModal.extend({
 		this.$el.html(content);
 		
 		this.onShow();
-		this.setActive({ tabNum: 1 });
+// 		this.setActive({ tabNum: 1 });
 		
 		return this;
 	}

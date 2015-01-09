@@ -10,7 +10,10 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"users/new": "userNew",
 		"users/profile": "userShow",
 		"session/new": "sessionNew",
-		"posts/:post_id/comments": "showComments"
+		"blogs/new": "blogNew",
+		"blogs/:id": "blogShow",
+		"posts/:post_id/comments": "showComments",
+		
 	},
 	
 	checkUser: function() { 
@@ -48,6 +51,14 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		var userShowView = new Tumblero.Views.UserShow({ model: user });
     this._swapView(userShowView);  
   },
+	
+	blogNew: function(){
+		
+	},
+	
+	blogShow: function(){
+
+	},
 	
 	showComments: function(post_id){
 		

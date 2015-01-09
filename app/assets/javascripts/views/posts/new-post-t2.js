@@ -9,13 +9,14 @@ Tumblero.Views.NewPostT2 = Tumblero.PostModal.extend({
 	initialize: function(opts){
 		$(".modal").removeClass("is-open");
 		this.blogs = opts.current_user.blogs();
+		this.$tabEl = $('.tab-container');
 	},
 	
 	render: function(){
 		var content = this.template({ post: this.model, blogs: this.blogs });
 		this.$el.html(content);
 		
-		this.setActive({ tabNum: 2 });
+// 		this.setActive({ tabNum: 2 });
 		this.makeDropPane();
 		
 		return this;

@@ -2,7 +2,19 @@ Rails.application.routes.draw do
 	
 	namespace 'api' do
 		resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
-			
+		end
+		
+		resources :blogs, only: [:new, :create, :show] do 
+			resources :posts, only: [:index]
+			resource :following, only: [:create, :destroy]
+		end
+		
+		resources :posts, only: [:new, :show, :create] do
+			resources :comments, only: [:new]
+			member do
+				get 'reblog'
+				get 'comments'
+			end
 		end
 	end
 	

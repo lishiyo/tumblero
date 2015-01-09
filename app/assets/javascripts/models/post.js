@@ -1,5 +1,5 @@
 Tumblero.Models.Post = Backbone.Model.extend({
-	urlRoot: "/posts",
+	urlRoot: "/api/posts",
 	initialize: function(opts){
 	}
 	

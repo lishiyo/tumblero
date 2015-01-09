@@ -64,12 +64,22 @@ window.Tumblero = {
 	
 	setPostModal: function(){
 		
+		$("body").on("click", "button.full-post-modal", function(event){
+			console.log("clicked full post modal")
+			event.preventDefault();
+			var post = new Tumblero.Models.Post();
+			var newPostFull = new Tumblero.Views.NewPostFull({
+				model: post,
+				current_user: Tumblero.current_user
+			});
+
+			$('.modal-container').html(newPostFull.render().$el);
+		}.bind(this));
+		
 		$("body").on("click", ".js-modal-open-1", function(event){
 			event.preventDefault();
 			var post = new Tumblero.Models.Post(),
 					user = Tumblero.current_user;
-			
-			console.log("currentUser: ", user);
 			
 			var newPostT1 = new Tumblero.Views.NewPostT1({
 				model: post,
@@ -85,7 +95,6 @@ window.Tumblero = {
 			var post = new Tumblero.Models.Post(),
 					user = Tumblero.current_user;
 			
-			console.log("currentUser: ", user);
 			
 			var newPostT2 = new Tumblero.Views.NewPostT2({
 				model: post,
