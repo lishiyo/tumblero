@@ -10,6 +10,7 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 		this.parent_id = opts.parent_id || null;
 		this.collection = opts.collection;
 		this.post_id = opts.post_id;
+		this.currentUser = this.currentUser;
 	},
 	
 	render: function(){

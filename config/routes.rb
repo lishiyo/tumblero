@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 		end
 		
 		resource :dashboard, only: [:show]
+		resource :like, only: [:create, :destroy] 
+		resources :comments, only: [:create, :show, :destroy]
 	end
 	
 	resource :session, only: [:new, :create, :destroy]

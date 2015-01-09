@@ -5,12 +5,20 @@ Tumblero.Models.User = Backbone.Model.extend({
 		return { user: this.attributes }
 	},
 	
-	likeStateFor: function(post_id){
+	likeStateFor: function(type, type_id){
 		var user = this;
+// 		console.log("likestatefor", user, user.get('liked_posts_ids'))
 		
-		return user.get('liked_posts').some(function(elem){
-			return (elem.id === post_id);
-		});
+		if (type == 'Post') {
+			return user.get('liked_posts_ids').some(function(elem){
+				return (elem === type_id);
+			});
+		} else if (type == 'Comment') {
+			return user.get('liked_comments_ids').some(function(elem){
+				return (elem === type_id);
+			});
+		}
+			
 	},
 	
 	followStateFor: function(blog_id) {	
@@ -36,14 +44,6 @@ Tumblero.Models.User = Backbone.Model.extend({
 			delete resp.blogs
 		}	
 		
-// 		if (resp.liked_posts) {
-// 			resp.liked_posts_ids = [];
-// 			resp.liked_posts.forEach(function(post){
-// 				resp.liked_posts_ids.push(post.id);
-// 			});
-// 		}
-		
-		console.log("parse resp", resp);
 		return resp;
 	}
 })

@@ -1,0 +1,22 @@
+<div class="post">
+	
+<h3><%= post.title.html_safe if post.title %></h3>
+	
+<% post.filepicker_urls.split(",").each do |file_url| %>
+	<%= filepicker_image_tag file_url, w: 300, h: 300, fit: 'clip' %>
+<% end %>
+	
+<p><%= post.content.html_safe if post.content %></p>
+
+	<span class="count-notes"><%= post.count_notes %> notes</span>
+	<button class="btn like-btn" data-likeable-type="Post" data-likeable-id="<%= post.id %>" data-initial-like-state="<%= current_user.likes?(post) ? 'liked' : 'unliked' %>"></button>
+	
+	<button class="btn reblog-btn" data-post-id="<%= post.id %>">reblog</button>
+	
+	<a class="btn btn-default open-comments" data-open-comments="#/posts/<%= post.id %>/comments" href="#/posts/<%= post.id %>/comments">comments</a>
+	
+	
+	<div id="post-comments-<%= post.id %>" class="comments-container">	
+	</div>
+	
+</div>

@@ -11,20 +11,20 @@ class  Api::PostsController < ApplicationController
 	
 	def show	
 		respond_to do |f| 
-			f.html { render 'show'}
-			f.json { render json: @post.as_json(include: :count_notes) }
+			f.json { render json: @post.to_json(methods: :count_notes) }
 		end
 	end
 	
 	def new
 		@post = Post.new
-		render json :@post
+		render json @post
 	end
 	
 	# post_params[:blog_id] comes from form
 	def create
 		@blog = Blog.find(post_params[:blog_id])
-		@post = @blog.posts.build(post_params)
+		@post = @blog.posts.build(post_params.except(:tags))
+		@tags_array = post_params[:tags].split(",")
 		
 		if full_transact?
 			respond_to do |format|
@@ -57,6 +57,7 @@ class  Api::PostsController < ApplicationController
 		Post.transaction do
 			@post.save!
 			@post.create_reblog_for!(@blog.id)
+			@post.create_new_taggings!(@tags_array, current_user)
 			
 			return true
 		end
@@ -69,11 +70,11 @@ class  Api::PostsController < ApplicationController
 	end
 	
 	def post_params
-		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :reblogged)
+		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :reblogged, :tags)
 	end
 	
 	def comment_params
-		params.require(:comment).permit(:body, :user_id, :commentable_type, :commentable_id, :subject, :parent_id, :lft, :rgt, :title)
+		params.require(:comment).permit(:body, :user_id, :parent_comment_id, :created_at, :updated_at, :post_id)
 	end
 	
 end

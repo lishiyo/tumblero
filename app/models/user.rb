@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
 	validates :email, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  after_initialize :ensure_session_token
-	
 	has_many :blogs, inverse_of: :user, dependent: :destroy
 	has_many :posts, through: :blogs
 	has_one :dashboard, inverse_of: :user, dependent: :destroy
@@ -14,9 +12,13 @@ class User < ActiveRecord::Base
 	
 	has_many :likings, class_name: "Like", foreign_key: :user_id, inverse_of: :user
 	has_many :liked_posts, through: :likings, source: :likeable, source_type: 'Post'
+	has_many :liked_comments, through: :likings, source: :likeable, source_type: 'Comment'
 	
 	has_many :comments, inverse_of: :user
+	has_many :taggings, inverse_of: :user
 
+	after_initialize :ensure_session_token
+	
   def self.generate_session_token
     SecureRandom.urlsafe_base64
   end
@@ -49,8 +51,16 @@ class User < ActiveRecord::Base
 	
 	def likes?(likeable)
 		if likeable.class == Post
-			return self.liked_posts.include?(likeable)	
+			self.liked_posts.include?(likeable)	
 		end
+	end
+	
+	def liked_posts_ids
+		self.liked_posts.map(&:id)
+	end
+	
+	def liked_comments_ids
+		self.liked_comments.map(&:id)
 	end
 
   private

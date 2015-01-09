@@ -10,7 +10,7 @@ class Api::BlogsController < ApplicationController
 	def show
 		@blog = Blog.includes(:posts).find(params[:id])
 		
-		render json: @blog.as_json(include: :posts)
+		render json: @blog.as_json(:include => { posts: { methods: :count_notes }})
 	end
 	
 	def new
@@ -27,7 +27,7 @@ class Api::BlogsController < ApplicationController
 		end
 	end
 	
-	# POST /blogs/:id/follow
+	# POST/DELETE /blogs/:id/follow
 	def follow
 		@blog = Blog.find(params[:id])
 		@following = current_user.followings.build(blog_id: @blog.id)
@@ -38,9 +38,7 @@ class Api::BlogsController < ApplicationController
 		end
 	end
 	
-	def unfollow
-		
-	end
+	
 	
 	private
 	

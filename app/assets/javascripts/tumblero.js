@@ -122,16 +122,16 @@ var bindNavHandlers = function(){
 		Tumblero.current_user = null;
 	});
 	
-	$('.user-profile-btn').on('click', function(e){
-		e.preventDefault();
-		console.log("profiel btn clicked");
-		window.location.replace("/#users/profile");
-	});
+// 	$('.user-profile-btn').on('click', function(e){
+// 		e.preventDefault();
+// 		window.location.replace("/#users/profile");
+// 	});
 	
 };
 
 $(document).ready(function(){
 	
+	filepicker.setKey('AFmd243qR4C3FGkOJfBTnz');
 	bindNavHandlers();
 	
   Tumblero.initialize();

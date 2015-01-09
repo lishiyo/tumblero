@@ -18,6 +18,7 @@ Tumblero.Views.CommentShow = Backbone.CompositeView.extend({
 	// this.model = comment with child_comments
 	initialize: function(opts){
 		this.post = opts.post;
+		this.currentUser = opts.currentUser;
 		
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.child_comments(), 'sync', this.render);
@@ -45,7 +46,8 @@ Tumblero.Views.CommentShow = Backbone.CompositeView.extend({
 	addCommSubview: function(comment) {
 		var commentSubview = new Tumblero.Views.CommentShow({
       model: comment,
-			post: this.post
+			post: this.post,
+			currentUser: this.currentUser
     });
     this.addSubview("#more-child-comment-"+this.model.id, commentSubview);
 	},
@@ -78,11 +80,21 @@ Tumblero.Views.CommentShow = Backbone.CompositeView.extend({
 	},
 	
 	render: function(){
-		var content = this.template({ comment: this.model });
+		var isLiked = this.currentUser.likeStateFor('Comment', this.model.id),
+				likeState;
+		
+		likeState = (isLiked) ? "liked" : "unliked";
+		
+		var content = this.template({ 
+			comment: this.model,
+			initialLikeState: likeState
+		});
+		
 		
     this.$el.html(content);
     this.attachSubviews();
-
+		
+		$("button.like-btn.like-comment").likeToggle();
     return this;
 	}
 });

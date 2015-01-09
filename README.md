@@ -68,7 +68,7 @@ Barebones tumblr - you can create multiple blogs and posts for each blog, and fo
   * a user's blog displays both blog’s own posts and reblogged posts
   * you don't need to follow a blog to reblog a post (i.e. you can reblog any post)
 	* reblog means you create a new post onto your own blog via a copy
-10. Tag.rb (posts only)
+10. Tagging.rb (as Taggable)
   * :id, :name
   * has_many :taggings, :posts (through :taggings)
 11. Tagging.rb (http://www.sitepoint.com/tagging-scratch-rails/)

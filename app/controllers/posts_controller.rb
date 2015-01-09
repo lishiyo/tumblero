@@ -21,7 +21,7 @@ class PostsController < ApplicationController
 	# post_params[:blog_id] comes from form
 	def create
 		@blog = Blog.find(post_params[:blog_id])
-		@post = @blog.posts.build(post_params)
+		@post = @blog.posts.build(post_params.except(:tags))
 		
 		if full_transact?
 			respond_to do |format|
@@ -60,6 +60,7 @@ class PostsController < ApplicationController
 		Post.transaction do
 			@post.save!
 			@post.create_reblog_for!(@blog.id)
+			@post.create_taggings!(post_params[:tags])
 			
 			return true
 		end
@@ -72,11 +73,11 @@ class PostsController < ApplicationController
 	end
 	
 	def post_params
-		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :reblogged)
+		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :reblogged, tags: [])
 	end
 	
 	def comment_params
-		params.require(:comment).permit(:body, :user_id, :commentable_type, :commentable_id, :subject, :parent_id, :lft, :rgt, :title)
+		params.require(:comment).permit(:body, :user_id, :parent_comment_id, :created_at, :updated_at, :post_id)
 	end
 	
 end

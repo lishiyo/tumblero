@@ -14,11 +14,14 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
+                    
+									<li>
+		<% if current_user.present? %>
+										<li class="hidden">
                         <a href="#page-top"></a>
                     </li>
 										<li>
-											<%= link_to "Dashboard", dashboard_url %>
+											<%= link_to "Dashboard", "/#dashboard" %>
 										</li>
                     <li>
 											<button class='full-post-modal btn btn-info' style="margin-top:7px;">Create Post</button>
@@ -26,9 +29,8 @@
 										<li>
 											<%= link_to "Explore", explore_blogs_url %>
                     </li>
-									<li>
-		<% if current_user.present? %>
-									<li><%= link_to "My Profile", "#users/profile", class: "user-profile-btn" %></li>
+									
+									<li><%= link_to "My Profile", "/#users/profile", class: "user-profile-btn" %></li>
 		<li><%= link_to "Logout", session_url, method: :delete, class: "logout-btn" %></li>
 									
 		<% else %>

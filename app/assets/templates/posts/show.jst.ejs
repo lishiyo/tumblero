@@ -18,7 +18,7 @@
 	<% } %>
 	</p>
 
-	<span class="count-notes"><%= post.get('count_notes') %> notes</span>
+	<span class="count-notes"><%= post.escape('count_notes') %> notes</span>
 	<button class="btn like-btn" data-likeable-type="Post" data-likeable-id="<%= post.id %>" data-initial-like-state='<%= initialLikeState%>'></button>
 	
 	

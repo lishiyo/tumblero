@@ -25,9 +25,9 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-		@user = current_user
-# 		render :show
-		render json: @user.as_json(include: [:liked_posts, :blogs])
+		@user = User.find(params[:id])
+		render :show
+# 		render json: @user.to_json(except: [:session_token, :password_digest], methods: :liked_posts, include: :blogs)
 		
   end
 	
@@ -36,7 +36,18 @@ class Api::UsersController < ApplicationController
 	end
 	
 	def update
+		if user_params[:old_password]
+			@user = User.find_by_credentials(current_user.email, user_params[:old_password])
+		else
+			@user = current_user
+		end
 		
+		if @user && @user == current_user
+			@user.update(user_params.except(:old_password))
+			render json: @user.as_json(include: [:liked_posts, :blogs])
+		else
+			render json: @user.errors.full_messages, status: 422
+		end
 	end
 	
 	def destroy
@@ -55,7 +66,7 @@ class Api::UsersController < ApplicationController
 	end
 	
   def user_params
-		params.require(:user).permit(:email, :password)
+		params.require(:user).permit(:email, :password, :old_password)
   end
 	
 end

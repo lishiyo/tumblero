@@ -19,19 +19,26 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 		var $commCont = $(commCont);
 		
 		var all_comments = new Tumblero.Collections.Comments({ post: this.model });
+		var cu = this.currentUser;
+		console.log("cu", cu);
 		all_comments.fetch({
 			success: function(){
-				var commentsIndex = new Tumblero.Views.CommentsIndex({ collection: all_comments });
+				var commentsIndex = new Tumblero.Views.CommentsIndex({ 
+					collection: all_comments,
+					currentUser: cu
+				});
 
 				$commCont.html(commentsIndex.render().$el);
+				
+				console.log($("button.like-btn"));
+				$("button.like-btn.like-comment").likeToggle();
 			}
 		});
 	},
 	
 		
 	render: function(){
-		var post_id = this.model.id,
-				isLiked = this.currentUser.likeStateFor(post_id),
+		var isLiked = this.currentUser.likeStateFor('Post', this.model.id),
 				likeState;
 		
 		likeState = (isLiked) ? "liked" : "unliked";
@@ -42,7 +49,8 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 		});
 		
     this.$el.html(content);
-    
+   
+		
     return this;
 	}
 	

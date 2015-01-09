@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+	include Likeable
+	
 	validates :body, :user, :post_id, presence: true
 
   belongs_to :post, inverse_of: :comments

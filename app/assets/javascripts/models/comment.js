@@ -1,6 +1,6 @@
 Tumblero.Models.Comment = Backbone.Model.extend({
 	
-	urlRoot: '/comments',
+	urlRoot: '/api/comments',
 	
 	initialize: function(opts){
 		this.post = opts.post;

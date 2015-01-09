@@ -20,5 +20,6 @@ module Tumblero
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.filepicker_rails.api_key = ENV["fp_secret"]
+		
   end
 end

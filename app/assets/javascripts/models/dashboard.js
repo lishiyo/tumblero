@@ -1,5 +1,5 @@
 Tumblero.Models.Dashboard = Backbone.Model.extend({
-	urlRoot: '/dashboard',
+	urlRoot: '/api/dashboard',
 	initialize: function(opts) {
 		this.user = opts.user;
 	},

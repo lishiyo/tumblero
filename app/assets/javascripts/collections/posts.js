@@ -1,5 +1,5 @@
 Tumblero.Collections.Posts = Backbone.Collection.extend({
-	url: "/posts",
+	url: "/api/posts",
 	modal: Tumblero.Models.Post,
 	initialize: function(models, opts){
 		this.blog = (opts.blog || null);

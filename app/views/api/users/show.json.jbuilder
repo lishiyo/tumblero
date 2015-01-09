@@ -1,3 +1,5 @@
-json.extract! @user, :id, :email, :created_at, :updated_at, :session_token
+json.extract! @user, :id, :email, :created_at, :updated_at
+json.liked_posts_ids @user.liked_posts_ids
+json.liked_comments_ids @user.liked_comments_ids
 
 json.blogs @user.blogs, :id, :user_id, :name, :description, :avatar_url, :created_at, :updated_at
