@@ -1,0 +1,40 @@
+<section class="blog-profile">
+	<h1><%= blog.get('name') %></h1>
+	<% if (current_user_id !== blog.get('user_id')) { %>
+		<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>"></button>
+	<% } %>
+	<p><%= blog.get('description') %></p>
+
+	<img src="<%= blog.get('avatar_url') %>">
+
+</section>
+
+
+<div class="container">
+	<h2>Make a New Post</h2>
+		
+	<div class="row">
+		
+		<button class='full-post-modal btn btn-default' data-id="<%= blog.id %>">Create Post
+		</button>
+
+		<button class="full-post-modal btn btn-info" data-tab-num="1" data-id="<%= blog.id %>">Text Post
+		</button>
+		<button class="full-post-modal btn btn-warning" data-tab-num="2" data-id="<%= blog.id %>">Image Post
+		</button>
+	
+	</div>
+	
+	<div class="inline-notifications"></div>
+</div>
+
+<section>
+	<h2>Posts</h2>
+<div class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3">
+	
+	<div class="posts-container"></div>
+	
+</div>
+
+</section>
+

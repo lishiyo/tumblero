@@ -4,14 +4,18 @@ class Api::BlogsController < ApplicationController
 	
 	def index # GET /explore/blogs 
 		@blogs = Blog.where.not(user_id: current_user.id)
+		render json: @blogs
 	end
 	
 	def show
 		@blog = Blog.includes(:posts).find(params[:id])
+		
+		render json: @blog.as_json(include: :posts)
 	end
 	
 	def new
 		@blog = current_user.blogs.new
+		render json: @blog
 	end
 	
 	def create

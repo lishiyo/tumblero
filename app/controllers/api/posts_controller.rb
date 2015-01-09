@@ -5,17 +5,20 @@ class  Api::PostsController < ApplicationController
 	def index
 		@blog = Blog.find(params[:blog_id])
 		@posts = @blog.posts
+		
+		render json :@posts
 	end
 	
 	def show	
 		respond_to do |f| 
 			f.html { render 'show'}
-			f.json { render json: @post }
+			f.json { render json: @post.as_json(include: :count_notes) }
 		end
 	end
 	
 	def new
 		@post = Post.new
+		render json :@post
 	end
 	
 	# post_params[:blog_id] comes from form
@@ -31,7 +34,7 @@ class  Api::PostsController < ApplicationController
 			end
 		else
 			flash.now[:errors] = "woops"
-			redirect_to :back
+			render json: nil, status: 422
 		end
 	end
 	
@@ -45,10 +48,8 @@ class  Api::PostsController < ApplicationController
 	# COMMENTS
 	# GET /posts/:id/comments
 	def comments
-	
 		render 'comments'
 	end
-	
 	
 	private
 

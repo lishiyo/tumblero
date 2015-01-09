@@ -27,7 +27,8 @@ class Api::UsersController < ApplicationController
   def show
 		@user = current_user
 # 		render :show
-#     render json: @user
+		render json: @user.as_json(include: [:liked_posts, :blogs])
+		
   end
 	
 	def edit

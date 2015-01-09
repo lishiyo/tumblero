@@ -5,12 +5,14 @@
 		this.likeState = this.$el.data("initial-like-state") || options.likeState;
 
 		this.render();
-
+		
 		this.$el.on("click", this.handleClick.bind(this));
 	};
 
 	$.LikeToggle.prototype.handleClick = function (event) {
 		event.preventDefault();
+		console.log("clicked like!");
+		
 		var likeToggle = this;
 		var dataParams = {
 		 	'likeable_id': this.likeableId,
@@ -18,7 +20,7 @@
 		};
 		
 		console.log("dataParams: ", dataParams);
-
+		
 		if (this.likeState === "liked") {
 			this.likeState = "liking";
 			this.render();

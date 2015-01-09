@@ -1,7 +1,7 @@
-
-// Place all the styles related to the Blogs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.blog-profile img {
+	max_width: 300px;
+	max-height: 300px;
+}
 
 .image-thumbnails img {
 	max-height: 100px;
@@ -12,3 +12,4 @@ iframe.wysihtml5-sandbox {
 	width: 100% !important;
 	border-radius: 5px !important;
 }
+

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 				get 'comments'
 			end
 		end
+		
+		resource :dashboard, only: [:show]
 	end
 	
 	resource :session, only: [:new, :create, :destroy]

@@ -49,9 +49,7 @@ class User < ActiveRecord::Base
 	
 	def likes?(likeable)
 		if likeable.class == Post
-			return self.liked_posts.include?(likeable)
-		else
-			
+			return self.liked_posts.include?(likeable)	
 		end
 	end
 

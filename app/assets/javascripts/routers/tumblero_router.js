@@ -43,48 +43,53 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id){
-// 		var user = Tumblero.current_user;
     var user = this.currentUser;
-// 		user.fetch();
-		console.log("userShow", user);
 		
 		var userShowView = new Tumblero.Views.UserShow({ model: user });
     this._swapView(userShowView);  
   },
 	
+	blogShow: function(blog_id){
+		var blog = new Tumblero.Models.Blog({id: blog_id});
+		blog.fetch();
+		var blogShowView = new Tumblero.Views.BlogShow({
+			currentUser: this.currentUser, 
+			model: blog
+		});
+		
+		this._swapView(blogShowView);
+
+	},
+	
 	blogNew: function(){
-		
-	},
-	
-	blogShow: function(){
 
 	},
 	
-	showComments: function(post_id){
+// 	showComments: function(post_id){
 		
-		var commCont = '#post-comments-' + post_id;
-		var $commCont = $(commCont);
-		var post = new Tumblero.Models.Post({id: post_id});
+// 		var commCont = '#post-comments-' + post_id;
+// 		var $commCont = $(commCont);
+// 		var post = new Tumblero.Models.Post({id: post_id});
 		
-		post.fetch({
-			success: function(){
-				var all_comments = new Tumblero.Collections.Comments({ post: post });
-				all_comments.fetch({
-					success: function(){
-						var commentsIndex = new Tumblero.Views.CommentsIndex({ collection: all_comments });
+// 		post.fetch({
+// 			success: function(){
+// 				var all_comments = new Tumblero.Collections.Comments({ post: post });
+// 				all_comments.fetch({
+// 					success: function(){
+// 						var commentsIndex = new Tumblero.Views.CommentsIndex({ collection: all_comments });
 
-					$commCont.html(commentsIndex.render().$el);
-					}
-				});
+// 					$commCont.html(commentsIndex.render().$el);
+// 					}
+// 				});
 				
-			},
-			error: function(){
-				console.log("something went wrong");
-			}
-		})
+// 			},
+// 			error: function(){
+// 				console.log("something went wrong");
+// 			}
+// 		})
 		
 		
-	},
+// 	},
 	
 	_swapView: function(newView) {
     this._currentView && this._currentView.remove();

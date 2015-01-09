@@ -19,8 +19,7 @@ Tumblero.Views.CommentShow = Backbone.CompositeView.extend({
 	initialize: function(opts){
 		this.post = opts.post;
 		
-		this.listenTo(this.model, 'sync add', this.render);
-// 		this.listenTo(this.model, 'add', this.addComment);
+		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.child_comments(), 'sync', this.render);
 		this.listenTo(this.model.child_comments(), 'remove', this.removeComment);
 		this.listenTo(this.model.child_comments(), 'add', this.addComment);
