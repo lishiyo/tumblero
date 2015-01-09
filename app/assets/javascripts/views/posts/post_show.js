@@ -11,11 +11,11 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.taggings(), 'sync', this.render);
-		
 	},
 	
 	openComments: function(event){
 		event.preventDefault();
+		console.log("clicked openComments");
 		
 		var commCont = '#post-comments-' + this.model.id;
 		var $commCont = $(commCont);
