@@ -49071,3 +49071,169 @@ Processing by Api::FollowingsController#create as JSON
   [1m[35mSQL (0.4ms)[0m  INSERT INTO "followings" ("blog_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["blog_id", 5], ["user_id", 15], ["created_at", "2015-01-09 22:54:51.985690"], ["updated_at", "2015-01-09 22:54:51.985690"]]
   [1m[36m (1.3ms)[0m  [1mCOMMIT[0m
 Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-09 23:02:13 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.6ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1182ms (Views: 1180.4ms | ActiveRecord: 0.4ms)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from block in tsort_each at /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/tsort.rb:226)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from block in tsort_each at /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/tsort.rb:226)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-09 23:02:17 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (6.1ms)
+Completed 200 OK in 13ms (Views: 9.9ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-09 23:02:18 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mDashboard Load (2.0ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 15]]
+  [1m[36mPost Load (0.9ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1[0m  [["id", 15]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[36m (2.0ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 18]]
+  [1m[35mTagging Load (1.8ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 7]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 6]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 5]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 4]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 4], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 3], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 3]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 3], ["taggable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 2], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 2]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 2], ["taggable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 1], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 1]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 1], ["taggable_type", "Post"]]
+Completed 200 OK in 63ms (Views: 1.1ms | ActiveRecord: 14.2ms)
+
+
+Started GET "/api/posts/6/comments.json" for 172.17.42.1 at 2015-01-09 23:02:24 +0000
+Processing by Api::PostsController#comments as JSON
+  Parameters: {"id"=>"6"}
+  [1m[35mPost Load (0.3ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 6]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 6]]
+  Rendered api/posts/comments.json.jbuilder (3.2ms)
+Completed 200 OK in 10ms (Views: 7.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/explore/blogs" for 172.17.42.1 at 2015-01-09 23:02:28 +0000
+
+SyntaxError - syntax error, unexpected ':', expecting keyword_end
+			render json: @blog.errors.full_messages: status: 422
+			                                        ^:
+  app/controllers/blogs_controller.rb:33:in `'
+  activesupport (4.2.0) lib/active_support/dependencies.rb:457:in `block in load_file'
+  activesupport (4.2.0) lib/active_support/dependencies.rb:647:in `new_constants_in'
+  activesupport (4.2.0) lib/active_support/dependencies.rb:456:in `load_file'
+  activesupport (4.2.0) lib/active_support/dependencies.rb:354:in `require_or_load'
+  activesupport (4.2.0) lib/active_support/dependencies.rb:494:in `load_missing_constant'
+  activesupport (4.2.0) lib/active_support/dependencies.rb:184:in `const_missing'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  activesupport (4.2.0) lib/active_support/dependencies.rb:566:in `get'
+  activesupport (4.2.0) lib/active_support/dependencies.rb:597:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  remotipart (1.2.1) lib/remotipart/middleware.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.0) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.0) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.0) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  unicorn (4.8.3) lib/unicorn/http_server.rb:576:in `process_client'
+  unicorn (4.8.3) lib/unicorn/http_server.rb:670:in `worker_loop'
+  unicorn (4.8.3) lib/unicorn/http_server.rb:525:in `spawn_missing_workers'
+  unicorn (4.8.3) lib/unicorn/http_server.rb:140:in `start'
+  unicorn-rails (2.2.0) lib/unicorn_rails.rb:33:in `run'
+  rack (1.6.0) lib/rack/server.rb:286:in `start'
+  railties (4.2.0) lib/rails/commands/server.rb:80:in `start'
+  railties (4.2.0) lib/rails/commands/commands_tasks.rb:80:in `block in server'
+  railties (4.2.0) lib/rails/commands/commands_tasks.rb:75:in `server'
+  railties (4.2.0) lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+  railties (4.2.0) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:8:in `<top (required)>'
+  spring (1.2.0) lib/spring/client/rails.rb:27:in `call'
+  spring (1.2.0) lib/spring/client/command.rb:7:in `call'
+  spring (1.2.0) lib/spring/client.rb:26:in `run'
+  spring (1.2.0) bin/spring:48:in `<top (required)>'
+  spring (1.2.0) lib/spring/binstub.rb:11:in `<top (required)>'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/rubygems/core_ext/kernel_require.rb:55:in `require'
+  bin/spring:16:in `<top (required)>'
+  bin/rails:3:in `<main>'
+
+
+
+Started POST "/__better_errors/a43a395fc5c5ff4d/variables" for 172.17.42.1 at 2015-01-09 23:02:29 +0000
