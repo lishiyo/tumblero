@@ -6,11 +6,13 @@ Tumblero.Views.DashboardShow = Backbone.CompositeView.extend({
 	},
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
+		this.listenTo(this.currentUser, 'sync', this.render);
 		
 		this.listenTo(this.model, 'sync', this.render);
 
 		this.listenTo(this.model.posts(), 'sync remove', this.render);
 		this.listenTo(this.model.posts(), 'add', this.addPost);
+		
 		
 		console.log("initialize", this.model, this.model.posts());
 		// add subviews for posts

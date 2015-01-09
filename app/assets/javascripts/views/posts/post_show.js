@@ -8,7 +8,9 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 	initialize: function(opts){
 		this.blog = opts.blog;
 		this.currentUser = opts.currentUser;
+		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync', this.render);
+		this.listenTo(this.model.taggings(), 'sync', this.render);
 		
 	},
 	
@@ -20,7 +22,6 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 		
 		var all_comments = new Tumblero.Collections.Comments({ post: this.model });
 		var cu = this.currentUser;
-		console.log("cu", cu);
 		all_comments.fetch({
 			success: function(){
 				var commentsIndex = new Tumblero.Views.CommentsIndex({ 
@@ -38,14 +39,20 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 	
 		
 	render: function(){
-		var isLiked = this.currentUser.likeStateFor('Post', this.model.id),
-				likeState;
+		var isLiked = this.currentUser.likeStateFor('Post', this.model.id);
 		
-		likeState = (isLiked) ? "liked" : "unliked";
+		var likeState = (isLiked) ? "liked" : "unliked";
+		
+		var tagArr = this.model.taggings().map(function(tagModel){
+			return tagModel.get('name');
+		});
+		
+		console.log("tagarr", this.model.taggings());
 		
 		var content = this.template({ 
 			post: this.model,
-			initialLikeState: likeState
+			initialLikeState: likeState,
+			tag_names: tagArr
 		});
 		
     this.$el.html(content);

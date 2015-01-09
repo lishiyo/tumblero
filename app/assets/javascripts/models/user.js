@@ -7,7 +7,7 @@ Tumblero.Models.User = Backbone.Model.extend({
 	
 	likeStateFor: function(type, type_id){
 		var user = this;
-// 		console.log("likestatefor", user, user.get('liked_posts_ids'))
+		console.log("likestatefor", user, user.get('liked_posts_ids'))
 		
 		if (type == 'Post') {
 			return user.get('liked_posts_ids').some(function(elem){
@@ -18,7 +18,8 @@ Tumblero.Models.User = Backbone.Model.extend({
 				return (elem === type_id);
 			});
 		}
-			
+		
+		return false;
 	},
 	
 	followStateFor: function(blog_id) {	

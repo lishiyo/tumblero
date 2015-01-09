@@ -11,11 +11,14 @@
 		<% }); %>
 	<% } %>
 	
+	<p>
+		<% if (post.get('content')) { %>
+			<%= post.get('content') %>
+		<% } %>
+	</p>
 	
-<p>
-	<% if (post.get('content')) { %>
-		<%= post.get('content') %>
-	<% } %>
+	<p>
+		<%= tag_names %>
 	</p>
 
 	<span class="count-notes"><%= post.escape('count_notes') %> notes</span>

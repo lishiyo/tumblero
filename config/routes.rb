@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 		
 		resources :posts, only: [:new, :show, :create] do
 			resources :comments, only: [:new]
+			resources :taggings, only: [:index]
 			member do
 				get 'reblog'
 				get 'comments'
@@ -20,8 +21,10 @@ Rails.application.routes.draw do
 		resource :dashboard, only: [:show]
 		resource :like, only: [:create, :destroy] 
 		resources :comments, only: [:create, :show, :destroy]
+		resources :taggings, only: [:create, :show, :destroy]
 	end
 	
+	# NOT NAMESPACE
 	resource :session, only: [:new, :create, :destroy]
 	resources :static_pages, only: [:index]
 	

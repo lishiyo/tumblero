@@ -11,7 +11,7 @@ class  Api::PostsController < ApplicationController
 	
 	def show	
 		respond_to do |f| 
-			f.json { render json: @post.to_json(methods: :count_notes) }
+			f.json { render json: @post.to_json(methods: :count_notes, include: :taggings) }
 		end
 	end
 	

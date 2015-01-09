@@ -6,7 +6,7 @@ Tumblero.Views.BlogShow = Backbone.CompositeView.extend({
 	},
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
-		
+		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync', this.render);
 
 		this.listenTo(this.model.posts(), 'sync remove', this.render);
