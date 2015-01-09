@@ -28,7 +28,7 @@
                     </li>
 									<li>
 		<% if current_user.present? %>
-									<li><%= link_to "My Profile", "#", class: "user-profile-btn" %></li>
+									<li><%= link_to "My Profile", "#users/profile", class: "user-profile-btn" %></li>
 		<li><%= link_to "Logout", session_url, method: :delete, class: "logout-btn" %></li>
 									
 		<% else %>
