@@ -1,5 +1,5 @@
-Tumblero.Models.Blog = Backbone.Model.extend({
-	urlRoot: '/api/dashboard',
+Tumblero.Models.Dashboard = Backbone.Model.extend({
+	urlRoot: '/dashboard',
 	initialize: function(opts) {
 		this.user = opts.user;
 	},

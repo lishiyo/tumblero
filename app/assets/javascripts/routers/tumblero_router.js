@@ -52,6 +52,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	blogShow: function(blog_id){
 		var blog = new Tumblero.Models.Blog({id: blog_id});
 		blog.fetch();
+		
 		var blogShowView = new Tumblero.Views.BlogShow({
 			currentUser: this.currentUser, 
 			model: blog
