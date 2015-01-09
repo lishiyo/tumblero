@@ -66,7 +66,7 @@ window.Tumblero = {
 		
 		$("body").on("click", "button.full-post-modal", function(event){
 			event.preventDefault();
-			var startTab = $(event.currentTarget).data("tab-num");
+			var startTab = ($(event.currentTarget).data("tab-num") || 1);
 			
 			var post = new Tumblero.Models.Post();
 			var newPostFull = new Tumblero.Views.NewPostFull({

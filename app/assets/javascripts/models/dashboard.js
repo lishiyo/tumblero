@@ -7,7 +7,7 @@ Tumblero.Models.Blog = Backbone.Model.extend({
 	posts: function(){
 		if(!this._posts) {
       this._posts = new Tumblero.Collections.Posts([], {
-      	dashboard: this;
+      	dashboard: this
       });
     }
 		
