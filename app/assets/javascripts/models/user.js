@@ -22,7 +22,7 @@ Tumblero.Models.User = Backbone.Model.extend({
 	},
 	
 	followStateFor: function(blog_id) {	
-		console.log("followStateFor", this.blogs(), blog_id)
+		
 		// returns true if blog_id is in 
 		return this.get('followed_blogs_ids').some(function(id){
 			return (id === blog_id);
