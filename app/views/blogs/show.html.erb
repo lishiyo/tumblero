@@ -8,20 +8,20 @@
 
 
 <div class="container">
+	<h2>Make a New Post</h2>
+		
 	<div class="row">
 		
-<h2>Make a New Post</h2>
-<button class='full-post-modal' data-id="<%= @blog.id %>">Create Post
-</button>
-		
-<button class="js-modal-open-1" data-id="<%= @blog.id %>">Text Post
-</button>
-<button class="js-modal-open-2" data-id="<%= @blog.id %>">Image Post
-</button>
+	<button class='full-post-modal' data-id="<%= @blog.id %>">Create Post
+	</button>
+
+	<button class="full-post-modal" data-tab-num="1" data-id="<%= @blog.id %>">Text Post
+	</button>
+	<button class="full-post-modal" data-tab-num="2" data-id="<%= @blog.id %>">Image Post
+	</button>
 	
-		<!-- get rid of this -->
-	<%= render partial: "posts/new", locals: { post: Post.new } %>
 	</div>
+	<div class="inline-notifications"></div>
 </div>
 
 <section>

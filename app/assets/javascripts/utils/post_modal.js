@@ -1,12 +1,12 @@
 Tumblero.PostModal = Backbone.View.extend({
 	
 	initialize: function(){
-		this.$tabEl = $('.tab-container');
+		
 	},
 	
 	setActive: function(opts) {
-// 		this.$('.bbm-modal__tab a').removeClass('active');
-// 		this.$('#tab'+opts.tabNum).addClass('active'); 
+		this.$('.bbm-modal__tab a').removeClass('active');
+		this.$('#tab'+opts.tabNum).addClass('active'); 
 		
 		event.preventDefault();
 		console.log("setActive", this.current_user, this);
@@ -33,7 +33,8 @@ Tumblero.PostModal = Backbone.View.extend({
 			current_user: user
 		});
 		
-		this.$tabEl(newPostT1.render().$el);
+		$('.tab-container').html(newPostT1.render().$el);
+		console.log(this.$tabEl);
 	},
 	
 	showTab2: function(post, user){
@@ -42,7 +43,7 @@ Tumblero.PostModal = Backbone.View.extend({
 			current_user: user
 		});
 		
-		this.$tabEl(newPostT2.render().$el);
+		$('.tab-container').html(newPostT2.render().$el);
 	},
 	
 	setImageOpts: function(){
@@ -135,10 +136,10 @@ Tumblero.PostModal = Backbone.View.extend({
 	},
 	
 	submit: function(event) {
-		console.log("clicked submit");
 		$(".modal").removeClass("is-open");
-		// add to collection
-		window.location.replace("/dashboard");
+		$('.inline-notifications').html("<h4>post added!</h4>");
+		// add to collection?
+// 		window.location.replace("/dashboard");
 	}
 	
 });
