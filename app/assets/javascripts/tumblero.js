@@ -3,6 +3,7 @@ window.Tumblero = {
   Collections: {},
   Views: {},
   Routers: {},
+	Assets: {},
 	
   initialize: function() {
 		console.log("welcome to backbone");

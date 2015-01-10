@@ -1,0 +1,18 @@
+Tumblero.Assets = {
+ 
+  images: {
+    <% AssetsUtil.images.each do |img| %>
+      "<%= img %>" : "<%= asset_path(img) %>",
+    <% end %>
+  },
+ 
+  path: function(name) {
+    // If the file is in our images object, pull the path from there.
+    if (this.images && this.images[name]) {
+      return this.images[name];
+    }
+ 
+    // Otherwise, create a generic asset path.
+    return '/assets/' + name;
+  }
+}

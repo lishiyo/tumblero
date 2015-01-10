@@ -4,7 +4,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	
 	events: {
 		'click .reply-comment': 'openReplyForm',
-		'click button.like-btn': "likeSubject"
+		'click button.like-comment': "likeSubject"
 	},
 	
 // 	tagName: "li",
@@ -33,6 +33,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 			}.bind(this));
 		}
 		
+		this.likeButtonId = "button#like-btn-" + this.model.id;
 	},
 	
 	removeComment: function(){
@@ -80,20 +81,18 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 		
 	},
 	
-	render: function(){
-		this.setLikeState('Comment', this.model.id);
-		
+	render: function(){		
+		this.setLikeState('Comment', this.model.id, this.likeButtonId);
+		console.log("showing likestate", this.likeState);
 		var content = this.template({ 
 			comment: this.model,
 			initialLikeState: this.likeState
 		});
 		
-		
     this.$el.html(content);
     this.attachSubviews();
 		
-		this.renderLikeButton(this.$('.like-btn'));
-// 		$("button.like-btn.like-comment").likeToggle();
+		this.renderLikeButton(this.likeButtonId);
     return this;
 	}
 });

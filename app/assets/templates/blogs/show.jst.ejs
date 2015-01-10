@@ -1,12 +1,15 @@
 <section class="blog-profile">
-	<h1><%= blog.get('name') %></h1>
+	<h1><a href="#<%= Routes.blog_path(blog) %>"><%= blog.get('name') %></a></h1>
 	<% if (current_user_id !== blog.get('user_id')) { %>
 		<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>"></button>
 	<% } %>
 	<p><%= blog.get('description') %></p>
-
-	<img src="<%= blog.get('avatar_url') %>">
-
+	
+	<% if (blog.get('avatar_url')) { %>
+		<img src="<%= blog.get('avatar_url') %>">
+	<% } else { %>
+		<img src="<%= Tumblero.Assets.path('default_avatar_01.jpg') %>">
+	<% } %>
 </section>
 
 

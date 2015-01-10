@@ -2,7 +2,8 @@ class Api::BlogsController < ApplicationController
 	
 	before_action :require_logged_in
 	
-	def index # GET /explore/blogs 
+	# GET /explore/blogs 
+	def index 
 		@blogs = Blog.where.not(user_id: current_user.id)
 		render json: @blogs
 	end

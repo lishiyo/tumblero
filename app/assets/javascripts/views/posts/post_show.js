@@ -12,18 +12,19 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.taggings(), 'sync', this.render);
-		
+		this.likeButtonId =('button.like-post');
 	},
 	
 	openComments: function(event){
 		event.preventDefault();
-		console.log("clicked openComments");
 		
 		var commCont = '#post-comments-' + this.model.id;
 		var $commCont = $(commCont);
-		
-		var all_comments = new Tumblero.Collections.Comments({ post: this.model });
+		var all_comments = new Tumblero.Collections.Comments({
+			post: this.model 
+		});
 		var cu = this.currentUser;
+		
 		all_comments.fetch({
 			success: function(){
 				var commentsIndex = new Tumblero.Views.CommentsIndex({ 
@@ -40,7 +41,7 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		
 	render: function(){
 		
-		this.setLikeState('Post', this.model.id);
+		this.setLikeState('Post', this.model.id, this.likeButtonId);
 		
 		var content = this.template({ 
 			post: this.model,
@@ -50,7 +51,7 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		
     this.$el.html(content);
    	
-		this.renderLikeButton(this.$('.like-btn'));
+		this.renderLikeButton(this.likeButtonId);
 		
     return this;
 	}

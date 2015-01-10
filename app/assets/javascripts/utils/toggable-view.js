@@ -1,14 +1,15 @@
 Tumblero.ToggableView = Backbone.CompositeView.extend({
 	
-	setLikeState: function(type, id){	
-		var isLiked = this.currentUser.likeStateFor('Post', this.model.id);	
+	setLikeState: function(type, id, btn){	
+		var isLiked = this.currentUser.likeStateFor(type, this.model.id);	
 		this.likeState = (isLiked) ? "liked" : "unliked";	
-		this.likeableId = id;
 		this.likeableType = type;
-// 		this.$likeBtn = this.$('.like-btn');
+		this.likeableId = id;
+		this.likeButtonId = (btn || ('button.like-btn'));
 	},
 	
-	renderLikeButton: function($btn){
+	renderLikeButton: function(btnId){
+		var $btn = this.$(btnId);
 		if (this.likeState === "liked") {
 			$btn.prop("disabled", false).addClass("liked");
 			$btn.html("unlike");
@@ -96,15 +97,13 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		console.log("clicked like!");
 		
 		var likeToggle = this,
-				$btn = this.$('button.like-btn');
+				$btn = this.$(this.likeButtonId);
 		
 		var dataParams = {
 		 	'likeable_id': this.likeableId,
 			'likeable_type': this.likeableType
 		};
-		
-		console.log("dataParams: ", dataParams);
-		
+			
 		if (this.likeState === "liked") {
 			this.likeState = "liking";
 			this.renderLikeButton($btn);

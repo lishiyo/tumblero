@@ -14,7 +14,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"blogs/:id": "blogShow",
 		"posts/:post_id/comments": "showComments",
 		"dashboard": "dashboardShow",
-		"explore/blogs": "exploreBlogs"
+		"explore/blogs": "blogsExplore"
 	},
 	
 	checkUser: function() { 
@@ -77,7 +77,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 
 	},
 	
-	exploreBlogs: function(){
+	blogsExplore: function(){
 		var blogs = new Tumblero.Collections.Blogs({ user: this.currentUser });
 		blogs.fetch({
 			success: function(){			

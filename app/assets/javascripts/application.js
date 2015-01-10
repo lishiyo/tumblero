@@ -20,6 +20,7 @@
 //= require bootstrap-wysihtml5
 
 //= require tumblero
+//= require assets
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

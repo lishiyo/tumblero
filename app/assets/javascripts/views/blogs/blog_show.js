@@ -1,4 +1,4 @@
-Tumblero.Views.BlogShow = Backbone.CompositeView.extend({
+Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	template: JST['blogs/show'],
 	events: {
@@ -35,19 +35,18 @@ Tumblero.Views.BlogShow = Backbone.CompositeView.extend({
 	},
 	
 	render: function(){
-		var isFollowed = this.currentUser.followStateFor(this.model.id);
-		var followState = ((isFollowed) ? "followed" : "unfollowed");
+		this.setFollowState();
 		console.log("current_user_id vs blog.user_id", this.currentUser.id, this.model.get('user_id'));
 		
 		var content = this.template({ 
 			blog: this.model,
 			current_user_id: this.currentUser.id,
-			initialFollowState: followState
+			initialFollowState: this.followState
 		});
 		
     this.$el.html(content);
     this.attachSubviews();
-		
+		this.renderFollowButton(this.$('.follow-btn'));
 		// set up like and follow buttons
 // 		$("button.like-btn").likeToggle();
 // 		$("button.follow-btn").followToggle();
