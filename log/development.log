@@ -49804,3 +49804,1506 @@ Processing by Api::PostsController#comments as JSON
   [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 23]]
   Rendered api/posts/comments.json.jbuilder (1.2ms)
 Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.4ms)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from block in tsort_each at /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/tsort.rb:226)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from block in tsort_each at /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/tsort.rb:226)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-09 23:48:08 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (3.0ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (33.8ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 1663ms (Views: 1636.5ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-09 23:48:13 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (1.0ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.7ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.9ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (117.2ms)
+Completed 200 OK in 130ms (Views: 118.9ms | ActiveRecord: 8.2ms)
+
+
+Started GET "/explore/blogs" for 172.17.42.1 at 2015-01-09 23:48:15 +0000
+Processing by BlogsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)  [["user_id", 15]]
+  [1m[36mBlog Exists (0.4ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2[0m  [["user_id", 15], ["id", 4]]
+  Rendered blogs/_blog.html.erb (5.1ms)
+  [1m[35mBlog Exists (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2  [["user_id", 15], ["id", 5]]
+  Rendered blogs/_blog.html.erb (1.2ms)
+  [1m[36mBlog Exists (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2[0m  [["user_id", 15], ["id", 6]]
+  Rendered blogs/_blog.html.erb (1.1ms)
+  Rendered blogs/index.html.erb within layouts/application (10.9ms)
+  Rendered layouts/_header.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1022ms (Views: 1018.7ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-09 23:48:18 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.7ms)
+Completed 200 OK in 12ms (Views: 9.1ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-09 23:48:26 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.5ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 976ms (Views: 974.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-09 23:48:30 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.9ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.5ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.4ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (8.4ms)
+Completed 200 OK in 18ms (Views: 13.7ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/api/blogs" for 172.17.42.1 at 2015-01-09 23:48:30 +0000
+Processing by Api::BlogsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)  [["user_id", 15]]
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-09 23:50:37 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 7]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 23]]
+  [1m[35mTagging Load (0.5ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 31ms (Views: 0.5ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/explore/blogs" for 172.17.42.1 at 2015-01-09 23:50:46 +0000
+Processing by BlogsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)  [["user_id", 15]]
+  [1m[36mBlog Exists (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2[0m  [["user_id", 15], ["id", 4]]
+  Rendered blogs/_blog.html.erb (1.8ms)
+  [1m[35mBlog Exists (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2  [["user_id", 15], ["id", 5]]
+  Rendered blogs/_blog.html.erb (1.1ms)
+  [1m[36mBlog Exists (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2[0m  [["user_id", 15], ["id", 6]]
+  Rendered blogs/_blog.html.erb (1.1ms)
+  Rendered blogs/index.html.erb within layouts/application (6.3ms)
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 2397ms (Views: 2393.9ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/explore/blogs" for 172.17.42.1 at 2015-01-09 23:50:49 +0000
+Processing by BlogsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)[0m  [["user_id", 15]]
+  [1m[35mBlog Exists (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2  [["user_id", 15], ["id", 4]]
+  Rendered blogs/_blog.html.erb (2.0ms)
+  [1m[36mBlog Exists (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2[0m  [["user_id", 15], ["id", 5]]
+  Rendered blogs/_blog.html.erb (1.2ms)
+  [1m[35mBlog Exists (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2  [["user_id", 15], ["id", 6]]
+  Rendered blogs/_blog.html.erb (1.0ms)
+  Rendered blogs/index.html.erb within layouts/application (6.8ms)
+  Rendered layouts/_header.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 997ms (Views: 994.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-09 23:50:52 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.4ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (6.5ms)
+Completed 200 OK in 13ms (Views: 10.0ms | ActiveRecord: 1.8ms)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from block in tsort_each at /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/tsort.rb:226)
+DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+
+You can opt into the new behavior and remove this warning by setting:
+
+  config.active_record.raise_in_transactional_callbacks = true
+
+ (called from block in tsort_each at /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/tsort.rb:226)
+
+
+Started GET "/explore/blogs" for 172.17.42.1 at 2015-01-09 23:51:24 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by BlogsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.4ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)[0m  [["user_id", 15]]
+  [1m[35mBlog Exists (0.5ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2  [["user_id", 15], ["id", 4]]
+  Rendered blogs/_blog.html.erb (46.6ms)
+  [1m[36mBlog Exists (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2[0m  [["user_id", 15], ["id", 5]]
+  Rendered blogs/_blog.html.erb (1.5ms)
+  [1m[35mBlog Exists (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1 AND "blogs"."id" = $2  [["user_id", 15], ["id", 6]]
+  Rendered blogs/_blog.html.erb (1.3ms)
+  Rendered blogs/index.html.erb within layouts/application (66.9ms)
+  Rendered layouts/_header.html.erb (1.4ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 1609ms (Views: 1509.0ms | ActiveRecord: 7.3ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-09 23:51:26 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.3ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.4ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1083ms (Views: 1082.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-09 23:51:30 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.7ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.7ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.5ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (91.2ms)
+Completed 200 OK in 104ms (Views: 95.0ms | ActiveRecord: 6.3ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-09 23:51:30 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mDashboard Load (0.6ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 15]]
+  [1m[35mPost Load (1.3ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1  [["id", 15]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 18]]
+  [1m[36mTagging Load (0.6ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 7]]
+  [1m[35mTagging Load (0.3ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 6]]
+  [1m[36mTagging Load (0.3ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mTagging Load (0.3ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 4]]
+  [1m[36mTagging Load (0.3ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 4], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 3], ["likeable_type", "Post"]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 3]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 3], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 2], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 2]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 2], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 1], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 1], ["taggable_type", "Post"]]
+Completed 200 OK in 108ms (Views: 1.3ms | ActiveRecord: 13.0ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-09 23:54:47 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.5ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1135ms (Views: 1133.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-09 23:54:51 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (6.7ms)
+Completed 200 OK in 14ms (Views: 10.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-09 23:54:51 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mDashboard Load (1.3ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 15]]
+  [1m[35mPost Load (0.9ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1  [["id", 15]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 18]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 7]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 6]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 4]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 4], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 3], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 3]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 3], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 2], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 2]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 2], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 1], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 1]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 1], ["taggable_type", "Post"]]
+Completed 200 OK in 31ms (Views: 1.1ms | ActiveRecord: 6.5ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-09 23:55:04 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 7]]
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 23]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 16ms (Views: 0.6ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/blogs" for 172.17.42.1 at 2015-01-09 23:55:06 +0000
+Processing by Api::BlogsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)  [["user_id", 15]]
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.5ms)
+
+
+Started DELETE "/api/blogs/5/following" for 172.17.42.1 at 2015-01-09 23:55:08 +0000
+Processing by Api::FollowingsController#destroy as JSON
+  Parameters: {"blog_id"=>"5"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mFollowing Load (0.2ms)[0m  SELECT  "followings".* FROM "followings" WHERE "followings"."user_id" = $1 AND "followings"."blog_id" = $2 LIMIT 1  [["user_id", 15], ["blog_id", 5]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "followings" WHERE "followings"."id" = $1  [["id", 16]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:03:49 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1131ms (Views: 1130.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/blogs" for 172.17.42.1 at 2015-01-10 00:03:53 +0000
+Processing by Api::BlogsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)  [["user_id", 15]]
+Completed 200 OK in 9ms (Views: 4.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:03:54 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.7ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.5ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.5ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (11.4ms)
+Completed 200 OK in 22ms (Views: 16.5ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:04:00 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.3ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1061ms (Views: 1060.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:04:04 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.8ms)
+Completed 200 OK in 12ms (Views: 9.3ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/api/blogs" for 172.17.42.1 at 2015-01-10 00:04:04 +0000
+Processing by Api::BlogsController#index as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)[0m  [["user_id", 15]]
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:05:04 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 995ms (Views: 993.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:05:08 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.5ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (6.3ms)
+Completed 200 OK in 13ms (Views: 9.8ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/api/blogs" for 172.17.42.1 at 2015-01-10 00:05:08 +0000
+Processing by Api::BlogsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)  [["user_id", 15]]
+Completed 200 OK in 3ms (Views: 1.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:06:43 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1282ms (Views: 1280.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:06:47 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.4ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.7ms)
+Completed 200 OK in 12ms (Views: 9.3ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/api/blogs" for 172.17.42.1 at 2015-01-10 00:06:47 +0000
+Processing by Api::BlogsController#index as JSON
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)[0m  [["user_id", 15]]
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:10:45 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1111ms (Views: 1110.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:10:49 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.1ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.7ms)
+Completed 200 OK in 15ms (Views: 12.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/api/blogs" for 172.17.42.1 at 2015-01-10 00:10:49 +0000
+Processing by Api::BlogsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE ("blogs"."user_id" != $1)  [["user_id", 15]]
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:20:35 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 7]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 23]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 1.1ms)
+
+
+Started DELETE "/like" for 172.17.42.1 at 2015-01-10 00:20:38 +0000
+Processing by LikesController#destroy as JSON
+  Parameters: {"likeable_id"=>"23", "likeable_type"=>"Post"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mLike Load (0.2ms)[0m  SELECT  "likes".* FROM "likes" WHERE "likes"."likeable_type" = $1 AND "likes"."likeable_id" = $2 LIMIT 1  [["likeable_type", "Post"], ["likeable_id", 23]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "likes" WHERE "likes"."id" = $1  [["id", 14]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/api/posts/23" for 172.17.42.1 at 2015-01-10 00:20:40 +0000
+Processing by Api::PostsController#show as JSON
+  Parameters: {"id"=>"23"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 23]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 23]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:21:51 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1119ms (Views: 1118.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:21:55 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.3ms)
+Completed 200 OK in 12ms (Views: 9.2ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:21:55 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 7]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 23]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:22:26 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1106ms (Views: 1105.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:22:30 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.7ms)
+Completed 200 OK in 13ms (Views: 9.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:22:30 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[35mUser Load (0.9ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 7]]
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 23]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 9ms (Views: 0.8ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:23:55 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1114ms (Views: 1113.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:23:59 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.5ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (19.8ms)
+Completed 200 OK in 31ms (Views: 26.5ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:23:59 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 7]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 23]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 10ms (Views: 0.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:24:36 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1407ms (Views: 1405.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:24:41 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.1ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.3ms)
+Completed 200 OK in 12ms (Views: 9.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:24:41 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 7]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 23]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:25:06 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1131ms (Views: 1130.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:25:09 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (8.0ms)
+Completed 200 OK in 17ms (Views: 13.6ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:25:09 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 7]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 23]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 18ms (Views: 0.5ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/like" for 172.17.42.1 at 2015-01-10 00:25:12 +0000
+Processing by LikesController#create as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mLike Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."likeable_id" IS NULL AND "likes"."likeable_id" IS NULL AND "likes"."user_id" = 15) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+Completed 422 Unprocessable Entity in 22ms (Views: 0.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:27:16 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.3ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 1191ms (Views: 1190.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:27:20 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.1ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.2ms)
+Completed 200 OK in 12ms (Views: 9.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:27:20 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 7]]
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 23]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/like" for 172.17.42.1 at 2015-01-10 00:27:23 +0000
+Processing by LikesController#create as JSON
+  Parameters: {"likeable_id"=>"23", "likeable_type"=>"Post"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mLike Exists (0.3ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."likeable_id" = 23 AND "likes"."likeable_id" = 23 AND "likes"."user_id" = 15) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "likes" ("likeable_type", "likeable_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["likeable_type", "Post"], ["likeable_id", 23], ["user_id", 15], ["created_at", "2015-01-10 00:27:23.917155"], ["updated_at", "2015-01-10 00:27:23.917155"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:27:59 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.4ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1128ms (Views: 1126.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:28:02 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.1ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.6ms)
+Completed 200 OK in 12ms (Views: 9.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:28:02 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.1ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 7]]
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 23]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 1.1ms)
+
+
+Started DELETE "/like" for 172.17.42.1 at 2015-01-10 00:28:14 +0000
+Processing by LikesController#destroy as JSON
+  Parameters: {"likeable_id"=>"23", "likeable_type"=>"Post"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mLike Load (0.3ms)[0m  [1mSELECT  "likes".* FROM "likes" WHERE "likes"."likeable_type" = $1 AND "likes"."likeable_id" = $2 LIMIT 1[0m  [["likeable_type", "Post"], ["likeable_id", 23]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "likes" WHERE "likes"."id" = $1[0m  [["id", 15]]
+  [1m[35m (0.9ms)[0m  COMMIT
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/like" for 172.17.42.1 at 2015-01-10 00:28:15 +0000
+Processing by LikesController#create as JSON
+  Parameters: {"likeable_id"=>"23", "likeable_type"=>"Post"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mLike Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."likeable_id" = 23 AND "likes"."likeable_id" = 23 AND "likes"."user_id" = 15) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "likes" ("likeable_type", "likeable_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["likeable_type", "Post"], ["likeable_id", 23], ["user_id", 15], ["created_at", "2015-01-10 00:28:15.689703"], ["updated_at", "2015-01-10 00:28:15.689703"]]
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:28:17 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1110ms (Views: 1109.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:28:21 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.7ms)
+Completed 200 OK in 12ms (Views: 9.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:28:21 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 7]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 23]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 8ms (Views: 0.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:34:47 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.3ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1300ms (Views: 1298.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:34:51 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.6ms)
+Completed 200 OK in 12ms (Views: 9.7ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/blogs/7" for 172.17.42.1 at 2015-01-10 00:34:51 +0000
+Processing by Api::BlogsController#show as JSON
+  Parameters: {"id"=>"7"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 7]]
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" WHERE "posts"."blog_id" IN (7)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 23], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 23]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 23], ["taggable_type", "Post"]]
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:35:02 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mDashboard Load (0.2ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 15]]
+  [1m[35mPost Load (0.7ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1  [["id", 15]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 18]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 7]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 6]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 4]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 19ms (Views: 0.8ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:35:15 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1086ms (Views: 1085.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:35:19 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.7ms)
+Completed 200 OK in 12ms (Views: 9.6ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:35:19 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 15]]
+  [1m[36mPost Load (0.6ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1[0m  [["id", 15]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 18]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 7]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 6]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 5]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 4]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 29ms (Views: 1.5ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:35:50 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1089ms (Views: 1088.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:35:54 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.7ms)
+Completed 200 OK in 12ms (Views: 9.5ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:35:54 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mDashboard Load (0.2ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 15]]
+  [1m[35mPost Load (0.6ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1  [["id", 15]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 18]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 7]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 6]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 4]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 18ms (Views: 0.7ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:36:18 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1197ms (Views: 1195.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:36:22 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.5ms)
+Completed 200 OK in 12ms (Views: 9.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:36:22 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 15]]
+  [1m[36mPost Load (0.6ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1[0m  [["id", 15]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 18]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 7]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 6]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 5]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 4]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 19ms (Views: 0.8ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:37:03 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1544ms (Views: 1543.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:37:08 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.1ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.4ms)
+Completed 200 OK in 12ms (Views: 9.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:37:08 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mDashboard Load (0.2ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1  [["id", 15]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 18]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 7]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 6]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 4]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 23ms (Views: 0.7ms | ActiveRecord: 2.7ms)
+
+
+Started POST "/like" for 172.17.42.1 at 2015-01-10 00:37:11 +0000
+Processing by LikesController#create as JSON
+  Parameters: {"likeable_id"=>"6", "likeable_type"=>"Post"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mLike Exists (0.3ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."likeable_id" = 6 AND "likes"."likeable_id" = 6 AND "likes"."user_id" = 15) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "likes" ("likeable_type", "likeable_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["likeable_type", "Post"], ["likeable_id", 6], ["user_id", 15], ["created_at", "2015-01-10 00:37:11.526302"], ["updated_at", "2015-01-10 00:37:11.526302"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/api/posts/6" for 172.17.42.1 at 2015-01-10 00:37:12 +0000
+Processing by Api::PostsController#show as JSON
+  Parameters: {"id"=>"6"}
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 6]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 6]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 6], ["taggable_type", "Post"]]
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/posts/6/comments.json" for 172.17.42.1 at 2015-01-10 00:37:14 +0000
+Processing by Api::PostsController#comments as JSON
+  Parameters: {"id"=>"6"}
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 6]]
+  [1m[35mComment Load (0.9ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1  [["post_id", 6]]
+  Rendered api/posts/comments.json.jbuilder (4.2ms)
+Completed 200 OK in 11ms (Views: 8.6ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/comments" for 172.17.42.1 at 2015-01-10 00:37:27 +0000
+Processing by CommentsController#create as JSON
+  Parameters: {"comment"=>{"body"=>"just dropping by gaiz", "post_id"=>"6", "parent_comment_id"=>""}}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (1.5ms)[0m  [1mINSERT INTO "comments" ("body", "post_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["body", "just dropping by gaiz"], ["post_id", 6], ["user_id", 15], ["created_at", "2015-01-10 00:37:27.849385"], ["updated_at", "2015-01-10 00:37:27.849385"]]
+  [1m[35m (1.1ms)[0m  COMMIT
+Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/api/comments/31" for 172.17.42.1 at 2015-01-10 00:37:27 +0000
+Processing by Api::CommentsController#show as JSON
+  Parameters: {"id"=>"31"}
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT  "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT 1[0m  [["id", 31]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 31], ["likeable_type", "Comment"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 31]]
+  Rendered api/comments/show.json.jbuilder (5.7ms)
+Completed 200 OK in 15ms (Views: 11.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:37:52 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1309ms (Views: 1308.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:37:56 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.5ms)
+Completed 200 OK in 12ms (Views: 9.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:37:56 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mDashboard Load (0.1ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 15]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1[0m  [["id", 15]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 18]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 7]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 6]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 5]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 4]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 18ms (Views: 0.9ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/api/posts/6/comments.json" for 172.17.42.1 at 2015-01-10 00:37:57 +0000
+Processing by Api::PostsController#comments as JSON
+  Parameters: {"id"=>"6"}
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 6]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1  [["post_id", 6]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" IN (31)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 31], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (2.7ms)
+  Rendered api/posts/comments.json.jbuilder (9.2ms)
+Completed 200 OK in 15ms (Views: 12.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:38:17 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1111ms (Views: 1109.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:38:21 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (6.0ms)
+Completed 200 OK in 13ms (Views: 10.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:38:21 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mDashboard Load (0.1ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1  [["id", 15]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 18]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 7]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 6]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 4]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 18ms (Views: 0.8ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/api/posts/5/comments.json" for 172.17.42.1 at 2015-01-10 00:38:22 +0000
+Processing by Api::PostsController#comments as JSON
+  Parameters: {"id"=>"5"}
+  [1m[35mPost Load (0.3ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 5]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" IN (25)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 25], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (1.5ms)
+  Rendered api/posts/comments.json.jbuilder (4.4ms)
+Completed 200 OK in 8ms (Views: 6.5ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/comments" for 172.17.42.1 at 2015-01-10 00:38:27 +0000
+Processing by CommentsController#create as JSON
+  Parameters: {"comment"=>{"body"=>"just dropping by gaiz", "post_id"=>"5", "parent_comment_id"=>"25"}}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "comments" ("body", "post_id", "parent_comment_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["body", "just dropping by gaiz"], ["post_id", 5], ["parent_comment_id", 25], ["user_id", 15], ["created_at", "2015-01-10 00:38:27.124794"], ["updated_at", "2015-01-10 00:38:27.124794"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/api/comments/32" for 172.17.42.1 at 2015-01-10 00:38:27 +0000
+Processing by Api::CommentsController#show as JSON
+  Parameters: {"id"=>"32"}
+  [1m[35mComment Load (0.3ms)[0m  SELECT  "comments".* FROM "comments" WHERE "comments"."id" = $1 LIMIT 1  [["id", 32]]
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 32], ["likeable_type", "Comment"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 32]]
+  Rendered api/comments/show.json.jbuilder (2.5ms)
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/posts/4/comments.json" for 172.17.42.1 at 2015-01-10 00:38:29 +0000
+Processing by Api::PostsController#comments as JSON
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 4]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1  [["post_id", 4]]
+  [1m[36mComment Load (1.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" IN (21, 22, 23, 24)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 21], ["likeable_type", "Comment"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 22]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 23]]
+  Rendered comments/_comment.json.jbuilder (0.9ms)
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 24]]
+  Rendered comments/_comment.json.jbuilder (1.0ms)
+  Rendered comments/_comment.json.jbuilder (4.2ms)
+  Rendered api/comments/_comment.json.jbuilder (6.3ms)
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 22], ["likeable_type", "Comment"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 23]]
+  Rendered comments/_comment.json.jbuilder (0.7ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 24]]
+  Rendered comments/_comment.json.jbuilder (0.7ms)
+  Rendered api/comments/_comment.json.jbuilder (3.7ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 23], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (1.3ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 24], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (1.3ms)
+  Rendered api/posts/comments.json.jbuilder (18.6ms)
+Completed 200 OK in 23ms (Views: 18.8ms | ActiveRecord: 2.8ms)
+
+
+Started POST "/like" for 172.17.42.1 at 2015-01-10 00:38:37 +0000
+Processing by LikesController#create as JSON
+  Parameters: {"likeable_id"=>"4", "likeable_type"=>"Post"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mLike Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."likeable_id" = 4 AND "likes"."likeable_id" = 4 AND "likes"."user_id" = 15) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "likes" ("likeable_type", "likeable_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["likeable_type", "Post"], ["likeable_id", 4], ["user_id", 15], ["created_at", "2015-01-10 00:38:37.641701"], ["updated_at", "2015-01-10 00:38:37.641701"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:38:43 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1032ms (Views: 1031.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:38:47 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 15]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 15]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (6.2ms)
+Completed 200 OK in 13ms (Views: 10.1ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:38:47 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 15]]
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1[0m  [["id", 15]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 18]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 7]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 6]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 5]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 4]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 23ms (Views: 0.8ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/api/posts/4/comments.json" for 172.17.42.1 at 2015-01-10 00:38:52 +0000
+Processing by Api::PostsController#comments as JSON
+  Parameters: {"id"=>"4"}
+  [1m[36mPost Load (0.2ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 4]]
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1  [["post_id", 4]]
+  [1m[36mComment Load (0.4ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" IN (21, 22, 23, 24)[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 21], ["likeable_type", "Comment"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 22]]
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 23]]
+  Rendered comments/_comment.json.jbuilder (0.9ms)
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 24]]
+  Rendered comments/_comment.json.jbuilder (0.9ms)
+  Rendered comments/_comment.json.jbuilder (3.6ms)
+  Rendered api/comments/_comment.json.jbuilder (5.6ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 22], ["likeable_type", "Comment"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 23]]
+  Rendered comments/_comment.json.jbuilder (0.8ms)
+  [1m[35mCACHE (0.0ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 24]]
+  Rendered comments/_comment.json.jbuilder (0.6ms)
+  Rendered api/comments/_comment.json.jbuilder (4.0ms)
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 23], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (1.3ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 24], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (1.3ms)
+  Rendered api/posts/comments.json.jbuilder (17.6ms)
+Completed 200 OK in 21ms (Views: 18.5ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:39:39 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.0ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1216ms (Views: 1215.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:39:43 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.2ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.2ms)
+Completed 200 OK in 12ms (Views: 9.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:39:43 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mDashboard Load (0.2ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 15]]
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1  [["id", 15]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 18]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 7]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 6]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 4]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 17ms (Views: 1.1ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/api/posts/4/comments.json" for 172.17.42.1 at 2015-01-10 00:39:45 +0000
+Processing by Api::PostsController#comments as JSON
+  Parameters: {"id"=>"4"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 4]]
+  [1m[36mComment Load (0.3ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" IN (21, 22, 23, 24)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 21], ["likeable_type", "Comment"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 22]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 23]]
+  Rendered comments/_comment.json.jbuilder (1.3ms)
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 24]]
+  Rendered comments/_comment.json.jbuilder (1.3ms)
+  Rendered comments/_comment.json.jbuilder (5.4ms)
+  Rendered api/comments/_comment.json.jbuilder (8.5ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 22], ["likeable_type", "Comment"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 23]]
+  Rendered comments/_comment.json.jbuilder (1.1ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 24]]
+  Rendered comments/_comment.json.jbuilder (1.1ms)
+  Rendered api/comments/_comment.json.jbuilder (5.5ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (2.0ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 24], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (2.0ms)
+  Rendered api/posts/comments.json.jbuilder (25.4ms)
+Completed 200 OK in 31ms (Views: 27.7ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/like" for 172.17.42.1 at 2015-01-10 00:39:46 +0000
+Processing by LikesController#create as JSON
+  Parameters: {"likeable_id"=>"21", "likeable_type"=>"Comment"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mLike Exists (0.3ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."likeable_id" = 21 AND "likes"."likeable_id" = 21 AND "likes"."user_id" = 15) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "likes" ("likeable_type", "likeable_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["likeable_type", "Comment"], ["likeable_id", 21], ["user_id", 15], ["created_at", "2015-01-10 00:39:46.475633"], ["updated_at", "2015-01-10 00:39:46.475633"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-01-10 00:39:50 +0000
+Processing by StaticPagesController#index as HTML
+  Rendered static_pages/index.html within layouts/application (0.2ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1[0m  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  Rendered layouts/_header.html.erb (1.2ms)
+  Rendered layouts/_footer.html.erb (0.0ms)
+Completed 200 OK in 1066ms (Views: 1065.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/dashboard" for 172.17.42.1 at 2015-01-10 00:39:54 +0000
+Processing by Api::DashboardsController#show as JSON
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mDashboard Load (0.2ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 15]]
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "blogs" ON "posts"."blog_id" = "blogs"."id" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" INNER JOIN "users" ON "followings"."user_id" = "users"."id" WHERE "users"."id" = $1  [["id", 15]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 18], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 18]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 18], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 7], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 7]]
+  [1m[35mTagging Load (0.2ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 7], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 6], ["likeable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 6]]
+  [1m[36mTagging Load (0.1ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 6], ["taggable_type", "Post"]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 5], ["likeable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1[0m  [["post_id", 5]]
+  [1m[35mTagging Load (0.1ms)[0m  SELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2  [["taggable_id", 5], ["taggable_type", "Post"]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 4], ["likeable_type", "Post"]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "reblogs" WHERE "reblogs"."post_id" = $1  [["post_id", 4]]
+  [1m[36mTagging Load (0.2ms)[0m  [1mSELECT "taggings".* FROM "taggings" WHERE "taggings"."taggable_id" = $1 AND "taggings"."taggable_type" = $2[0m  [["taggable_id", 4], ["taggable_type", "Post"]]
+Completed 200 OK in 18ms (Views: 0.8ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/api/users/15" for 172.17.42.1 at 2015-01-10 00:39:54 +0000
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"15"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT 1  [["session_token", "Mnk_0e0lzkDierf-BmgGsw"]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 15]]
+  [1m[35mPost Load (0.3ms)[0m  SELECT "posts".* FROM "posts" INNER JOIN "likes" ON "posts"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2  [["user_id", 15], ["likeable_type", "Post"]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" INNER JOIN "likes" ON "comments"."id" = "likes"."likeable_id" WHERE "likes"."user_id" = $1 AND "likes"."likeable_type" = $2[0m  [["user_id", 15], ["likeable_type", "Comment"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 15]]
+  [1m[36mBlog Load (0.1ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 15]]
+  Rendered api/users/show.json.jbuilder (5.1ms)
+Completed 200 OK in 12ms (Views: 9.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/api/posts/4/comments.json" for 172.17.42.1 at 2015-01-10 00:39:56 +0000
+Processing by Api::PostsController#comments as JSON
+  Parameters: {"id"=>"4"}
+  [1m[35mPost Load (0.2ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 4]]
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."post_id" = $1[0m  [["post_id", 4]]
+  [1m[35mComment Load (0.3ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" IN (21, 22, 23, 24)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 21], ["likeable_type", "Comment"]]
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 22]]
+  [1m[36mComment Load (0.1ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 23]]
+  Rendered comments/_comment.json.jbuilder (0.8ms)
+  [1m[35mComment Load (0.1ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 24]]
+  Rendered comments/_comment.json.jbuilder (0.8ms)
+  Rendered comments/_comment.json.jbuilder (3.5ms)
+  Rendered api/comments/_comment.json.jbuilder (5.5ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 22], ["likeable_type", "Comment"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1  [["parent_comment_id", 23]]
+  Rendered comments/_comment.json.jbuilder (0.7ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT "comments".* FROM "comments" WHERE "comments"."parent_comment_id" = $1[0m  [["parent_comment_id", 24]]
+  Rendered comments/_comment.json.jbuilder (0.7ms)
+  Rendered api/comments/_comment.json.jbuilder (3.9ms)
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2  [["likeable_id", 23], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (1.4ms)
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "likes" WHERE "likes"."likeable_id" = $1 AND "likes"."likeable_type" = $2[0m  [["likeable_id", 24], ["likeable_type", "Comment"]]
+  Rendered api/comments/_comment.json.jbuilder (1.4ms)
+  Rendered api/posts/comments.json.jbuilder (17.4ms)
+Completed 200 OK in 21ms (Views: 18.6ms | ActiveRecord: 1.8ms)

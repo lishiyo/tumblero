@@ -1,9 +1,10 @@
-Tumblero.Views.CommentShow = Backbone.CompositeView.extend({
+Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	
 	template: JST['comments/_comment'],
 	
 	events: {
-		'click .reply-comment': 'openReplyForm'
+		'click .reply-comment': 'openReplyForm',
+		'click button.like-btn': "likeSubject"
 	},
 	
 // 	tagName: "li",
@@ -80,21 +81,19 @@ Tumblero.Views.CommentShow = Backbone.CompositeView.extend({
 	},
 	
 	render: function(){
-		var isLiked = this.currentUser.likeStateFor('Comment', this.model.id),
-				likeState;
-		
-		likeState = (isLiked) ? "liked" : "unliked";
+		this.setLikeState('Comment', this.model.id);
 		
 		var content = this.template({ 
 			comment: this.model,
-			initialLikeState: likeState
+			initialLikeState: this.likeState
 		});
 		
 		
     this.$el.html(content);
     this.attachSubviews();
 		
-		$("button.like-btn.like-comment").likeToggle();
+		this.renderLikeButton(this.$('.like-btn'));
+// 		$("button.like-btn.like-comment").likeToggle();
     return this;
 	}
 });

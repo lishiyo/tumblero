@@ -1,8 +1,9 @@
-Tumblero.Views.PostShow = Backbone.View.extend({
+Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	
 	template: JST['posts/show'],
 	events: {
-		"click .open-comments": "openComments"
+		"click .open-comments": "openComments",
+		'click button.like-btn': "likeSubject"
 	},
 	
 	initialize: function(opts){
@@ -11,6 +12,7 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.taggings(), 'sync', this.render);
+		
 	},
 	
 	openComments: function(event){
@@ -31,27 +33,24 @@ Tumblero.Views.PostShow = Backbone.View.extend({
 
 				$commCont.html(commentsIndex.render().$el);
 				
-				console.log($("button.like-btn"));
-				$("button.like-btn.like-comment").likeToggle();
 			}
 		});
 	},
 	
 		
 	render: function(){
-		var isLiked = this.currentUser.likeStateFor('Post', this.model.id);
 		
-		var likeState = (isLiked) ? "liked" : "unliked";
-		
+		this.setLikeState('Post', this.model.id);
 		
 		var content = this.template({ 
 			post: this.model,
-			initialLikeState: likeState,
+			initialLikeState: this.likeState,
 			tag_names: this.model.taggings()
 		});
 		
     this.$el.html(content);
-   
+   	
+		this.renderLikeButton(this.$('.like-btn'));
 		
     return this;
 	}

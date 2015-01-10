@@ -49,8 +49,8 @@ Tumblero.Views.BlogShow = Backbone.CompositeView.extend({
     this.attachSubviews();
 		
 		// set up like and follow buttons
-		$("button.like-btn").likeToggle();
-		$("button.follow-btn").followToggle();
+// 		$("button.like-btn").likeToggle();
+// 		$("button.follow-btn").followToggle();
 		
     return this;
 	}

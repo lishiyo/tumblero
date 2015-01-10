@@ -43,7 +43,7 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 		// attach child comments subviews
 		this.attachSubviews();
 		
-		$("button.like-btn.like-comment").likeToggle();
+// 		$("button.like-btn.like-comment").likeToggle();
 		return this;
 	},
 	
