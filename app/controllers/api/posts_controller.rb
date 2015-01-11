@@ -6,7 +6,7 @@ class  Api::PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@posts = @blog.posts
 		
-		render json: @posts
+		render json: @posts.to_json(methods: :count_notes, include: :taggings)
 	end
 	
 	def show	

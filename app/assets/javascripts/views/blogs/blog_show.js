@@ -2,28 +2,29 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	template: JST['blogs/show'],
 	events: {
-		'click .reSort': 'reSortBy'
+		'click .re-sort': 'reSortBy'
 	},
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		
-		this.listenTo(this.currentUser, 'sync', this.render);
+		this.listenTo(this.currentUser, 'sync', this.renderFollow);
 		this.listenTo(this.model, 'sync', this.render);
 		
 		this.listenTo(this.collection, 'sort', this.render);
-		this.listenTo(this.collection, 'add', this.addPost);
+		this.listenTo(this.collection, 'add', this.render);
 		
 	},
 	
+	
 	addPost: function(post){
-		this.addPostSubview(post);
-// 		this.render();
+// 		this.addPostSubview(post);
+		this.render();
 	},
 	
 	addAllPosts: function() {		
 		// add subviews for posts
-		this.model.posts().each(function(post){
+		this.collection.each(function(post){
 			this.addPostSubview(post);
 		}.bind(this));
 	},
@@ -39,10 +40,12 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
     this.addSubview(".posts-container", subview);
 	},
 	
+	renderFollow: function(){
+		this.setFollowState();
+	},
+	
 	render: function(){
-			
-		this.setFollowState();		
-		
+		this.renderFollow();		
 		var content = this.template({ 
 			blog: this.model,
 			current_user_id: this.currentUser.id,
@@ -53,7 +56,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.addAllPosts();
 		
 //     this.attachSubviews();
-		this.renderFollowButton(this.$('.follow-btn'));
+		this.renderFollowButton('.follow-btn');
 		
     return this;
 	}

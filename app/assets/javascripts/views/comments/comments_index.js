@@ -9,12 +9,14 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	
 	initialize: function(opts){
 		// this.collection is all_comments
-		this.listenTo(this.collection, 'sync', this.render);
-		this.listenTo(this.collection, 'add', this.addCommSubview);
+		this.listenTo(this.collection, 'remove change', this.render);
+		this.listenTo(this.collection, 'add', this.render);
 		this.post = this.collection.post;
 		this.currentUser = opts.currentUser;
-		
-		// only add subviews of root comments
+	},
+	
+	// only add subviews of root comments
+	addAllRoots: function(){
 		this.collection.forEach(function(comm){
 			if (comm.get('parent_comment_id') === null ) {
 				this.addCommSubview(comm);
@@ -35,7 +37,6 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	},
 	
 	render: function(){
-		
 		var content = this.template({ 
 			post_id: this.post.id
 		});
@@ -43,7 +44,7 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 		var $close = $('<a class="close-comments" href="">close</a>');
 		this.$el.html(content).append($close);
 		// attach child comments subviews
-		this.attachSubviews();
+		this.addAllRoots();
 		
 		return this;
 	},

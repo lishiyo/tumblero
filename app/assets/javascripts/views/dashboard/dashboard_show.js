@@ -2,30 +2,31 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	template: JST['dashboard/show'],
 	events: {
-		
+		'click .re-sort': 'reSortBy'
 	},
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
+		this.collection = this.model.posts();
+		
 		this.listenTo(this.currentUser, 'sync', this.render);
 		
 		this.listenTo(this.model, 'sync', this.render);
-
-		this.listenTo(this.model.posts(), 'sync remove', this.render);
-		this.listenTo(this.model.posts(), 'add', this.addPost);
-		
-		
-		console.log("initialize", this.model, this.model.posts());
-		// add subviews for posts
-		this.model.posts().each(function(post){
-			this.addPostSubview(post);
-		}.bind(this));
+		this.listenTo(this.collection, 'sort', this.render);
+		this.listenTo(this.collection, 'remove', this.render);
+		this.listenTo(this.collection, 'add', this.render);
 		
 	},
 	
 	addPost: function(post){
-		console.log("adding post subview")
-		this.addPostSubview(post);
+// 		this.addPostSubview(post);
 		this.render();
+	},
+	
+	addAllPosts: function() {		
+		// add subviews for posts
+		this.collection.each(function(post){
+			this.addPostSubview(post);
+		}.bind(this));
 	},
 	
 	addPostSubview: function(post){
@@ -50,8 +51,9 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
-    this.attachSubviews();
-		
+//     this.attachSubviews();
+		this.addAllPosts();
+
 		this.renderLikeButton(this.$('.like-btn'));
 		this.renderFollowButton(this.$('.follow-btn'));
 		
@@ -59,9 +61,10 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 // 		$("button.like-btn").likeToggle();
 // 		$("button.follow-btn").followToggle();
 		
-		
     return this;
 	}
 	
-	
 });
+
+
+_.extend(Tumblero.Views.DashboardShow.prototype, Tumblero.Utils.Sortable);

@@ -5,6 +5,8 @@ Tumblero.Models.User = Backbone.Model.extend({
 		return { user: this.attributes }
 	},
 	
+	currLikeState: null,
+	
 	likeStateFor: function(type, type_id){
 		var user = this;	
 		

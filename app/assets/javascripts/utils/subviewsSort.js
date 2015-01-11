@@ -7,7 +7,7 @@ Tumblero.Utils.Sortable = {
 		console.log("attr", attr);
 		
 		this.collection.comparator = function(model) {
-			return model.get(attr);
+			return -model.get(attr);
 		}
 		this.collection.sort();
 	},
