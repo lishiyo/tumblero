@@ -17,7 +17,7 @@ Tumblero.Collections.Blogs = Backbone.Collection.extend({
       blog = new Tumblero.Models.Blog({ id: id });
       blog.fetch({
         success: function () {
-          blogs.add(blog);
+          blogs.add(blog, {merge: true});
         },
       });
     } else {

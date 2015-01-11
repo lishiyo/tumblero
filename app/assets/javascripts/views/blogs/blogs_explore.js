@@ -23,7 +23,6 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 			currentUser: this.currentUser
     });
 		
-		console.log("adding blog profile", this.collection);
     this.addSubview(".blogs-explore-index", subview);
 	},
 	

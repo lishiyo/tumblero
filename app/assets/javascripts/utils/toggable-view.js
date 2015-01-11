@@ -51,6 +51,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 					likeToggle.currentUser.fetch();
 					likeToggle.likeState = "unliked";
 					likeToggle.renderLikeButton($btn);
+					likeToggle.model.fetch();
 				},
 				error: function(data) {
 					console.log("error in like delete", data);
@@ -69,6 +70,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 					likeToggle.currentUser.fetch();
 					likeToggle.likeState = "liked";
 					likeToggle.renderLikeButton($btn);
+					likeToggle.model.fetch();
 				},
 				error: function(data) {
 					console.log("error in like creation", data);
@@ -108,8 +110,6 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		event.preventDefault();
 		var followToggle = this,
 				$btn = this.$(this.btnId);
-		
-		console.log("following blog btn", $btn);
 		
 		if (this.followState === "followed") {
 			this.followState = "unfollowing";

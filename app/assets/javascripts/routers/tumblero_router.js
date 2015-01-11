@@ -1,4 +1,4 @@
-Tumblero.Routers.Router = Backbone.Router.extend({
+Tumblero.MainRouter = Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	initialize: function(opts){
 		this.$rootEl = opts.$rootEl;
@@ -9,7 +9,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	routes: {
-		"#": "checkUser",
+		"": "checkUser",
 		"users/new": "userNew",
 		"users/profile": "userShow",
 		"session/new": "sessionNew",
@@ -87,9 +87,9 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		this._swapView(view);
 	},
 	
-	blogsExplore: function(){
+	blogsExplore: function() {
 		// create global
-		var blogs = Tumblero.Collections.blogs
+		var blogs = Tumblero.Collections.blogs;
 		
 		blogs.fetch({
 			success: function(){			
@@ -100,14 +100,12 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 
 				this._swapView(view);
 				
-				
-				
 			}.bind(this)
 		});
 		
 	},
 	
-	current : function() {
+	current: function() {
     var Router = this,
         fragment = Backbone.history.fragment,
         routes = _.pairs(Router.routes),
@@ -131,32 +129,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
         params : params
     };
 	},
-	
-// 	showComments: function(post_id){
-		
-// 		var commCont = '#post-comments-' + post_id;
-// 		var $commCont = $(commCont);
-// 		var post = new Tumblero.Models.Post({id: post_id});
-		
-// 		post.fetch({
-// 			success: function(){
-// 				var all_comments = new Tumblero.Collections.Comments({ post: post });
-// 				all_comments.fetch({
-// 					success: function(){
-// 						var commentsIndex = new Tumblero.Views.CommentsIndex({ collection: all_comments });
-
-// 					$commCont.html(commentsIndex.render().$el);
-// 					}
-// 				});
-				
-// 			},
-// 			error: function(){
-// 				console.log("something went wrong");
-// 			}
-// 		})
-		
-		
-// 	},
 	
 	_swapView: function(newView) {
     this._currentView && this._currentView.remove();

@@ -38,11 +38,12 @@ class  Api::PostsController < ApplicationController
 		end
 	end
 	
-	# GET /posts/:id/reblog => open up reblog form
+	# POST /posts/:id/reblog => open up reblog form
 	# button_to '/posts/'+post.id+'/reblog'
 	def reblog
-		@post = Post.new
-		@post.reblogged = true
+		# old post - reblogged: false
+		@post = Post.find(params[:id])
+		@post.create_reblog_for!(post_params[:reblog_blog_id]) 
 	end
 	
 	# COMMENTS
@@ -56,7 +57,6 @@ class  Api::PostsController < ApplicationController
 	def full_transact?
 		Post.transaction do
 			@post.save!
-			@post.create_reblog_for!(@blog.id) if @post.reblogged
 			@post.create_new_taggings!(@tags_array, current_user) if @tags_array
 			
 			return true
@@ -70,7 +70,7 @@ class  Api::PostsController < ApplicationController
 	end
 	
 	def post_params
-		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :reblogged, :tags)
+		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :reblogged, :tags, :reblog_blog_id)
 	end
 	
 	def comment_params

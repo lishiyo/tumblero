@@ -24,7 +24,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	addAllPosts: function() {		
 		// add subviews for posts
-		this.collection.each(function(post){
+		this.model.posts().each(function(post){
 			this.addPostSubview(post);
 		}.bind(this));
 	},

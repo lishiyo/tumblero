@@ -27,9 +27,8 @@ class Post < ActiveRecord::Base
     comments_by_parent
 	end
 	
+	# create reblog association for OLD post, not new one
 	def create_reblog_for!(blog_id)
-		return unless self.reblogged
-		
 		reblog = self.reblogs.build(blog_id: blog_id)
 		reblog.save!
 	end

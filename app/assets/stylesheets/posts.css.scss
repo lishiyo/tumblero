@@ -128,3 +128,22 @@
 	background-color: #F6F6F6;
 	border: 1px dashed #666;
 }
+
+.nav li.inline-notifications span {
+	transition: opacity 2.0s ease;
+	background-color: goldenrod;
+	color: white;
+	text-align: center;
+	border-radius: 5px;	
+	padding: 4px 40px;
+	margin: 2px auto;
+	display: inline-block;
+	position: absolute !important;
+	top: 10px;
+	left: -330px;
+	opacity: 0.75;
+	width: 300px;
+	a {
+		color: white !important;
+	}
+}

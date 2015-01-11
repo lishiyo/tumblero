@@ -45,66 +45,6 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		$('.tab-container').html(newPostT2.render().$el);
 	},
 	
-// 	setImageOpts: function(){
-// 		this.uploadNum = this.uploadNum || 0;
-// 		var $previews = this.$('div.image-thumbnails');
-// 		var $input = this.$('#filepicker_urls');
-// 		var inputVal = $input.val();
-// 		var xBtn = $('<i class="fa fa-times"></i>').data("upload-num", this.uploadNum);
-// 		var $imageArr = [];
-		
-// 		// clear out all pics 
-// 		xBtn.on('click', function(event){
-// 			console.log("clicked xBtn");
-// 			event.preventDefault();
-// 			$input.val("");
-// 			$previews.empty();
-// 		});
-		
-// 		this.imageOpts = {
-// 			$previews: $previews,
-// 			$input: $input,
-// 			inputVal: inputVal,
-// 			$imageArr: $imageArr,
-// 			xBtn: xBtn
-// 		};
-		
-// 		return this.imageOpts;
-// 	},
-	
-// 	// click upload in tab1
-// 	upload: function (event) {
-// 		event.preventDefault();
-// 		this.setImageOpts();
-		
-// 		filepicker.pickMultiple({
-// 			maxFiles: 10,
-// 			folders: true,
-// 			maxSize: 1024*1024,
-// 			container: 'modal'
-// 		}, function(blobs) {
-// 			this.processImages(blobs, this.imageOpts);
-			
-// 		}.bind(this));
-		
-// 	},
-	
-// 	processImages: function(blobs, opts) {
-// 		blobs.forEach(function(blob){
-			
-// 			// set input value
-// 			opts.inputVal = opts.inputVal.split(",").concat(blob.url).filter(function(v){ return v!==''}).toString();
-// 			opts.$input.val(opts.inputVal);
-			
-// 			// add image to preview and imagePreviewArr
-// 			var $image = $('<img>').attr('src', blob.url);
-// 			opts.$imageArr.push($image);
-// 			opts.$previews.append($image);
-// 		});
-			
-// 		opts.$previews.append(opts.xBtn);
-// 	},
-	
 	// editor for tab1 and reblog form
 	setEditor: function(){
 		this.$('#post-content').wysihtml5({
@@ -124,20 +64,20 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 	
 	submitForm: function(event) {
 		event.preventDefault();
-		var blogId = $('select#post_blog_id').val();
-// 		var blog = (this.blog || new Tumblero.Models.Blog({ id: blogId }));
-// 		blog.fetch();
+		var blogId = $('select#post_blog_id').val(),
+				blog = Tumblero.Collections.blogs.getOrFetch(blogId);
 		
-		var formData = $(event.currentTarget).serializeJSON();
+		var formData = $(event.currentTarget).serializeJSON().post;
 		var modalView = this;
 		
-		var post = new Tumblero.Models.Post();
-		post.save(formData, {
-			success: function(model) {
-// 				blog.posts().add(post);
-				this.submit(blogId);
-				console.log("post saved to ", blog.posts());
-			}.bind(this),
+		// create new post and save it
+		var newPost = new Tumblero.Models.Post();
+		newPost.save(formData, {
+			success: function(model) {		
+				blog.posts().add(newPost);
+				modalView.submit(blog);	
+				modalView.model.fetch();
+			},
 			error: function() {
 				console.log("something went wrong")
 			}
@@ -145,14 +85,19 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		
 	},
 	
-	submit: function(blogId) {
+	submit: function(blog) {
 		$(".modal").removeClass("is-open");
-		$('.inline-notifications').html("<h4>post added!</h4>").removeClass('hidden');
+		var content = "<small>post added to <a href='/blogs/" + blog.id + "'>" + blog.get('name') + "</a></small>";
+		var note = $('<span></span>').html(content).addClass('hidden');
+		$('.inline-notifications').removeClass('hidden').prepend(note);
+		note.removeClass('hidden').fadeToggle( 1000, "linear" );
 		
-		console.log(Tumblero.Routers.Router.current());
-		if (Tumblero.Routers.Router.current().params == blogId) {
-			Backbone.history.navigate("/blogs/"+blogId, { trigger: true });
-		}
+		blog.fetch();
+		
+// 		if (Backbone.history.location.hash == ("#/blogs/"+blog.id) || Backbone.history.location.hash == ("#blogs/"+blog.id)) {
+			
+// 			Backbone.history.navigate("/blogs/"+blog.id, { trigger: true });
+// 		}
 		// add to collection?
 // 		window.location.replace("/dashboard");
 	}

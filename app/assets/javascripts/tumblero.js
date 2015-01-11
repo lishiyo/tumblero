@@ -7,7 +7,6 @@ window.Tumblero = {
 	Utils: {},
 	
   initialize: function() {
-		console.log("welcome to backbone");
 		
     var $main = $("#main");
 		new Tumblero.Routers.Router({

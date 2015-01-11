@@ -41,7 +41,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	
 	addAllComments: function(){
 		// add subviews for child_comments
-		if (this.collection.length > 0) {
+		if (this.model.child_comments().length > 0) {
 			this.collection.each(function(comment){
 				this.addCommSubview(comment);
 			}.bind(this));
