@@ -29,7 +29,7 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 	showTab1: function(post, user){
 		var newPostT1 = new Tumblero.Views.NewPostT1({
 			model: post,
-			current_user: user
+			currentUser: user
 		});
 		
 		$('.tab-container').html(newPostT1.render().$el);
@@ -39,7 +39,7 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 	showTab2: function(post, user){
 		var newPostT2 = new Tumblero.Views.NewPostT2({
 			model: post,
-			current_user: user
+			currentUser: user
 		});
 		
 		$('.tab-container').html(newPostT2.render().$el);
@@ -61,25 +61,27 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 			}
 		});
 	},
-	
+	// create a new post
 	submitForm: function(event) {
 		event.preventDefault();
+		// blog post is submitting to
 		var blogId = $('select#post_blog_id').val(),
-				blog = Tumblero.Collections.blogs.getOrFetch(blogId);
+				blog = Tumblero.Collections.blogs.getOrFetch(blogId),
+				modalView = this;
 		
 		var formData = $(event.currentTarget).serializeJSON().post;
-		var modalView = this;
 		
+		console.log("submitting new post", formData);
 		// create new post and save it
 		var newPost = new Tumblero.Models.Post();
 		newPost.save(formData, {
 			success: function(model) {		
 				blog.posts().add(newPost);
 				modalView.submit(blog);	
-				modalView.model.fetch();
+				blog.fetch();
 			},
 			error: function() {
-				console.log("something went wrong")
+				console.log("something went wrong");
 			}
 		});
 		

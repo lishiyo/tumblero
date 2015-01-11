@@ -1,19 +1,20 @@
 Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	template: JST['blogs/show'],
+	
 	events: {
 		'click .re-sort': 'reSortBy'
 	},
+	
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		
 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
-		this.listenTo(this.model, 'sync', this.render);
+		this.listenTo(this.model, 'sync change', this.render);
 		
 		this.listenTo(this.collection, 'sort', this.render);
 		this.listenTo(this.collection, 'add', this.render);
-		
 	},
 	
 	

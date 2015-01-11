@@ -8,7 +8,7 @@ Tumblero.Views.NewPostFull = Tumblero.PostModal.extend({
 	},
 	
 	initialize: function(opts){
-		this.current_user = opts.current_user;
+		this.currentUser = opts.currentUser;
 		this.$tabEl = $('.tab-container');
 		this.blog = (opts.blog || null);
 		$(".modal").removeClass("is-open");

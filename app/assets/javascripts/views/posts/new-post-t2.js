@@ -6,18 +6,14 @@ Tumblero.Views.NewPostT2 = Tumblero.PostModal.extend({
 	},
 	
 	initialize: function(opts){
-		this.blogs = opts.current_user.blogs();
+		this.blogs = opts.currentUser.blogs();
 		this.blog = (opts.blog || null);
 	},
 	
 	render: function(){
-		console.log("rendering in Tab2");
-		
 		var content = this.template({ post: this.model, blogs: this.blogs });
 		this.$el.html(content);
-
-		this.makeDropPane();
-		
+		this.makeDropPane();	
 		return this;
 	},
 	

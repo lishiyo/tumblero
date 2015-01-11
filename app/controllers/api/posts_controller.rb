@@ -38,12 +38,16 @@ class  Api::PostsController < ApplicationController
 		end
 	end
 	
-	# POST /posts/:id/reblog => open up reblog form
-	# button_to '/posts/'+post.id+'/reblog'
+	# POST /api/posts/:id/reblog 
+	# create reblog for either self or source_post (reblogged: true)
 	def reblog
-		# old post - reblogged: false
-		@post = Post.find(params[:id])
-		@post.create_reblog_for!(post_params[:reblog_blog_id]) 
+		# source post means :reblogged => false
+		old_post = Post.find(params[:id])
+		if old_post.create_reblog_for!(post_params[:reblog_blog_id]) 
+			render json: old_post
+		else
+			render json: old_post.errors.full_messages
+		end
 	end
 	
 	# COMMENTS
@@ -70,7 +74,7 @@ class  Api::PostsController < ApplicationController
 	end
 	
 	def post_params
-		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :reblogged, :tags, :reblog_blog_id)
+		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :tags, :reblogged, :reblog_blog_id, :source_id)
 	end
 	
 	def comment_params

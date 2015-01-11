@@ -5,16 +5,21 @@ class Post < ActiveRecord::Base
 	belongs_to :blog
 	has_one :author, through: :blog, source: :user
 	
-	# if you delete a post, it will disappear on its original blog but remain on the reblogging_blog (reblogs never destroyed)
+	# each source post gets a row in the table when reblogged
 	has_many :reblogs, class_name: "Reblog", foreign_key: :post_id, inverse_of: :post
 	has_many :reblogging_blogs, through: :reblogs, source: :blog
+	# source post is where :reblogged => false
+	belongs_to :source_post, class_name: "Post", foreign_key: :source_id, primary_key: :id
+	# posts that reblogged the source post
+	has_many :reblogged_posts, class_name: "Post", foreign_key: :source_id, inverse_of: :source_post
+	
 	has_many :comments, inverse_of: :post, dependent: :destroy
 	
 	validates :content, presence: true, unless: ->(post){ post.filepicker_urls.present? }
 	validates :filepicker_urls, presence: true, unless: ->(post){ post.content.present? }
 	validates :blog, presence: :true
 	
-	default_scope  { order(:created_at => :desc) }
+	default_scope  { order(created_at: :desc) }
 	
 	# { 0 => [1,2,3], 2 => [4,5,6] }
 	def comments_by_parent
@@ -27,10 +32,21 @@ class Post < ActiveRecord::Base
     comments_by_parent
 	end
 	
-	# create reblog association for OLD post, not new one
+	# create reblog association for the *source* post
 	def create_reblog_for!(blog_id)
-		reblog = self.reblogs.build(blog_id: blog_id)
-		reblog.save!
+		# if you are a reblog, look at source post instead
+		Post.transaction do
+			if self.reblogged
+				reblog = self.source_post.reblogs.build(blog_id: blog_id)
+			else
+				reblog = self.reblogs.build(blog_id: blog_id)
+			end
+			
+			reblog.save!
+			return true
+		end
+		
+		false
 	end
 	
 	# called on post create
@@ -70,8 +86,13 @@ class Post < ActiveRecord::Base
 	
 	private
 
+	# count your own reblogs if a source post, else count source's
 	def count_reblogs
-		reblogs.count
+		if self.reblogged
+			Reblog.where(post_id: self.source_id).count
+		else
+			reblogs.count
+		end
 	end
 	
 end

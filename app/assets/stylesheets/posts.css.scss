@@ -21,8 +21,15 @@
 }
 
 .post img {
-	max-width: 600px;
-	max-height: 300px;
+	max-width: 510px;
+	max-height: 400px;
+}
+
+
+/* for dashboard and blog view */
+.posts-container {
+	max-width: 550px;
+	margin: 0 auto;
 }
 
 /* Post Modal */

@@ -1,6 +1,6 @@
 <div class="bbm-modal__section modal post-modal">
 	
-	<form class='modal-form'>
+<form class='modal-form' id="reblog-form">
 	<span class="modal-close js-modal-close">&times;</span>
 		
 	<div class="form-group">
@@ -30,11 +30,11 @@
 	</div>	
 	
 	<div class="form-group wysiwyg">
-    <textarea id="post-content" name="post[content]">
-		 </textarea>
+    <textarea id="post-content" name="post[content]"></textarea>
 	</div>
 		
 	<input type="hidden" name="post[reblogged]" value="true">
+	<input type="hidden" name="post[source_id]" value="<%= source_id %>">
 	
   <input type="submit" class="submit-el" value="POST">
 	</form>

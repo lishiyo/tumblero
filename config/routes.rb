@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 			resources :comments, only: [:new]
 			resources :taggings, only: [:index]
 			member do
-				get 'reblog'
+				post 'reblog'
 				get 'comments'
 			end
 		end
