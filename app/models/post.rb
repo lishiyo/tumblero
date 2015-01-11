@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
 	include Likeable
 	include Taggable
 	
-	belongs_to :blog
+	belongs_to :blog, counter_cache: true
 	has_one :author, through: :blog, source: :user
 	
 	# each source post gets a row in the table when reblogged
@@ -20,6 +20,23 @@ class Post < ActiveRecord::Base
 	validates :blog, presence: :true
 	
 	default_scope  { order(created_at: :desc) }
+	scope :reblogged, -> { where(reblogged: true) }
+	
+	
+	def self.created_before(time)
+    where("created_at < ?", time)
+ 	end
+	
+	def self.created_after(time)
+    where("created_at > ?", time)
+ 	end
+	
+	def self.trending
+		self.created_after(1.day.ago)
+		.joins()
+		.sort_by{|post| post.count_notes }
+		.reverse
+	end
 	
 	# { 0 => [1,2,3], 2 => [4,5,6] }
 	def comments_by_parent
@@ -81,17 +98,25 @@ class Post < ActiveRecord::Base
 	end
 	
 	def count_notes
-		count_likes + count_reblogs
+# 		if self.reblogged
+			
+# 		else
+# 			Post.joins("LEFT JOIN likes ON likes.likeable_type = 'Post' AND likes.likeable_id = posts.id").joins("LEFT JOIN comments on comments.post_id = posts.id").joins("LEFT JOIN reblogs on reblogs.post_id = posts.id").where("posts.id = ?", self.id).count
+# 		end
+		
+		count_likes + count_reblogs + count_comments
 	end
 	
-	private
+	def count_comments
+		comments.size
+	end
 
 	# count your own reblogs if a source post, else count source's
 	def count_reblogs
 		if self.reblogged
-			Reblog.where(post_id: self.source_id).count
+			Reblog.where(post_id: self.source_id).size
 		else
-			reblogs.count
+			reblogs.size
 		end
 	end
 	

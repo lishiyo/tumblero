@@ -6,6 +6,6 @@ module Taggable
   end
 
   def tag_names
-    tags.map(&:name)
+		tags.pluck(:name)
   end
 end

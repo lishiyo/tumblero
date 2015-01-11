@@ -9,46 +9,50 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 	initialize: function(opts){
 		this.parent_id = opts.parent_id || null;
 		this.collection = opts.collection;
-		this.post_id = opts.post_id;
+		this.post = opts.post;
 		this.currentUser = this.currentUser;
 	},
 	
 	render: function(){
-		console.log("post_id", this.post_id);
-		
 		var content = this.template({ 
 			comment: this.model,
-			post_id: this.post_id
+			post_id: this.post.id
 		});
 		this.$el.html(content);
 		
 		return this;
 	},
 	
+	incrementCount: function(){
+		var commCount = this.$el.closest('.post').find('.count-comments');
+		var currCount = commCount.data("curr-count");
+		var newCount = currCount + 1;
+		commCount.data("curr-count", newCount);
+		console.log("incCount", commCount, currCount, newCount)
+		commCount.text(newCount);
+	},
+	
 	createComment: function(event) {
 		event.preventDefault();
 		
-		var formData = $(event.currentTarget).serializeJSON();
-// 		var url = '/posts/'+this.model.post.id+'/new_comment';
-		var url = "/comments"
+		var formData = $(event.currentTarget).serializeJSON(),
+				url = "/comments",
+				commentsColl = this.collection,
+				view = this;
+		
 		formData['comment']['parent_comment_id'] = this.parent_id;
 		
-		console.log("createComment", formData);
-		
-		var commentsColl = this.collection;
 		$.ajax({
 			url: url,
 			dataType: 'json',
 			type: 'POST',
 			data: formData
 		}).done(function(data){
-			console.log("created comment", data);
-			var newPost = new Tumblero.Models.Comment({ id: data.id });
-			newPost.fetch();
-			commentsColl.add(newPost);
-// 			console.log("added coll", commentsColl);
-			
-			$(event.currentTarget).remove();
+			var newComm = new Tumblero.Models.Comment({ id: data.id });
+			newComm.fetch();
+			commentsColl.add(newComm);		
+			view.incrementCount();
+// 			$(event.currentTarget).remove();
 		}).fail(function(jqXHR, textStatus){
 			console.log(textStatus);
 		})

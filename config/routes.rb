@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 		resources :blogs, only: [:new, :create, :show, :index] do 
 			resources :posts, only: [:index]
 			resource :following, only: [:create, :destroy]
+			member do
+				get 'submit'
+				post 'submit'
+			end
 		end
 		
 		resources :posts, only: [:new, :show, :create] do

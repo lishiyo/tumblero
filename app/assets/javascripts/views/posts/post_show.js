@@ -17,7 +17,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		this.likeButtonId = ('button.like-post');
 		
 // 		this.model.fwd = Backbone.fwd;
-		
 	},
 	
 	openReblogModal: function(event){
@@ -27,7 +26,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		
 		post.fetch({
 			success: function(model) {
-				console.log("setReblogModal got post: ", model);
 				var reblogView = new Tumblero.Views.ReblogForm({
 					model: post,
 					currentUser: this.currentUser
@@ -73,7 +71,8 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		var content = this.template({ 
 			post: this.model,
 			initialLikeState: this.likeState,
-			tag_names: this.taggings
+			tag_names: this.taggings,
+			count_comments: this.model.get('count_comments')
 		});
 		
     this.$el.html(content);

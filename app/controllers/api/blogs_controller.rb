@@ -11,7 +11,7 @@ class Api::BlogsController < ApplicationController
 	def show
 		@blog = Blog.includes(:posts).find(params[:id])
 		
-		render json: @blog.as_json(:include => { posts: { methods: :count_notes, include: :taggings }})
+		render json: @blog.as_json(:include => { posts: { methods: [:count_notes, :count_comments], include: :taggings }})
 	end
 	
 	def new

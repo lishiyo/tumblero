@@ -60,7 +60,6 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	openReplyForm: function(event) {
 		event.preventDefault();
 		var $a = $(event.currentTarget);
-		
 		var newComment = new Tumblero.Models.Comment({
 			post: this.post
 		});
@@ -70,14 +69,14 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 				model: newComment,
 				parent_id: $a.data("parent_id"),
 				collection: this.collection,
-				post_id: this.post.id,
+				post: this.post,
 				currentUser: this.currentUser
 			});
 		} else {
 			var newCommView = new Tumblero.Views.CommentNew({
 				model: newComment,
 				collection: this.collection,
-				post_id: this.post.id,
+				post: this.post,
 				currentUser: this.currentUser
 			});
 		}

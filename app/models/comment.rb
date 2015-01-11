@@ -3,8 +3,8 @@ class Comment < ActiveRecord::Base
 	
 	validates :body, :user, :post_id, presence: true
 
-  belongs_to :post, inverse_of: :comments
-	belongs_to :user, inverse_of: :comments
+  belongs_to :post, inverse_of: :comments, counter_cache: true
+	belongs_to :user, inverse_of: :comments, counter_cache: true
 
   has_many :child_comments, class_name: "Comment", foreign_key: :parent_comment_id, primary_key: :id
 

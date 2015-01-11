@@ -22,7 +22,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.child_comments();
 		
-		this.listenTo(this.model, 'sync', this.render);
+		this.listenTo(this.model, 'sync change', this.render);
 // 		this.listenTo(this.collection, 'sync', this.render);
 		this.listenTo(this.collection, 'remove', this.removeComment);
 		this.listenTo(this.collection, 'add', this.addComment);
@@ -31,6 +31,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	},
 	
 	removeComment: function(){
+		// turn body into null like Reddit
 		this.render();
 	},
 	
@@ -70,18 +71,17 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 				model: newComment,
 				parent_id: $a.data("parent_id"),
 				collection: this.model.child_comments(),
-				post_id: this.post.id
+				post: this.post
 			});
 		} else {
 			var newCommView = new Tumblero.Views.CommentNew({
 				model: newComment,
 				collection: this.model.child_comments(),
-				post_id: this.post.id
+				post: this.post
 			});
 		}
 		
 		$a.replaceWith(newCommView.render().$el);
-		
 	},
 	
 	render: function(){		
@@ -91,8 +91,8 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 			comment: this.model,
 			initialLikeState: this.likeState
 		});
-		
     this.$el.html(content);
+		
     this.addAllComments();
 		
 		this.renderLikeButton(this.likeButtonId);
