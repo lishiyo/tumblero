@@ -10,8 +10,9 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 		this.currentUser = opts.currentUser;
 		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync', this.render);	
+		
+		this.followBtnId = "button#follow-btn-" + this.model.id;
 	},
-	
 	
 	render: function(){
 		this.setFollowState();
@@ -22,7 +23,7 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 		});
 		
 		this.$el.html(content);
-		this.renderFollowButton(this.$('.follow-btn'));
+		this.renderFollowButton(this.followBtnId);
 	
 		return this;
 	},

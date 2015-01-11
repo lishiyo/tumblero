@@ -41,6 +41,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	renderFollow: function(){
+		// no btnId passed in = default
 		this.setFollowState();
 	},
 	
