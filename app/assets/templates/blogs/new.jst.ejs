@@ -1,0 +1,30 @@
+<h1>Create a Blog</h1>
+<div class="inline-notifications hidden"></div>
+
+<form id="new-blog-form">
+	
+		<div class="form-group">
+			<label for="blog_handle">HANDLE</label>
+			<input type="text" name="blog[handle]" value="<%= blog.escape('handle') %>" class="form-control">
+			<small>Tumblero URL: <span class="tumblero-url"></span></small>
+	</div>
+		<div class="form-group">
+			<label for="blog_name">NAME</label>
+			<input type="text" name="blog[name]" value="<%= blog.escape('handle') %>" class="form-control">
+		</div>
+
+		<div class="form-group">
+			<label for="blog_description">DESCRIPTION (max 300 char)</label>
+			<input type="textarea" id="blog_description" name="blog[description]" value="<%= blog.escape('description')%>" placeholder="follow me for puppies, kittens, and pop culture daily..." class="form-control">
+		</div>
+	
+		<div class="form-group">
+			<label for="blog_avatar_url"><a href="#" class="upload-fp">upload images</a></label>
+		<input type="hidden" name="blog[avatar_url]" id="filepicker_urls">
+			<div class="image-thumbnails"></div>
+		
+		</div>
+	
+		<input type="submit" class="submit-el form-control btn btn-info" value="create blog">
+</form>
+

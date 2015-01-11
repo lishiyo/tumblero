@@ -6,7 +6,7 @@ class  Api::PostsController < ApplicationController
 		@blog = Blog.find(params[:blog_id])
 		@posts = @blog.posts
 		
-		render json :@posts
+		render json: @posts
 	end
 	
 	def show	
@@ -24,7 +24,7 @@ class  Api::PostsController < ApplicationController
 	def create
 		@blog = Blog.find(post_params[:blog_id])
 		@post = @blog.posts.build(post_params.except(:tags))
-		@tags_array = post_params[:tags].split(",")
+		@tags_array = post_params[:tags].split(",") if post_params[:tags]
 		
 		if full_transact?
 			respond_to do |format|
@@ -56,8 +56,8 @@ class  Api::PostsController < ApplicationController
 	def full_transact?
 		Post.transaction do
 			@post.save!
-			@post.create_reblog_for!(@blog.id)
-			@post.create_new_taggings!(@tags_array, current_user)
+			@post.create_reblog_for!(@blog.id) if @post.reblogged
+			@post.create_new_taggings!(@tags_array, current_user) if @tags_array
 			
 			return true
 		end

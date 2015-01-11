@@ -7,5 +7,23 @@ Tumblero.Collections.Blogs = Backbone.Collection.extend({
 		if (opts.user) {
 			this.user = opts.user;
 		}
+	},
+	
+	getOrFetch: function (id) {
+    var blog = this.get(id),
+      blogs = this;
+		
+    if(!blog) {
+      blog = new Tumblero.Models.Blog({ id: id });
+      blog.fetch({
+        success: function () {
+          blogs.add(blog);
+        },
+      });
+    } else {
+      blog.fetch();
+    }
+    return blog;
 	}
+
 })

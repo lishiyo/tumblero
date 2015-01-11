@@ -4,6 +4,7 @@ window.Tumblero = {
   Views: {},
   Routers: {},
 	Assets: {},
+	Utils: {},
 	
   initialize: function() {
 		console.log("welcome to backbone");
@@ -41,7 +42,7 @@ window.Tumblero = {
 					post = new Tumblero.Models.Post({ id: postId }),
 					user = Tumblero.current_user;
 			
-			console.log("clicked reblog-btn with postId and user: ", postId, user);
+// 			console.log("clicked reblog-btn with postId and user: ", postId, user);
 			
 			post.fetch({
 				success: function(model) {
@@ -67,9 +68,9 @@ window.Tumblero = {
 		
 		$("body").on("click", "button.full-post-modal", function(event){
 			event.preventDefault();
-			var startTab = ($(event.currentTarget).data("tab-num") || 1);
-			
-			var post = new Tumblero.Models.Post();
+			var startTab = ($(event.currentTarget).data("tab-num") || 1),
+					post = new Tumblero.Models.Post();
+
 			var newPostFull = new Tumblero.Views.NewPostFull({
 				model: post,
 				current_user: Tumblero.current_user

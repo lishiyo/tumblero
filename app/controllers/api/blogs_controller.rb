@@ -19,12 +19,13 @@ class Api::BlogsController < ApplicationController
 		render json: @blog
 	end
 	
-	def create
-		@blog = current_user.blogs.build(blog_params)
+	def create		
+		puts clean_params
+		@blog = current_user.blogs.build(clean_params)
 		if @blog.save
-			redirect_to blog_url(@blog)
+			render json: @blog
 		else
-			render 'new'
+			render json: @blog.errors.full_messages, status: 422
 		end
 	end
 	
@@ -39,16 +40,22 @@ class Api::BlogsController < ApplicationController
 		end
 	end
 	
+	private	
 	
-	
-	private
+	def clean_params
+		params = blog_params
+		new_handle = blog_params[:handle].split(" ").join("-")
+		params[:handle] = new_handle
+		
+		params
+	end
 	
 	def get_blog
 		@blog = Blog.includes(:posts).find(params[:id])
 	end
 	
 	def blog_params
-		params.require(:blog).permit(:avatar_url, :user_id, :name, :description)
+		params.require(:blog).permit(:avatar_url, :user_id, :name, :description, :handle)
 	end
 	
 	

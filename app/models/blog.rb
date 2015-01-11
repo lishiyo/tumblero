@@ -7,8 +7,17 @@ class Blog < ActiveRecord::Base
 	has_many :reblogs, inverse_of: :blog, dependent: :destroy
 	has_many :reblogged_posts, through: :reblogs, source: :post
 	
-	validates :name, presence: true, uniqueness: true
-	validates :user, presence: :true
-	validates :description, length: { maximum: 140 }
+	validates :name, :user, :handle, presence: true
+	validates :handle, uniqueness: true
+	validates :description, length: { maximum: 300 }
+	validate :handle_must_be_one_word
+	
+	private
+	
+	def handle_must_be_one_word
+		unless handle.chars.all? {|char| char.match(/(\w+|-)/) }
+			errors.add(:blog, "handle can contain only letters, digits, or underscores/dashes")
+		end
+	end
 	
 end

@@ -7,18 +7,19 @@ Tumblero.Views.NewPostFull = Tumblero.PostModal.extend({
 		"submit form": "submitForm"
 	},
 	
+	initialize: function(opts){
+		this.current_user = opts.current_user;
+		this.$tabEl = $('.tab-container');
+		this.blog = (opts.blog || null);
+		$(".modal").removeClass("is-open");
+	},
+		
 	callTab1: function(){
 		this.setActive({ tabNum: 1 });
 	},
 	
 	callTab2: function(){
 		this.setActive({ tabNum: 2 });
-	},
-	
-	initialize: function(opts){
-		this.current_user = opts.current_user;
-		this.$tabEl = $('.tab-container');
-		$(".modal").removeClass("is-open");
 	},
 	
 	render: function(){	

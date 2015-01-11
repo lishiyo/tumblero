@@ -5,7 +5,7 @@
 <!-- 	<span class="modal-close js-modal-close">&times;</span> -->
 		
 	<div class="form-group">
-		<select class="form-control" name="post[blog_id]">
+		<select class="form-control" name="post[blog_id]" id="post_blog_id">
 			<% blogs.each(function(blog){ %>
 					<option value="<%= blog.id %>"><%= blog.escape('name') %></option>
 			<% }); %>
@@ -22,7 +22,7 @@
 		
 		<a href="#" class="upload-fp">upload images</a>
 		
-		<input type="hidden" name="post[filepicker_urls]" id="post_filepicker_urls">
+		<input type="hidden" name="post[filepicker_urls]" id="filepicker_urls">
 		<div class="image-thumbnails"></div>
 		
 	</div>	

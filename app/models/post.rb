@@ -14,6 +14,8 @@ class Post < ActiveRecord::Base
 	validates :filepicker_urls, presence: true, unless: ->(post){ post.content.present? }
 	validates :blog, presence: :true
 	
+	default_scope  { order(:created_at => :desc) }
+	
 	# { 0 => [1,2,3], 2 => [4,5,6] }
 	def comments_by_parent
 		comments_by_parent = Hash.new { |hash, key| hash[key] = [] }
@@ -26,14 +28,16 @@ class Post < ActiveRecord::Base
 	end
 	
 	def create_reblog_for!(blog_id)
-		if self.reblogged 
-			reblog = self.reblogs.build(blog_id: blog_id)
-			reblog.save!
-		end
+		return unless self.reblogged
+		
+		reblog = self.reblogs.build(blog_id: blog_id)
+		reblog.save!
 	end
 	
 	# called on post create
 	def create_new_taggings!(tagging_names, user)
+		return unless tagging_names.length > 0
+		
 		Tagging.transaction do 
 			tagging_names.each do |tagging_name|
 				tagging = self.taggings.build(name: tagging_name, user_id: user.id)
@@ -44,6 +48,8 @@ class Post < ActiveRecord::Base
 	
 	# called on update of existing post
 	def update_new_taggings(tagging_names)
+		return unless tagging_names.length > 0
+		
 		old_names = self.taggings.map(&:name)
 		new_names = tagging_names - old_names
 		names_to_destroy = old_names - tagging_names

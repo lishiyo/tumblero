@@ -94,7 +94,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 	
 	likeSubject: function(event) {
 		event.preventDefault();
-		console.log("clicked like!");
+// 		console.log("clicked like!");
 		
 		var likeToggle = this,
 				$btn = this.$(this.likeButtonId);
@@ -105,7 +105,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		};
 			
 		if (this.likeState === "liked") {
-			this.likeState = "liking";
+			this.likeState = "unliking";
 			this.renderLikeButton($btn);
 
 			$.ajax({
@@ -123,7 +123,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 				}
 			});
 		} else if (this.likeState === "unliked") {
-			this.likeState = "unliking"
+			this.likeState = "liking"
 			this.renderLikeButton($btn);
 
 			$.ajax({

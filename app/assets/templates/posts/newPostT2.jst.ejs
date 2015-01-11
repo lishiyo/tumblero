@@ -6,15 +6,13 @@
 		
 	<div class="errors" id="localDropResult hidden"></div>
 	
-	<div id="dropPane">
-		drop images here
-	</div>
-	<br>
-
-	<input type="hidden" name="post[filepicker_urls]" id="post_filepicker_urls">
-		
-	<div class="image-thumbnails"></div>
-		
+	<div class="drop-pane-full">
+		<div id="dropPane">drop images here</div>
+		<div class="image-thumbnails"></div>
+	</div>	
+	
+	<input type="hidden" name="post[filepicker_urls]" id="filepicker_urls">	
+			
 	<div class="form-group">
 		<select class="form-control" name="post[blog_id]">
 			<% blogs.each(function(blog){ %>

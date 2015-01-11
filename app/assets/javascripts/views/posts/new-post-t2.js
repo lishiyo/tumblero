@@ -7,7 +7,7 @@ Tumblero.Views.NewPostT2 = Tumblero.PostModal.extend({
 	
 	initialize: function(opts){
 		this.blogs = opts.current_user.blogs();
-		
+		this.blog = (opts.blog || null);
 	},
 	
 	render: function(){

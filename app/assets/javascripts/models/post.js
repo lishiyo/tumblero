@@ -14,9 +14,7 @@ Tumblero.Models.Post = Backbone.Model.extend({
 	},
 	
 	parse: function(resp) {
-		console.log("hitting parse in post", resp);
 		if (resp.taggings) {
-			console.log("setting taggings", resp.taggings);
 			this.taggings().set(resp.taggings, { parse: true });
 			delete resp.taggings;
 		} 

@@ -96,15 +96,28 @@
 }
 
 /** tab2 **/
-#dropPane {
-	width: 100%;
-	height: 200px;
+
+.drop-pane-full {	
 	background-color: yellow;
 	opacity: 0.8;
 	text-align: center;
-	margin: 0 auto;
+	margin: 10px auto;
 	padding: 10px;
+	border-radius: 10px;
+	position: relative;
+	
+	.image-thumbnails {
+		position: absolute;
+		bottom: 10px;
+	}
 }
+
+#dropPane {
+	width: 100%;
+	height: 200px;
+/* 	position: absolute; */
+}
+
 
 #dropPane .drag-enter {
 	background-color: #E0E0E0;

@@ -2,29 +2,34 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	template: JST['blogs/show'],
 	events: {
-		
+		'click .reSort': 'reSortBy'
 	},
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
+		this.collection = this.model.posts();
+		
 		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync', this.render);
-
-		this.listenTo(this.model.posts(), 'sync remove', this.render);
-		this.listenTo(this.model.posts(), 'add', this.addPost);
 		
-		// add subviews for posts
-		this.model.posts().each(function(post){
-			this.addPostSubview(post);
-		}.bind(this));
+		this.listenTo(this.collection, 'sort', this.render);
+		this.listenTo(this.collection, 'add', this.addPost);
 		
 	},
 	
 	addPost: function(post){
 		this.addPostSubview(post);
-		this.render();
+// 		this.render();
+	},
+	
+	addAllPosts: function() {		
+		// add subviews for posts
+		this.model.posts().each(function(post){
+			this.addPostSubview(post);
+		}.bind(this));
 	},
 	
 	addPostSubview: function(post){
+// 		console.log("addPostSubview called", post);
 		var subview = new Tumblero.Views.PostShow({
       model: post,
 			blog: this.model,
@@ -35,8 +40,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	render: function(){
-		this.setFollowState();
-		console.log("current_user_id vs blog.user_id", this.currentUser.id, this.model.get('user_id'));
+			
+		this.setFollowState();		
 		
 		var content = this.template({ 
 			blog: this.model,
@@ -45,14 +50,16 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
-    this.attachSubviews();
+		this.addAllPosts();
+		
+//     this.attachSubviews();
 		this.renderFollowButton(this.$('.follow-btn'));
-		// set up like and follow buttons
-// 		$("button.like-btn").likeToggle();
-// 		$("button.follow-btn").followToggle();
 		
     return this;
 	}
 	
 	
 });
+
+
+_.extend(Tumblero.Views.BlogShow.prototype, Tumblero.Utils.Sortable);
