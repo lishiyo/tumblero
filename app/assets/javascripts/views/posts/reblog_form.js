@@ -2,7 +2,8 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 	template: JST['posts/reblog_form'],
 	
 	events: {
-		"submit form": "submitReblog"
+		"submit form": "submitReblog",
+		"click .js-modal-close": "closeModal"
 	},
 	
 	// model = post being reblogged

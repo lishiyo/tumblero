@@ -31,7 +31,6 @@
 }
 
 
-
 /* for dashboard and blog view */
 .posts-container {
 	max-width: 550px;
@@ -40,9 +39,13 @@
 
 /* Post Modal */
 
-.tab-container form {
-	max-width: 80%;
-	min-width: 70%;
+.tab-container {
+	a {
+		color: $rosy;
+		&:hover {
+			color: gray;
+		}
+	}
 }
 
 .modal.post-modal {
@@ -76,6 +79,7 @@
   z-index: 3;
   border-radius: 5px;
   border: 1px solid #000;
+	
 }
 
 .modal-close {
@@ -123,6 +127,7 @@ li.bbm-modal__tab:hover, li.bbm-modal__tab:active {
 	top: 33px;
 	left: 3%;
 }
+
 /** tab2 **/
 
 .drop-pane-full {	

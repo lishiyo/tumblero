@@ -17,10 +17,6 @@ Tumblero.Views.NewPostFull = Tumblero.PostModal.extend({
 		$(".modal").removeClass("is-open");
 	},
 		
-	closeModal: function(event){
-		event.preventDefault();
-		$(".modal").removeClass("is-open");
-	},
 	
 	submitFormCheck: function(e) {
 		e.preventDefault();
@@ -43,15 +39,18 @@ Tumblero.Views.NewPostFull = Tumblero.PostModal.extend({
 		this.submitForm(e, formData);
 	},
 	
-	callTab1: function() {
+	callTab1: function(e) {
+		e.preventDefault();
 		this.setActive({ tabNum: 1 });
 	},
 	
-	callTab2: function() {
+	callTab2: function(e) {
+		e.preventDefault();
 		this.setActive({ tabNum: 2 });
 	},
 	
-	callTab3: function() {
+	callTab3: function(e) {
+		e.preventDefault();
 		this.setActive({ tabNum: 3 });
 	},
 	

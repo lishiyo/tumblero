@@ -29,6 +29,11 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		this.$(".modal").addClass("is-open");
 	},
 	
+	closeModal: function(event){
+		event.preventDefault();
+		$(".modal").removeClass("is-open");
+	},
+	
 	showTab1: function(post, user){
 		var view = new Tumblero.Views.NewPostT1({
 			model: post,
@@ -108,7 +113,7 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 	
 	submit: function(blog) {
 		$(".modal").removeClass("is-open");		
-		this.alertSuccess(blog);		
+// 		this.alertSuccess(blog);		
 		blog.fetch();
 		
 // 		if (Backbone.history.location.hash == ("#/blogs/"+blog.id) || Backbone.history.location.hash == ("#blogs/"+blog.id)) {

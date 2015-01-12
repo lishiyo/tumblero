@@ -40,9 +40,9 @@ class Post < ActiveRecord::Base
 	def count_notes
 		if self.reblogged
 			source_post = Post.find(self.source_id)
-			source_post.likes_count + source_post.comments_count + source_post.reblogs_count
+			source_post.likes_count + source_post.reblogs_count
 		else
-			reblogs_count + likes_count + comments_count
+			reblogs_count + likes_count
 		end
 	end
 	
