@@ -85,6 +85,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		this.followState = ((isFollowed) ? "followed" : "unfollowed");
 		
 		this.btnId = (btnId || ('button.follow-btn'));
+// 		console.log("setFollowState", this.followState);
 	},
 	
 	renderFollowButton: function(btnId){
@@ -109,7 +110,8 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 	followBlog: function(event){
 		event.preventDefault();
 		var followToggle = this,
-				$btn = this.$(this.btnId);
+				$btn = this.$(this.btnId),
+				user = this.currentUser;
 		
 		if (this.followState === "followed") {
 			this.followState = "unfollowing";
@@ -122,7 +124,8 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 				success: function (data) {
 					console.log("successful delete", data);
 					followToggle.followState = "unfollowed";
-					followToggle.renderFollowButton($btn);
+					followToggle.currentUser.fetch();
+					followToggle.renderFollowButton($btn);		
 				},
 				error: function(data) {
 					console.log("error in delete", data);
@@ -139,6 +142,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 				success: function (data) {
 					console.log("successful follow", data);
 					followToggle.followState = "followed";
+					followToggle.currentUser.fetch();
 					followToggle.renderFollowButton($btn);
 				},
 				error: function(data) {

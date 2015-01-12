@@ -13,8 +13,8 @@ Tumblero.Views.Header = Backbone.View.extend({
 		return this;
 	},
 	
-	signIn: function(){
-		
+	refresh: function(){
+		this.render();
 	}
 	
 })

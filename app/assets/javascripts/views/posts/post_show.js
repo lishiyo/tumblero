@@ -72,7 +72,7 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 			post: this.model,
 			initialLikeState: this.likeState,
 			tag_names: this.taggings,
-			count_comments: this.model.get('count_comments')
+			count_comments: this.model.get('comments_count')
 		});
 		
     this.$el.html(content);

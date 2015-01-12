@@ -14,14 +14,17 @@
 		
 	<div class="form-group">
 		<h3>
+			<% if (post.get('title')) { %>
 				<%= post.get('title') %>
+				<input type="hidden" name="post[title]" value="<%= post.get('title') %>">
+			<% } %>		
 		</h3>
 	</div>
 	
 	<div class="form-group">
 		<input type="hidden" name="post[filepicker_urls]" id="post_filepicker_urls" value="<%= post.escape('filepicker_urls') %>">
 		<div class="image-thumbnails">
-			<% if (post.get('filepicker_urls').length > 0) { %>
+			<% if (post.get('filepicker_urls') && post.get('filepicker_urls').length > 0) { %>
 				<% post.get('filepicker_urls').split(",").forEach(function(file_url) { %>
 					<img src="<%= file_url %>">
 				<% }); %>

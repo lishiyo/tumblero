@@ -33,7 +33,22 @@ class Post < ActiveRecord::Base
 	
 	# posts created in last day with highest number of notes
 	def self.trending
-		self.created_after(1.day.ago).sort_by{|p| p.count_notes }
+		self.created_after(1.day.ago).sort_by{|p| p.count_notes }.reverse
+	end
+	
+	# ONE query - reblogs_count + likes_count + comments_count
+	def count_notes
+		if self.reblogged
+			source_post = Post.find(self.source_id)
+			source_post.likes_count + source_post.comments_count + source_post.reblogs_count
+		else
+			reblogs_count + likes_count + comments_count
+		end
+	end
+	
+	# TO-DO
+	def count_recent_notes
+		count_notes
 	end
 	
 	# { 0 => [1,2,3], 2 => [4,5,6] }
@@ -92,22 +107,12 @@ class Post < ActiveRecord::Base
 				tagging.save!
 			end
 		end
-		
 	end
 	
-	# ONE query - reblogs_count + likes_count + comments_count
-	def count_notes
-		if self.reblogged
-			source_post = Post.find(self.source_id)
-			source_post.likes_count + source_post.comments_count + source_post.reblogs_count
-		else
-			reblogs_count + likes_count + comments_count
-		end
-	end
 	
-	def count_comments
-		comments_count
-	end
+# 	def count_comments
+# 		comments_count
+# 	end
 	
 # 	def count_notes
 # 		if self.reblogged

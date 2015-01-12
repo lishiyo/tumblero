@@ -3,7 +3,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	template: JST['blogs/show'],
 	
 	events: {
-		'click .re-sort': 'reSortBy'
+		'click .re-sort': 'reSortBy',
+		'click button.follow-btn': "followBlog"
 	},
 	
 	initialize: function(opts){
@@ -16,7 +17,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.collection, 'sort', this.render);
 		this.listenTo(this.collection, 'add', this.render);
 	},
-	
 	
 	addPost: function(post){
 // 		this.addPostSubview(post);
@@ -48,6 +48,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	render: function(){
 		this.renderFollow();		
+		
 		var content = this.template({ 
 			blog: this.model,
 			current_user_id: this.currentUser.id,

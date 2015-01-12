@@ -7,6 +7,8 @@ Tumblero.Models.User = Backbone.Model.extend({
 	
 	currLikeState: null,
 	
+	currFollowState: null,
+	
 	likeStateFor: function(type, type_id){
 		var user = this;	
 		
@@ -31,6 +33,7 @@ Tumblero.Models.User = Backbone.Model.extend({
 				return (id === blog_id);
 			});
 		}
+		
 		
 	},
 	

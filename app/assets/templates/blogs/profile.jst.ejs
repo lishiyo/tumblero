@@ -4,7 +4,11 @@
 	<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>" id="follow-btn-<%= blog.id %>"></button>
 	
 <figure>
-	<img src="<%= blog.escape('avatar_url') %>">
+	<% if (blog.get('avatar_url')) { %>
+		<img src="<%= blog.get('avatar_url') %>">
+	<% } else { %>
+		<img src="<%= Tumblero.Assets.path('default_avatar_02.png') %>">
+	<% } %>
 	<figcaption><%= blog.escape('description') %></figcaption>
 </figure>
 

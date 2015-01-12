@@ -18,7 +18,6 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 		
 		dataParams = { post: { reblog_blog_id: blogId } };
 		
-		console.log("dataParams", dataParams);
 		// create reblog assocation for both self *and* source post in case the source post gets deleted
 		$.ajax({
 			url: '/api/posts/'+this.model.id+"/reblog",
@@ -48,7 +47,7 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 		
 		this.setEditor();
 		if (this.model.escape('content')) {
-			var postContent = "<blockquote><i class='fa fa-quote-left'></i>" + this.model.escape('content') + "<i class='fa fa-quote-right'></i></blockquote><br>";
+			var postContent = "<blockquote>" + this.model.escape('content') + "</blockquote><br>";
 			this.$('#post-content').html(postContent);
 		}
 	

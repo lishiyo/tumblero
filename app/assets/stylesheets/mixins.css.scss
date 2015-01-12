@@ -3,9 +3,15 @@
 $gray-medium-light: #eaeaea;
 $gray-light: #F0F8FF;
 $gray-darker: #778899;
-$lilac-light: rgba(172, 159, 211, 0.5);
+$lilac-light: rgba(172, 159, 211, 0.8);
 $lemon-light: rgba(236, 210, 40, 0.4);
-$post-width: 656px;
+$tumblr-standard: #36465d;
+$gold: #EBDC2B;
+$rosy: #FC0650;
+$rosy-light: #DDA1B3;
+
+$post-container: 656px;
+$post-width: 550px;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;

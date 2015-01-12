@@ -1,5 +1,18 @@
 @import "mixins";
 
+table.blogs-table {
+	margin: 10px auto;
+	max-width: $post-width;
+ 	td {
+	 padding: 15px;
+ 	}
+}
+
+#edit-user {
+	margin: 10px auto;
+	max-width: $post-width;
+}
+
 .blog-profile img {
 	max_width: 300px;
 	max-height: 300px;

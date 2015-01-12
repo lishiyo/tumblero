@@ -22,7 +22,8 @@ Tumblero.Views.SessionNew = Backbone.View.extend({
 				Tumblero.current_user.fetch();
 				
         Backbone.history.navigate("/dashboard", {trigger: true});
-				Backbone.history.loadUrl();
+				Tumblero.Header.refresh();
+// 				Backbone.history.loadUrl();
 // 				window.location.replace("#/dashboard");
 
 // 					window.location = "/#/dashboard";

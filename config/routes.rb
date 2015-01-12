@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 	
 	namespace 'api' do
-		resources :users, only: [:new, :create, :show, :edit, :update, :destroy] do
+		resources :users, only: [:new, :create, :show, :update, :destroy] do
 		end
 		
-		resources :blogs, only: [:new, :create, :show, :index] do 
+		resources :blogs, only: [:new, :create, :show, :index, :update] do 
 			resources :posts, only: [:index]
 			resource :following, only: [:create, :destroy]
 			member do

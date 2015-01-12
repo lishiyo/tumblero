@@ -5,7 +5,7 @@
 		<% } %>
 </h3>
 
-	<% if (post.get('filepicker_urls').length > 0) { %>
+	<% if (post.get('filepicker_urls') && post.get('filepicker_urls').length > 0) { %>
 		<% post.get('filepicker_urls').split(",").forEach(function(file_url) { %>
 			<img src="<%= file_url %>">
 		<% }); %>

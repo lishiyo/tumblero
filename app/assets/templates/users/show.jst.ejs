@@ -1,14 +1,36 @@
 <h2>Welcome back <%= user.escape('email') %>!</h2>
 
+<h3><a class="btn btn-info" href="#<%= Routes.new_blog_path() %>"><i class="fa fa-plus-square"></i> Create a New Blog</a></h3>
 
-<h2>Blogs</h2>
-<a class="btn btn-info" href="#<%= Routes.new_blog_path() %>">Create a New Blog</a>
+<div class="container settings-container">
+	<div class="row">
+		<div class="col-md-8 col-sm-8 col-xs-8">
+			<section id="settings"></section>
+		</div>
+		
+		<div class="col-md-3 col-sm-3 col-xs-3">
+			<table class="blogs-table">
+				<tr col-span="3">
+				<a class="btn btn-default user-settings-btn" href="#"><i class="fa fa-wrench"></i> user settings</a>
+				</tr>
+			<% user.blogs().each(function(blog){ %>
+				<tr>
+					<td>
+						<% if (blog.escape('avatar_url')) { %>
+							<img class="avatar" src="<%= blog.escape('avatar_url') %>">
+						<% } else { %>
+							<img class="avatar" src="<%= Tumblero.Assets.path('default_avatar_02.png') %>">
+						<% } %>
+					</td>
+						<td><a href="#/blogs/<%= blog.id %>"><%= blog.escape('name') %></a></td>
 
-<ul>
-	<% user.blogs().each(function(blog){ %>
-		<h3><a href="#/blogs/<%= blog.id %>"><%= blog.escape('name') %></a></h3>
-	<% }); %>
-</ul>
+					<td>
+						<a class="btn btn-default blog-settings-btn" href="#" data-blog-id="<%= blog.id %>"><i class="fa fa-wrench"></i> settings</a>
+					</td>
+				</tr>
+			<% }); %>
+		</table>
+		</div>
+	</div>
+</div>
 
-<section id="user-settings">
-</section>

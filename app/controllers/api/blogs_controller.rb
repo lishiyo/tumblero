@@ -11,7 +11,7 @@ class Api::BlogsController < ApplicationController
 	def show
 		@blog = Blog.includes(:posts).find(params[:id])
 		
-		render json: @blog.as_json(:include => { posts: { methods: [:count_notes, :count_comments], include: :taggings }})
+		render json: @blog.as_json(:include => { posts: { methods: [:count_notes], include: :taggings }})
 	end
 	
 	def new
@@ -22,6 +22,16 @@ class Api::BlogsController < ApplicationController
 	def create		
 		@blog = current_user.blogs.build(clean_params)
 		if @blog.save
+			render json: @blog
+		else
+			render json: @blog.errors.full_messages, status: 422
+		end
+	end
+	
+	# PUT api/blogs/:id
+	def update
+		@blog = Blog.find(params[:id])
+		if @blog.update(clean_params)
 			render json: @blog
 		else
 			render json: @blog.errors.full_messages, status: 422

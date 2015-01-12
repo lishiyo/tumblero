@@ -1,35 +1,14 @@
-<!-- quote -->
+<!-- QUOTE -->
 
 <div class="bbm-modal__section" id="tab1">
-<!-- 	<form class='modal-form'> -->
-<!-- 	<form> -->
-<!-- 	<span class="modal-close js-modal-close">&times;</span> -->
-		
-	<div class="form-group">
-		<select class="form-control" name="post[blog_id]" id="post_blog_id">
-			<% blogs.each(function(blog){ %>
-					<option value="<%= blog.id %>"><%= blog.escape('name') %></option>
-			<% }); %>
-		</select>
-
-	</div>
-	
-	<div class="form-group">
-		<label for="post_title">title: </label>
-		<input type="text" name="post[title]" class="form-control">
-	</div>
 	
 	<div class="form-group">
 		
-		<a href="#" class="upload-fp">upload images</a>
-		
-		<input type="hidden" name="post[filepicker_urls]" id="filepicker_urls">
-		<div class="image-thumbnails"></div>
-		
-	</div>	
+		<textarea class="post-quote form-control" id="post-quote" rows="3" name="post[quote]" placeholder="Quote" autofocus="" autocomplete="off"></textarea>
+	</div>
 	
 	<div class="form-group wysiwyg">
-    <textarea id="post-content" name="post[content]">
+    <textarea id="post-content" name="post[source]">
 		 </textarea>
 	</div>
 	

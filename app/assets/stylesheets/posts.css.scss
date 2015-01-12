@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
+@import "mixins";
 /* Edit Vendor */
 
 #filepicker_dialog_container {
@@ -95,13 +95,28 @@
   margin: 0 0 20px 0;
 }
 
-.bbm-modal__tab a:hover, .bbm-modal__tab a.active {
-	background-color: yellow;
-	color: gray;
-	padding: 4px 10px;
-	border-radius: 5px;
+.bbm-modal__topbar.full-modal ul {
+	margin-top: -20px !important;
 }
 
+li.bbm-modal__tab {
+	color: gray;
+}
+
+li.bbm-modal__tab:hover, li.bbm-modal__tab:active {
+/* 	background-color: yellow; */
+	color: $lilac-light !important;
+	padding: 4px 10px;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+.full-modal #post_blog_id {
+	width: 230px;
+	position: absolute;
+	top: 33px;
+	left: 3%;
+}
 /** tab2 **/
 
 .drop-pane-full {	

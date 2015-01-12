@@ -15,7 +15,9 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 	},
 	
 	render: function(){
+		
 		this.setFollowState();
+		
 		var content = this.template({ 
 			blog: this.model,
 			current_user_id: this.currentUser.id,

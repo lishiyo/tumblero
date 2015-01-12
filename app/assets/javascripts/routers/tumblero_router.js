@@ -11,11 +11,11 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	refreshHeader: function(){
-		var header = new Tumblero.Views.Header({
+		Tumblero.Header = new Tumblero.Views.Header({
 			currentUser: this.currentUser
 		});
 		
-		this._swapHeader(header);
+		this._swapHeader(Tumblero.Header);
 	},
 	
 	routes: {
@@ -25,6 +25,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"session/new": "sessionNew",
 		"blogs/new": "blogNew",
 		"blogs/:id": "blogShow",
+// 		"blogs/:id/settings": "blogSettings",
 		"dashboard": "dashboardShow",
 		"explore/blogs": "blogsExplore"
 	},
@@ -41,7 +42,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	userNew: function(){
 		var newUser = new Tumblero.Models.User();
-    var userNewView = new Tumblero.Views.UserNew({ model: newUser });
+    var userNewView = new Tumblero.Views.UserNew({ 
+			model: newUser });
 
     this._swapView(userNewView);
 	},
@@ -62,7 +64,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 	
 	dashboardShow: function(){
-		this.refreshHeader();
 		
 		var dashboard = new Tumblero.Models.Dashboard({ user: this.currentUser });
 		dashboard.fetch();
@@ -74,24 +75,21 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogShow: function(blog_id){
-		this.refreshHeader();
-		
 		var blog = Tumblero.Collections.blogs.getOrFetch(blog_id);
 		
 		var blogShowView = new Tumblero.Views.BlogShow({
-			currentUser: this.currentUser, 
+			currentUser: (this.currentUser || Tumblero.current_user), 
 			model: blog
 		});
 		
 		this._swapView(blogShowView);
-
 	},
 	
 	blogNew: function(){
-		this.refreshHeader();
+		
 		var blog = new Tumblero.Models.Blog({ user: this.currentUser });
 		var view = new Tumblero.Views.BlogNew({
-			currentUser: this.currentUser,
+			currentUser: (this.currentUser || Tumblero.current_user),
 			model: blog
 		});
 		
@@ -99,7 +97,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogsExplore: function() {
-		this.refreshHeader();
 		
 		// create global
 		var blogs = Tumblero.Collections.blogs;
@@ -107,7 +104,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		blogs.fetch({
 			success: function(){			
 				var view = new Tumblero.Views.BlogsExplore ({
-					currentUser: this.currentUser,
+					currentUser: (this.currentUser || Tumblero.current_user),
 					collection: blogs
 				});
 

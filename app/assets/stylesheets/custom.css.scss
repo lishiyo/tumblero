@@ -17,7 +17,11 @@ ul, li, ol {
 	margin: 0; */
 }
 
-
+body, input {
+	-webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
 /** vendor fix **/
 
 .container {
@@ -33,7 +37,8 @@ ul, li, ol {
 
 body {
 	text-align: center;
-	background-color: $lilac-light;
+/* 	background-color: $lilac-light; */
+	background-color: $rosy;
 /* 	max-width: 1330px; */
 }
 
@@ -41,6 +46,11 @@ form {
 	max-width: 55%;
 	margin: 0 auto;
 	text-align: center;
+}
+
+img.avatar {
+	max-width: 100px;
+	max-height: 100px;
 }
 
 /** blogs index **/
