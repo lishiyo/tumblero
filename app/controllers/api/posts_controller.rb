@@ -4,14 +4,16 @@ class  Api::PostsController < ApplicationController
 	
 	def index
 		@blog = Blog.find(params[:blog_id])
-		@posts = @blog.posts
+# 		@posts = @blog.posts
 		
-		render json: @posts.to_json(methods: [:count_notes, :count_comments], include: :taggings)
+		@posts = @blog.posts.page(params[:page])
+		
+		render json: @posts.to_json(methods: [:count_notes, :likers], include: :taggings)
 	end
 	
 	def show	
 		respond_to do |f| 
-			f.json { render json: @post.to_json(methods: [:count_notes, :count_comments], include: :taggings) }
+			f.json { render json: @post.to_json(methods: [:count_notes, :likers_ids], include: :taggings) }
 		end
 	end
 	
@@ -41,6 +43,7 @@ class  Api::PostsController < ApplicationController
 	
 	# POST /api/posts/:id/reblog 
 	# create reblog for either self or source_post (reblogged: true)
+	# port comments
 	def reblog
 		# source post means :reblogged => false
 		old_post = Post.find(params[:id])

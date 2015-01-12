@@ -50,14 +50,15 @@ gem 'quiet_assets'
 gem 'bootstrap-sass',          '3.2.0.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
-gem 'will_paginate', '~> 3.0.5'
-gem 'will_paginate-bootstrap'
+# gem 'will_paginate', '~> 3.0.5'
+# gem 'will_paginate-bootstrap'
 gem "font-awesome-rails"
 gem 'formtastic', '~> 3.0'
 gem "mini_magick"
 gem 'bootsy'
 gem 'bootstrap-wysihtml5-rails'
 gem 'filepicker-rails'
+gem 'kaminari'
 
 gem 'backbone-on-rails'
 gem 'js-routes'

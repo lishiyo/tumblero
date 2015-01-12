@@ -24,11 +24,11 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 	},
 	
 	incrementCount: function(){
-		var commCount = this.$el.closest('.post').find('.count-comments');
+		var commCount = this.$el.closest('.post').first().find('.count-comments');
 		var currCount = commCount.data("curr-count");
 		var newCount = currCount + 1;
 		commCount.data("curr-count", newCount);
-		console.log("incCount", commCount, currCount, newCount)
+		console.log("incCount", this.$el, this.$el.closest('.post'), commCount, currCount, newCount)
 		commCount.text(newCount);
 	},
 	

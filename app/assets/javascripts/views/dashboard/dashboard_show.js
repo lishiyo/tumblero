@@ -11,7 +11,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.collection = this.model.posts();
 		this.listenTo(this.currentUser, 'sync', this.render);
 		
-		this.listenTo(this.model, 'sync', this.render);
+		this.listenTo(this.model, 'sync change', this.render);
 		this.listenTo(this.collection, 'sort', this.render);
 		this.listenTo(this.collection, 'remove', this.render);
 		this.listenTo(this.collection, 'add', this.render);
@@ -33,7 +33,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 
 		newPostFull.setActive({ tabNum: startTab });
 		
-		console.log("clicked open");
 	},
 
 	
@@ -69,7 +68,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 			current_user_id: this.currentUser.id,
 			initialFollowState: this.followState
 		});
-		console.log("dashboard render", this.model, this.model.posts());
 		
     this.$el.html(content);
 //     this.attachSubviews();

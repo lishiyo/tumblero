@@ -16,9 +16,16 @@ class Api::LikesController < ApplicationController
 	end
 	
 	def destroy
-		@like = Like.find_by(likeable_type: params[:likeable_type], likeable_id: params[:likeable_id])
-		@like.destroy!
+		likeable = params[:likeable_type].constantize.find(params[:likeable_id])
 		
+		if params[:likeable_type] == 'Post' && likeable.reblogged
+			@like = Like.find_by(likeable_type: params[:likeable_type], likeable_id: likeable.source_id)
+			@like.destroy!
+		else
+			@like = Like.find_by(likeable_type: params[:likeable_type], likeable_id: params[:likeable_id])
+			@like.destroy!
+		end
+	
 		render json: nil
 	end
 	

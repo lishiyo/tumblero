@@ -7,6 +7,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		this.likeableType = type;
 		this.likeableId = id;
 		this.likeButtonId = (btn || ('button.like-btn'));
+		
 	},
 	
 	renderLikeButton: function(btnId){
@@ -43,7 +44,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 			this.renderLikeButton($btn);
 
 			$.ajax({
-				url: "/like",
+				url: "/api/like",
 				dataType: "json",
 				method: "DELETE",
 				data: dataParams,
@@ -62,7 +63,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 			this.renderLikeButton($btn);
 
 			$.ajax({
-				url: "/like",
+				url: "/api/like",
 				dataType: "json",
 				method: "POST",
 				data: dataParams,
@@ -126,6 +127,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 					followToggle.followState = "unfollowed";
 					followToggle.currentUser.fetch();
 					followToggle.renderFollowButton($btn);		
+// 					followToggle.model.fetch();
 				},
 				error: function(data) {
 					console.log("error in delete", data);
@@ -144,6 +146,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 					followToggle.followState = "followed";
 					followToggle.currentUser.fetch();
 					followToggle.renderFollowButton($btn);
+// 					followToggle.model.fetch();
 				},
 				error: function(data) {
 					console.log("error in follow creation", data);

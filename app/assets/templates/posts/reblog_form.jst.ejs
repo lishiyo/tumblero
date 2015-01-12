@@ -1,16 +1,22 @@
+
 <div class="bbm-modal__section modal post-modal">
 	
 <form class='modal-form' id="reblog-form">
 	<span class="modal-close js-modal-close">&times;</span>
 		
-	<div class="form-group">
-		<label for="post_blog_id">Reblog to:</label>
-		<select class="form-control" name="post[blog_id]" id="post_blog_id">
-			<% blogs.each(function(blog){ %>
-					<option value="<%= blog.id %>"><%= blog.escape('name') %></option>
-			<% }); %>
-		</select>
+	<div class="bbm-modal__topbar full-modal">
+		<ul>
+				<select class="form-control" name="post[blog_id]" id="post_blog_id">
+					<% blogs.each(function(blog){ %>
+							<option value="<%= blog.id %>"><%= blog.escape('name') %></option>
+					<% }); %>
+				</select>
+			
+			<li class="bbm-modal__tab">Reblog</li>
+
+		</ul>
 	</div>
+
 		
 	<div class="form-group">
 		<h3>

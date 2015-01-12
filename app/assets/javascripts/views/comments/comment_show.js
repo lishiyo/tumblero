@@ -91,6 +91,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 			comment: this.model,
 			initialLikeState: this.likeState
 		});
+		
     this.$el.html(content);
 		
     this.addAllComments();

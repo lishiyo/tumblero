@@ -4,7 +4,7 @@ class Api::DashboardsController < ApplicationController
 	
 	def show
 		@dashboard = current_user.dashboard
-		render json: @dashboard.as_json(:include => { posts: { methods: [:count_notes], include: :taggings }})	
+		render json: @dashboard.as_json(:include => { posts: { methods: [:count_notes, :likers_ids], include: :taggings }})	
 	end
 	
 end

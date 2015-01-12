@@ -65,7 +65,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	
 		
 	render: function(){
-		
 		this.setLikeState('Post', this.model.id, this.likeButtonId);
 		
 		var content = this.template({ 

@@ -19,7 +19,7 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 		
 		dataParams = { post: { reblog_blog_id: blogId } };
 		
-		// create reblog assocation for both self *and* source post in case the source post gets deleted
+		// create reblog assocation for self only
 		$.ajax({
 			url: '/api/posts/'+this.model.id+"/reblog",
 			type: 'POST',
@@ -28,7 +28,9 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 		}).done(function(data, textStatus){
 			// only submit new reblogged post if the reblog was created
 			view.submitForm(event);
-			view.model.trigger("change");
+			view.model.fetch();
+// 			view.model.trigger("change", view.model);
+			console.log("triggered model", view.model);
 		}).fail(function(jqXHR, textStatus, error) {
 			console.log("failed", textStatus, error);
 		}).always(function(data, textStatus, error){

@@ -16,10 +16,33 @@ Tumblero.Models.User = Backbone.Model.extend({
 			return user.get('liked_posts_ids').some(function(elem){
 				return (elem === type_id);
 			});
+// 			var post = new Tumblero.Models.Post({ id: type_id });
+// 			post.fetch({
+// 				success:function(){
+// 					return post.get('likers_ids').some(function(id){
+// 						return (id === user.id);
+// 					});
+// 				}
+// 			})
+			
+// 			return user.get('liked_posts_ids').some(function(elem){
+// 				return (elem === type_id);
+// 			});
 		} else if (type == 'Comment' && user.get('liked_comments_ids')) {
-			return user.get('liked_comments_ids').some(function(elem){
-				return (elem === type_id);
-			});
+					return user.get('liked_comments_ids').some(function(elem){
+						return (elem === type_id);
+					});
+// 			var comment = new Tumblero.Models.Comment({ id: type_id });
+// 			comment.fetch({
+// 				success:function(){
+// 					return comment.get('likers_ids').some(function(id){
+// 						return (id === user.id);
+// 					});
+// 				}
+			
+// 			return user.get('liked_comments_ids').some(function(elem){
+// 				return (elem === type_id);
+// 			});
 		}
 		
 		return false;

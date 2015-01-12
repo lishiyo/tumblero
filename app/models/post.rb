@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
 	belongs_to :source_post, class_name: "Post", foreign_key: :source_id, primary_key: :id
 	# posts that reblogged the source post
 	has_many :reblogged_posts, class_name: "Post", foreign_key: :source_id, inverse_of: :source_post
+	has_many :liking_users, through: :likes, source: :user
 	
 	has_many :comments, inverse_of: :post, dependent: :destroy
 	
@@ -22,6 +23,44 @@ class Post < ActiveRecord::Base
 	default_scope  { order(created_at: :desc) }
 	scope :reblogged, -> { where(reblogged: true) }
 	
+# 	before_save :update_comments_count
+	
+	# HELPER - reset commetns back to 0
+	def self.reset_all
+		Post.all.each do |p|
+			Post.reset_counters(p.id, :comments)
+		end
+	end
+	
+	# all users who like me
+	def likers
+		if self.reblogged
+			source = Post.find(self.source_id)
+			source.liking_users
+		else
+			self.liking_users
+		end
+	end
+	
+	def likers_ids
+		likers.map(&:id)
+	end
+	
+	def comments
+		if self.reblogged
+			self.source_post.comments
+		else
+			Comment.where(post_id: self.id)
+		end
+	end
+	
+	def comments_count
+		if self.reblogged
+			self.source_post.comments_count
+		else
+			Post.where(id: self.id).pluck('comments_count').first
+		end
+	end
 	
 	def self.created_before(time)
     where("created_at < ?", time)
@@ -46,7 +85,7 @@ class Post < ActiveRecord::Base
 		end
 	end
 	
-	# TO-DO
+	# TO-DO for trending?
 	def count_recent_notes
 		count_notes
 	end

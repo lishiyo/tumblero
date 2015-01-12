@@ -46,18 +46,40 @@ class User < ActiveRecord::Base
     self.password_digest = BCrypt::Password.create(password)
   end
 	
+	# TOGGLEABLE
+	
 	def follows?(blog)
 		self.followed_blogs.include?(blog)
 	end
 	
+	# include post and all its reblogged posts
+	def all_liked_posts
+		posts = []
+		self.liked_posts.each do |post|
+			posts << post.id
+			if !post.reblogged # soruce post
+				post.reblogged_posts.each {|r| posts << r.id } 
+			end
+		end
+			
+		posts.uniq
+	end
+	
+# 	def all_liked_comments
+		
+# 	end
+	
 	def likes?(likeable)
 		if likeable.class == Post
 			self.liked_posts.include?(likeable)	
+		elsif likeable.class == Comment
+			self.liked_comments.include?(likeable)
 		end
 	end
 	
 	def liked_posts_ids
-		self.liked_posts.map(&:id)
+		all_liked_posts
+# 		self.liked_posts.map(&:id)
 	end
 	
 	def liked_comments_ids

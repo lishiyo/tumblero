@@ -1,5 +1,11 @@
 #Tumblero
 
+##TODOS:
+* Comments
+* Pagination
+* Edit post if own post
+* Sort method - Trending
+
 ##Minimal Viable Product: Features
 Barebones tumblr - you can create multiple blogs and posts for each blog, and follow other blogs. If you follow a blog, you'll see their posts on your dashboard home. You can also "like" and "reblog" posts onto your own blog(s).
 

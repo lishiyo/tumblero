@@ -9,6 +9,8 @@ class Comment < ActiveRecord::Base
   has_many :child_comments, class_name: "Comment", foreign_key: :parent_comment_id, primary_key: :id
 
   belongs_to :parent_comment, class_name: "Comment", foreign_key: :parent_comment_id, primary_key: :id
+	
+	has_many :liking_users, through: :likes, source: :user
   
 	# class method to lookup all comments for a user
   scope :find_comments_by_user, lambda { |user|
@@ -19,6 +21,10 @@ class Comment < ActiveRecord::Base
 	
 	def ordered_child_comments
 		child_comments.sort_by{|comm| comm.created_at }
+	end
+	
+	def likers_ids
+		liking_users.map(&:id)
 	end
 	
 end
