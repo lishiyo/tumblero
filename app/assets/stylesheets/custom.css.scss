@@ -63,6 +63,10 @@ ul.blogs-index {
 li.blog-profile {
 	text-align: center;
 	float: left;
-	max-width: 200px;
+	width: 250px;
+	margin: 10px auto;
 	position: relative; /* to place follow button */
+	figcaption {
+		color: white;
+	}
 }

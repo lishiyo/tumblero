@@ -1,6 +1,7 @@
 // Place all the styles related to the dashboards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "mixins";
 
 section.dashboard-main {
 	margin: 0 auto;
@@ -10,8 +11,17 @@ section.dashboard-main {
 #main-nav button.full-post-modal {
 	padding: 4px;
 	width: 80px;
-	margin-top: 10px;
+	top: 10px;
 	box-shadow: 1px 2px 5px #778899;
+	background-color: $rosy;
+	border: none;
+	position: relative;
+	
+	&:hover, &:active {
+		background-color: rgba(0,0,0,0.8);
+		top: 12px;
+	}
+	
 }
 
 button.full-post-modal {

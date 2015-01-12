@@ -5,14 +5,20 @@ Tumblero.Views.NewPostFull = Tumblero.PostModal.extend({
 		"click a#tab1": "callTab1",
 		"click a#tab2": "callTab2",
 		"click a#tab3": "callTab3",
-		"submit form": "submitFormCheck"
+		"submit form": "submitFormCheck",
+		"click .js-modal-close": "closeModal"
 	},
-	
+		
 	initialize: function(opts) {
-		this.currentUser = opts.currentUser;
-		this.blogs = opts.currentUser.blogs();
+		this.currentUser = (opts.currentUser || Tumblero.current_user);
+		this.blogs = this.currentUser.blogs();
 		this.$tabEl = $('.tab-container');
 		this.blog = (opts.blog || null);
+		$(".modal").removeClass("is-open");
+	},
+		
+	closeModal: function(event){
+		event.preventDefault();
 		$(".modal").removeClass("is-open");
 	},
 	

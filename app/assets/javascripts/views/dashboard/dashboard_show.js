@@ -2,8 +2,10 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	template: JST['dashboard/show'],
 	events: {
-		'click .re-sort': 'reSortBy'
+		'click .re-sort': 'reSortBy',
+		"click button.full-post-modal": "openPostModal"
 	},
+	
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
@@ -15,6 +17,26 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.collection, 'add', this.render);
 		
 	},
+	
+	
+	openPostModal: function(event){
+		event.preventDefault();
+		
+		var startTab = ($(event.currentTarget).data("tab-num") || 1),
+				post = new Tumblero.Models.Post();
+
+		var newPostFull = new Tumblero.Views.NewPostFull({
+			model: post,
+			currentUser: this.currentUser
+		});
+
+		$('.modal-container').html(newPostFull.render().$el);
+
+		newPostFull.setActive({ tabNum: startTab });
+		
+		console.log("clicked open");
+	},
+
 	
 	addPost: function(post){
 // 		this.addPostSubview(post);

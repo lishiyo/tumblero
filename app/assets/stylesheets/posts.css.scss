@@ -18,12 +18,18 @@
 	padding: 20px;
 	background-color: white;
 	border-radius: 10px;
+	
+	img {
+		max-width: 510px;
+		max-height: 400px;
+	}
+
+	a {
+		text-decoration: none;
+		color: gray;
+	}
 }
 
-.post img {
-	max-width: 510px;
-	max-height: 400px;
-}
 
 
 /* for dashboard and blog view */

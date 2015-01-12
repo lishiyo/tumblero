@@ -26,7 +26,7 @@ window.Tumblero = {
 		} else {
 			Tumblero.current_user.fetch({
 				success: function(model){
-					this.setPostModal(model);
+// 					this.setPostModal(model);
 				}.bind(this)
 			});
 			
@@ -34,31 +34,31 @@ window.Tumblero = {
 		}
 	},
 
-	setPostModal: function(cu){
+// 	setPostModal: function(cu){
 		
-		$("body").on("click", "button.full-post-modal", function(event){
-			event.preventDefault();
-			var startTab = ($(event.currentTarget).data("tab-num") || 1),
-					post = new Tumblero.Models.Post();
+// 		$("body").on("click", "button.full-post-modal", function(event){
+// 			event.preventDefault();
+// 			var startTab = ($(event.currentTarget).data("tab-num") || 1),
+// 					post = new Tumblero.Models.Post();
 
-			var newPostFull = new Tumblero.Views.NewPostFull({
-				model: post,
-				currentUser: cu
-			});
+// 			var newPostFull = new Tumblero.Views.NewPostFull({
+// 				model: post,
+// 				currentUser: cu
+// 			});
 
-			$('.modal-container').html(newPostFull.render().$el);
+// 			$('.modal-container').html(newPostFull.render().$el);
 			
-			newPostFull.setActive({ tabNum: startTab });
+// 			newPostFull.setActive({ tabNum: startTab });
 			
-		}.bind(this));
+// 		}.bind(this));
 		
 
-		$("body").on("click", ".js-modal-close", function(event){
-			event.preventDefault();
-			$(".modal").removeClass("is-open");
-		});
+// 		$("body").on("click", ".js-modal-close", function(event){
+// 			event.preventDefault();
+// 			$(".modal").removeClass("is-open");
+// 		});
 
-	}
+// 	}
 };
 
 // janky way of navigation
