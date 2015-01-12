@@ -2,13 +2,19 @@ class  Api::PostsController < ApplicationController
 	
 	before_action :set_post, only: [:show, :comments, :reblog, :new_comment]
 	
+	# GET api/blogs/:blog_id/posts
 	def index
 		@blog = Blog.find(params[:blog_id])
 # 		@posts = @blog.posts
+# 		render json: @posts.to_json(methods: [:count_notes, :likers], include: :taggings)
 		
 		@posts = @blog.posts.page(params[:page])
 		
-		render json: @posts.to_json(methods: [:count_notes, :likers], include: :taggings)
+		render :json => {
+        :models => @posts,
+        :page => params[:page],
+        :total_pages => @posts.total_pages # thanks kaminari!
+    }
 	end
 	
 	def show	

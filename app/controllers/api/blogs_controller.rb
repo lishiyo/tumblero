@@ -6,7 +6,6 @@ class Api::BlogsController < ApplicationController
 	def index 
 		@blogs = Blog.where.not(user_id: current_user.id)
 		
-		
 		render json: @blogs
 	end
 	
@@ -14,6 +13,13 @@ class Api::BlogsController < ApplicationController
 		@blog = Blog.includes(:posts).find(params[:id])
 		
 		render json: @blog.as_json(:include => { posts: { methods: [:count_notes, :likers_ids], include: :taggings }})
+		
+# 		render :json => {
+#         :models => @posts,
+#         :page => params[:page],
+#         :total_pages => @posts.total_pages # thanks kaminari!
+#     }
+		
 	end
 	
 	def new

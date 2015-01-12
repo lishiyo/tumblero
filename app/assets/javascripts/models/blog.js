@@ -18,7 +18,7 @@ Tumblero.Models.Blog = Backbone.Model.extend({
 		
 	},
 	
-	posts: function(orderMethod){
+	posts: function(){
 		
 		if(!this._posts) {
       this._posts = new Tumblero.Collections.Posts([], {

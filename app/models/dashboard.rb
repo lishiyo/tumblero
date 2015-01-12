@@ -8,8 +8,8 @@ class Dashboard < ActiveRecord::Base
 	
 	validates :user_id, presence: :true
 	
-	def posts
-		followed_posts.sort_by{|post| post.created_at }.reverse
-	end
+# 	def posts
+# 		followed_posts.sort_by{|post| post.created_at }.reverse
+# 	end
 	
 end

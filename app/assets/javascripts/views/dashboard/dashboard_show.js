@@ -1,6 +1,7 @@
 Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	template: JST['dashboard/show'],
+	
 	events: {
 		'click .re-sort': 'reSortBy',
 		"click button.full-post-modal": "openPostModal"
@@ -9,6 +10,21 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
+	
+		
+// 		this.collection = new Tumblero.Collections.Posts([], {
+// 			dashboard: this.model,		
+// 		});
+		
+// 		this.collection.fetch({ 
+// 			data: { page: 1 },
+// 			success: function(posts){
+// 				this.currPage = posts.page;
+// 				this.totalPages = posts.total_pages;
+// 				console.log("fetched in dash", posts, this.currPage);	
+// 			}.bind(this)
+// 		});
+		
 		this.listenTo(this.currentUser, 'sync', this.render);
 		
 		this.listenTo(this.model, 'sync change', this.render);
@@ -16,6 +32,19 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.collection, 'remove', this.render);
 		this.listenTo(this.collection, 'add', this.render);
 		
+		
+	},
+	
+	
+	addPageNav: function(){
+		var subview = new Tumblero.Views.PageNav({
+			currPage: (this.currPage || 1),
+			totalPages: this.totalPages,
+			blog: this.model,
+			collection: this.collection
+		});
+		
+		this.addSubview('#pagination-nav', subview);
 	},
 	
 	openPostModal: function(event){
@@ -72,6 +101,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
     this.$el.html(content);
 //     this.attachSubviews();
 		this.addAllPosts();
+		this.addPageNav();
 
 		this.renderLikeButton(this.$('.like-btn'));
 		this.renderFollowButton(this.$('.follow-btn'));

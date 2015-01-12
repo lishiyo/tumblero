@@ -8,6 +8,12 @@ table.blogs-table {
  	}
 }
 
+.pagination-nav {
+	margin: 10px auto;
+	max-width: $post-width;
+	padding: 10px;
+}
+
 #edit-user {
 	margin: 10px auto;
 	max-width: $post-width;

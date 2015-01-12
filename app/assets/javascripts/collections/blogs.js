@@ -16,12 +16,17 @@ Tumblero.Collections.Blogs = Backbone.Collection.extend({
     if(!blog) {
       blog = new Tumblero.Models.Blog({ id: id });
       blog.fetch({
+				remove: false,
+				data: { page: 1 },
         success: function () {
           blogs.add(blog, {merge: true});
         },
       });
     } else {
-      blog.fetch();
+      blog.fetch({
+				remove: false,
+				data: { page: 1 },
+			});
     }
     return blog;
 	}

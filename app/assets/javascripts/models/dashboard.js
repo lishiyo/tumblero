@@ -11,16 +11,19 @@ Tumblero.Models.Dashboard = Backbone.Model.extend({
       });
     }
 		
+		console.log("dashboard posts", this._posts);
     return this._posts;
 	},
 	
-	parse: function(resp) {
+	parse: function(response) {
+		this.page = ( Number(response.page) || 1);
+		this.total_pages = response.total_pages;
 		
-		if (resp.posts) {
-			this.posts().set(resp.posts, {parse: true});
-			delete resp.posts;
+		if (response.models) {
+			this.posts().set(response.models, {parse: true});
+			delete response.models;
 		} 
 			
-		return resp;
+		return response;
 	}
 });

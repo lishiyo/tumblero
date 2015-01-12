@@ -32,7 +32,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	checkUser: function() { 
 		// check if current_user is present and redirect
-		console.log("checkUser", this.currentUser);
 		if (this.currentUser){
 			this.userShow();
 		} else {
