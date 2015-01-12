@@ -6,8 +6,8 @@ Tumblero.Models.Blog = Backbone.Model.extend({
 	},
 	
 	validate: function(attrs, opts){
-		var newHandle = attrs.handle.replace(/\s+/g, "-");
-		console.log("newHandle", newHandle);
+		var newHandle = attrs.handle.toLowerCase().replace(/\s+/g, "-");
+		
 		function isValid(char) {
 			return char.match(/(\w+|-)/);
 		}

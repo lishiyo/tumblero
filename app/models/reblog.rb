@@ -6,4 +6,5 @@ class Reblog < ActiveRecord::Base
 	# note that a blog can reblog a post multiple times
 	validates :blog, :post, presence: :true
 	
+	
 end

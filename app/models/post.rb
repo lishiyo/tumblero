@@ -31,11 +31,9 @@ class Post < ActiveRecord::Base
     where("created_at > ?", time)
  	end
 	
+	# posts created in last day with highest number of notes
 	def self.trending
-		self.created_after(1.day.ago)
-		.joins()
-		.sort_by{|post| post.count_notes }
-		.reverse
+		self.created_after(1.day.ago).sort_by{|p| p.count_notes }
 	end
 	
 	# { 0 => [1,2,3], 2 => [4,5,6] }
@@ -97,27 +95,42 @@ class Post < ActiveRecord::Base
 		
 	end
 	
+	# ONE query - reblogs_count + likes_count + comments_count
 	def count_notes
+		if self.reblogged
+			source_post = Post.find(self.source_id)
+			source_post.likes_count + source_post.comments_count + source_post.reblogs_count
+		else
+			reblogs_count + likes_count + comments_count
+		end
+	end
+	
+	def count_comments
+		comments_count
+	end
+	
+# 	def count_notes
 # 		if self.reblogged
 			
 # 		else
 # 			Post.joins("LEFT JOIN likes ON likes.likeable_type = 'Post' AND likes.likeable_id = posts.id").joins("LEFT JOIN comments on comments.post_id = posts.id").joins("LEFT JOIN reblogs on reblogs.post_id = posts.id").where("posts.id = ?", self.id).count
 # 		end
 		
-		count_likes + count_reblogs + count_comments
-	end
+# 		count_likes + count_reblogs + count_comments
+# 	end
 	
-	def count_comments
-		comments.size
-	end
+# 	def count_comments
+# 		comments.size
+# 	end
 
+	
 	# count your own reblogs if a source post, else count source's
-	def count_reblogs
-		if self.reblogged
-			Reblog.where(post_id: self.source_id).size
-		else
-			reblogs.size
-		end
-	end
+# 	def reblogs_count
+# 		if self.reblogged
+# 			Reblog.where(post_id: self.source_id).size
+# 		else # source_post
+# 			Post.where(id: self.id).pluck('reblogs_count').first
+# 		end
+# 	end
 	
 end

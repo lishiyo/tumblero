@@ -17,13 +17,16 @@ Tumblero.Views.SessionNew = Backbone.View.extend({
 	
     this.model.save(formData, {
       success: function(model, response, options) {
-				console.log("saved!", model, response, options);
+				
 				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
 				Tumblero.current_user.fetch();
-//         Backbone.history.navigate("users/" + response.id, {trigger: true});
 				
-// 				window.location.replace("#/users/" + response.id);
-				window.location.replace("/blogs/new");
+        Backbone.history.navigate("/dashboard", {trigger: true});
+				Backbone.history.loadUrl();
+// 				window.location.replace("#/dashboard");
+
+// 					window.location = "/#/dashboard";
+// 				window.location.reload();
       }.bind(this),
 			
 			error: function(model, response, options){

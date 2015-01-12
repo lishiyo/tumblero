@@ -20,7 +20,6 @@ class Api::BlogsController < ApplicationController
 	end
 	
 	def create		
-		puts clean_params
 		@blog = current_user.blogs.build(clean_params)
 		if @blog.save
 			render json: @blog
@@ -44,7 +43,7 @@ class Api::BlogsController < ApplicationController
 	
 	def clean_params
 		params = blog_params
-		new_handle = blog_params[:handle].split(" ").join("-")
+		new_handle = blog_params[:handle].downcase.split(" ").join("-")
 		params[:handle] = new_handle
 		
 		params

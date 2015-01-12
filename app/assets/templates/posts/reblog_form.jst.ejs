@@ -35,6 +35,9 @@
 		
 	<input type="hidden" name="post[reblogged]" value="true">
 	<input type="hidden" name="post[source_id]" value="<%= source_id %>">
+	<input type="hidden" name="post[reblogs_count]" value="<%= post.get('reblogs_count') %>">
+	<input type="hidden" name="post[comments_count]" value="<%= post.get('comments_count') %>">
+	<input type="hidden" name="post[likes_count]" value="<%= post.get('likes_count') %>">
 	
   <input type="submit" class="submit-el" value="POST">
 	</form>

@@ -7,7 +7,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
-		
 		this.listenTo(this.currentUser, 'sync', this.render);
 		
 		this.listenTo(this.model, 'sync', this.render);

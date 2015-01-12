@@ -36,7 +36,7 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 		event.preventDefault();
 		
 		var formData = $(event.currentTarget).serializeJSON(),
-				url = "/comments",
+				url = "/api/comments",
 				commentsColl = this.collection,
 				view = this;
 		
@@ -52,7 +52,7 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 			newComm.fetch();
 			commentsColl.add(newComm);		
 			view.incrementCount();
-// 			$(event.currentTarget).remove();
+			$(event.currentTarget).remove();
 		}).fail(function(jqXHR, textStatus){
 			console.log(textStatus);
 		})

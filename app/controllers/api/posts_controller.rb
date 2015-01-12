@@ -26,6 +26,7 @@ class  Api::PostsController < ApplicationController
 		@post = @blog.posts.build(post_params.except(:tags))
 		@tags_array = post_params[:tags].split(",") if post_params[:tags]
 		
+		
 		if full_transact?
 			respond_to do |format|
 				format.html { redirect_to blog_url(blog) }
@@ -74,7 +75,7 @@ class  Api::PostsController < ApplicationController
 	end
 	
 	def post_params
-		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :tags, :reblogged, :reblog_blog_id, :source_id)
+		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :tags, :reblogged, :reblog_blog_id, :source_id, :likes_count, :comments_count, :reblogs_count)
 	end
 	
 	def comment_params

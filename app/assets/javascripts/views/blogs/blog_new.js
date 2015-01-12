@@ -3,7 +3,8 @@ Tumblero.Views.BlogNew = Tumblero.Filepickerable.extend({
 	
 	events: {
 		"submit form": "createBlog",
-		"click .upload-fp": 'upload'
+		"click .upload-fp": 'upload',
+		"change #blog_handle": "showHandle"
 	},
 	
 	initialize: function(opts){
@@ -11,6 +12,12 @@ Tumblero.Views.BlogNew = Tumblero.Filepickerable.extend({
 		this.listenTo(this.model, 'invalid', this.noteInvalid);
 	},
 	
+	showHandle: function(event){
+		var input = $(event.currentTarget).val();
+		var newHandle = input.toLowerCase().replace(/\s+/g, "-");
+		
+		$('span.tumblero-url').text(newHandle);
+	},
 	// override filepickerable
 	upload: function (event) {	
 		event.preventDefault();

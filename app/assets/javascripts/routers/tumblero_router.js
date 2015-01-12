@@ -1,11 +1,21 @@
-Tumblero.MainRouter = Tumblero.Routers.Router = Backbone.Router.extend({
+Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	initialize: function(opts){
 		this.$rootEl = opts.$rootEl;
-		this.currentUser = opts.currentUser;
+		this.$headerEl = opts.$headerEl;
+		this.currentUser = (opts.currentUser || Tumblero.current_user);
 		
 		Tumblero.Collections.blogs = new Tumblero.Collections.Blogs({ user: this.currentUser });
 		
+		this.refreshHeader();
+	},
+	
+	refreshHeader: function(){
+		var header = new Tumblero.Views.Header({
+			currentUser: this.currentUser
+		});
+		
+		this._swapHeader(header);
 	},
 	
 	routes: {
@@ -30,8 +40,6 @@ Tumblero.MainRouter = Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	userNew: function(){
-		console.log("userNew");
-		
 		var newUser = new Tumblero.Models.User();
     var userNewView = new Tumblero.Views.UserNew({ model: newUser });
 
@@ -40,31 +48,33 @@ Tumblero.MainRouter = Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	sessionNew: function(){
     var newSession = new Tumblero.Models.Session();
-    var sessionNewView = new Tumblero.Views.SessionNew({ model: newSession });
+    var sessionNewView = new Tumblero.Views.SessionNew({ 
+			model: newSession });
 
     this._swapView(sessionNewView);
   },
 
   userShow: function(id){
-    var user = this.currentUser;
+    var user = (this.currentUser || Tumblero.current_user);
 		
 		var userShowView = new Tumblero.Views.UserShow({ model: user });
     this._swapView(userShowView);  
   },
 	
 	dashboardShow: function(){
+		this.refreshHeader();
+		
 		var dashboard = new Tumblero.Models.Dashboard({ user: this.currentUser });
 		dashboard.fetch();
 		var view = new Tumblero.Views.DashboardShow({ 
 			model: dashboard,
-			currentUser: this.currentUser
+			currentUser: (this.currentUser || Tumblero.current_user)
 		});
 		this._swapView(view);
 	},
 	
 	blogShow: function(blog_id){
-// 		var blog = new Tumblero.Models.Blog({id: blog_id});
-// 		blog.fetch();
+		this.refreshHeader();
 		
 		var blog = Tumblero.Collections.blogs.getOrFetch(blog_id);
 		
@@ -78,6 +88,7 @@ Tumblero.MainRouter = Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogNew: function(){
+		this.refreshHeader();
 		var blog = new Tumblero.Models.Blog({ user: this.currentUser });
 		var view = new Tumblero.Views.BlogNew({
 			currentUser: this.currentUser,
@@ -88,6 +99,8 @@ Tumblero.MainRouter = Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogsExplore: function() {
+		this.refreshHeader();
+		
 		// create global
 		var blogs = Tumblero.Collections.blogs;
 		
@@ -134,6 +147,12 @@ Tumblero.MainRouter = Tumblero.Routers.Router = Backbone.Router.extend({
     this._currentView && this._currentView.remove();
     this._currentView = newView;
     this.$rootEl.html(newView.render().$el);
-  }
+  },
+	
+	_swapHeader: function(newView) {
+		this._headerView && this._headerView.remove();
+		this._headerView = newView;
+		this.$headerEl.html(newView.render().$el);
+	}
 	
 })

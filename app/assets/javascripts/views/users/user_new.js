@@ -20,8 +20,8 @@ Tumblero.Views.UserNew = Backbone.View.extend({
 				console.log("saved new user", this.model);
 				Tumblero.current_user = this.model;
 				Tumblero.current_user.fetch();
-//         Backbone.history.navigate("users/" + this.model.id, {trigger: true});
-        window.location.replace("/explore/blogs");
+        Backbone.history.navigate("blogs/new", {trigger: true});
+//         window.location.replace("#/blogs/new");
       }.bind(this),
 			error: function(model, response, options){
 				console.log(model, response, options);

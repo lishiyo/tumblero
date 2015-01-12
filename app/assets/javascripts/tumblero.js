@@ -8,13 +8,16 @@ window.Tumblero = {
 	
   initialize: function() {
 		
-    var $main = $("#main");
+    var $main = $("#main"),
+				$nav = $('#main-nav');
+		
 		new Tumblero.Routers.Router({
 			$rootEl: $main,
-			currentUser: this.currentUser()
+			currentUser: this.currentUser(),
+			$headerEl: $nav
 		});
-		Backbone.history.start();
 		
+		Backbone.history.start();
   },
 	
 	currentUser: function(){
