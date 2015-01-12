@@ -18,7 +18,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 	},
 	
-	
 	openPostModal: function(event){
 		event.preventDefault();
 		
@@ -70,6 +69,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 			current_user_id: this.currentUser.id,
 			initialFollowState: this.followState
 		});
+		console.log("dashboard render", this.model, this.model.posts());
 		
     this.$el.html(content);
 //     this.attachSubviews();
