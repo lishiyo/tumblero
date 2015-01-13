@@ -17,7 +17,7 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 	
 	previousPage: function(e){
 		e.preventDefault();
-		if (this.currPage <= 0 ) { return; }
+		if (this.currPage <= 1 ) { return; }
 		
 		var newPage = (this.currPage - 1);
 		
@@ -31,14 +31,12 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 // 			}.bind(this)
 		});
 		
-		console.log("clicked prev", newPage);
 		this.currPage = newPage;
 		this.parentView.currPage = newPage;
 	},
 	
 	nextPage: function(e){
 		e.preventDefault();
-		console.log("next", this.currPage, this.totalPages);
 		if (this.currPage >= this.totalPages ) { return; }
 		
 		var newPage = (this.currPage + 1);
@@ -46,11 +44,6 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 		this.collection.fetch({
 			remove: false, // merge this page with the rest of the collection
 			data: { page: newPage },
-// 			success: function() {
-// 				console.log("fetched nextPage", newPage);
-// 				this.currPage = newPage;
-// 				this.parentView.currPage = newPage;
-// 			}.bind(this)
 		});
 		
 		this.currPage = newPage;

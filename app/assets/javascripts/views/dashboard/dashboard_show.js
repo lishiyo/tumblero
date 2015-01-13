@@ -8,7 +8,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	initialize: function(opts){
-		this.perPage = 2;
+		Tumblero.perPage = (Tumblero.perPage || 2); // set to a default
 		
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
@@ -27,7 +27,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.model, 'sync change', this.render);
 		this.listenTo(this.collection, 'sort', this.render);
 		this.listenTo(this.collection, 'remove sync', this.render);
-		this.listenTo(this.collection, 'add', this.render);
+// 		this.listenTo(this.collection, 'add', this.render);
 	},
 	
 	addPageNav: function(){
@@ -50,7 +50,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 
 		var newPostFull = new Tumblero.Views.NewPostFull({
 			model: post,
-			currentUser: this.currentUser
+			currentUser: this.currentUser,
+			collection: this.collection
 		});
 
 		$('.modal-container').html(newPostFull.render().$el);
@@ -60,29 +61,23 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 
 	
-	addPost: function(post){
-// 		this.addPostSubview(post);
-		this.render();
-	},
-	
-// 	addAllPosts: function() {		
-// 		// add subviews for posts
-// 		this.model.posts().each(function(post){
-// 			this.addPostSubview(post);
-// 		}.bind(this));
+// 	addPost: function(post){
+// // 		this.addPostSubview(post);
+// 		this.render();
 // 	},
+	
 	
 	//only add posts for this.currPage
 	addAllPosts: function() {		
 		var view = this;
-		var perPage = this.perPage;
+		var perPage = Tumblero.perPage;
 		var startPage = (this.currPage <= 0) ? 0 : (this.currPage - 1);
 		var startPost = (startPage==0) ? 0 : (startPage * perPage);
 		
 		var coll = _(this.collection.rest(perPage*(startPage)));
 		coll = _(coll.first(perPage)); 
 		
-// 		console.log("coll is", this.currPage, startPost, coll);
+		console.log("coll is", this.currPage, startPost, coll);
 		coll.forEach(function(post){
 			view.addPostSubview(post);
 		}.bind(this));
@@ -99,8 +94,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	render: function(){
-// 		var isFollowed = this.currentUser.followStateFor(this.model.id);
-// 		var followState = ((isFollowed) ? "followed" : "unfollowed");
+		console.log("curr coll in dash", this.collection);
 		
 		this.setFollowState();
 		
@@ -110,16 +104,11 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
-//     this.attachSubviews();
 		this.addAllPosts();
 		this.addPageNav();
 
 		this.renderLikeButton(this.$('.like-btn'));
 		this.renderFollowButton(this.$('.follow-btn'));
-		
-		// set up like and follow buttons
-// 		$("button.like-btn").likeToggle();
-// 		$("button.follow-btn").followToggle();
 		
     return this;
 	}
