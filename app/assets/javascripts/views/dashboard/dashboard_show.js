@@ -8,11 +8,19 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	initialize: function(opts){
+		this.perPage = 2;
+		
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		this.currPage = opts.currPage || 1;
 		
-		this.collection.fetch({ data: { page: this.currPage }});
+		this.collection.fetch({ 
+			data: { page: this.currPage },
+			success: function(coll){
+				this.currPage = coll.page;
+				this.totalPages = coll.total_pages;
+			}.bind(this)
+		});
 		
 		this.listenTo(this.currentUser, 'sync', this.render);
 		
@@ -27,7 +35,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 			currPage: (this.currPage || 1),
 			totalPages: this.totalPages,
 			blog: this.model,
-			collection: this.collection
+			collection: this.collection,
+			parentView: this
 		});
 		
 		this.addSubview('#pagination-nav', subview);
@@ -56,10 +65,26 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.render();
 	},
 	
+// 	addAllPosts: function() {		
+// 		// add subviews for posts
+// 		this.model.posts().each(function(post){
+// 			this.addPostSubview(post);
+// 		}.bind(this));
+// 	},
+	
+	//only add posts for this.currPage
 	addAllPosts: function() {		
-		// add subviews for posts
-		this.model.posts().each(function(post){
-			this.addPostSubview(post);
+		var view = this;
+		var perPage = this.perPage;
+		var startPage = (this.currPage <= 0) ? 0 : (this.currPage - 1);
+		var startPost = (startPage==0) ? 0 : (startPage * perPage);
+		
+		var coll = _(this.collection.rest(perPage*(startPage)));
+		coll = _(coll.first(perPage)); 
+		
+// 		console.log("coll is", this.currPage, startPost, coll);
+		coll.forEach(function(post){
+			view.addPostSubview(post);
 		}.bind(this));
 	},
 	

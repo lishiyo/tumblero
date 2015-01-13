@@ -13,6 +13,14 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		this.currPage = this.currPage || 1;
+		
+		this.listenTo(this.currentUser, 'sync', this.renderFollow);
+// 		this.listenTo(this.model, 'sync', this.render);
+		
+		this.listenTo(this.collection, 'sort', this.render);
+		this.listenTo(this.collection, 'sync', this.render);
+		this.listenTo(this.collection, "addNewPost", this.addNewPost);
+		
 		this.collection.fetch({ 
 			data: { page: this.currPage },
 			success: function(coll){
@@ -20,26 +28,15 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 				this.totalPages = coll.total_pages;
 			}.bind(this)
 		});
-			
-		this.listenTo(this.currentUser, 'sync', this.renderFollow);
-// 		this.listenTo(this.model, 'sync change', this.render);
-		
-		this.listenTo(this.collection, 'sort', this.render);
-		this.listenTo(this.collection, 'add', this.render);
 		
 	},
 	
 	// manual addition
-	addPost: function(post){
+	addNewPost: function(post){
+		this.collection.add(post, { at: 0 });
+		console.log("triggered add new post", post, this.collection);
+// 		this.render();
 // 		this.addPostSubview(post);
-		var subview = new Tumblero.Views.PostShow({
-      model: post,
-			blog: this.model,
-			currentUser: this.currentUser
-    });
-		console.log("adding post", post);
-		
-		this.$el.prepend(subview);
 	},
 	
 	//only add posts for this.currPage
@@ -52,7 +49,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		var coll = _(this.collection.rest(perPage*(startPage)));
 		coll = _(coll.first(perPage)); 
 		
-// 		console.log("coll is", this.currPage, startPost, coll);
+		console.log("coll is", this.currPage, startPage, coll);
 		coll.forEach(function(post){
 			view.addPostSubview(post);
 		}.bind(this));
@@ -90,7 +87,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	render: function(){
 		console.log("curr coll", this.collection);
-		
+			
 		this.renderFollow();		
 		
 		var content = this.template({ 

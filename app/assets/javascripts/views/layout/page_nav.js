@@ -31,8 +31,9 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 // 			}.bind(this)
 		});
 		
+		console.log("clicked prev", newPage);
 		this.currPage = newPage;
-				this.parentView.currPage = newPage;
+		this.parentView.currPage = newPage;
 	},
 	
 	nextPage: function(e){

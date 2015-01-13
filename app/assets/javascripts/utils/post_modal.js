@@ -83,6 +83,7 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		
 		// blog post is submitting to
 		var blogId = $('select#post_blog_id').val(),
+// 				blogName = $('self#post_blog_id').data("blog-name"),
 				blog = Tumblero.Collections.blogs.getOrFetch(blogId),
 				modalView = this,
 				collection = (this.collection || blog.posts());
@@ -94,8 +95,9 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		var newPost = new Tumblero.Models.Post();
 		newPost.save(formData, {
 			success: function(model) {		
-				collection.add(newPost);
+// 				collection.add(newPost);
 				modalView.submit(blog);	
+				collection.trigger("addNewPost", model);
 			},
 			error: function() {
 				console.log("something went wrong");
@@ -105,10 +107,10 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 	},
 	
 	alertSuccess: function(blog){
-		var content = "<small>post added to <a href='/blogs/" + blog.id + "'>" + blog.get('name') + "</a></small>";
+		var content = "<small>post added to <a href='/blogs/" + blog.id + "'>" + blog.escape('name') + "</a></small>";
 		var note = $('<span></span>').html(content).addClass('hidden');
 		$('.inline-notifications').removeClass('hidden').prepend(note);
-		note.removeClass('hidden').fadeToggle( 1000, "linear" );
+		note.removeClass('hidden').fadeToggle( 5000, "linear" );
 	},
 	
 	submit: function(blog) {

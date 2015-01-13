@@ -23,10 +23,10 @@ Tumblero.Collections.Blogs = Backbone.Collection.extend({
         },
       });
     } else {
-      blog.fetch({
-				remove: false,
-				data: { page: 1 },
-			});
+//       blog.fetch({
+// 				remove: false,
+// 				data: { page: 1 },
+// 			});
     }
     return blog;
 	}

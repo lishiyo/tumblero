@@ -9,6 +9,10 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 		} 
 	},
 	
+// 	comparator: function(post){
+// 		return post.get('created_at');
+// 	},
+	
 	model: Tumblero.Models.Post,
 	
 	initialize: function(models, opts){
@@ -22,15 +26,15 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 // 		} 
 	},
 	
-	pagination : function(perPage, page) {
-       page = page-1;
-       var collection = this;
-       collection = _(collection.rest(perPage*page));
-       collection = _(collection.first(perPage));    
-       return collection.map( function(model) { 
-				 return model.toJSON();
-			 }); 
-    },
+// 	pagination : function(perPage, page) {
+//        page = page-1;
+//        var collection = this;
+//        collection = _(collection.rest(perPage*page));
+//        collection = _(collection.first(perPage));    
+//        return collection.map( function(model) { 
+// 				 return model.toJSON();
+// 			 }); 
+//     },
 	
 	// hits api/posts
 	parse: function(response) {

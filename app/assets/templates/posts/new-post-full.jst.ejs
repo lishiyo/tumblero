@@ -4,7 +4,7 @@
 		<ul>
 				<select class="form-control" name="post[blog_id]" id="post_blog_id">
 					<% blogs.each(function(blog){ %>
-							<option value="<%= blog.id %>"><%= blog.escape('name') %></option>
+							<option value="<%= blog.id %>" data-blog-name="<%= blog.escape('name') %>"><%= blog.escape('name') %></option>
 					<% }); %>
 				</select>
 			
