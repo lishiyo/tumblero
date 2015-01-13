@@ -4,7 +4,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	events: {
 		'click .re-sort': 'reSortBy',
-		"click button.full-post-modal": "openPostModal"
+		"click button.full-post-modal": "openPostModal",
+		"keyup input#search-tag": 'callFilter'
 	},
 	
 	initialize: function(opts){
@@ -12,34 +13,14 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
-		this.currPage = (this.model.page || 1);
+		this.collection.currPage = (this.model._page || 1);
 		
-		this.collection.fetch({ 
-			data: { page: this.currPage },
-			success: function(coll){
-				this.currPage = coll.page;
-				this.totalPages = coll.total_pages;
-			}.bind(this)
-		});
-		
-		this.listenTo(this.currentUser, 'sync', this.render);
-		
+		this.listenTo(this.currentUser, 'sync', this.render);	
 		this.listenTo(this.model, 'sync change', this.render);
-		this.listenTo(this.collection, 'sort', this.render);
-		this.listenTo(this.collection, 'remove sync', this.render);
+		this.listenTo(this.collection, 'sort remove sync', this.render);
 // 		this.listenTo(this.collection, 'add', this.render);
-	},
-	
-	addPageNav: function(){
-		var subview = new Tumblero.Views.PageNav({
-			currPage: (this.currPage || 1),
-			totalPages: this.totalPages,
-			blog: this.model,
-			collection: this.collection,
-			parentView: this
-		});
-		
-		this.addSubview('#pagination-nav', subview);
+
+		this.fetchCollection();
 	},
 	
 	openPostModal: function(event){
@@ -60,19 +41,19 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 	},
 
-	
-	//only add posts for this.currPage
-	addAllPosts: function() {		
+	//only add posts for this.collection.currPage in this.collection
+	addAllPosts: function(coll) {		
+		var currColl = (coll || this.collection);
 		var view = this;
 		var perPage = Tumblero.perPage;
-		var startPage = (this.currPage <= 0) ? 0 : (this.currPage - 1);
+		var startPage = (currColl.currPage <= 0) ? 0 : (currColl.currPage - 1);
 		var startPost = (startPage==0) ? 0 : (startPage * perPage);
 		
-		var coll = _(this.collection.rest(perPage*(startPage)));
-		coll = _(coll.first(perPage)); 
+		currColl = _(currColl.rest(perPage*(startPage)));
+		currColl = _(currColl.first(perPage)); 
 		
-		console.log("coll is", this.currPage, startPost, coll);
-		coll.forEach(function(post){
+		console.log("coll is", currColl.currPage, currColl);
+		currColl.forEach(function(post){
 			view.addPostSubview(post);
 		}.bind(this));
 	},
@@ -81,27 +62,48 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		var subview = new Tumblero.Views.PostShow({
       model: post,
 			blog: this.model,
-			currentUser: this.currentUser
+			currentUser: this.currentUser,
+			collection: this.collection
     });
 		
     this.addSubview(".posts-container", subview);
 	},
 	
+	
+	addPageNav: function(coll){
+		var coll = (coll || this.collection);
+		
+		var subview = new Tumblero.Views.PageNav({
+			currPage: (coll.currPage),
+			totalPages: coll.totalPages,
+			blog: this.model,
+			collection: coll
+		});
+		
+		this.addSubview('#pagination-nav', subview);
+	},
+	
+	renderFollow: function(){
+		// no btnId passed in = default
+		this.setFollowState();
+	},
+	
 	render: function(){
 		console.log("curr coll in dash", this.collection);
 		
-		this.setFollowState();
+		this.renderFollow();
 		
 		var content = this.template({ 
+			dashboard: this.model,
 			current_user_id: this.currentUser.id,
 			initialFollowState: this.followState
 		});
 		
     this.$el.html(content);
-		this.addAllPosts();
-		this.addPageNav();
+		this.addAllPosts(this.collection);
+		this.addPageNav(this.collection);
 
-		this.renderLikeButton(this.$('.like-btn'));
+// 		this.renderLikeButton(this.$('.like-btn'));
 		this.renderFollowButton(this.$('.follow-btn'));
 		
     return this;

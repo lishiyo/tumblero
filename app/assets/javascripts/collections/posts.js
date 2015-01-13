@@ -15,7 +15,6 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 	initialize: function(models, opts){
 		this.blog = (opts.blog || Tumblero.current_user.blogs().first());
 		this.dashboard = (opts.dashboard || null);
-
 	},
 	
 	filterByTag: function(tag) {

@@ -20,11 +20,11 @@
 	
 	<h2>Posts</h2>
 	
-	<input type="text" id="search-tag">
+	
 	
 <!-- 	<div class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3"> -->
-		<div>
-		<ul class="nav nav-tabs oe-tabs sort-methods" role="tablist">
+	<div class="sortable-bar group">
+		<ul class="nav nav-tabs oe-tabs sort-methods group" role="tablist" style="float:left;">
 		<li class="active">
 			<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="created_at">
 				<i class="fa fa-key"></i> Recent</a>
@@ -37,13 +37,20 @@
 			<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="recent_notes_count">
 				<i class="fa fa-flask"></i> Trending</a>
 		</li>
-	</ul>
-	
-	
-		<div class="posts-container"></div>
-
+			
+		</ul>
+		
+		<li class="inline-search-bar">
+				<input type="text" id="search-tag" class="form-control">
+		</li>
 		
 	</div>
+	
+	
+	<div class="posts-container"></div>
+
+		
+	
 	
 	<div id="pagination-nav"></div>
 

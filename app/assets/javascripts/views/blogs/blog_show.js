@@ -18,74 +18,53 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
 // 		this.listenTo(this.model, 'sync', this.render);
 		
-		this.listenTo(this.collection, 'sort', this.render);
-		this.listenTo(this.collection, 'sync remove', this.render);
+		this.listenTo(this.collection, 'sync remove sort', this.render);
 		this.listenTo(this.collection, "addNewPost", this.addNewPost);
 		
 		this.fetchCollection();
 	},
 	
-	fetchCollection: function(){
-		this.collection.fetch({ 
-			data: { page: this.collection.currPage },
-			success: function(coll){
-				this.collection.currPage = coll._page;
-				this.collection.totalPages = coll.total_pages;
-				console.log("fetched Collection", this.collection.currPage, this.collection.totalPages)
-			}.bind(this)
-		});
+// 	fetchCollection: function(){
+// 		this.collection.fetch({ 
+// 			data: { page: this.collection.currPage },
+// 			success: function(coll){
+// 				this.collection.currPage = coll._page;
+// 				this.collection.totalPages = coll.total_pages;
+// 				console.log("fetched Collection", this.collection.currPage, this.collection.totalPages)
+// 			}.bind(this)
+// 		});
 
-	},
+// 	},
 	
 	// render this.searchResults after sync
-	renderSearch: function(){
-		console.log("renderSearch called", this.searchResults);
-		this.removeAllSubviews();
-		this.renderFollow();
-		this.addAllPosts(this.searchResults);
-		this.addPageNav(this.searchResults);
-		this.renderFollowButton('.follow-btn');
-	},
+// 	renderSearch: function(){
+// 		console.log("renderSearch called", this.searchResults);
+// 		this.removeAllSubviews();
+// 		this.renderFollow();
+// 		this.addAllPosts(this.searchResults);
+// 		this.addPageNav(this.searchResults);
+// 		this.renderFollowButton('.follow-btn');
+// 	},
 	
-	callFilter: function(event){
-		event.preventDefault();
-		var queryTag = $(event.currentTarget).val(); // current val in input box
-		if ( event.which == 13 || queryTag === "" ) { return };	
+// 	callFilter: function(event){
+// 		event.preventDefault();
+// 		var queryTag = $(event.currentTarget).val(); // current val in input box
+// 		if ( event.which == 13 || queryTag === "" ) { return };	
 		
-		this.searchResults = new Tumblero.Collections.SearchResults();
-// 		this.listenTo(this.searchResults, "sync", this.renderSearch);
+// 		this.searchResults = new Tumblero.Collections.SearchResults();
+// // 		this.listenTo(this.searchResults, "sync", this.renderSearch);
 		
-		var view = this;
-		var searchData = { query: queryTag, blog_id: view.model.id };
+// 		var view = this;
+// 		var searchData = { query: queryTag, blog_id: view.model.id };
 		
-		this.searchResults.fetch({
-			data: searchData,
-			success: function(){
-				view.renderSearch();
-			}
-		});
-		
-// 		$.ajax({
-// 			url: "/api/blogs/"+this.model.id+"/search",
-// 			type: "GET",
+// 		this.searchResults.fetch({
 // 			data: searchData,
-// 			dataType: "json",
-// 			success: function(data){
-// 				var allPosts = new Tumblero.Collections.Posts(data, { blog: view.model });
-// 				view.filteredCollection = allPosts.filterByTag(tag);
-				
-// 				view.removeAllSubviews();
-				
-// 				view.renderFollow();		
-// 				view.addAllPosts(view.filteredCollection);
-// 				view.addPageNav(view.filteredCollection);
-
-// 				view.renderFollowButton('.follow-btn');
-
+// 			success: function(){
+// 				view.renderSearch();
 // 			}
 // 		});
 		
-	},
+// 	},
 	
 	removeAllSubviews: function(){
 		var view = this;
@@ -135,14 +114,11 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	// pass in the collection you are showing
 	addPageNav: function(coll){
 		
-		console.log("addPageNav", coll);
-		
 		var subview = new Tumblero.Views.PageNav({
-			currPage: (coll.currPage || 1),
+			currPage: (coll.currPage),
 			totalPages: coll.totalPages,
 			blog: this.model,
-			collection: coll,
-			parentView: this
+			collection: coll
 		});
 		
 		this.addSubview('#pagination-nav', subview);
@@ -154,9 +130,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	
-	render: function(){
-		console.log("render! curr coll", this.collection);
-			
+	render: function(){	
 		this.renderFollow();		
 		
 		var content = this.template({ 

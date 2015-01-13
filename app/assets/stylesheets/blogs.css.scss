@@ -35,10 +35,34 @@ iframe.wysihtml5-sandbox {
 	border-radius: 5px !important;
 }
 
+/** SORTABLE **/
+
+.sortable-bar {
+	width: $post-width;
+	margin: 0 auto;
+	position: relative;
+}
+
 .sort-methods {
 	margin: 10px auto;
-	width: $post-width;
 	text-align: center;
+	float: left;
+	width: $post-width;
+	
+	li > a {
+		padding: 6px 15px;
+	}
+}
+
+.inline-search-bar {
+	float: right;
+	position: absolute;
+	right: 0px;
+	bottom: 10px;
+	input {
+		border: none;
+		border-radius: none;
+	}
 }
 
 .tumblero-url {
