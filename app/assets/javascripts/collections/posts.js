@@ -18,23 +18,12 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 	initialize: function(models, opts){
 		this.blog = (opts.blog || Tumblero.current_user.blogs().first());
 		this.dashboard = (opts.dashboard || null);
-		console.log("dashboard", this.dashboard);
 // 		this.ordering = (opts.ordering || null);
 		
 // 		if (this.ordering) {
 // 			this.orderBy(this.ordering);
 // 		} 
 	},
-	
-// 	pagination : function(perPage, page) {
-//        page = page-1;
-//        var collection = this;
-//        collection = _(collection.rest(perPage*page));
-//        collection = _(collection.first(perPage));    
-//        return collection.map( function(model) { 
-// 				 return model.toJSON();
-// 			 }); 
-//     },
 	
 	// hits api/posts
 	parse: function(response) {

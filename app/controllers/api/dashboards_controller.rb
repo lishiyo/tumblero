@@ -8,7 +8,7 @@ class Api::DashboardsController < ApplicationController
 		@posts = @dashboard.followed_posts.page(params[:page])
 		
 		render :json => {
-        :models => @posts.as_json(methods: [:count_notes, :likers_ids], include: :taggings),
+			:models => @posts.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings),
         :page => params[:page],
         :total_pages => @posts.total_pages # thanks kaminari!
     }

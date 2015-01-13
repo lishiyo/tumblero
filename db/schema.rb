@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112002747) do
+ActiveRecord::Schema.define(version: 20150113164754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,14 +85,17 @@ ActiveRecord::Schema.define(version: 20150112002747) do
     t.integer  "comments_count",  default: 0
     t.integer  "likes_count",     default: 0
     t.integer  "reblogs_count",   default: 0
+    t.string   "tags_string"
   end
 
   add_index "posts", ["blog_id"], name: "index_posts_on_blog_id", using: :btree
   add_index "posts", ["source_id"], name: "index_posts_on_source_id", using: :btree
 
   create_table "reblogs", force: :cascade do |t|
-    t.integer "blog_id", null: false
-    t.integer "post_id", null: false
+    t.integer  "blog_id",    null: false
+    t.integer  "post_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "reblogs", ["blog_id"], name: "index_reblogs_on_blog_id", using: :btree

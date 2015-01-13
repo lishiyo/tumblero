@@ -71,12 +71,12 @@ class Post < ActiveRecord::Base
  	end
 	
 	# posts created in last day with highest number of notes
-	def self.trending
-		self.created_after(1.day.ago).sort_by{|p| p.count_notes }.reverse
-	end
+# 	def self.trending
+# 		self.created_after(1.day.ago).sort_by{|p| p.notes_count }.reverse
+# 	end
 	
 	# ONE query - reblogs_count + likes_count + comments_count
-	def count_notes
+	def notes_count
 		if self.reblogged
 			source_post = Post.find(self.source_id)
 			source_post.likes_count + source_post.reblogs_count
@@ -85,9 +85,16 @@ class Post < ActiveRecord::Base
 		end
 	end
 	
-	# TO-DO for trending?
-	def count_recent_notes
-		count_notes
+	# TRENDING
+	# add notes_count column 
+	# create Notable model? join post_id, :created_at, :notable_type, :notable_id
+	def recent_notes_count
+		if self.reblogged
+			source_post = Post.find(self.source_id)
+			Like.where('created_at > ?', 1.day.ago).where('likeable_type = ? AND likeable_id = ?', 'Post', source_post.id).size + Reblog.where('created_at > ? AND post_id = ?', 1.day.ago, source_post.id).size
+		else
+			Like.where('created_at > ?', 1.day.ago).where('likeable_type = ? AND likeable_id = ?', 'Post', self.id).size + Reblog.where('created_at > ? AND post_id = ?', 1.day.ago, self.id).size
+		end
 	end
 	
 	# { 0 => [1,2,3], 2 => [4,5,6] }
@@ -101,7 +108,7 @@ class Post < ActiveRecord::Base
     comments_by_parent
 	end
 	
-	# create reblog association for the *source* post
+	# create reblog association for the *source* post rather than self
 	def create_reblog_for!(blog_id)
 		# if you are a reblog, look at source post instead
 		Post.transaction do
@@ -112,6 +119,7 @@ class Post < ActiveRecord::Base
 			end
 			
 			reblog.save!
+			
 			return true
 		end
 		

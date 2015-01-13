@@ -1,5 +1,10 @@
 Tumblero.Models.Post = Backbone.Model.extend({
 	urlRoot: "/api/posts",
+	
+	toJSON: function(){ // nest everything under user
+		return { post: this.attributes }
+	},
+	
 	initialize: function(opts){
 		
 	},

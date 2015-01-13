@@ -39,6 +39,7 @@ Tumblero.Views.NewPostFull = Tumblero.PostModal.extend({
 		var source = this.$('#post-content').val();
 		formData['post']['content'] = block + "<p>" + source + "</p>";
 		
+		console.log("in tab 3", formData);
 		this.submitForm(e, formData);
 	},
 	

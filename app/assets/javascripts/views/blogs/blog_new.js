@@ -4,7 +4,7 @@ Tumblero.Views.BlogNew = Tumblero.Filepickerable.extend({
 	events: {
 		"submit form": "createBlog",
 		"click .upload-fp": 'upload',
-		"change #blog_handle": "showHandle"
+		"keyup #blog_handle": "showHandle"
 	},
 	
 	initialize: function(opts){

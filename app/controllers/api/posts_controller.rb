@@ -1,25 +1,27 @@
 class  Api::PostsController < ApplicationController
 	
+	wrap_parameters false
+	
 	before_action :set_post, only: [:show, :comments, :reblog, :new_comment]
 	
 	# GET api/blogs/:blog_id/posts
 	def index
 		@blog = Blog.find(params[:blog_id])
 # 		@posts = @blog.posts
-# 		render json: @posts.to_json(methods: [:count_notes, :likers], include: :taggings)
+# 		render json: @posts.to_json(methods: [:notes_count, :likers], include: :taggings)
 		
 		@posts = @blog.posts.page(params[:page])
 		
 		render :json => {
-        :models => @posts.as_json(methods: [:count_notes, :likers_ids], include: :taggings),
+        :models => @posts.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings),
         :page => params[:page],
-        :total_pages => @posts.total_pages # thanks kaminari!
+        :total_pages => @posts.total_pages 
     }
 	end
 	
 	def show	
 		respond_to do |f| 
-			f.json { render json: @post.as_json(methods: [:count_notes, :likers_ids], include: :taggings) }
+			f.json { render json: @post.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings) }
 		end
 	end
 	
@@ -31,15 +33,13 @@ class  Api::PostsController < ApplicationController
 	# post_params[:blog_id] comes from form
 	def create
 		@blog = Blog.find(post_params[:blog_id])
-		@post = @blog.posts.build(post_params.except(:tags))
-		@tags_array = post_params[:tags].split(",") if post_params[:tags]
-		
+		@tags_array = post_params[:tags_string].split(",").map(&:strip) if post_params[:tags_string]
+		@post = @blog.posts.build(post_params)
 		
 		if full_transact?
 			respond_to do |format|
 				format.html { redirect_to blog_url(blog) }
-				format.json { render json: @post }
-				format.js { render json: @post }
+				format.json { render json: @post.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings) }
 			end
 		else
 			flash.now[:errors] = "woops"
@@ -48,13 +48,11 @@ class  Api::PostsController < ApplicationController
 	end
 	
 	# POST /api/posts/:id/reblog 
-	# create reblog for either self or source_post (reblogged: true)
-	# port comments
+	# create reblog for either self or ultimate source_post (if reblogged: true)
 	def reblog
-		# source post means :reblogged => false
 		old_post = Post.find(params[:id])
-		if old_post.create_reblog_for!(post_params[:reblog_blog_id]) 
-			render json: old_post
+		if old_post.create_reblog_for!(post_params[:reblog_blog_id])
+			render json: old_post.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings)
 		else
 			render json: old_post.errors.full_messages
 		end
@@ -84,7 +82,7 @@ class  Api::PostsController < ApplicationController
 	end
 	
 	def post_params
-		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :tags, :reblogged, :reblog_blog_id, :source_id, :likes_count, :comments_count, :reblogs_count)
+		params.require(:post).permit(:blog_id, :title, :content, :filepicker_urls, :tags_string, :reblogged, :reblog_blog_id, :source_id, :likes_count, :comments_count, :reblogs_count)
 	end
 	
 	def comment_params

@@ -23,7 +23,7 @@
 			<% if (post.get('title')) { %>
 				<%= post.get('title') %>
 				<input type="hidden" name="post[title]" value="<%= post.get('title') %>">
-			<% } %>		
+			<% } %>
 		</h3>
 	</div>
 	
@@ -40,6 +40,11 @@
 	
 	<div class="form-group wysiwyg">
     <textarea id="post-content" name="post[content]"></textarea>
+	</div>
+	
+	<div class="form-group">
+		<label for="post_tags_string">tags (separate by commas):</label>
+		<input type="text" id="post_tags_string" name="post[tags_string]" class="form-control" value="<%= post.escape('tags_string') %>">
 	</div>
 		
 	<input type="hidden" name="post[reblogged]" value="true">

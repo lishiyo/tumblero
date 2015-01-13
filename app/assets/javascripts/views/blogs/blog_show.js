@@ -83,7 +83,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	
 	render: function(){
-		console.log("curr coll", this.collection);
+		console.log("render! curr coll", this.collection);
 			
 		this.renderFollow();		
 		

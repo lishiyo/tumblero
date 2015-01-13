@@ -61,12 +61,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 
 	
-// 	addPost: function(post){
-// // 		this.addPostSubview(post);
-// 		this.render();
-// 	},
-	
-	
 	//only add posts for this.currPage
 	addAllPosts: function() {		
 		var view = this;
