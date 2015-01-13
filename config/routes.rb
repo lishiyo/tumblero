@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 	
-	namespace 'api' do
+	namespace 'api', defaults: { format: :json } do
 		resources :users, only: [:new, :create, :show, :update, :destroy] do
 		end
 		
@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 			member do
 				get 'submit'
 				post 'submit'
+				get 'all_posts'
+				get 'search'
 			end
 		end
 		
@@ -29,7 +31,12 @@ Rails.application.routes.draw do
 		resource :like, only: [:create, :destroy] 
 		resources :comments, only: [:create, :show, :destroy]
 		resources :taggings, only: [:create, :show, :destroy]
+		
+		get "search", to: "searches#index"
 	end
+	
+	
+	
 	
 	# NOT NAMESPACE
 	resource :session, only: [:new, :create, :destroy]

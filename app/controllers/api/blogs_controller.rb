@@ -2,6 +2,16 @@ class Api::BlogsController < ApplicationController
 	
 	before_action :require_logged_in
 	
+	# GET /blogs/:id/search
+# 	def search
+# 		query = params[:query] # either one tag or string of tags
+		
+# 		@search_results = Post.where(blog_id: params[:id]).search_by_tags(query).page(params[:page])
+		
+# 		render 'api/searches/single_search'
+# 	end
+	
+	
 	# GET /explore/blogs 
 	def index 
 		@blogs = Blog.where.not(user_id: current_user.id)
@@ -59,6 +69,14 @@ class Api::BlogsController < ApplicationController
 			render json: @blog.errors.full_messages, status: 422
 		end
 	end
+	
+# 	def all_posts
+# 		@blog = Blog.find(params[:id])
+# 		@posts = @blog.posts
+		
+# 		render json: @posts.as_json(methods: [:notes_count, :likers, :recent_notes_count], include: :taggings)
+# 	end
+	
 	
 	private	
 	

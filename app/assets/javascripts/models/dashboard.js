@@ -19,7 +19,7 @@ Tumblero.Models.Dashboard = Backbone.Model.extend({
 	},
 	
 	parse: function(response) {
-		this.page = ( Number(response.page) || 1);
+		this._page = ( Number(response._page) || 1);
 		this.total_pages = response.total_pages;
 		if (response.models) {
 			this.posts().set(response.models, { 

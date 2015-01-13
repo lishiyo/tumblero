@@ -15,10 +15,6 @@ class Blog < ActiveRecord::Base
 	validate :handle_must_be_one_word
 
 	
-	def tags
-		taggings.pluck('name').uniq
-	end
-	
 	private
 	
 	def handle_must_be_one_word

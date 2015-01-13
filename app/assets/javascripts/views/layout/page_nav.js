@@ -9,7 +9,7 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 	
 	initialize: function(opts){
 		this.blog = opts.blog;
-		this.parentView = opts.parentView;
+// 		this.parentView = opts.parentView;
 		this.totalPages = opts.totalPages;
 		this.collection = opts.collection;
 		this.currPage = opts.currPage;
@@ -32,7 +32,7 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 		});
 		
 		this.currPage = newPage;
-		this.parentView.currPage = newPage;
+		this.collection.currPage = newPage;
 	},
 	
 	nextPage: function(e){
@@ -47,7 +47,7 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 		});
 		
 		this.currPage = newPage;
-		this.parentView.currPage = newPage;
+		this.collection.currPage = newPage;
 	},
 	
 	render: function(){

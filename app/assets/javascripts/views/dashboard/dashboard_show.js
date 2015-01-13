@@ -12,7 +12,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
-		this.currPage = opts.currPage || 1;
+		this.currPage = (this.model.page || 1);
 		
 		this.collection.fetch({ 
 			data: { page: this.currPage },

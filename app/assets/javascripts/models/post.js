@@ -22,6 +22,12 @@ Tumblero.Models.Post = Backbone.Model.extend({
 	parse: function(resp) {
 		if (resp.taggings) {
 			this.taggings().set(resp.taggings, { parse: true });
+			// array of tag names
+			resp.tagNames = resp.taggings.map(function(obj){
+				return obj.name;
+			});
+			
+			console.log("resp.tagNames", resp.tagNames);
 			delete resp.taggings;
 		} 
 			

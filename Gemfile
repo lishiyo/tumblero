@@ -63,6 +63,7 @@ gem 'kaminari'
 gem 'backbone-on-rails'
 gem 'js-routes'
 gem 'ejs'
+gem 'pg_search'
 
 group :production do
   gem 'rails_12factor'

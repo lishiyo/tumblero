@@ -21,9 +21,10 @@ ul, li, ol {
 input[type="text"],
 button,
 textarea {
-	 -moz-appearance: none;
-   appearance: none;
+	-moz-appearance: none;
+  appearance: none;
   -webkit-appearance: none;
+	outline: none;
 }
 
 /** vendor fix **/

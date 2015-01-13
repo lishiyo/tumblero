@@ -8,15 +8,18 @@ class  Api::PostsController < ApplicationController
 	def index
 		@blog = Blog.find(params[:blog_id])
 # 		@posts = @blog.posts
-# 		render json: @posts.to_json(methods: [:notes_count, :likers], include: :taggings)
+		# 		render json: @posts.as_json(methods: [:notes_count, :likers, :recent_notes_count], include: :taggings)
 		
 		@posts = @blog.posts.page(params[:page])
 		
-		render :json => {
-        :models => @posts.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings),
-        :page => params[:page],
-        :total_pages => @posts.total_pages 
-    }
+		render 'index'
+		
+# 		render :json => {
+#         :models => @posts.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings),
+#         :page => params[:page],
+#         :total_pages => @posts.total_pages 
+#     }
+		
 	end
 	
 	def show	
@@ -33,7 +36,13 @@ class  Api::PostsController < ApplicationController
 	# post_params[:blog_id] comes from form
 	def create
 		@blog = Blog.find(post_params[:blog_id])
-		@tags_array = post_params[:tags_string].split(",").map(&:strip) if post_params[:tags_string]
+		if post_params[:tags_string]
+			@tags_array = post_params[:tags_string].split(",").map(&:strip)
+			# make sure tags_string is joined correctly 
+			post_params[:tags_string] = post_params[:tags_string]
+				.split(",").map(&:strip).join(", ")
+		end
+			
 		@post = @blog.posts.build(post_params)
 		
 		if full_transact?
