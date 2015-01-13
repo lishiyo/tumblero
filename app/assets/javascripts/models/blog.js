@@ -18,24 +18,37 @@ Tumblero.Models.Blog = Backbone.Model.extend({
 		
 	},
 	
-	posts: function(){
-		
+	posts: function(){	
 		if(!this._posts) {
       this._posts = new Tumblero.Collections.Posts([], {
-        blog: this
+        blog: this,
+				data: { page: this.page }
       });
     }
 				
     return this._posts;
 	},
 	
-	
-	parse: function(resp) {
-		if (resp.posts) {
-			this.posts().set(resp.posts, {parse: true});
-			delete resp.posts;
+	parse: function(response) {
+		this.page = ( Number(response.page) || 1);
+		this.total_pages = response.total_pages;
+		if (response.models) {
+			this.posts().set(response.models, { 
+				parse: true
+			});
+			delete response.models;
 		} 
+		
+		return response;
+	},
+	
+// 	parse: function(resp) {
+// 		if (resp.posts) {
+// 			this.posts().set(resp.posts, {parse: true});
+// 			delete resp.posts;
+// 		} 
 			
-		return resp;
-	}
+// 		return resp;
+// 	}
+	
 });

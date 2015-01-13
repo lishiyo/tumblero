@@ -8,39 +8,53 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	initialize: function(opts){
-		this.currentUser = opts.currentUser;
-// 		this.collection = this.model.posts();
-		this.collection = new Tumblero.Collections.Posts([], {
-			blog: this.model,		
-		});
-		this.currPage = this.currPage || 1;
+		this.perPage = 2; // set to a default
 		
+		this.currentUser = opts.currentUser;
+		this.collection = this.model.posts();
+		this.currPage = this.currPage || 1;
 		this.collection.fetch({ 
 			data: { page: this.currPage },
-			success: function(posts){
-				this.currPage = posts.page;
-				this.totalPages = posts.total_pages;
-				console.log("fetched!", posts, this.currPage);	
+			success: function(coll){
+				this.currPage = coll.page;
+				this.totalPages = coll.total_pages;
 			}.bind(this)
 		});
-		
+			
 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
-		this.listenTo(this.model, 'sync change', this.render);
+// 		this.listenTo(this.model, 'sync change', this.render);
 		
 		this.listenTo(this.collection, 'sort', this.render);
-		this.listenTo(this.collection, 'sync add', this.render);
+		this.listenTo(this.collection, 'add', this.render);
 		
 	},
 	
+	// manual addition
 	addPost: function(post){
 // 		this.addPostSubview(post);
-		this.render();
+		var subview = new Tumblero.Views.PostShow({
+      model: post,
+			blog: this.model,
+			currentUser: this.currentUser
+    });
+		console.log("adding post", post);
+		
+		this.$el.prepend(subview);
 	},
 	
+	//only add posts for this.currPage
 	addAllPosts: function() {		
-		// add subviews for posts
-		this.collection.each(function(post){
-			this.addPostSubview(post);
+		var view = this;
+		var perPage = this.perPage;
+		var startPage = (this.currPage <= 0) ? 0 : (this.currPage - 1);
+		var startPost = (startPage==0) ? 0 : (startPage * perPage);
+		
+		var coll = _(this.collection.rest(perPage*(startPage)));
+		coll = _(coll.first(perPage)); 
+		
+// 		console.log("coll is", this.currPage, startPost, coll);
+		coll.forEach(function(post){
+			view.addPostSubview(post);
 		}.bind(this));
 	},
 	
@@ -48,7 +62,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		var subview = new Tumblero.Views.PostShow({
       model: post,
 			blog: this.model,
-			currentUser: this.currentUser
+			currentUser: this.currentUser,
+			collection: this.collection
     });
 		
     this.addSubview(".posts-container", subview);
@@ -60,7 +75,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 			currPage: (this.currPage || 1),
 			totalPages: this.totalPages,
 			blog: this.model,
-			collection: this.collection
+			collection: this.collection,
+			parentView: this
 		});
 		
 		this.addSubview('#pagination-nav', subview);
@@ -71,7 +87,10 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.setFollowState();
 	},
 	
+	
 	render: function(){
+		console.log("curr coll", this.collection);
+		
 		this.renderFollow();		
 		
 		var content = this.template({ 
@@ -79,7 +98,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 			current_user_id: this.currentUser.id,
 			initialFollowState: this.followState
 		});
-		
 		
     this.$el.html(content);
 		this.addAllPosts();

@@ -84,7 +84,8 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		// blog post is submitting to
 		var blogId = $('select#post_blog_id').val(),
 				blog = Tumblero.Collections.blogs.getOrFetch(blogId),
-				modalView = this;
+				modalView = this,
+				collection = (this.collection || blog.posts());
 		
 		var formData = (data || $(event.currentTarget).serializeJSON().post);
 		
@@ -93,9 +94,8 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		var newPost = new Tumblero.Models.Post();
 		newPost.save(formData, {
 			success: function(model) {		
-				blog.posts().add(newPost);
+				collection.add(newPost);
 				modalView.submit(blog);	
-				blog.fetch();
 			},
 			error: function() {
 				console.log("something went wrong");
@@ -113,8 +113,8 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 	
 	submit: function(blog) {
 		$(".modal").removeClass("is-open");		
-// 		this.alertSuccess(blog);		
-		blog.fetch();
+		this.alertSuccess(blog);		
+// 		blog.fetch();
 		
 // 		if (Backbone.history.location.hash == ("#/blogs/"+blog.id) || Backbone.history.location.hash == ("#blogs/"+blog.id)) {
 			
