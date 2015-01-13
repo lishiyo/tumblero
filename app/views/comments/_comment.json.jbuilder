@@ -4,3 +4,4 @@ json.child_comments comment.ordered_child_comments do |child|
 	json.partial! 'comments/comment', comment: child
 	
 end
+

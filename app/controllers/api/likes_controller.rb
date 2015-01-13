@@ -2,12 +2,19 @@ class Api::LikesController < ApplicationController
 	
 	before_action :require_logged_in
 	
-	
 	def create
-		@like = current_user.likings.build(
-			likeable_type: params[:likeable_type], 
-			likeable_id: params[:likeable_id])
+		likeable = params[:likeable_type].constantize.find(params[:likeable_id])
 		
+		if params[:likeable_type] === 'Post' && likeable.reblogged
+			@like = current_user.likings.build(
+				likeable_type: params[:likeable_type], 
+				likeable_id: likeable.source_id)
+		else
+			@like = current_user.likings.build(
+				likeable_type: params[:likeable_type], 
+				likeable_id: params[:likeable_id])
+		end		
+	
 		if @like.save
 			render json: @like
 		else
@@ -18,7 +25,7 @@ class Api::LikesController < ApplicationController
 	def destroy
 		likeable = params[:likeable_type].constantize.find(params[:likeable_id])
 		
-		if params[:likeable_type] == 'Post' && likeable.reblogged
+		if params[:likeable_type] === 'Post' && likeable.reblogged
 			@like = Like.find_by(likeable_type: params[:likeable_type], likeable_id: likeable.source_id)
 			@like.destroy!
 		else

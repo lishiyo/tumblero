@@ -22,7 +22,10 @@ Rails.application.routes.draw do
 			end
 		end
 		
-		resource :dashboard, only: [:show]
+		resource :dashboard, only: [:show] do
+			get 'posts', on: :member
+		end
+		
 		resource :like, only: [:create, :destroy] 
 		resources :comments, only: [:create, :show, :destroy]
 		resources :taggings, only: [:create, :show, :destroy]

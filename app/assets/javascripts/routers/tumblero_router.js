@@ -66,6 +66,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		var dashboard = new Tumblero.Models.Dashboard({ user: this.currentUser });
 		dashboard.fetch();
+		
 		var view = new Tumblero.Views.DashboardShow({ 
 			model: dashboard,
 			currentUser: (this.currentUser || Tumblero.current_user)

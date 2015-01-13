@@ -10,31 +10,17 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
-	
+		this.currPage = opts.currPage || 1;
 		
-// 		this.collection = new Tumblero.Collections.Posts([], {
-// 			dashboard: this.model,		
-// 		});
-		
-// 		this.collection.fetch({ 
-// 			data: { page: 1 },
-// 			success: function(posts){
-// 				this.currPage = posts.page;
-// 				this.totalPages = posts.total_pages;
-// 				console.log("fetched in dash", posts, this.currPage);	
-// 			}.bind(this)
-// 		});
+		this.collection.fetch({ data: { page: this.currPage }});
 		
 		this.listenTo(this.currentUser, 'sync', this.render);
 		
 		this.listenTo(this.model, 'sync change', this.render);
 		this.listenTo(this.collection, 'sort', this.render);
-		this.listenTo(this.collection, 'remove', this.render);
+		this.listenTo(this.collection, 'remove sync', this.render);
 		this.listenTo(this.collection, 'add', this.render);
-		
-		
 	},
-	
 	
 	addPageNav: function(){
 		var subview = new Tumblero.Views.PageNav({

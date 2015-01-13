@@ -18,11 +18,14 @@ ul, li, ol {
 	margin: 0; */
 }
 
-body, input {
-	-webkit-appearance: none;
-   -moz-appearance: none;
+input[type="text"],
+button,
+textarea {
+	 -moz-appearance: none;
    appearance: none;
+  -webkit-appearance: none;
 }
+
 /** vendor fix **/
 
 .container {

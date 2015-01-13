@@ -11,7 +11,7 @@ class  Api::PostsController < ApplicationController
 		@posts = @blog.posts.page(params[:page])
 		
 		render :json => {
-        :models => @posts,
+        :models => @posts.as_json(methods: [:count_notes, :likers_ids], include: :taggings),
         :page => params[:page],
         :total_pages => @posts.total_pages # thanks kaminari!
     }
@@ -19,13 +19,13 @@ class  Api::PostsController < ApplicationController
 	
 	def show	
 		respond_to do |f| 
-			f.json { render json: @post.to_json(methods: [:count_notes, :likers_ids], include: :taggings) }
+			f.json { render json: @post.as_json(methods: [:count_notes, :likers_ids], include: :taggings) }
 		end
 	end
 	
 	def new
 		@post = Post.new
-		render json @post
+		render json: @post
 	end
 	
 	# post_params[:blog_id] comes from form

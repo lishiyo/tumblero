@@ -2,7 +2,11 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 // 	url: "/api/posts",
 	
 	url: function(){
-		return this.blog.url() + "/posts.json";
+		if (this.dashboard) {
+			return this.dashboard.urlRoot + "/posts.json"
+		} else if (this.blog) {
+			return this.blog.url() + "/posts.json";
+		} 
 	},
 	
 	model: Tumblero.Models.Post,
@@ -10,6 +14,7 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 	initialize: function(models, opts){
 		this.blog = (opts.blog || Tumblero.current_user.blogs().first());
 		this.dashboard = (opts.dashboard || null);
+		console.log("dashboard", this.dashboard);
 // 		this.ordering = (opts.ordering || null);
 		
 // 		if (this.ordering) {
@@ -17,9 +22,8 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 // 		} 
 	},
 	
-	// posts#index
+	// hits api/posts
 	parse: function(response) {
-		
 		this.page = ( Number(response.page) || 1);
 		this.total_pages = response.total_pages;
 		// deal with any nested resources on response.models and return

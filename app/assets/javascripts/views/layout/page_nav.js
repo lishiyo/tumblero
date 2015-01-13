@@ -22,7 +22,8 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 			data: { page: newPage },
 			success: function() {
 				console.log("fetched prevpage", newPage);
-			}
+				this.currPage = newPage;
+			}.bind(this)
 		});
 	},
 	
@@ -34,7 +35,8 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 			data: { page: newPage },
 			success: function() {
 				console.log("fetched nextPage", newPage);
-			}
+				this.currPage = newPage;
+			}.bind(this)
 		});
 	},
 	

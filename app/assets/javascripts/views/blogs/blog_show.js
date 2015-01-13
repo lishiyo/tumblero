@@ -13,9 +13,10 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.collection = new Tumblero.Collections.Posts([], {
 			blog: this.model,		
 		});
+		this.currPage = this.currPage || 1;
 		
 		this.collection.fetch({ 
-			data: { page: 1 },
+			data: { page: this.currPage },
 			success: function(posts){
 				this.currPage = posts.page;
 				this.totalPages = posts.total_pages;
@@ -44,7 +45,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	addPostSubview: function(post){
-// 		console.log("addPostSubview called", post);
 		var subview = new Tumblero.Views.PostShow({
       model: post,
 			blog: this.model,

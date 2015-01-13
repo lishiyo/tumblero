@@ -14,9 +14,11 @@ Tumblero.Views.UserShow = Backbone.CompositeView.extend({
 	
 	showUserSettings: function(e){
 		if (e) { e.preventDefault(); }
+		
 		if (this._currSubview) {
 			this.removeSubview('#settings', this._currSubview);
 		}
+		
 		var settingsView = new Tumblero.Views.UserSettings({
 			model: this.model
 		});
