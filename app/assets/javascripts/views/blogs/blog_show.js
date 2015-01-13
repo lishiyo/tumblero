@@ -53,13 +53,16 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		if ( event.which == 13 || queryTag === "" ) { return };	
 		
 		this.searchResults = new Tumblero.Collections.SearchResults();
-		this.listenTo(this.searchResults, "sync", this.renderSearch);
+// 		this.listenTo(this.searchResults, "sync", this.renderSearch);
 		
 		var view = this;
-		var searchData = { query: queryTag };
+		var searchData = { query: queryTag, blog_id: view.model.id };
 		
 		this.searchResults.fetch({
-			data: searchData
+			data: searchData,
+			success: function(){
+				view.renderSearch();
+			}
 		});
 		
 // 		$.ajax({
