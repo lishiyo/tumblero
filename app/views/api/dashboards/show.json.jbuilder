@@ -1,4 +1,4 @@
-json.extract! @dashboard, :user_id, :id, :created_at, :updated_at
+json.extract! @dashboard, :user_id, :id, :created_at, :updated_at, :tags
 
 json._page params[:page]
 json.total_pages @posts.total_pages

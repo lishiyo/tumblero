@@ -28,12 +28,13 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		
 // 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
 		this.listenTo(this.model, 'sync', this.render);
-		
 		this.listenTo(this.collection, 'sync remove sort', this.renderPosts);
 		this.listenTo(this.collection, "addNewPost", this.addNewPost);
 		
-		this.fetchCollection();
+		this.postsCont = '.posts-container';
+		this.paginationCont = '#pagination-nav';
 		
+		this.fetchCollection();
 	},
 	
 	callFilterWith: function(event) {
@@ -43,7 +44,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		if ( event.which == 13 ) { 
 			return;
 		} else if (queryTag === "") {
-			this.render();
+			this.render(); // go back to beginning
 			return;
 		}
 		
@@ -56,22 +57,25 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	//only add posts for this.collection.currPage in this.collection
-	addAllPosts: function(coll) {		
-		this.removeSubviewsFor('.posts-container');
+// 	addAllPosts: function(coll) {		
+// 		this.removeSubviewsFor(this.postsCont);
+// 		this.removeSubviewsFor("#pagination-nav");
 		
-		var view = this;
-		var perPage = Tumblero.perPage;
-		var startPage = (coll.currPage <= 0) ? 0 : (coll.currPage - 1);
-		var startPost = (startPage==0) ? 0 : (startPage * perPage);
+// 		var currColl = (coll || this.collection);
+// 		var view = this;
+// 		var perPage = Tumblero.perPage;
+// 		var startPage = (coll.currPage <= 0) ? 0 : (coll.currPage - 1);
+// 		var startPost = (startPage==0) ? 0 : (startPage * perPage);
+			
+// 		currColl = _(currColl.rest(perPage*(startPage)));
+// 		currColl = _(currColl.first(perPage)); 
 		
-		var currColl = (coll || this.collection);
-		currColl = _(currColl.rest(perPage*(startPage)));
-		currColl = _(currColl.first(perPage)); 
+// 		currColl.forEach(function(post){
+// 			view.addPostSubview(post);
+// 		}.bind(this));
 		
-		currColl.forEach(function(post){
-			view.addPostSubview(post);
-		}.bind(this));
-	},
+// 		this.addPageNav(this.collection);
+// 	},
 	
 	addPostSubview: function(post){
 		var subview = new Tumblero.Views.PostShow({
@@ -81,7 +85,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 			collection: this.collection
     });
 		
-    this.addSubview(".posts-container", subview);
+    this.addSubview(this.postsCont, subview);
 	},
 	
 	// pass in the collection you are showing
@@ -103,8 +107,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	// posts container
-	renderPosts: function(coll){
-		this.addAllPosts(coll);
+	renderPosts: function(){
+		this.addAllPosts(this.collection);
 	},
 	
 	render: function(){	
@@ -119,8 +123,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
     this.$el.html(content);
 		
 		this.renderFollowButton('.follow-btn');
-		this.renderPosts(this.collection);
-		this.addPageNav(this.collection);
+// 		this.renderPosts(this.collection);
+// 		this.addPageNav(this.collection);
 		
     return this;
 	}

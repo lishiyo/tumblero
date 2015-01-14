@@ -4,11 +4,11 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	events: {
 		"click button.full-post-modal": "openPostModal",
-		"click #nav-search-btn": "mainSearch"
+		"focus #nav-search": "initAutocomplete",
+		'keyup #nav-search': 'checkSearch'
 	},
 	
 	initialize: function(opts){
-		console.log("header init");
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
 	},
 	
@@ -22,15 +22,15 @@ Tumblero.Views.Header = Backbone.View.extend({
 		this.render();
 	},
 	
-	mainSearch: function(event) {
-		event.preventDefault();
-		var query = this.$("#nav-search").val().split(" ").join("+");
+// 	mainSearch: function(event) {
+// 		event.preventDefault();
+// 		var query = this.$("#nav-search").val().split(" ").join("+");
 		
-		// pass in query to router, which swaps view to SearchTags
-		var url = "/explore/" + query;
-		console.log("query is", url);
-		Backbone.history.navigate(url, {trigger: true});
-	},
+// 		// pass in query to router, which swaps view to SearchTags
+// 		var url = "/explore/" + query;
+// 		console.log("query is", url);
+// 		Backbone.history.navigate(url, {trigger: true});
+// 	},
 	
 	openPostModal: function(event){
 		event.preventDefault();
@@ -48,12 +48,8 @@ Tumblero.Views.Header = Backbone.View.extend({
 		newPostFull.setActive({ tabNum: startTab });
 		
 	}
-
-
-// 		$("body").on("click", ".js-modal-close", function(event){
-// 			event.preventDefault();
-// 			$(".modal").removeClass("is-open");
-// 		});
-
 	
-})
+});
+
+_.extend(Tumblero.Views.Header.prototype, Tumblero.Utils.Sortable);
+_.extend(Tumblero.Views.Header.prototype, Tumblero.Utils.Searchable);

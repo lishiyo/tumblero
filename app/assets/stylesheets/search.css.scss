@@ -1,0 +1,26 @@
+/* /explore/:tags */
+input#main-search {
+	width: 15%;
+	display: inline-block;
+	vertical-align: top;
+	border-radius: none;
+	border: none;
+	outline: none;
+}
+
+/* navbar search */
+input#nav-search {
+	
+}
+
+/* inline search on dashboard or blog */
+.inline-search-bar {
+	float: right;
+	position: absolute;
+	right: 0px;
+	bottom: 10px;
+	input {
+		border: none;
+		border-radius: none;
+	}
+}

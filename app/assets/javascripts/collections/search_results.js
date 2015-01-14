@@ -33,7 +33,7 @@ Tumblero.Collections.SearchResults = Backbone.Collection.extend({
 	
 	parse: function (resp) {
 		this._page = resp._page;
-		
+		this.total_pages = resp.total_pages;
 		return resp.results;
 	}
 

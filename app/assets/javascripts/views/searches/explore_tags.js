@@ -5,7 +5,9 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 	
 	events: {
 // 		"click #main-search-btn": "searchMain",
-		"click .next-page": "nextPage"
+		"click .next-page": "nextPage",
+		'focus #main-search': 'initAutocomplete',
+		'keyup #main-search': 'checkSearch'
 	},
 	
 	initialize: function (opts) {
@@ -23,38 +25,35 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 		this.blogsCont = '#blogs-results';
 		this.postsCont = '#posts-results';
 		
-		this.initSearchBlogs();
-		this.initSearchPosts();
-		
 		this.listenTo(this.searchResBlogs, "sync", this.renderBlogResults);
-		this.listenTo(this.searchResPosts, "sync", this.renderPostResults);
+		this.listenTo(this.searchResPosts, "sync remove sort", this.renderPostResults);
+		
 	},
 	
 	searchMain: function (event) {
 		event.preventDefault();
 		this.queryStr = this.$("#main-search").val();
 		
-		this.initSearchBlogs();
-		this.initSearchPosts();
+		this.initSearchBlogs(this.queryStr);
+		this.initSearchPosts(this.queryStr);
 	},
 	
-	initSearchBlogs: function(){
-		this.searchResBlogs._query = this.queryStr;
+	initSearchBlogs: function(query){
+		this.searchResBlogs.reset();
+		this.searchResBlogs._query = query;
 		this.searchResBlogs.fetch({
 			data: { query: this.searchResBlogs._query },
-// 			success: function(data){
-// 				console.log("initSearchBlogs success", data);
-// 			}
 		});
 	},
 	
-	initSearchPosts: function(){
-		this.searchResPosts._query = this.queryStr;
+	initSearchPosts: function(query){
+		this.searchResPosts.reset();
+		this.searchResPosts._query = query;
 		this.searchResPosts.fetch({
-			data: { query: this.searchResPosts._query },
-// 			success: function(data){
-// 				console.log("initSearchPpost success", data);
-// 			}
+			data: { 
+				query: this.searchResPosts._query,
+				page: (this.searchResPosts._page || 1)
+			}
 		});
 	},
 	
@@ -67,13 +66,15 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 	},
 	
 	renderPostResults: function () {
-		this.removeSubviewsFor(this.postsCont);
-	
-		this.searchResPosts.each(function (model) {
-			this.addPostSubview(model)
-// 			container.append("<li>" + model.escape('content') + "</li>")
-		}.bind(this));
+		this.collection = this.searchResPosts;
+		this.collection.currPage = this.searchResPosts._page;
+		this.collection.totalPages = this.searchResPosts.total_pages;
+		
+		tagview = this;
+		
+		this.addAllPosts(this.collection);
 	},
+	
 	
 	addBlogSubview: function(blog) {
 		var subview = new Tumblero.Views.BlogProfile({
@@ -93,30 +94,33 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 		this.addSubview(this.postsCont, subview);
 	},
 	
+	// pass in the collection you are showing
+	addPageNav: function(coll){
+		
+		var subview = new Tumblero.Views.PageNav({
+			currPage: (coll.currPage),
+			totalPages: coll.totalPages,
+			collection: coll,
+			query: coll._query,
+			postsCont: this.postsCont,
+		});
+		
+		this.addSubview('#pagination-nav', subview);
+	},
+	
 	render: function () {
+		console.log("rendering with", this.queryStr);
+		
 		var content = this.template({ 
 			query: this.queryStr
 		});	
 		
 		this.$el.html(content);
+		this.initSearchBlogs(this.queryStr);
+		this.initSearchPosts(this.queryStr);
 		
-		this.initAutocomplete();
 		return this;
 	},
-	
-// 	nextPage: function (event) {
-// 		if (this.searchResPosts._page >= this.searchResPosts.total_pages) {
-// 			event.preventDefault();
-// 			return;
-// 		}
-		
-// 		this.searchResults.fetch({
-// 			data: {
-// 				query: this.searchResults._query,
-// 				page: (this.searchResults._page || 1) + 1
-// 			}
-// 		});
-// 	}
 	
 });
 

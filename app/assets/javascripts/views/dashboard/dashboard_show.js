@@ -17,9 +17,11 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 		this.listenTo(this.currentUser, 'sync', this.render);	
 		this.listenTo(this.model, 'sync change', this.render);
-		this.listenTo(this.collection, 'sort remove sync', this.render);
+		this.listenTo(this.collection, 'sort remove sync', this.renderPosts);
 // 		this.listenTo(this.collection, 'add', this.render);
-
+		
+		this.postsCont = '.posts-container';
+		this.paginationCont = '#pagination-nav';
 		this.fetchCollection();
 	},
 	
@@ -101,6 +103,10 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.setFollowState();
 	},
 	
+	renderPosts: function(){
+		this.addAllPosts(this.collection);
+	},
+	
 	render: function(){
 		console.log("curr coll in dash", this.collection);
 		
@@ -113,8 +119,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
-		this.addAllPosts(this.collection);
-		this.addPageNav(this.collection);
+// 		this.addAllPosts(this.collection);
+// 		this.addPageNav(this.collection);
 
 // 		this.renderLikeButton(this.$('.like-btn'));
 		this.renderFollowButton(this.$('.follow-btn'));

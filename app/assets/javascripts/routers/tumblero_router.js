@@ -6,7 +6,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
 		
 		Tumblero.Collections.blogs = new Tumblero.Collections.Blogs({ user: this.currentUser });
-		Tumblero.perPage = 2;
+		Tumblero.perPage = 2; // CHANGE!!!
 		
 		this.refreshHeader();
 	},
@@ -28,24 +28,25 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"blogs/:id": "blogShow",
 		"dashboard": "dashboardShow",
 		"explore/blogs": "blogsExplore",
-		"explore/trending": "exploreTrending",
+		"explore": "exploreTrending",
 		"explore/:tags": "exploreTags"
 	},
 	
+	// sorted by popularity
 	exploreTrending: function(){
-
+		var view = new Tumblero.Views.ExploreTags({ queryStr: "" });
+		
+		this._swapView(view);
 	},
 	
 	exploreTags: function(query) {
-		var queryStr = query.split("+").join(" "); // "One Direction"
-		console.log("exploreTags are", queryStr);
+		var queryStr = query.split("+").join(" "); // EX: "One Direction"
 		
 		var view = new Tumblero.Views.ExploreTags({
 			queryStr: queryStr
 		});
 		
 		this._swapView(view);
-		view.initAutocomplete();
 	},
 	
 	checkUser: function() { 

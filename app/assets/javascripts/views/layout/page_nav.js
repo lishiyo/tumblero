@@ -8,11 +8,16 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 	},
 	
 	initialize: function(opts){
-		this.blog = opts.blog;
-// 		this.parentView = opts.parentView;
-		this.totalPages = opts.totalPages;
+		this.blog = (opts.blog || null);
 		this.collection = opts.collection;
-		this.currPage = opts.currPage;
+		this.totalPages = (opts.totalPages || this.collection.totalPages);
+		this.currPage = (opts.currPage || this.collection.currPage);
+		this.query = (opts.query || null);
+		this.postsCont = opts.postsCont;
+		
+		console.log("init opts", opts);
+		
+		pageview = this;
 	},
 	
 	previousPage: function(e){
@@ -23,7 +28,10 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 		
 		this.collection.fetch({
 			remove: false, // merge this page with the rest of the collection
-			data: { page: newPage },
+			data: { 
+				page: newPage,
+				query: this.query
+			},
 // 			success: function() {
 // 				console.log("fetched prevpage", newPage);
 // 				this.currPage = newPage;
@@ -37,13 +45,19 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 	
 	nextPage: function(e){
 		e.preventDefault();
-		if (this.currPage >= this.totalPages ) { return; }
+		console.log("clicked next!", this.currPage, this.totalPages);
 		
+		if ( (typeof this.totalPages === "undefined") || this.currPage >= this.totalPages ) { 
+				return; }
+				
 		var newPage = (this.currPage + 1);
 		
 		this.collection.fetch({
 			remove: false, // merge this page with the rest of the collection
-			data: { page: newPage },
+			data: { 
+				page: newPage,
+				query: this.query
+			},
 		});
 		
 		this.currPage = newPage;

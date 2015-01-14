@@ -38,11 +38,7 @@ Tumblero.Utils.Sortable = {
 		this.renderPosts(this.searchResults);
 	},
 	
-	
-	
-	
 	callFilter: function(type, queryTag){
-		
 		var view = this;
 		this.searchResults = new Tumblero.Collections.SearchResults([], {
 			searchType: "single"
@@ -61,6 +57,26 @@ Tumblero.Utils.Sortable = {
 			}
 		});
 		
+	},
+	
+	addAllPosts: function(coll) {		
+		this.removeSubviewsFor(this.postsCont);
+		this.removeSubviewsFor("#pagination-nav");
+		
+		var currColl = (coll || this.collection);
+		var view = this;
+		var perPage = Tumblero.perPage;
+		var startPage = (coll.currPage <= 0) ? 0 : (coll.currPage - 1);
+		var startPost = (startPage==0) ? 0 : (startPage * perPage);
+			
+		currColl = _(currColl.rest(perPage*(startPage)));
+		currColl = _(currColl.first(perPage)); 
+		
+		currColl.forEach(function(post){
+			view.addPostSubview(post);
+		}.bind(this));
+		
+		this.addPageNav(this.collection);
 	},
 	
 // 	filterBy: function(tag) {

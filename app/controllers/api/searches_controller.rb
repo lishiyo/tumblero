@@ -16,14 +16,24 @@ class Api::SearchesController < ApplicationController
 
 	end
 	
-	# SINGLE - search through blogs that are not yours
+	# SINGLE search through blogs that are not yours
 	def blogs
-		@search_results = Blog.where.not(user_id: current_user.id).search_by_tags(params[:query]).page(params[:page]).per(2)
+		if params[:query] && params[:query].empty?
+			@search_results = Blog.where.not(user_id: current_user.id).page(params[:page]).per(5)
+		else
+			@search_results = Blog.where.not(user_id: current_user.id).search_by_tags(params[:query]).page(params[:page]).per(5)
+		end
+		
 		render 'single_search'
 	end
 	
+	# SINGLE SEARCH
 	def posts
-		@search_results = Post.search_by_tags(params[:query]).page(params[:page]).per(20)
+		if params[:query] && params[:query].empty?
+			@search_results = Post.page(params[:page]).per(2)
+		else
+			@search_results = Post.search_by_tags(params[:query]).page(params[:page]).per(2)
+		end
 		render 'single_search'
 	end
 	
@@ -35,7 +45,7 @@ class Api::SearchesController < ApplicationController
     @search_results = PgSearch
 		.multisearch(query)
 			.page(params[:page])
-			.per(20)
+			.per(2)
 		
 		render 'multi_search'
 	end
