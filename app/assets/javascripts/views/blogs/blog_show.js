@@ -44,7 +44,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		if ( event.which == 13 ) { 
 			return;
 		} else if (queryTag === "") {
-			this.render(); // go back to beginning
+			this.renderPosts(this.collection); // go back to beginning
 			return;
 		}
 		
@@ -107,8 +107,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	// posts container
-	renderPosts: function(){
-		this.addAllPosts(this.collection);
+	renderPosts: function(coll){
+		this.addAllPosts(coll);
 	},
 	
 	render: function(){	

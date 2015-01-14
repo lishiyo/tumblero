@@ -49,7 +49,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		if ( event.which == 13 ) { 
 			return;
 		} else if (queryTag === "") {
-			this.render();
+			this.renderPosts(this.collection); 
 			return;
 		}
 		
@@ -103,8 +103,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.setFollowState();
 	},
 	
-	renderPosts: function(){
-		this.addAllPosts(this.collection);
+	renderPosts: function(coll){
+		this.addAllPosts(coll);
 	},
 	
 	render: function(){
