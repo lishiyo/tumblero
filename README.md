@@ -6,6 +6,7 @@
 * Search features: https://www.tumblr.com/explore/trending
 * search by tag in header
 * search by clicking on tags
+* recommended blogs
 
 ##Minimal Viable Product: Features
 Barebones tumblr - you can create multiple blogs and posts for each blog, and follow other blogs. If you follow a blog, you'll see their posts on your dashboard home. You can also "like" and "reblog" posts onto your own blog(s).

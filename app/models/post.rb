@@ -28,11 +28,19 @@ class Post < ActiveRecord::Base
 	scope :reblogged, -> { where(reblogged: true) }
 	
 # 	before_save :update_comments_count
+	before_save :ensure_total_notes
 	
-	# HELPER - reset commetns back to 0
-	def self.reset_all
+	# HELPERS
+	# reset comments back to 0
+	def self.reset_comments
 		Post.all.each do |p|
 			Post.reset_counters(p.id, :comments)
+		end
+	end
+	
+	def self.reset_total_notes
+		Post.all.each do |p|
+			p.update!(total_notes: p.notes_count)
 		end
 	end
 	
@@ -89,7 +97,22 @@ class Post < ActiveRecord::Base
 		end
 	end
 	
+	def ensure_total_notes
+		self.total_notes = notes_count
+	end
+	
 	# TRENDING
+	
+	# most popular all-time
+	def self.most_popular
+		Post.order('total_notes DESC').limit(10)
+	end
+	
+	# new posts that gained the most notes in last timespan
+	def self.trending_in(time)
+		Post.where('created_at > ?', time).order('total_notes DESC').limit(10)
+	end
+	
 	# add notes_count column 
 	# create Notable model? join post_id, :created_at, :notable_type, :notable_id
 	def recent_notes_count

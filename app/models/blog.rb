@@ -1,7 +1,7 @@
 class Blog < ActiveRecord::Base
 	include PgSearch
 	
-	multisearchable :against => :tags, if: proc{|p| true}
+	multisearchable :against => :tags, if: proc{ |p| true }
 			
 	belongs_to :user
 	has_many :posts, inverse_of: :blog
@@ -17,17 +17,25 @@ class Blog < ActiveRecord::Base
 	validates :description, length: { maximum: 300 }
 	validate :handle_must_be_one_word
 
+		# blogs that gained the most followers in 1 day, month, year
+	def self.trending_in(time)
+		Blog.joins(:followings).where('followings.created_at > ?', 1.week.ago).order('blogs.followers_count DESC').limit(5)	
+	end
+	
+		# 10 most popular all-time
+	def self.most_popular
+		Blog.joins(:followings).order('blogs.followers_count DESC').limit(10)
+	end
 	
 	def tags
 		self.taggings.pluck('name').uniq
 	end
 		
-# 	def tags_string
-# 		Post.where(blog_id: self.id).pluck('tags_string').uniq
-# 	end
+	def tags_string
+		Post.where(blog_id: self.id).pluck('tags_string').uniq
+	end
 		
 	private
-	
 		
 	def handle_must_be_one_word
 		unless handle.chars.all? {|char| char.match(/(\w+|-)/) }
