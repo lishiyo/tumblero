@@ -25,27 +25,32 @@
 		
 		<section>
 			<h2>Posts</h2>
-			<div class="">
-				<ul class="nav nav-tabs oe-tabs sort-methods" role="tablist">
-					<li class="active">
-						<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="created_at">
-							<i class="fa fa-key"></i> Recent</a>
-					</li>
-					<li class="">
-						<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="notes_count">
-							<i class="fa fa-suitcase"></i> Popular</a>
-					</li>
-					<li class="">
-						<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="recent_notes_count">
-							<i class="fa fa-flask"></i> Trending</a>
-					</li>
+		
+			<div class="sortable-bar group">
+				<ul class="nav nav-tabs oe-tabs sort-methods group" role="tablist" style="float:left;">
+				<li class="active">
+					<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="created_at">
+						<i class="fa fa-key"></i> Recent</a>
+				</li>
+				<li class="">
+					<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="notes_count">
+						<i class="fa fa-suitcase"></i> Popular</a>
+				</li>
+				<li class="">
+					<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="recent_notes_count">
+						<i class="fa fa-flask"></i> Trending</a>
+				</li>
+
 				</ul>
 
-
-				<div class="posts-container"></div>
+				<li class="inline-search-bar">
+						<input type="text" id="search-tag" class="form-control">
+				</li>
 
 			</div>
 
+			<div class="posts-container"></div>
+			
 			<div id="pagination-nav"></div>
 		</section>
 

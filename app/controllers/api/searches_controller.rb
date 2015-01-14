@@ -5,10 +5,13 @@ class Api::SearchesController < ApplicationController
 		# either one tag or string of tags
 		query = params[:query] 
 
-		@search_results = Post.where(blog_id: params[:blog_id]).search_by_tags(query).page(params[:page])
+		if params[:blog_id]
+			@search_results = Post.where(blog_id: params[:blog_id]).search_by_tags(query).page(params[:page])
+		elsif params[:dashboard_id]
+			dashboard = Dashboard.find(params[:dashboard_id])
+			@search_results = dashboard.followed_posts.search_by_tags(query).page(params[:page])
+		end
 
-		p @search_results
-		
 		render 'single_search'
 
 	end

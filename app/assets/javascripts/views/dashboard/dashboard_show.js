@@ -5,7 +5,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	events: {
 		'click .re-sort': 'reSortBy',
 		"click button.full-post-modal": "openPostModal",
-		"keyup input#search-tag": 'callFilter'
+		"keyup input#search-tag": 'callFilterWith'
 	},
 	
 	initialize: function(opts){
@@ -39,6 +39,14 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 
 		newPostFull.setActive({ tabNum: startTab });
 		
+	},
+	
+	callFilterWith: function(event) {
+		event.preventDefault();
+		var queryTag = $(event.currentTarget).val(); // current val in input box
+		if ( event.which == 13 || queryTag === "" ) { return };	
+		
+		this.callFilter("dashboard", queryTag);
 	},
 
 	//only add posts for this.collection.currPage in this.collection

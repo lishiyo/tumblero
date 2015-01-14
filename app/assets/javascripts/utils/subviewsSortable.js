@@ -42,15 +42,28 @@ Tumblero.Utils.Sortable = {
 		this.renderFollowButton('.follow-btn');
 	},
 	
-	callFilter: function(event){
-		event.preventDefault();
-		var queryTag = $(event.currentTarget).val(); // current val in input box
-		if ( event.which == 13 || queryTag === "" ) { return };	
+	removeAllSubviews: function(){
+		var view = this;
 		
-		this.searchResults = new Tumblero.Collections.SearchResults();
+		_(this.subviews()).each(function (subviews, selector) {
+      view.$(selector).empty();
+      _(subviews).each(function (subview) {
+        view.removeSubview(selector, subview);
+      });
+    });
+	},
+	
+	
+	callFilter: function(type, queryTag){
 		
 		var view = this;
-		var searchData = { query: queryTag, blog_id: view.model.id };
+		this.searchResults = new Tumblero.Collections.SearchResults();
+		
+		if (type === "blog") {
+			var searchData = { query: queryTag, blog_id: view.model.id };
+		} else {
+			var searchData = { query: queryTag, dashboard_id: view.model.id };
+		}
 		
 		this.searchResults.fetch({
 			data: searchData,

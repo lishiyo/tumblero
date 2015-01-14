@@ -2,16 +2,6 @@ class Api::BlogsController < ApplicationController
 	
 	before_action :require_logged_in
 	
-	# GET /blogs/:id/search
-# 	def search
-# 		query = params[:query] # either one tag or string of tags
-		
-# 		@search_results = Post.where(blog_id: params[:id]).search_by_tags(query).page(params[:page])
-		
-# 		render 'api/searches/single_search'
-# 	end
-	
-	
 	# GET /explore/blogs 
 	def index 
 		@blogs = Blog.where.not(user_id: current_user.id)
