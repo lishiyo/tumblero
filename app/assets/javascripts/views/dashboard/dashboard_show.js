@@ -44,7 +44,12 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	callFilterWith: function(event) {
 		event.preventDefault();
 		var queryTag = $(event.currentTarget).val(); // current val in input box
-		if ( event.which == 13 || queryTag === "" ) { return };	
+		if ( event.which == 13 ) { 
+			return;
+		} else if (queryTag === "") {
+			this.render();
+			return;
+		}
 		
 		this.callFilter("dashboard", queryTag);
 	},

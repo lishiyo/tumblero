@@ -7,9 +7,9 @@ Tumblero.Collections.SearchResults = Backbone.Collection.extend({
 		delete attrs._type;
 		
 		if (type === "Post") {
-			return new Tumblero.Models.Post(attrs);
+			return new Tumblero.Models.Post(attrs, { parse: true });
 		} else if (type === "Blog") {
-			return new Tumblero.Models.Blog(attrs);
+			return new Tumblero.Models.Blog(attrs, { parse: true });
 		}
 	},
 	

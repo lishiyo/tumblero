@@ -16,5 +16,12 @@ class Api::SearchesController < ApplicationController
 
 	end
 	
+	# search through posts and blogs' tags 
+	def tagged
+    @search_results = PgSearch
+      .multisearch(params[:query])
+      .page(params[:page])
+	end
+	
 	
 end

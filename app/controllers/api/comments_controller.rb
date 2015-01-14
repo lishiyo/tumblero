@@ -14,7 +14,9 @@ class Api::CommentsController < ApplicationController
 			if @comment.save
 				respond_to do |format|
 					format.html { redirect_to post_url(@comment.post_id) }
-					format.json { render json: @comment }
+					format.json { 
+						render partial: 'comment', locals: { comment: @comment } 
+						}
 				end
 			else
 				render json: @comment.errors.full_messages, status: 422

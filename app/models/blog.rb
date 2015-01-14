@@ -1,5 +1,8 @@
 class Blog < ActiveRecord::Base
+	include PgSearch
 	
+	multisearchable :against => :tags, if: proc{|p| true}
+			
 	belongs_to :user
 	has_many :posts, inverse_of: :blog
 	has_many :followings, dependent: :destroy
@@ -15,8 +18,17 @@ class Blog < ActiveRecord::Base
 	validate :handle_must_be_one_word
 
 	
+	def tags
+		self.taggings.pluck('name').uniq
+	end
+		
+# 	def tags_string
+# 		Post.where(blog_id: self.id).pluck('tags_string').uniq
+# 	end
+		
 	private
 	
+		
 	def handle_must_be_one_word
 		unless handle.chars.all? {|char| char.match(/(\w+|-)/) }
 			errors.add(:blog, "handle can contain only letters, digits, or underscores/dashes")

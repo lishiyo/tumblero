@@ -5,8 +5,20 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	events: {
 		'click .re-sort': 'reSortBy',
 		'click button.follow-btn': "followBlog",
-		"keyup input#search-tag": 'callFilterWith'
+		"keyup input#search-tag": 'callFilterWith',
+		
 	},
+	
+	
+// 	testTypeahead: function(){
+		
+// 		typeahead = new Backbone.Typeahead({
+// 			collection: this.collection
+// 		});
+		
+// 		typeahead.setElement('#typeahead-results').render();
+		
+// 	},
 	
 	initialize: function(opts){
 		Tumblero.perPage = (Tumblero.perPage || 2); // set to a default
@@ -15,19 +27,25 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);
 		
-		this.listenTo(this.currentUser, 'sync', this.renderFollow);
-// 		this.listenTo(this.model, 'sync', this.render);
+// 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
+		this.listenTo(this.model, 'sync', this.render);
 		
 		this.listenTo(this.collection, 'sync remove sort', this.render);
 		this.listenTo(this.collection, "addNewPost", this.addNewPost);
 		
 		this.fetchCollection();
+		
 	},
 	
 	callFilterWith: function(event) {
 		event.preventDefault();
 		var queryTag = $(event.currentTarget).val(); // current val in input box
-		if ( event.which == 13 || queryTag === "" ) { return };	
+		if ( event.which == 13 ) { 
+			return;
+		} else if (queryTag === "") {
+			this.render();
+			return;
+		}
 		
 		this.callFilter("blog", queryTag);
 	},

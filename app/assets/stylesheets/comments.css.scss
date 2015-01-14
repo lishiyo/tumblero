@@ -8,6 +8,7 @@
 		margin: 10px 0 0 0;
 		padding: 0;
 		padding-left: 15px;
+		text-align: left;
 	}
 	li {
 		text-align: left;
@@ -37,6 +38,22 @@
 	
 	a.reply-comment:before {
 		content: " § "
+	}
+	
+	.commenter {
+		display: block;
+	}
+	
+	.comment-body-container {
+		display: block;
+		button {
+			float: left;
+			max-width: 20%;
+		}
+		.comment-body {
+			float: right;
+			width: 70%;
+		}
 	}
 }
 

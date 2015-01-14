@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 		resources :taggings, only: [:create, :show, :destroy]
 		
 		get "search", to: "searches#index"
+		get "tagged", to: "searches#tagged"
 	end
 	
 	

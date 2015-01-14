@@ -55,6 +55,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 			post: this.post,
 			currentUser: this.currentUser
     });
+		
     this.addSubview("#more-child-comment-"+this.model.id, commentSubview);
 	},
 	

@@ -19,6 +19,21 @@ class User < ActiveRecord::Base
 	has_many :taggings, inverse_of: :user
 
 	after_initialize :ensure_session_token
+	after_initialize :ensure_main_blog
+	
+	# HELPER - reset blogs to first blog
+	def self.reset_all
+		User.all.each do |user|
+			blog = user.blogs.first
+			user.update!(main_blog_id: blog.id)
+		end
+	end
+	
+	def ensure_main_blog
+		return unless self.main_blog_id.nil?
+		
+		self.main_blog_id = self.blogs.first.id
+	end
 	
   def self.generate_session_token
     SecureRandom.urlsafe_base64
@@ -65,9 +80,6 @@ class User < ActiveRecord::Base
 		posts.uniq
 	end
 	
-# 	def all_liked_comments
-		
-# 	end
 	
 	def likes?(likeable)
 		if likeable.class == Post

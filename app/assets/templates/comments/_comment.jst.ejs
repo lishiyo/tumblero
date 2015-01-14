@@ -1,6 +1,12 @@
 <li>
+	<a class="commenter" href="#/blogs/<%= comment.get('main_blog_id') %>"><%= comment.escape('main_blog_handle') %></a>
+	<div class="comment-body-container group">
 	<button class="btn like-btn like-comment" data-likeable-type="Comment" data-likeable-id="<%= comment.id %>" data-initial-like-state='<%= initialLikeState%>' id="like-btn-<%= comment.id %>"></button>
-  <%= comment.escape('body') %> <a href="" class="reply-comment" data-parent_id="<%= comment.id %>">reply</a>
+		<div class="comment-body">
+			<%= comment.escape('body') %> 	
+			<a href="" class="reply-comment" data-parent_id="<%= comment.id %>">reply</a>
+		</div>  
+	</div>
 </li>
 
 	
