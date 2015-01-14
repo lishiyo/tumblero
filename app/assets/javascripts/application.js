@@ -17,7 +17,7 @@
 //= require js-routes
 //= require underscore
 //= require backbone
-//= require backbone.typeahead.min
+//= require backbone.autocomplete.min
 //= require bootstrap-wysihtml5
 
 //= require tumblero

@@ -26,9 +26,14 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"session/new": "sessionNew",
 		"blogs/new": "blogNew",
 		"blogs/:id": "blogShow",
-// 		"blogs/:id/settings": "blogSettings",
 		"dashboard": "dashboardShow",
-		"explore/blogs": "blogsExplore"
+		"explore/blogs": "blogsExplore",
+		"explore/trending": "exploreTrending",
+		
+	},
+	
+	exploreTrending: function(tags){
+
 	},
 	
 	checkUser: function() { 

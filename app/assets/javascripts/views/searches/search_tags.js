@@ -1,4 +1,5 @@
-Tumblero.Views.ExploreTags = Backbone.View.extend({
+// searching in main header => #/
+Tumblero.Views.SearchTags = Backbone.View.extend({
 	
 	initialize: function () {
 		this.searchResults = new Tumblero.Collections.SearchResults();
