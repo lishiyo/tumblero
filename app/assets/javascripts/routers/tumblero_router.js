@@ -29,11 +29,23 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"dashboard": "dashboardShow",
 		"explore/blogs": "blogsExplore",
 		"explore/trending": "exploreTrending",
-		
+		"explore/:tags": "exploreTags"
 	},
 	
-	exploreTrending: function(tags){
+	exploreTrending: function(){
 
+	},
+	
+	exploreTags: function(query) {
+		var queryStr = query.split("+").join(" "); // "One Direction"
+		console.log("exploreTags are", queryStr);
+		
+		var view = new Tumblero.Views.ExploreTags({
+			queryStr: queryStr
+		});
+		
+		this._swapView(view);
+		view.initAutocomplete();
 	},
 	
 	checkUser: function() { 
@@ -69,7 +81,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 	
 	dashboardShow: function(){
-		
 		var dashboard = new Tumblero.Models.Dashboard({ 
 			user: this.currentUser });
 		dashboard.fetch();

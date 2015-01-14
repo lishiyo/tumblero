@@ -59,6 +59,7 @@ gem 'bootsy'
 gem 'bootstrap-wysihtml5-rails'
 gem 'filepicker-rails'
 gem 'kaminari'
+gem 'jquery-ui-rails'
 
 gem 'backbone-on-rails'
 gem 'js-routes'

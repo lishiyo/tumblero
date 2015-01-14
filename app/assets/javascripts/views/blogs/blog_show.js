@@ -5,8 +5,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	events: {
 		'click .re-sort': 'reSortBy',
 		'click button.follow-btn': "followBlog",
-		"keyup input#search-tag": 'callFilterWith',
-		
+		"keyup input#search-tag": 'callFilterWith'
 	},
 	
 	
@@ -30,7 +29,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 // 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
 		this.listenTo(this.model, 'sync', this.render);
 		
-		this.listenTo(this.collection, 'sync remove sort', this.render);
+		this.listenTo(this.collection, 'sync remove sort', this.renderPosts);
 		this.listenTo(this.collection, "addNewPost", this.addNewPost);
 		
 		this.fetchCollection();
@@ -40,6 +39,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	callFilterWith: function(event) {
 		event.preventDefault();
 		var queryTag = $(event.currentTarget).val(); // current val in input box
+		
 		if ( event.which == 13 ) { 
 			return;
 		} else if (queryTag === "") {
@@ -57,6 +57,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	//only add posts for this.collection.currPage in this.collection
 	addAllPosts: function(coll) {		
+		this.removeSubviewsFor('.posts-container');
+		
 		var view = this;
 		var perPage = Tumblero.perPage;
 		var startPage = (coll.currPage <= 0) ? 0 : (coll.currPage - 1);
@@ -100,6 +102,10 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.setFollowState();
 	},
 	
+	// posts container
+	renderPosts: function(coll){
+		this.addAllPosts(coll);
+	},
 	
 	render: function(){	
 		this.renderFollow();		
@@ -111,10 +117,10 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
-		this.addAllPosts(this.collection);
-		this.addPageNav(this.collection);
 		
 		this.renderFollowButton('.follow-btn');
+		this.renderPosts(this.collection);
+		this.addPageNav(this.collection);
 		
     return this;
 	}

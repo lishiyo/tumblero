@@ -4,7 +4,11 @@ class Post < ActiveRecord::Base
 	include Taggable
 	
 	multisearchable :against => :tags_string
-	pg_search_scope :search_by_tags, :against => :tags_string
+# 	pg_search_scope :search_by_tags, :against => :tags_string
+	
+	pg_search_scope :search_by_tags, :associated_against => {
+		:taggings => :name
+  }
 	
 	belongs_to :blog, counter_cache: true
 	has_one :author, through: :blog, source: :user

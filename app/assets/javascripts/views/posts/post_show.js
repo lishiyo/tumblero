@@ -16,7 +16,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.taggings, 'sync', this.render);
 		this.likeButtonId = ('button.like-post');
 		
-// 		this.model.fwd = Backbone.fwd;
 	},
 	
 	openReblogModal: function(event){

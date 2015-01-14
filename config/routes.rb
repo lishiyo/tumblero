@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 		resources :blogs, only: [:new, :create, :show, :index, :update] do 
 			resources :posts, only: [:index]
 			resource :following, only: [:create, :destroy]
+			resources :taggings, only: [:index] # /api/blogs/:blog_id/taggings
 			member do
 				get 'submit'
 				post 'submit'
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
 		end
 		
 		resource :dashboard, only: [:show] do
+			resources :taggings, only: [:index] # /api/dashboard/taggings
 			get 'posts', on: :member
 		end
 		
@@ -33,7 +35,10 @@ Rails.application.routes.draw do
 		resources :taggings, only: [:create, :show, :destroy]
 		
 		get "search", to: "searches#index"
-		get "tagged", to: "searches#tagged"
+		get "search/blogs", to: "searches#blogs"
+		get "search/posts", to: "searches#posts"
+		get "search/all", to: "searches#all"
+		get "tags/all", to: "taggings#all"
 	end
 	
 	

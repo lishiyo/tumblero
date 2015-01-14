@@ -2,6 +2,9 @@ class Blog < ActiveRecord::Base
 	include PgSearch
 	
 	multisearchable :against => :tags, if: proc{ |p| true }
+	pg_search_scope :search_by_tags, :associated_against => {
+    :posts => :tags_string
+  }
 			
 	belongs_to :user
 	has_many :posts, inverse_of: :blog

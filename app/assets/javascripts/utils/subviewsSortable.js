@@ -32,36 +32,25 @@ Tumblero.Utils.Sortable = {
 
 	},
 	
-	// render this.searchResults after sync
+	// render this.searchResults for single searches
 	renderSearch: function(){
-		console.log("renderSearch called", this.searchResults);
-		this.removeAllSubviews();
-		this.renderFollow();
-		this.addAllPosts(this.searchResults);
-		this.addPageNav(this.searchResults);
-		this.renderFollowButton('.follow-btn');
+		console.log("renderSearch called", this.searchResults);		
+		this.renderPosts(this.searchResults);
 	},
 	
-	removeAllSubviews: function(){
-		var view = this;
-		
-		_(this.subviews()).each(function (subviews, selector) {
-      view.$(selector).empty();
-      _(subviews).each(function (subview) {
-        view.removeSubview(selector, subview);
-      });
-    });
-	},
+	
 	
 	
 	callFilter: function(type, queryTag){
 		
 		var view = this;
-		this.searchResults = new Tumblero.Collections.SearchResults();
+		this.searchResults = new Tumblero.Collections.SearchResults([], {
+			searchType: "single"
+		});
 		
 		if (type === "blog") {
 			var searchData = { query: queryTag, blog_id: view.model.id };
-		} else {
+		} else { // dashboard
 			var searchData = { query: queryTag, dashboard_id: view.model.id };
 		}
 		

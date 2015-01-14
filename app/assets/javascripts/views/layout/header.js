@@ -3,7 +3,8 @@ Tumblero.Views.Header = Backbone.View.extend({
 	template: JST["layout/header_default"],
 	
 	events: {
-		"click button.full-post-modal": "openPostModal"
+		"click button.full-post-modal": "openPostModal",
+		"click #nav-search-btn": "mainSearch"
 	},
 	
 	initialize: function(opts){
@@ -19,6 +20,16 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	refresh: function(){
 		this.render();
+	},
+	
+	mainSearch: function(event) {
+		event.preventDefault();
+		var query = this.$("#nav-search").val().split(" ").join("+");
+		
+		// pass in query to router, which swaps view to SearchTags
+		var url = "/explore/" + query;
+		console.log("query is", url);
+		Backbone.history.navigate(url, {trigger: true});
 	},
 	
 	openPostModal: function(event){

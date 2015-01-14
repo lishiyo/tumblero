@@ -16,7 +16,7 @@
  *= require backbone.modal
  *= require backbone.modal.theme
  *= require backbone.autocomplete.min
- 
+ *= require jquery-ui/autocomplete
  *= require bootstrap-wysihtml5
  *= require rails_bootstrap_forms
  *= require_tree .

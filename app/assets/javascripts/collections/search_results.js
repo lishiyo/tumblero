@@ -1,6 +1,24 @@
 Tumblero.Collections.SearchResults = Backbone.Collection.extend({
 	
-	url: "api/search",
+	url: function(){
+		if (this._searchType === "single") {
+			// search through main navbar
+			if (this._searchModel === "post") {
+				return "/api/search/posts"
+			} else if (this._searchModel === "blog") {
+				return "/api/search/blogs"
+			} else { // search on blog or dashboard page
+				return "/api/search";
+			}
+		} else { // multisearch
+			return "/api/search/all";
+		}
+	},
+	
+	initialize: function(models, opts){
+		this._searchType = (opts.searchType || "multi");
+		this._searchModel = (opts.searchModel || null);
+	},
 	
 	model: function (attrs) {
 		var type = attrs._type;
