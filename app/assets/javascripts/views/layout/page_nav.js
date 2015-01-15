@@ -15,9 +15,6 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 		this.query = (opts.query || null);
 		this.postsCont = opts.postsCont;
 		
-		console.log("init opts", opts);
-		
-		pageview = this;
 	},
 	
 	previousPage: function(e){

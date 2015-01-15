@@ -12,8 +12,6 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 		this.currentUser = this.currentUser;
 		this.postView = opts.postView;
 		this.parent_id = opts.parent_id || null;
-		newcomm = this;
-		console.log(opts);
 	},
 	
 	render: function(){
@@ -56,7 +54,9 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 			var newComm = new Tumblero.Models.Comment({ id: data.id });
 			newComm.fetch();
 			commentsColl.add(newComm);	
-			view.postView.incrementCommCount();
+			var oldCount = Number(view.post.get('comments_count'));
+			view.post.set({comments_count: oldCount+1});
+// 			view.postView.incrementCommCount();
 			$(event.currentTarget).remove();
 		}).fail(function(jqXHR, textStatus){
 			console.log(textStatus);

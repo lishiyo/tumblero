@@ -20,14 +20,14 @@ class Blog < ActiveRecord::Base
 	validates :description, length: { maximum: 300 }
 	validate :handle_must_be_one_word
 
-		# blogs that gained the most followers in 1 day, month, year
+		# top five blogs that gained the most followers in 1 day, month, year
 	def self.trending_in(time)
 		Blog.joins(:followings).where('followings.created_at > ?', 1.week.ago).order('blogs.followers_count DESC').limit(5)	
 	end
 	
 		# 10 most popular all-time
 	def self.most_popular
-		Blog.joins(:followings).order('blogs.followers_count DESC').limit(10)
+		Blog.joins(:followings).order('blogs.followers_count DESC')
 	end
 	
 	def tags

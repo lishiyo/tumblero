@@ -45,33 +45,32 @@ Rails.application.routes.draw do
 		get "tags/all", to: "taggings#all"
 	end
 	
-	
-	
+	root to: "static_pages#index"
+	resource :session, only: [:new, :create, :destroy]
 	
 	# NOT NAMESPACE
-	resource :session, only: [:new, :create, :destroy]
-	resources :static_pages, only: [:index]
+	
+# 	resources :static_pages, only: [:index]
 	
 	resources :blogs, only: [:new, :create, :show] do 
-		resources :posts, only: [:index]
-		resource :following, only: [:create, :destroy]
+# 		resources :posts, only: [:index]
+# 		resource :following, only: [:create, :destroy]
 	end
 	
-	resources :posts, only: [:new, :show, :create] do
-		resources :comments, only: [:new]
-		member do
-			get 'reblog'
-			get 'comments'
-		end
-	end
+# 	resources :posts, only: [:new, :show, :create] do
+# 		resources :comments, only: [:new]
+# 		member do
+# 			get 'reblog'
+# 			get 'comments'
+# 		end
+# 	end
 	
-	resource :dashboard, only: [:show]
-	resource :like, only: [:create, :destroy] 
-	resources :comments, only: [:create, :show, :destroy]
+# 	resource :dashboard, only: [:show]
+# 	resource :like, only: [:create, :destroy] 
+# 	resources :comments, only: [:create, :show, :destroy]
 	
-	get 'explore/blogs', to: 'blogs#index'
+# 	get 'explore/blogs', to: 'blogs#index'
 	
-	root to: "static_pages#index"
 	
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -19,7 +19,6 @@ class  Api::PostsController < ApplicationController
 #         :page => params[:page],
 #         :total_pages => @posts.total_pages 
 #     }
-		
 	end
 	
 	def show	
@@ -36,6 +35,7 @@ class  Api::PostsController < ApplicationController
 	# post_params[:blog_id] comes from form
 	def create
 		@blog = Blog.find(post_params[:blog_id])
+		
 		if post_params[:tags_string]
 			@tags_array = post_params[:tags_string].split(",").map(&:strip)
 			# make sure tags_string is joined correctly 

@@ -13,21 +13,29 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		this.taggings = this.model.taggings();
 		this.likeButtonId = ('button.like-post');
 		
-		
 // 		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync change', this.render);
+		this.listenTo(this.model, 'change:comments_count', this.incrementCommCount);
 		this.listenTo(this.taggings, 'sync', this.render);
 		
 		postshow = this;
 	},
 	
 	// manually increment comments counter
+// 	incrementCommCount: function(){
+// 		var $commCount = this.$('span.count-comments');
+// 		var newCount = Number($commCount.data("curr-count")) + 1;
+// 		$commCount.data("curr-count", newCount);
+		
+// 		console.log("called increment", newCount, $commCount);
+// 		$commCount.text(newCount);
+// 	},
+
 	incrementCommCount: function(){
 		var $commCount = this.$('span.count-comments');
-		var newCount = Number($commCount.data("curr-count")) + 1;
-		$commCount.data("curr-count", newCount);
+		var newCount = this.model.get('comments_count') + 1;
 		
-		console.log("called increment", newCount, $commCount);
+		console.log("called increment", newCount);
 		$commCount.text(newCount);
 	},
 	

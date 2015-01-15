@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114052018) do
+ActiveRecord::Schema.define(version: 20150115021556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,18 @@ ActiveRecord::Schema.define(version: 20150114052018) do
 
   add_index "likes", ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id",           null: false
+    t.integer  "noter_id",          null: false
+    t.string   "notification_type", null: false
+    t.integer  "notification_id",   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "notifications", ["noter_id"], name: "index_notifications_on_noter_id", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"

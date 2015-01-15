@@ -6,7 +6,6 @@ Tumblero.Models.Post = Backbone.Model.extend({
 	},
 	
 	initialize: function(opts){
-		
 	},
 	
 	taggings: function(){

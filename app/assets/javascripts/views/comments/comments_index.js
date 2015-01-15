@@ -14,7 +14,6 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 		this.post = opts.post;
 		this.currentUser = opts.currentUser;
 		this.postView = opts.postView;
-		index = this;
 	},
 	
 	// only add subviews of root comments

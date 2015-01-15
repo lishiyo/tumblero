@@ -29,7 +29,18 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"dashboard": "dashboardShow",
 		"explore/blogs": "blogsExplore",
 		"explore": "exploreTrending",
-		"explore/:tags": "exploreTags"
+		"explore/:tags": "exploreTags",
+		"posts/:id": "postShowFull"
+	},
+	
+	postShowFull: function(id){
+		var post = new Tumblero.Models.Post();
+		post.fetch();
+		
+		var view = new Tumblero.Views.PostShow({
+			currentUser: this.currentUser,
+			model: post
+		})
 	},
 	
 	// sorted by popularity
@@ -84,6 +95,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	dashboardShow: function(){
 		var dashboard = new Tumblero.Models.Dashboard({ 
 			user: this.currentUser });
+		
 		dashboard.fetch();
 		
 		var view = new Tumblero.Views.DashboardShow({ 

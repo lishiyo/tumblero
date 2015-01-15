@@ -18,10 +18,12 @@ class User < ActiveRecord::Base
 	has_many :comments, inverse_of: :user
 	has_many :taggings, inverse_of: :user
 
+	has_many :notifications
+		
 	after_initialize :ensure_session_token
 	after_initialize :ensure_main_blog
 	
-	# HELPER - reset blogs to first blog
+	# HELPERS - reset blogs to first blog
 	def self.reset_all
 		User.all.each do |user|
 			blog = user.blogs.first
@@ -35,6 +37,58 @@ class User < ActiveRecord::Base
 		self.main_blog_id = self.blogs.first.id
 	end
 	
+	# NOTIFICATIONS
+	
+	def notify(user)
+		
+	end
+	
+	def get_notified_by(user)
+		
+	end
+	
+	# TOGGLEABLE
+	
+	def follows?(blog)
+		self.followed_blogs.include?(blog)
+	end
+	
+	# include post and all its reblogged posts
+	def all_liked_posts
+		posts = []
+		self.liked_posts.each do |post|
+			posts << post.id
+			if !post.reblogged # soruce post
+				post.reblogged_posts.each {|r| posts << r.id } 
+			end
+		end
+			
+		posts.uniq
+	end
+	
+	def likes?(likeable)
+		if likeable.class == Post
+			self.liked_posts.include?(likeable)	
+		elsif likeable.class == Comment
+			self.liked_comments.include?(likeable)
+		end
+	end
+	
+	def liked_posts_ids
+		all_liked_posts
+# 		self.liked_posts.map(&:id)
+	end
+	
+	def liked_comments_ids
+		self.liked_comments.map(&:id)
+	end
+	
+	def followed_blogs_ids
+		self.followed_blogs.map(&:id)
+	end
+
+	
+	# USER AUTH
   def self.generate_session_token
     SecureRandom.urlsafe_base64
   end
@@ -61,47 +115,7 @@ class User < ActiveRecord::Base
     self.password_digest = BCrypt::Password.create(password)
   end
 	
-	# TOGGLEABLE
 	
-	def follows?(blog)
-		self.followed_blogs.include?(blog)
-	end
-	
-	# include post and all its reblogged posts
-	def all_liked_posts
-		posts = []
-		self.liked_posts.each do |post|
-			posts << post.id
-			if !post.reblogged # soruce post
-				post.reblogged_posts.each {|r| posts << r.id } 
-			end
-		end
-			
-		posts.uniq
-	end
-	
-	
-	def likes?(likeable)
-		if likeable.class == Post
-			self.liked_posts.include?(likeable)	
-		elsif likeable.class == Comment
-			self.liked_comments.include?(likeable)
-		end
-	end
-	
-	def liked_posts_ids
-		all_liked_posts
-# 		self.liked_posts.map(&:id)
-	end
-	
-	def liked_comments_ids
-		self.liked_comments.map(&:id)
-	end
-	
-	def followed_blogs_ids
-		self.followed_blogs.map(&:id)
-	end
-
   private
 
   def ensure_session_token

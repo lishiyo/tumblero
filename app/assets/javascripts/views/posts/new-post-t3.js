@@ -13,7 +13,6 @@ Tumblero.Views.NewPostT3 = Tumblero.PostModal.extend({
 	submitForm: function(e) {
 		e.preventDefault();
 		
-		
 	},
 	
 	render: function() {

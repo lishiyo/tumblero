@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 	def show	
 		respond_to do |f| 
 			f.html { render 'show'}
-			f.json { render json: @post }
+			f.json { render json: @post.as_json(includes: :comments) }
 		end
 	end
 	
