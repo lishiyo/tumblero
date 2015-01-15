@@ -44,6 +44,19 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.callFilter("blog", queryTag);
 	},
 	
+	// posts container
+	renderPosts: function(coll){
+		// avoid unless coll is a collection
+		if (!coll || coll._taggings) {
+			var currColl = this.collection
+		} else {
+			var currColl = coll;
+		}
+
+		this.addAllPosts(currColl);
+	},
+	
+	
 	// manual addition for new posts from post modal
 	addNewPost: function(post){
 		this.collection.add(post, { at: 0 });
@@ -93,17 +106,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.setFollowState();
 	},
 	
-	// posts container
-	renderPosts: function(coll){
-		console.log("coll is", coll);
-		if (!coll || coll._taggings) {
-			var currColl = this.collection
-		} else {
-			var currColl = coll;
-		}
-
-		this.addAllPosts(currColl);
-	},
 	
 	render: function(){	
 		this.renderFollow();		

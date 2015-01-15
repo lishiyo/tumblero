@@ -3,7 +3,6 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 	setLikeState: function(type, id, btn){	
 		var isLiked = this.currentUser.likeStateFor(type, this.model.id);	
 		this.likeState = (isLiked) ? "liked" : "unliked";
-		
 		this.likeableType = type;
 		this.likeableId = id;
 		this.likeButtonId = (btn || ('button.like-btn'));
@@ -86,7 +85,6 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		this.followState = ((isFollowed) ? "followed" : "unfollowed");
 		
 		this.btnId = (btnId || ('button.follow-btn'));
-// 		console.log("setFollowState", this.followState);
 	},
 	
 	renderFollowButton: function(btnId){

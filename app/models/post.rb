@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   }
 	
 	belongs_to :blog, counter_cache: true
-	has_one :author, through: :blog, source: :user
+	has_one :user, through: :blog, source: :user
 	
 	# each source post gets a row in the table when reblogged
 	has_many :reblogs, class_name: "Reblog", foreign_key: :post_id, inverse_of: :post

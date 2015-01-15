@@ -18,7 +18,9 @@ class User < ActiveRecord::Base
 	has_many :comments, inverse_of: :user
 	has_many :taggings, inverse_of: :user
 
-	has_many :notifications
+	has_many :notifications, foreign_key: :user_id, inverse_of: :user
+	has_many :notes, class_name: "Notification", foreign_key: :noter_id, inverse_of: :noter
+# 	has_many :notifiers, through: :notifications, source: :noter
 		
 	after_initialize :ensure_session_token
 	after_initialize :ensure_main_blog
@@ -37,14 +39,22 @@ class User < ActiveRecord::Base
 		self.main_blog_id = self.blogs.first.id
 	end
 	
-	# NOTIFICATIONS
-	
-	def notify(user)
-		
+	def self.reset_notifications
+		User.all.each do |u|
+			User.reset_counters(u.id, :notifications)
+		end
 	end
 	
-	def get_notified_by(user)
-		
+	# NOTIFICATIONS
+	# params = user_id/noter_id, notification_type, notification_id
+	def notify(params)
+		notification = self.notes.create!(params)
+		notification
+	end
+	
+	def get_notified(params)
+		notification = self.notifications.create!(params)
+		notification
 	end
 	
 	# TOGGLEABLE

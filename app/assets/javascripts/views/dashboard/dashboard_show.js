@@ -15,13 +15,14 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);
 		
-		this.listenTo(this.currentUser, 'sync', this.render);	
-		this.listenTo(this.model, 'sync change', this.render);
+		this.listenTo(this.currentUser, 'sync', this.renderFollow);
+		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.collection, 'sort remove sync', this.renderPosts);
 // 		this.listenTo(this.collection, 'add', this.render);
 		
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';
+		
 		this.fetchCollection();
 	},
 	
@@ -57,21 +58,21 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 
 	//only add posts for this.collection.currPage in this.collection
-	addAllPosts: function(coll) {		
-		var currColl = (coll || this.collection);
-		var view = this;
-		var perPage = Tumblero.perPage;
-		var startPage = (currColl.currPage <= 0) ? 0 : (currColl.currPage - 1);
-		var startPost = (startPage==0) ? 0 : (startPage * perPage);
+// 	addAllPosts: function(coll) {		
+// 		var currColl = (coll || this.collection);
+// 		var view = this;
+// 		var perPage = Tumblero.perPage;
+// 		var startPage = (currColl.currPage <= 0) ? 0 : (currColl.currPage - 1);
+// 		var startPost = (startPage==0) ? 0 : (startPage * perPage);
 		
-		currColl = _(currColl.rest(perPage*(startPage)));
-		currColl = _(currColl.first(perPage)); 
+// 		currColl = _(currColl.rest(perPage*(startPage)));
+// 		currColl = _(currColl.first(perPage)); 
 		
-		console.log("coll is", currColl.currPage, currColl);
-		currColl.forEach(function(post){
-			view.addPostSubview(post);
-		}.bind(this));
-	},
+// 		console.log("coll is", currColl.currPage, currColl);
+// 		currColl.forEach(function(post){
+// 			view.addPostSubview(post);
+// 		}.bind(this));
+// 	},
 	
 	addPostSubview: function(post){
 		var subview = new Tumblero.Views.PostShow({
@@ -104,7 +105,12 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	renderPosts: function(coll){
-		var currColl = (coll || this.collection);
+		if (!coll || coll._taggings) {
+			var currColl = this.collection
+		} else {
+			var currColl = coll;
+		}
+		
 		this.addAllPosts(currColl);
 	},
 	

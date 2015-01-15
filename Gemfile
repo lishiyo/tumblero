@@ -65,6 +65,7 @@ gem 'backbone-on-rails'
 gem 'js-routes'
 gem 'ejs'
 gem 'pg_search'
+gem "lograge"
 
 group :production do
   gem 'rails_12factor'

@@ -1,0 +1,19 @@
+<h2>Recent Notifications</h2>
+
+<% user.notifications().each(function(n){ %>
+	
+	<%= n.escape('content') %>
+
+<% }); %>
+
+
+<h2>Recent Activity</h2>
+<ul>
+<% user.notes().each(function(n){ %>
+	
+<li><a href="#/<%= n.escape('notifiable_url') %>"><%= n.escape('noter_content') %></a></li>
+
+<% }); %>
+
+	
+</ul>

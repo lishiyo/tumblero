@@ -10,6 +10,7 @@ class Like < ActiveRecord::Base
 	before_create :increment_counter
 	before_destroy :decrement_counter
 	
+	
 	def increment_counter
 		self.likeable_type.constantize.increment_counter("likes_count", self.likeable_id)
 		self.update_source('increment')

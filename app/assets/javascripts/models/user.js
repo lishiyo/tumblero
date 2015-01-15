@@ -16,33 +16,11 @@ Tumblero.Models.User = Backbone.Model.extend({
 			return user.get('liked_posts_ids').some(function(elem){
 				return (elem === type_id);
 			});
-// 			var post = new Tumblero.Models.Post({ id: type_id });
-// 			post.fetch({
-// 				success:function(){
-// 					return post.get('likers_ids').some(function(id){
-// 						return (id === user.id);
-// 					});
-// 				}
-// 			})
-			
-// 			return user.get('liked_posts_ids').some(function(elem){
-// 				return (elem === type_id);
-// 			});
 		} else if (type == 'Comment' && user.get('liked_comments_ids')) {
 					return user.get('liked_comments_ids').some(function(elem){
 						return (elem === type_id);
-					});
-// 			var comment = new Tumblero.Models.Comment({ id: type_id });
-// 			comment.fetch({
-// 				success:function(){
-// 					return comment.get('likers_ids').some(function(id){
-// 						return (id === user.id);
-// 					});
-// 				}
-			
-// 			return user.get('liked_comments_ids').some(function(elem){
-// 				return (elem === type_id);
-// 			});
+			});
+
 		}
 		
 		return false;
@@ -56,8 +34,6 @@ Tumblero.Models.User = Backbone.Model.extend({
 				return (id === blog_id);
 			});
 		}
-		
-		
 	},
 	
 	blogs: function(){
@@ -70,10 +46,42 @@ Tumblero.Models.User = Backbone.Model.extend({
 		return this._blogs;
 	},
 	
+	notifications: function(){
+		if (!this._notifications) {
+			this._notifications = new Tumblero.Collections.Notifications([], {
+				user: this,
+				_type: "notification"
+			});
+		}
+		
+		return this._notifications;
+	},
+	
+	notes: function(){
+		if (!this._notes) {
+			this._notes = new Tumblero.Collections.Notifications([], {
+				user: this,
+				_type: "note"
+			});
+		}
+		
+		return this._notes;
+	},
+	
 	parse: function(resp){
 		if (resp.blogs) {
 			this.blogs().set(resp.blogs, { parse: true });
 			delete resp.blogs
+		}	
+		
+		if (resp.notifications) {
+			this.notifications().set(resp.notifications, { parse: true });
+			delete resp.notifications
+		}	
+		
+		if (resp.notes) {
+			this.notes().set(resp.notes, { parse: true });
+			delete resp.notes
 		}	
 		
 		return resp;

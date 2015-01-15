@@ -34,13 +34,15 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	postShowFull: function(id){
-		var post = new Tumblero.Models.Post();
+		var post = new Tumblero.Models.Post({ id: id });
 		post.fetch();
 		
 		var view = new Tumblero.Views.PostShow({
 			currentUser: this.currentUser,
 			model: post
-		})
+		});
+		
+		this._swapView(view);
 	},
 	
 	// sorted by popularity

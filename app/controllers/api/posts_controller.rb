@@ -59,12 +59,32 @@ class  Api::PostsController < ApplicationController
 	# POST /api/posts/:id/reblog 
 	# create reblog for either self or ultimate source_post (if reblogged: true)
 	def reblog
-		old_post = Post.find(params[:id])
-		if old_post.create_reblog_for!(post_params[:reblog_blog_id])
-			render json: old_post.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings)
+		@post = Post.find(params[:id])
+		
+		if @post.create_reblog_for!(post_params[:reblog_blog_id]) && create_with_notification!
+			render json: @post.as_json(
+				methods: [:notes_count, :likers_ids, :recent_notes_count],
+				include: :taggings)
 		else
-			render json: old_post.errors.full_messages
+			render json: @post.errors.full_messages
 		end
+	end
+	
+	def create_with_notification!
+		Reblog.transaction do
+			# a reblogged post
+			author = @post.user
+			note_params = {}
+			note_params[:notification_type] = "Reblog"
+			note_params[:noter_id] = current_user.id
+			note_params[:notification_id] = @post.id
+			
+			author.get_notified(note_params)
+			
+			return true
+		end
+		
+		false
 	end
 	
 	# COMMENTS

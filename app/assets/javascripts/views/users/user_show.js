@@ -4,13 +4,30 @@ Tumblero.Views.UserShow = Backbone.CompositeView.extend({
 	events: {
 		'click .blog-settings-btn': "showBlogSettings",
 		'click .user-settings-btn': "showUserSettings",
+		'click .user-notifications': "showNotifications"
 	},
 		
 	initialize: function(opts){
 		this.currentUser = (this.model || Tumblero.current_user);
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.blogs(), 'sync change add remove', this.render);
-		this.showUserSettings();
+		this.showNotifications();
+	},
+	
+	showNotifications: function(e){
+		if (e) { e.preventDefault(); }
+		
+		if (this._currSubview) {
+			this.removeSubview('#settings', this._currSubview);
+		}
+		
+		var view = new Tumblero.Views.UserNotifications({
+			model: this.model
+		});
+		
+		this.addSubview('#settings', view);
+		this._currSubview = view;
+		this.render();
 	},
 	
 	showUserSettings: function(e){

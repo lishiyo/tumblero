@@ -3,7 +3,7 @@ class Api::UsersController < ApplicationController
   wrap_parameters false
 	
 	before_action :require_logged_in, only: [:show, :edit, :update, :destroy]
-# 	before_action :set_user, only: [:show, :edit, :update, :destroy]
+	before_action :set_user, only: [:show, :destroy, :notifications, :notes]
 	
   def new
     @user = User.new
@@ -25,15 +25,8 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-		@user = User.find(params[:id])
 		render :show
-# 		render json: @user.to_json(except: [:session_token, :password_digest], methods: :liked_posts, include: :blogs)
-		
   end
-	
-	def edit
-		
-	end
 	
 	def update
 		if user_params[:old_password]
@@ -51,7 +44,16 @@ class Api::UsersController < ApplicationController
 	end
 	
 	def destroy
-		
+		@user.destroy!
+		render json: nil
+	end
+	
+	def notifications
+		render :notifications
+	end
+	
+	def notes
+		render :notes
 	end
 	
 	# GET /dashboard

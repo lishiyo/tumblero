@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 	
 	namespace 'api', defaults: { format: :json } do
 		resources :users, only: [:new, :create, :show, :update, :destroy] do
+			member do
+				get 'notifications'
+				get 'notes'
+			end
 		end
 		
 		resources :blogs, only: [:new, :create, :show, :index, :update] do 
