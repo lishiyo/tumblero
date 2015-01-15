@@ -104,7 +104,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	renderPosts: function(coll){
-		this.addAllPosts(coll);
+		var currColl = (coll || this.collection);
+		this.addAllPosts(currColl);
 	},
 	
 	render: function(){

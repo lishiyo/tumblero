@@ -7,6 +7,7 @@ Tumblero.Views.UserShow = Backbone.CompositeView.extend({
 	},
 		
 	initialize: function(opts){
+		this.currentUser = (this.model || Tumblero.current_user);
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.model.blogs(), 'sync change add remove', this.render);
 		this.showUserSettings();
@@ -34,13 +35,16 @@ Tumblero.Views.UserShow = Backbone.CompositeView.extend({
 			this.removeSubview('#settings', this._currSubview);
 		}
 		
+		
 		var blog_id = $(e.currentTarget).data("blog-id");
 		var blog = Tumblero.Collections.blogs.getOrFetch(blog_id);
 		var view = new Tumblero.Views.BlogSettings({
 			currentUser: (this.currentUser || Tumblero.current_user), 
 			model: blog
 		});
-				
+		
+		console.log("blogsettings", view);
+		
 		this.addSubview('#settings', view);
 		this._currSubview = view;
 		this.render();

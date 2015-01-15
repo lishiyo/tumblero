@@ -5,7 +5,6 @@ class Api::BlogsController < ApplicationController
 	# GET /explore/blogs 
 	def index 
 		@blogs = Blog.where.not(user_id: current_user.id)
-		
 		render json: @blogs
 	end
 	
@@ -58,6 +57,12 @@ class Api::BlogsController < ApplicationController
 		else
 			render json: @blog.errors.full_messages, status: 422
 		end
+	end
+	
+	# GET /blogs/:id/tags
+	def tags
+		@blog = Blog.find(params[:id])
+		render json: @blog.tags
 	end
 	
 # 	def all_posts

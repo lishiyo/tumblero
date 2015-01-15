@@ -7,10 +7,13 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 	},
 	
 	initialize: function(opts){
-		this.parent_id = opts.parent_id || null;
 		this.collection = opts.collection;
 		this.post = opts.post;
 		this.currentUser = this.currentUser;
+		this.postView = opts.postView;
+		this.parent_id = opts.parent_id || null;
+		newcomm = this;
+		console.log(opts);
 	},
 	
 	render: function(){
@@ -23,14 +26,14 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 		return this;
 	},
 	
-	incrementCount: function(){
-		var commCount = this.$el.closest('.post').first().find('.count-comments');
-		var currCount = commCount.data("curr-count");
-		var newCount = currCount + 1;
-		commCount.data("curr-count", newCount);
-		console.log("incCount", this.$el, this.$el.closest('.post'), commCount, currCount, newCount)
-		commCount.text(newCount);
-	},
+// 	incrementCount: function(){
+// 		var commCount = this.$el.closest('.post').first().find('.count-comments');
+// 		var currCount = commCount.data("curr-count");
+// 		var newCount = currCount + 1;
+// 		commCount.data("curr-count", newCount);
+// 		console.log("incCount", this.$el, this.$el.closest('.post'), commCount, currCount, newCount)
+// 		commCount.text(newCount);
+// 	},
 	
 	createComment: function(event) {
 		event.preventDefault();
@@ -42,6 +45,8 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 		
 		formData['comment']['parent_comment_id'] = this.parent_id;
 		
+		var view = this;
+		
 		$.ajax({
 			url: url,
 			dataType: 'json',
@@ -50,8 +55,8 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 		}).done(function(data){
 			var newComm = new Tumblero.Models.Comment({ id: data.id });
 			newComm.fetch();
-			commentsColl.add(newComm);		
-			view.incrementCount();
+			commentsColl.add(newComm);	
+			view.postView.incrementCommCount();
 			$(event.currentTarget).remove();
 		}).fail(function(jqXHR, textStatus){
 			console.log(textStatus);

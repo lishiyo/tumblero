@@ -8,7 +8,7 @@ Tumblero.Views.BlogSettings = Tumblero.Filepickerable.extend({
 	},
 	
 	initialize: function(opts){
-		this.blogs = this.currentUser.blogs();
+		this.blogs = opts.currentUser.blogs();
 		this.listenTo(this.model, 'sync change', this.render);
 		this.listenTo(this.model, 'invalid', this.noteInvalid);
 		

@@ -4,7 +4,6 @@ Tumblero.Utils.Searchable = {
 		var queryTag = $(event.currentTarget).val();
 		console.log("hit checksearch");
 		if (event.which===13 && queryTag === "") {
-			console.log("hit 13")
 			this.queryStr = "";
 			Backbone.history.navigate("explore", { trigger: true })
 // 			this.render();
@@ -23,14 +22,12 @@ Tumblero.Utils.Searchable = {
 			var term = $.ui.autocomplete.escapeRegex(req.term);
 			var pattern = new RegExp(term, "i");
 			var tags = this.model.tags;
-			
 			var filtered = _.filter(tags, function(tag) {
 					return pattern.test(tag);
 				});
 			console.log("got tags", tags, filtered);
 			cb(filtered);
 		}
-		
 		
 	},
 	

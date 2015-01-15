@@ -2,6 +2,11 @@ class Api::DashboardsController < ApplicationController
 	
 	before_action :require_logged_in
 	
+	def tags
+		@dashboard = current_user.dashboard
+		render json: @dashboard.tags
+	end
+	
 	# GET /api/dashboard/posts
 	def posts
 		@dashboard = current_user.dashboard

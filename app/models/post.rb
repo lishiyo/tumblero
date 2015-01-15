@@ -48,6 +48,7 @@ class Post < ActiveRecord::Base
 		end
 	end
 	
+	
 	# all users who like me
 	def likers
 		if self.reblogged

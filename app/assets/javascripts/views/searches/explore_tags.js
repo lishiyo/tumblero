@@ -69,9 +69,6 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 		this.collection = this.searchResPosts;
 		this.collection.currPage = this.searchResPosts._page;
 		this.collection.totalPages = this.searchResPosts.total_pages;
-		
-		tagview = this;
-		
 		this.addAllPosts(this.collection);
 	},
 	

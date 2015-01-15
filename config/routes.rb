@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 				post 'submit'
 				get 'all_posts'
 				get 'search'
+				get 'tags'
 			end
 		end
 		
@@ -27,7 +28,10 @@ Rails.application.routes.draw do
 		
 		resource :dashboard, only: [:show] do
 			resources :taggings, only: [:index] # /api/dashboard/taggings
-			get 'posts', on: :member
+			member do
+				get 'posts'
+				get 'tags'
+			end			
 		end
 		
 		resource :like, only: [:create, :destroy] 

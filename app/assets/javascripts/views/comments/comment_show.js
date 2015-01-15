@@ -21,6 +21,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 		this.post = opts.post;
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.child_comments();
+		this.postView = opts.postView;
 		
 		this.listenTo(this.model, 'sync change', this.render);
 // 		this.listenTo(this.collection, 'sync', this.render);
@@ -53,7 +54,8 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 		var commentSubview = new Tumblero.Views.CommentShow({
       model: comment,
 			post: this.post,
-			currentUser: this.currentUser
+			currentUser: this.currentUser,
+			postView: this.postView
     });
 		
     this.addSubview("#more-child-comment-"+this.model.id, commentSubview);
@@ -72,13 +74,15 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 				model: newComment,
 				parent_id: $a.data("parent_id"),
 				collection: this.model.child_comments(),
-				post: this.post
+				post: this.post,
+				postView: this.postView
 			});
 		} else {
 			var newCommView = new Tumblero.Views.CommentNew({
 				model: newComment,
 				collection: this.model.child_comments(),
-				post: this.post
+				post: this.post,
+				postView: this.postView
 			});
 		}
 		

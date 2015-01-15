@@ -9,24 +9,13 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	
-// 	testTypeahead: function(){
-		
-// 		typeahead = new Backbone.Typeahead({
-// 			collection: this.collection
-// 		});
-		
-// 		typeahead.setElement('#typeahead-results').render();
-		
-// 	},
-	
 	initialize: function(opts){
 		Tumblero.perPage = (Tumblero.perPage || 2); // set to a default
 		
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);
-		
-// 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
+		this.listenTo(this.currentUser, 'sync', this.renderFollow);
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.collection, 'sync remove sort', this.renderPosts);
 		this.listenTo(this.collection, "addNewPost", this.addNewPost);
@@ -108,7 +97,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	// posts container
 	renderPosts: function(coll){
-		this.addAllPosts(coll);
+		var currColl = (coll || this.collection);
+		this.addAllPosts(currColl);
 	},
 	
 	render: function(){	
