@@ -19,18 +19,24 @@
 	
 	<p>
 		<% tag_names.forEach(function(tag){ %>
-			<span><a href="">#<%= tag.escape('name') %></a></span>
+			<span class="tags"><a href="">#<%= tag.escape('name') %></a></span>
 		<% }); %>
 	</p>
 
-	<span class="count-notes"><%= post.escape('notes_count') %> notes</span>
+	<div class="toggleable group">
+		
+		<span class="count-notes pull-left"><%= post.escape('notes_count') %> notes</span>
+
+		<span class="pull-right">
+		<button class="like-btn like-post" data-likeable-type="Post" data-likeable-id="<%= post.id %>" data-initial-like-state='<%= initialLikeState%>'><i class='fa fa-heart'></i></button>
+
+		<button class="reblog-btn" data-post-id="<%= post.id %>"><i class="fa fa-retweet"></i></button>
+
+		<a class="open-comments" data-open-comments="#/posts/<%= post.id %>/comments" href="#/posts/<%= post.id %>/comments"><span class="count-comments" data-curr-count="<%= count_comments %>"><%= count_comments %></span> comments</a>
 	
-	<button class="btn like-btn like-post" data-likeable-type="Post" data-likeable-id="<%= post.id %>" data-initial-like-state='<%= initialLikeState%>'></button>
-	
-	<button class="btn reblog-btn" data-post-id="<%= post.id %>">reblog</button>
-	
-	<a class="btn btn-default open-comments" data-open-comments="#/posts/<%= post.id %>/comments" href="#/posts/<%= post.id %>/comments"><span class="count-comments" data-curr-count="<%= count_comments %>"><%= count_comments %></span> comments</a>
-	
+		</span>
+		
+	</div>
 	
 	<div id="post-comments-<%= post.id %>" class="comments-container">	
 	</div>

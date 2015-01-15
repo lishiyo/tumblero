@@ -13,16 +13,16 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		var $btn = this.$(btnId);
 		if (this.likeState === "liked") {
 			$btn.prop("disabled", false).addClass("liked");
-			$btn.html("unlike");
+// 			$btn.html("unlike");
 		} else if (this.likeState === "unliked") {
 			$btn.prop("disabled", false).removeClass("liked");
-			$btn.html("like");
+// 			$btn.html("like");
 		} else if (this.likeState === "liking") {
 			$btn.prop("disabled", true);
-			$btn.html("liking...");
+// 			$btn.html("liking...");
 		} else if (this.likeState === "unliking") {
 			$btn.prop("disabled", true);
-			$btn.html("unliking...");
+// 			$btn.html("unliking...");
 		}
 	},
 	
@@ -106,18 +106,19 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 	},
 	
 	
-	followBlog: function(event){
+	followBlog: function(event, model_id){
 		event.preventDefault();
 		var followToggle = this,
 				$btn = this.$(this.btnId),
 				user = this.currentUser;
+		var blog_id = model_id || followToggle.model.id;
 		
 		if (this.followState === "followed") {
 			this.followState = "unfollowing";
 			this.renderFollowButton($btn);
-
+			
 			$.ajax({
-				url: "/api/blogs/" + followToggle.model.id + "/following",
+				url: "/api/blogs/" + blog_id + "/following",
 				dataType: "json",
 				method: "DELETE",
 				success: function (data) {
@@ -134,9 +135,9 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		} else if (this.followState === "unfollowed") {
 			this.followState = "following"
 			this.renderFollowButton($btn);
-
+			
 			$.ajax({
-				url: "/api/blogs/" + followToggle.model.id + "/following",
+				url: "/api/blogs/" + blog_id + "/following",
 				dataType: "json",
 				method: "POST",
 				success: function (data) {

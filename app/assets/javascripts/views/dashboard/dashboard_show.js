@@ -18,7 +18,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.collection, 'sort remove sync', this.renderPosts);
-// 		this.listenTo(this.collection, 'add', this.render);
+		this.listenTo(this.collection, 'add', this.renderPosts);
 		
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';

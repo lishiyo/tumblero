@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-fixed-top header-nav group" id="main-nav">
+
+<!-- 		<h1 class="header-logo">
+			<a href="#">App Academy Friends</a>
+		</h1> -->
+<a class="navbar-brand page-scroll" href="#">tumblero</a>
+		
+	<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right header-list-group">
+<% if (Tumblero.current_user) { %>
+					<li class="inline-notifications hidden"></li>
+					
+					<li>
+						<a href="#">Notifications <strong class="badge">3</strong></a>
+						<ul class="header-notifications">
+							<li><a href="#">Constance likes your photo.</a></li>
+							<li><a href="#">Tommy left you a comment.</a></li>
+							<li><a href="#">Jonathan is now following you.</a></li>
+						</ul>
+					</li>
+						
+						<li>
+							<a href="/#/dashboard">Dashboard</a>
+						</li>
+						<li>
+							
+							<button class='btn oe-btn oe-btn-reflect oe-btn-hover-flap oe-btn-inline-icon' id="nav-post"><span data-btn-text="POST"><i class="fa fa-edit fa-2x"></i></span></button>
+						</li>
+						<li>
+							<a href="/#/explore/blogs">Explore</a>
+						</li>
+
+					<li>
+						<a href="#">ME</a>
+						<ul class="header-notifications">
+							<li><a href="/#users/profile" class="user-profile-btn">Profile</a></li>
+							<li><a class="logout-btn" rel="nofollow" data-method="delete" href="/session">Logout</a>
+							
+						</ul>
+					</li>
+					
+					<li>
+						<input type="text" id="nav-search" class="form-control query" placeholder="search tags">
+					</li>
+
+<% } else { %>
+					<li><a href="/#/session/new">Login</a></li>
+					<li><a href="/#/users/new" %>Sign Up</li>
+<% } %>
+
+				</ul>
+		</div>
+	
+
+</nav>

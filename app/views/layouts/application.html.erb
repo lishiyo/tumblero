@@ -8,8 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'layouts/header' %>
-	
+	<div id="main-nav"></div>
 	<% flash.each do |type, message| %>
 		<% if type == 'errors' %>
 			<%= flash_errors %>

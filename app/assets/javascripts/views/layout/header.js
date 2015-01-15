@@ -1,6 +1,6 @@
 Tumblero.Views.Header = Backbone.View.extend({
 	
-	template: JST["layout/header_default"],
+	template: JST["layout/header_basic"],
 	
 	events: {
 		"click button.full-post-modal": "openPostModal",
@@ -10,6 +10,7 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	initialize: function(opts){
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
+		console.log("rendering header");
 	},
 	
 	render: function(){

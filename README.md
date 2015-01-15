@@ -1,6 +1,13 @@
 #Tumblero
 
 ##TODOS:
+* http://navnav.co/
+* http://tympanus.net/codrops/2013/05/08/responsive-retina-ready-menu/
+* http://codyhouse.co/demo/secondary-fixed-navigation/index.html
+* http://tympanus.net/Development/FullscreenOverlayStyles/index8.html
+* http://www.roblukedesign.com/trunk/trunk.html
+
+
 * http://fatiherikli.github.io/backbone-autocomplete/
 * inline post editing (if own post)
 * Search features: https://www.tumblr.com/explore/trending

@@ -1,10 +1,49 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "font-awesome";
-@import "mixins";
-@charset "utf-8";
+/** ===== RESET ===== **/
 
-/** reset **/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
 .group:after {
 	content: "";
@@ -27,7 +66,19 @@ textarea {
 	outline: none;
 }
 
-/** vendor fix **/
+/** ===== IMPORTS ===== **/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+@import "mixins";
+@charset "utf-8";
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,900,900italic,700italic,400italic);
+
+/** ===== VENDOR FIX ===== **/
 
 .container {
 	max-width: 900px;
@@ -38,13 +89,51 @@ textarea {
 	opacity: 0;
 }
 
-/** universal **/
+/** ===== UNIVERSAL ===== **/
+
+/* body {
+		text-align: center;
+/* 	background-color: $lilac-light; */
+/* 	background-color: $rosy; */
+/* 	max-width: 1330px; */
+/* } */
+
+/* EVENTIX */
+/* body {
+	background: $bg-red-orange;
+	text-align: center;
+	font: 18px/1 "Open Sans", "Century Gothic", "Trebuchet MS", Helvetica, sans-serif;
+	color: #000;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	position: relative;
+} */
+
+/* FLAT */
 
 body {
-	text-align: center;
-/* 	background-color: $lilac-light; */
-	background-color: $rosy;
-/* 	max-width: 1330px; */
+	background: $bg-aqua;
+	font: 15px/22px "Lato", "Century Gothic", "Trebuchet MS", Helvetica, sans-serif;
+	color: #34495E;
+	-webkit-font-smoothing: antialiased;
+	text-rendering:optimizeLegibility;
+}
+
+a { 
+	color: #1ABC9C;
+	outline: 0 none;
+	text-decoration: none;
+	transition: all 0.25s ease-in-out 0s;
+	-moz-transition: all 0.25s ease-in-out 0s;
+	-webkit-transition: all 0.25s ease-in-out 0s;
+	-o-transition: all 0.25s ease-in-out 0s;
+	-ms-transition: all 0.25s ease-in-out 0s;
+}
+
+a:hover {
+	color: #2FE2BF;
+	text-decoration: none;
 }
 
 form {
@@ -58,21 +147,42 @@ img.avatar {
 	max-height: 100px;
 }
 
-/** blogs index **/
+/* SHOOT */
 
-ul.blogs-index {
-	max-width: 75%;
-	margin: 0 auto;
+/* LOADING */
+.loading-overlay {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.loading-overlay.active {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  z-index: 9999;
+}
+.loading-overlay div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #444444;
+  font-size: 24px;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.loading-overlay span {
+  -webkit-animation: flash 2s infinite;
+  animation: flash 2s infinite;
+}
+.oe-animate-delay {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 
-.blog-profile {
-	text-align: center;
-	float: left;
-	width: 250px;
-	margin: 10px auto;
-	display: block;
-	position: relative; /* to place follow button */
-	figcaption {
-		color: white;
-	}
-}
+

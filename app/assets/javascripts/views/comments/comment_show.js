@@ -4,7 +4,8 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	
 	events: {
 		'click .reply-comment': 'openReplyForm',
-		'click button.like-comment': "likeSubject"
+		'click button.like-comment': "likeSubject",
+		'click button.follow-btn': "followCommenter"
 	},
 	
 // 	tagName: "li",
@@ -20,8 +21,10 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	initialize: function(opts){
 		this.post = opts.post;
 		this.currentUser = opts.currentUser;
+		
 		this.collection = this.model.child_comments();
 		this.postView = opts.postView;
+		this.blog_id = this.model.get('main_blog_id');
 		
 		this.listenTo(this.model, 'sync change', this.render);
 // 		this.listenTo(this.collection, 'sync', this.render);
@@ -29,6 +32,11 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.collection, 'add', this.addComment);
 		
 		this.likeButtonId = "button#like-btn-" + this.model.id;
+		this.followBtnId = "button#follow-btn-" + this.blog_id;
+	},
+	
+	followCommenter: function(event){
+		this.followBlog(event, this.blog_id);	
 	},
 	
 	removeComment: function(){
@@ -89,12 +97,23 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 		$a.replaceWith(newCommView.render().$el);
 	},
 	
+	setFollowState: function(btnId){
+		var isFollowed = this.currentUser.followStateFor(this.blog_id);
+		this.followState = ((isFollowed) ? "followed" : "unfollowed");
+		
+		this.btnId = (btnId || ('button.follow-btn'));
+	},
+	
 	render: function(){		
 		this.setLikeState('Comment', this.model.id, this.likeButtonId);
+		this.setFollowState(this.followBtnId);
+		comment = this;
 		
 		var content = this.template({ 
 			comment: this.model,
-			initialLikeState: this.likeState
+			initialLikeState: this.likeState,
+			main_blog_id: this.blog_id,
+			initialFollowState: this.followState
 		});
 		
     this.$el.html(content);
@@ -102,6 +121,7 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
     this.addAllComments();
 		
 		this.renderLikeButton(this.likeButtonId);
+		this.renderFollowButton(this.followBtnId);
     return this;
 	}
 });

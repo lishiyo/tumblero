@@ -22,8 +22,8 @@
 	border-radius: 10px;
 	
 	img {
-		max-width: 510px;
-		max-height: 400px;
+		max-width: $post-img-width;
+		max-height: $post-img-height;
 	}
 
 	a {
@@ -33,11 +33,60 @@
 }
 
 
-/* for dashboard and blog view */
+/* === DASHBOARD/BLOG VIEWS ==== */
 .posts-container {
-	max-width: 550px;
+	max-width: $post-container;
 	margin: 0 auto;
 }
+
+
+/* === TOGGLEABLE === */
+
+.toggleable {
+	background: transparent;
+	color: $gray-darker;
+	
+	button {
+		background: inherit;
+		border: none;
+		outline: none;
+	}
+	
+	btn-default {
+		
+	}
+	
+	i {
+		color: inherit;
+		background: inherit;
+		transition: all 0.25s ease-in-out 0s;
+		-moz-transition: all 0.25s ease-in-out 0s;
+		-webkit-transition: all 0.25s ease-in-out 0s;
+		-o-transition: all 0.25s ease-in-out 0s;
+		-ms-transition: all 0.25s ease-in-out 0s;
+	}
+	
+	i.fa-heart {
+		font-size: 20px;
+		
+	}
+	i.fa-heart:hover {
+		color: $rosy;
+		background: inherit;	
+	}
+	
+	i.fa-retweet {
+		font-size: 25px;
+	}
+	
+	i.fa-retweet:hover {
+		color: $foam-green;
+		background: inherit;
+	}
+}
+
+
+
 
 /* Post Modal */
 

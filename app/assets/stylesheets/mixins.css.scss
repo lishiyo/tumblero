@@ -9,9 +9,28 @@ $tumblr-standard: #36465d;
 $gold: #EBDC2B;
 $rosy: #FC0650;
 $rosy-light: #DDA1B3;
+$rosy-coral: rgba(245, 72, 74, 0.9);
+$orange-dull: rgb(208, 101, 3);
+$gold: rgb(233, 147, 26);
+$sky-blue: rgb(22, 145, 190);
+$dark-blue: rgb(27, 54, 71);
 
+/* envato */
+$bg-black: rgba(49, 60, 65, 0.9);
+/* eventix */
+$bg-dark: rgba(25, 33, 50, 0.92);
+$bg-light: #f4f6f8; 
+$bg-red-orange: linear-gradient(135deg, #fe7955 0%,#f05c6a 100%);
+$bg-aqua: #26b6cb;
+/* signum */
+$foam-green: #84cbc5;
+
+
+/* sizes */
 $post-container: 656px;
-$post-width: 550px;
+$post-width: 600px;
+$post-img-width: 580px;
+$post-img-height: 400px;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
