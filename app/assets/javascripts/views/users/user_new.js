@@ -2,7 +2,8 @@ Tumblero.Views.UserNew = Backbone.View.extend({
   template: JST['users/new'],
 
   events: {
-    "submit form": "createUser"
+    "submit form": "createUser",
+		"click #guest-sign-in": "guestSignIn"
   },
 
   render: function () {
@@ -10,6 +11,32 @@ Tumblero.Views.UserNew = Backbone.View.extend({
     this.$el.html(content);
     return this;
   },
+	
+	guestSignIn: function(event){
+		event.preventDefault();
+		
+		var formData = {
+			email: "guest@tumblero.com",
+			password: "demodemo"
+		}
+		
+		var newSession = new Tumblero.Models.Session();
+		
+		newSession.save(formData, {
+			success:function(response){
+				console.log("guest sign in");
+				
+				this.$('.errors').addClass('hidden');
+				
+				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
+				Tumblero.current_user.fetch();
+				
+        Backbone.history.navigate("/dashboard", {trigger: true});
+				Tumblero.Header.refresh();
+				
+			}.bind(this)
+		})
+	},
 
   createUser: function (event){
     event.preventDefault();
@@ -17,7 +44,6 @@ Tumblero.Views.UserNew = Backbone.View.extend({
 
     this.model.save(formData, {
       success: function(model, response, options) {
-				console.log("saved new user", this.model);
 				this.$('.errors').addClass('hidden');
 				
 				Tumblero.current_user = this.model;

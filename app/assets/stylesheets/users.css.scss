@@ -35,9 +35,9 @@ button.session-btn {
 		height: inherit;
 		width: inherit;
 	}
-	span#inner-span {
+	span.inner-span {
 		margin-top: 4px;
-		background: transparent;
+		background: none !important;
 	}
 }
 
