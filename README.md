@@ -1,5 +1,12 @@
 #Tumblero
 
+## FEATURES
+
+Posts
+Reblog
+Like, Follow, Comment
+
+
 ##TODOS:
 * http://navnav.co/
 * http://tympanus.net/codrops/2013/05/08/responsive-retina-ready-menu/
