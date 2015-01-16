@@ -4,7 +4,7 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	
 	events: {
 		'click .close-comments': 'closeComments',
-		'click .reply-comment': 'openReplyForm'
+// 		'click .reply-comment': 'openReplyForm'
 	},
 	
 	initialize: function(opts){
@@ -26,16 +26,45 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	},
 	
 	addCommSubview: function(comment) {
+
+		view = this;
+		
+		if (comment.get('main_blog_id') === this.currentUser.get('main_blog_id')) {
+			this.shouldShowFollow = false;
+		} else {
+			this.shouldShowFollow = true;
+		}
+		
 		var commentSubview = new Tumblero.Views.CommentShow({
       model: comment,
 			post: this.post,
 			currentUser: this.currentUser,
-			postView: this.postView
+			postView: this.postView,
+			shouldShowFollow: this.shouldShowFollow
     });
 
 		var contId = "#comments-index-"+this.post.id;
 	
     this.addSubview(contId, commentSubview);
+	},
+	
+	addReplyForm: function() {
+		
+		var newComment = new Tumblero.Models.Comment({
+			post: this.post
+		});
+		
+		var newCommView = new Tumblero.Views.CommentNew({
+			model: newComment,
+			collection: this.collection,
+			post: this.post,
+			postView: this.postView
+		});
+		
+		var contId = this.$('.reply-form-container');
+		
+		this.addSubview(contId, newCommView);
+// 		contId.html(newCommView.render().$el);
 	},
 	
 	render: function(){
@@ -44,7 +73,9 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 		});
 		
 		var $close = $('<a class="close-comments" href="">close</a>');
+		
 		this.$el.html(content).append($close);
+		this.addReplyForm();
 		// attach child comments subviews
 		this.addAllRoots();
 		

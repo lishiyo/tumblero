@@ -7,7 +7,8 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 	},
 	
 	initialize: function(opts){
-		this.collection = opts.collection;
+		// child comments I belong to
+		this.collection = (opts.collection || null);
 		this.post = opts.post;
 		this.currentUser = this.currentUser;
 		this.postView = opts.postView;
@@ -23,15 +24,6 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 		
 		return this;
 	},
-	
-// 	incrementCount: function(){
-// 		var commCount = this.$el.closest('.post').first().find('.count-comments');
-// 		var currCount = commCount.data("curr-count");
-// 		var newCount = currCount + 1;
-// 		commCount.data("curr-count", newCount);
-// 		console.log("incCount", this.$el, this.$el.closest('.post'), commCount, currCount, newCount)
-// 		commCount.text(newCount);
-// 	},
 	
 	createComment: function(event) {
 		event.preventDefault();
@@ -57,7 +49,7 @@ Tumblero.Views.CommentNew = Backbone.View.extend({
 			var oldCount = Number(view.post.get('comments_count'));
 			view.post.set({comments_count: oldCount+1});
 // 			view.postView.incrementCommCount();
-			$(event.currentTarget).remove();
+// 			$(event.currentTarget).remove();
 		}).fail(function(jqXHR, textStatus){
 			console.log(textStatus);
 		})

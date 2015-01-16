@@ -66,6 +66,23 @@ textarea {
 	outline: none;
 }
 
+::-webkit-input-placeholder { /* WebKit browsers */
+	opacity: 0.5;
+}
+
+::-webkit-input-placeholder:focus { /* WebKit browsers */
+	opacity: 0.5;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+ 	opacity: 0.5;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+ 	opacity: 0.5;
+}
+
+
 /** ===== IMPORTS ===== **/
 
 @import "bootstrap-sprockets";
@@ -88,6 +105,13 @@ textarea {
 	display: none !important;
 	opacity: 0;
 }
+
+
+h1, h2, h3, h4 {
+	text-align: center;
+}
+
+
 
 /** ===== UNIVERSAL ===== **/
 
@@ -136,6 +160,14 @@ a:hover {
 	text-decoration: none;
 }
 
+i {
+	transition: all 0.25s ease-in-out 0s;
+	-moz-transition: all 0.25s ease-in-out 0s;
+	-webkit-transition: all 0.25s ease-in-out 0s;
+	-o-transition: all 0.25s ease-in-out 0s;
+	-ms-transition: all 0.25s ease-in-out 0s;
+}
+
 form {
 	max-width: 55%;
 	margin: 0 auto;
@@ -146,6 +178,16 @@ img.avatar {
 	max-width: 100px;
 	max-height: 100px;
 }
+
+/* ==== SHARED ==== */
+
+.pagination-nav {
+	margin: 10px auto;
+	max-width: $post-width;
+	padding: 10px;
+	text-align: center;
+}
+
 
 /* SHOOT */
 

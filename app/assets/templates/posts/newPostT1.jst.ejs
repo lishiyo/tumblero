@@ -12,7 +12,11 @@
 	
 	<div class="form-group">
 		
-		<a href="#" class="upload-fp">upload images</a>
+<!-- 		<a href="#" class="upload-fp"><i class="fa fa-camera-retro"></i>upload images</a>
+		 -->
+		<a href="#" class="upload-fp"><button class="btn oe-btn oe-btn-grey oe-btn-hover-up oe-btn-inline-icon">
+			<span><i class="fa fa-camera-retro"></i>upload images</span>
+			</button></a>
 		
 		<input type="hidden" name="post[filepicker_urls]" id="filepicker_urls">
 		<div class="image-thumbnails"></div>
@@ -25,8 +29,8 @@
 	</div>
 	
 	<div class="form-group">
-		<label for="post_tags_string">tags (separate by commas):</label>
-		<input type="text" id="post_tags_string" name="post[tags_string]" class="form-control">
+<!-- 		<label class="tags" for="post_tags_string">tags (separate by commas):</label> -->
+		<input type="text" id="post_tags_string" name="post[tags_string]" class="form-control tags" placeholder="tags(separate by commas)">
 	</div>
 		
 	<input type="hidden" name="post[reblogged]" value="false">

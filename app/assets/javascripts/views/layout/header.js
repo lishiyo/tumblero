@@ -3,7 +3,7 @@ Tumblero.Views.Header = Backbone.View.extend({
 	template: JST["layout/header_basic"],
 	
 	events: {
-		"click button.full-post-modal": "openPostModal",
+		"click button#nav-post": "openPostModal",
 		"focus #nav-search": "initAutocomplete",
 		'keyup #nav-search': 'checkSearch'
 	},

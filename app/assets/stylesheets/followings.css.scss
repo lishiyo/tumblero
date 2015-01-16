@@ -1,3 +1,5 @@
+@import "mixins";
+
 button.follow-btn {
 /* 	position: absolute; */
 	right: 10px;
@@ -6,6 +8,14 @@ button.follow-btn {
 	margin: 5px;
 	width: 175px;
 }
+
+button.follow-btn.follow-btn-small {
+		width: $follow-small-width;
+		height: $follow-small-height;
+		margin-top: -2px;
+		margin-left: 10px;
+		font-size: 11px;
+	}
 
 button.follow-btn:hover {
 	background-color: orange;
@@ -18,4 +28,18 @@ button.followed {
 
 button.followed:hover {
 	background-color: black;
+}
+
+
+button.liked {
+	color: $rosy;
+	i.fa-heart {
+		font-size: 24px;
+	}
+}
+
+button.liked:hover {
+	i.fa-heart {
+		color: $gray-line;
+	}
 }

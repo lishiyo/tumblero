@@ -16,8 +16,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.collection.currPage = (this.model._page || 1);
 		
 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
-		this.listenTo(this.model, 'sync', this.render);
-		this.listenTo(this.collection, 'sort remove sync', this.renderPosts);
+		this.listenTo(this.model, 'sync', this.renderDash);
+		this.listenTo(this.collection, 'sort sync', this.renderPosts);
 		this.listenTo(this.collection, 'add', this.renderPosts);
 		
 		this.postsCont = '.posts-container';
@@ -114,11 +114,13 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.addAllPosts(currColl);
 	},
 	
-	render: function(){
-		console.log("curr coll in dash", this.collection);
-		
+	renderDash: function(){
 		this.renderFollow();
-		
+		this.renderFollowButton(this.$('.follow-btn'));
+	},
+	
+	render: function(){
+		this.renderFollow();
 		var content = this.template({ 
 			dashboard: this.model,
 			current_user_id: this.currentUser.id,

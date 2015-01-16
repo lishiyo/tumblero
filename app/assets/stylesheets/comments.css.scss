@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "mixins";
+	
 .comments-container {
 	ol {
 		border: none;
@@ -24,41 +26,118 @@
 		max-width: 100%;
 		
 		.form-group {
-			width: 100%;
+			width: inherit;
+			padding: 10px;
+			margin: 5px 0 20px 0;
+			border-radius: 5px;
+			background: $gray-line;
+			
 			textarea {
-				width: 100%;
+				width: inherit;
 			}
-			input[type="submit"] {
-				float: right;
-				margin-top: 10px;
-				width: 100px;
-			}
+
 		}
 	}
 	
-	a.reply-comment:before {
+/* 	a.reply-comment:before {
 		content: " § "
 	}
-	
+	 */
 	.commenter {
 		display: block;
 	}
 	
+	.inline-reply {
+		
+		.reply-comment {
+			padding: 3px 20px;
+			margin-left: 10px;
+			border-radius: 4px;
+			color: $gray-line;
+			font-size: 12px;
+			font-weight: 700;
+			float: right;
+			border: 1px solid #fff;
+			background: transparent;
+			width: $reply-btn-width;
+			height: $reply-btn-height;
+			span {
+				line-height: 1rem;
+				padding: 0;
+				background: none;
+				color: $bg-aqua;
+			}
+			span:before {
+				line-height: 1rem;
+				padding: 0;
+				background: transparent;
+			}
+		}
+
+		.reply-comment:hover {
+			background: $bg-aqua;
+		}
+
+		.reply-comment.new-comment {
+			margin-top: 10px;
+		}
+		
+	}
+	
 	.comment-body-container {
 		display: block;
-		button {
-			float: left;
-			max-width: 20%;
-		}
+		position: relative;
+
 		.comment-body {
-			float: right;
-			width: 70%;
+			width: 100%;
+			padding: 0px 10px 20px 0;
+			border-bottom: 1px dashed $gray-line;
+			float:left;
 		}
+		
+		.toggleable {
+			float: right;
+			margin-top: 10px;
+		}
+		
+		
+	}
+}
+
+.reply-comment.new-comment {
+	padding: 3px 20px;
+	margin-left: 10px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-weight: 700;
+	float: right;
+	border: 1px solid $gray-line;
+	background: transparent;
+	width: $reply-btn-width;
+	height: $reply-btn-height;
+	span {
+		line-height: 1rem;
+		padding: 0;
+		background: none;
+		color: $gray-line;
+	}
+	span:before {
+		line-height: 1rem;
+		padding: 0;
+		background: transparent;
 	}
 }
 
 
+.reply-comment:hover {
+	background: $bg-aqua;
+}
+/* 
+.reply-comment.new-comment {
+	margin-top: 10px;
+}
 
+ */
 /* 
 .comments-container ol {
 	border: 1px solid gray;

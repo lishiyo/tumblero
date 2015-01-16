@@ -12,8 +12,10 @@ $rosy-light: #DDA1B3;
 $rosy-coral: rgba(245, 72, 74, 0.9);
 $orange-dull: rgb(208, 101, 3);
 $gold: rgb(233, 147, 26);
-$sky-blue: rgb(22, 145, 190);
+$skyblue: rgb(22, 145, 190);
 $dark-blue: rgb(27, 54, 71);
+
+$gray-line: #ccc;
 
 /* envato */
 $bg-black: rgba(49, 60, 65, 0.9);
@@ -31,6 +33,11 @@ $post-container: 656px;
 $post-width: 600px;
 $post-img-width: 580px;
 $post-img-height: 400px;
+
+$follow-small-width: 80px;
+$follow-small-height: 25px;
+$reply-btn-width: 150px;
+$reply-btn-height: 30px;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;

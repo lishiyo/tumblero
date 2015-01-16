@@ -1,3 +1,4 @@
+/* === SEE FOLLOWINGS === */
 
 /* button.like-btn {
 	position: absolute;
@@ -9,12 +10,6 @@
 
 button.like-btn:hover {
 	background-color: red;
-	color: white;
-}
-
-button.liked {
-	@extend button.follow-btn;
-	background-color: gray;
 	color: white;
 }
 

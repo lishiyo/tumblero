@@ -28,12 +28,6 @@ table.blogs-table {
  	}
 }
 
-.pagination-nav {
-	margin: 10px auto;
-	max-width: $post-width;
-	padding: 10px;
-}
-
 #edit-user {
 	margin: 10px auto;
 	max-width: $post-width;
@@ -63,7 +57,7 @@ iframe.wysihtml5-sandbox {
 /** SORTABLE **/
 
 .sortable-bar {
-	width: $post-width;
+	width: $post-container;
 	margin: 0 auto;
 	position: relative;
 }
@@ -72,7 +66,7 @@ iframe.wysihtml5-sandbox {
 	margin: 10px auto;
 	text-align: center;
 	float: left;
-	width: $post-width;
+	width: $post-container;
 	
 	li > a {
 		padding: 6px 15px;

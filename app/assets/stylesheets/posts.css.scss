@@ -30,8 +30,19 @@
 		text-decoration: none;
 		color: gray;
 	}
+	
+	p {
+		padding: 0 10px;
+	}
+	
 }
 
+blockquote.post-quote {
+	background: $bg-light;
+	border:none;
+	border-radius: 5px;
+	padding: 10px 15px;
+}
 
 /* === DASHBOARD/BLOG VIEWS ==== */
 .posts-container {
@@ -124,12 +135,32 @@
   left: 50%;
   transform: translateX(-50%);
   max-width: 66% !important;
-	width: 66%;
   padding: 40px;
   background: #fff;
   z-index: 3;
   border-radius: 5px;
   border: 1px solid #000;
+	width: 900px;
+	
+	label {
+		float: left;
+		opacity: 0.75;
+		width: 5%;
+		font-weight: normal;
+	}
+	
+	input[type="text"] {
+		width: 93%;
+		margin-left: 50px;
+	}
+	
+	.upload-fp button, .upload-fp span {
+		width: 750px;
+	}
+	
+	.upload-fp button:hover:before {
+		background: $rosy;
+	}
 	
 }
 
@@ -179,11 +210,28 @@ li.bbm-modal__tab:hover, li.bbm-modal__tab:active {
 	left: 3%;
 }
 
+.wysiwyg iframe{
+	border: 1px solid $gray-line;
+}
+
+input[type="text"].tags {
+	width: 100%;
+	margin-left: 0px;
+}
+
+#submit-post-btn {
+	width: 93%;
+	border: none;
+	span:before {
+		background: transparent;
+	}
+}
+
 /** tab2 **/
 
 .drop-pane-full {	
-	background-color: yellow;
-	opacity: 0.8;
+	background-color: $gold;
+	opacity: 0.6;
 	text-align: center;
 	margin: 10px auto;
 	padding: 10px;

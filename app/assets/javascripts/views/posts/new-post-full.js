@@ -30,16 +30,16 @@ Tumblero.Views.NewPostFull = Tumblero.PostModal.extend({
 		}
 	},
 	
+	// FOR TAB 3 - quotes
 	createPostContent: function(e){
 		e.preventDefault();
 		var quote = this.$('#post-quote').val();
-		var block = "<i class='fa fa-quote-left text-muted pull-left'></i>" + quote + "<i class='fa fa-quote-right text-muted pull-right'></i>";
+		var block = "<blockquote class='post-quote'><i class='fa fa-quote-left text-muted pull-left'></i>" + quote + "<i class='fa fa-quote-right text-muted pull-right'></i></blockquote>";
 		
 		var formData = $(e.currentTarget).serializeJSON();
 		var source = this.$('#post-content').val();
 		formData['post']['content'] = block + "<p>" + source + "</p>";
 		
-// 		console.log("in tab 3", formData);
 		this.submitForm(e, formData.post);
 	},
 	

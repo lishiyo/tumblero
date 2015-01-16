@@ -7,7 +7,18 @@
 	
 <div class="container">
 	<h2>Make a New Post</h2>
-		
+	
+	<div class="row dashboard-row">
+
+		<button class="full-post-modal btn oe-btn oe-btn-reflect oe-btn-hover-flap oe-btn-inline-icon" data-tab-num="1" id="text-post-btn"><span><i class="fa fa-4x fa-font"></i></span>
+		</button>
+		<button class="full-post-modal btn oe-btn oe-btn-reflect oe-btn-hover-flap oe-btn-inline-icon" data-tab-num="2" id="image-post-btn"><span><i class="fa fa-4x fa-camera"></i></span>
+		</button>
+		<button class='full-post-modal btn oe-btn oe-btn-reflect oe-btn-hover-flap oe-btn-inline-icon' data-tab-num="3" id="quote-post-btn"><span ><i class="fa fa-4x fa-quote-left"></i></span>
+		</button>
+	
+	</div>
+<!-- 	
 	<div class="row">
 
 		<button class="full-post-modal btn btn-info" data-tab-num="1"><i class="fa-pencil-square fa fa-4x"></i> <p>Text</p>
@@ -17,9 +28,9 @@
 		<button class='full-post-modal btn btn-default' data-tab-num="3"><i class="fa-quote-left fa fa-4x"></i><p>Quote</p>
 		</button>
 	
-	</div>
+	</div> -->
 	
-	<div class="row">
+<!-- 	<div class="row">
 		<button class="btn oe-btn oe-btn-reflect oe-btn-hover-flap">
 			<span data-btn-text="new post">text</span><i class="fa fa-edit"></i>
 		</button>
@@ -33,12 +44,9 @@
 			<span data-btn-text="new post">
 				<i class="fa fa-edit"></i>color</span>
 		</button>
-		
-		
-	</div>
+	</div> -->
 	
 </div>
-	
 	
 	
 	<section class="container dashboard-main">
@@ -54,7 +62,7 @@
 				</li>
 				<li class="">
 					<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="notes_count">
-						<i class="fa fa-suitcase"></i> Popular</a>
+						<i class="fa fa-fire"></i> Popular</a>
 				</li>
 				<li class="">
 					<a href="#" role="tab" data-toggle="tab" class="re-sort" data-sort-method="recent_notes_count">
@@ -64,7 +72,7 @@
 				</ul>
 
 				<li class="inline-search-bar">
-						<input type="text" id="search-tag" class="form-control">
+						<input type="text" id="search-tag" class="form-control" placeholder="search tags">
 				</li>
 
 			</div>

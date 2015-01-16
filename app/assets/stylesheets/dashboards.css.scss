@@ -24,12 +24,54 @@ section.dashboard-main {
 	
 }
  */
+
+.dashboard-row {
+	text-align: center;
+	margin-bottom: 80px;
+}
+
 button.full-post-modal {
-	width: 100px;
 	border-radius: 5px;
 	padding: 10px;
-	p {
-		padding: 0px;
-		margin: 0px;
+	border: none;
+	
+	span {
+		border: none;
+		height: 105px;
+		background: inherit;
 	}
+	
+	i.fa {
+		background: transparent;
+		margin: 0;
+	}
+}
+
+.full-post-modal.oe-btn-reflect.oe-btn-hover-flap .fa {
+	background: transparent;
+}
+
+.full-post-modal.oe-btn-reflect.oe-btn-hover-flap span {
+	background: inherit;
+	&:before {
+		height: 100%;
+		background: inherit;
+	}
+}
+
+.full-post-modal.oe-btn-reflect:before, .oe-btn-reflect span:before, .oe-btn-reflect .fa:after {
+	border: none;
+	outline: none;
+}
+
+button#text-post-btn span {
+	background: $rosy;
+}
+
+button#image-post-btn span {
+	background: $gold;
+}
+
+button#quote-post-btn span {
+	background: $foam-green;
 }

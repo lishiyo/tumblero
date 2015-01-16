@@ -1,18 +1,30 @@
 <li>
-	<a class="commenter" href="#/blogs/<%= main_blog_id %>"><%= comment.escape('main_blog_handle') %>
+	<span class="group">
+	<a class="commenter pull-left" href="#/blogs/<%= main_blog_id %>"><%= comment.escape('main_blog_handle') %>
 	</a>
-	<button class="follow-btn btn btn-info" data-blog-id="<%= main_blog_id %>" data-initial-follow-state="<%= initialFollowState %>" id="follow-btn-<%= main_blog_id %>"></button>
+		
+		<% if (shouldShowFollow) { %>
+			<button class="follow-btn btn btn-info pull-left follow-btn-small" data-blog-id="<%= main_blog_id %>" data-initial-follow-state="<%= initialFollowState %>" id="follow-btn-<%= main_blog_id %>"></button>
+		<% } %>
+		
+		</span>
 	
 	<div class="comment-body-container group">
 		
-		<span class="toggleable">
-			<button class="like-btn like-comment" data-likeable-type="Comment" data-likeable-id="<%= comment.id %>" data-initial-like-state='<%= initialLikeState%>' id="like-btn-<%= comment.id %>"><i class='fa fa-heart'></i></button>
-		</span>
-	
 		<div class="comment-body">
 			<%= comment.escape('body') %> 	
-			<a href="" class="reply-comment" data-parent_id="<%= comment.id %>">reply</a>
-		</div>  
+		</div>
+		
+
+		<span class="toggleable group">
+			<button class="like-btn like-comment" data-likeable-type="Comment" data-likeable-id="<%= comment.id %>" data-initial-like-state='<%= initialLikeState%>' id="like-btn-<%= comment.id %>"><i class='fa fa-heart'></i></button>
+			
+			<button type="submit" class="btn oe-btn oe-btn-reflect reply-comment new-comment" data-parent_id="<%= comment.id %>"><span>reply</span>
+		</button>
+<!-- 			
+			<a href="#" class="reply-comment" data-parent_id="<%= comment.id %>">reply</a> -->
+		</span>
+		
 	</div>
 	
 </li>

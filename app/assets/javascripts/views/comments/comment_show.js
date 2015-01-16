@@ -26,6 +26,13 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 		this.postView = opts.postView;
 		this.blog_id = this.model.get('main_blog_id');
 		
+		
+		if (this.blog_id === this.currentUser.get('main_blog_id')) {
+			this.shouldShowFollow = false;
+		} else {
+			this.shouldShowFollow = true;
+		}
+		
 		this.listenTo(this.model, 'sync change', this.render);
 // 		this.listenTo(this.collection, 'sync', this.render);
 		this.listenTo(this.collection, 'remove', this.removeComment);
@@ -71,8 +78,8 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	
 	openReplyForm: function(event) {
 		event.preventDefault();
-		var $a = $(event.currentTarget);
-		
+		var $a = $(event.currentTarget); // reply-comment btn
+		var $elem = $a.closest('.toggleable');
 		var newComment = new Tumblero.Models.Comment({
 			post: this.post
 		});
@@ -94,7 +101,9 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 			});
 		}
 		
-		$a.replaceWith(newCommView.render().$el);
+		$elem.replaceWith(newCommView.render().$el);
+
+// 		$a.replaceWith(newCommView.render().$el);
 	},
 	
 	setFollowState: function(btnId){
@@ -107,13 +116,13 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	render: function(){		
 		this.setLikeState('Comment', this.model.id, this.likeButtonId);
 		this.setFollowState(this.followBtnId);
-		comment = this;
 		
 		var content = this.template({ 
 			comment: this.model,
 			initialLikeState: this.likeState,
 			main_blog_id: this.blog_id,
-			initialFollowState: this.followState
+			initialFollowState: this.followState,
+			shouldShowFollow: this.shouldShowFollow
 		});
 		
     this.$el.html(content);

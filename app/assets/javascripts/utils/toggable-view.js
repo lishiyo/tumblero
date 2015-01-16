@@ -71,6 +71,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 					likeToggle.likeState = "liked";
 					likeToggle.renderLikeButton($btn);
 					likeToggle.model.fetch();
+					console.log("created like!");
 				},
 				error: function(data) {
 					console.log("error in like creation", data);
