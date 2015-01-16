@@ -1,15 +1,20 @@
-<section class="blog-profile">
-	<h1><a href="#<%= Routes.blog_path(blog) %>"><%= blog.get('name') %></a></h1>
-	<% if (current_user_id !== blog.get('user_id')) { %>
-		<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>"></button>
-	<% } %>
-	<p><%= blog.get('description') %></p>
-	
-	<% if (blog.get('avatar_url')) { %>
-		<img src="<%= blog.get('avatar_url') %>">
-	<% } else { %>
-		<img src="<%= Tumblero.Assets.path('default_avatar_02.png') %>">
-	<% } %>
+<section class="blog-main">
+	<div class="blog-profile">
+		
+		<h1><a href="#<%= Routes.blog_path(blog) %>"><%= blog.get('name') %></a></h1>
+		<% if (current_user_id !== blog.get('user_id')) { %>
+			<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>"></button>
+		<% } %>
+		<p><%= blog.get('description') %></p>
+
+		<% if (blog.get('avatar_url')) { %>
+			<img src="<%= blog.get('avatar_url') %>">
+		<% } else { %>
+			<img src="<%= Tumblero.Assets.path('default_avatar_02.png') %>">
+		<% } %>
+
+
+	</div>
 </section>
 
 
@@ -17,7 +22,7 @@
 
 <section>
 	
-	<h2>Posts</h2>
+<!-- 	<h2>Posts</h2> -->
 	
 <!-- 	<div class="col-md-6 col-md-offset-3 col-xs-6 col-xs-offset-3 col-lg-6 col-lg-offset-3"> -->
 	<div class="sortable-bar group">

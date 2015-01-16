@@ -1,4 +1,4 @@
-<li class="blog-profile">
+<div class="item blog-profile">
 <h3><a href="#<%= Routes.blog_path(blog) %>"><%= blog.get('name') %></a></h3>
 	<!-- follow button -->
 	<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>" id="follow-btn-<%= blog.id %>"></button>
@@ -13,4 +13,4 @@
 </figure>
 
 
-</li>
+</div>

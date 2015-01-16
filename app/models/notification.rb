@@ -7,15 +7,17 @@ class Notification < ActiveRecord::Base
 	
 	default_scope  { order(created_at: :desc) }
 	
-	# returns string
+	
+	# AS NOTIFICATION
+	
 	def content
 		case notification_type
 		when "Reblog"
-			"reblogged"
+			"reblogged your post"
 		when "Like"
-			"liked"
+			"liked your post"
 		when "Comment" # only for posts 
-			"commented on"
+			"commented on your post"
 		when "Following"
 			"is now following you"
 		else
@@ -28,13 +30,12 @@ class Notification < ActiveRecord::Base
 		"blogs/#{self.noter.main_blog_id}"
 	end
 	
-	def notifiable_url
-		if ["Reblog", "Like", "Comment"].include?(self.notification_type)
-			"posts/#{notification_id}"
-		else
-			"blogs/#{notification_id}"
-		end
+	# name of the main blog of the noter following me
+	def noter_blog_handle
+		noter.main_blog.handle
 	end
+	
+	# AS NOTER
 	
 	def noter_content
 		case notification_type
@@ -51,4 +52,12 @@ class Notification < ActiveRecord::Base
 		end
 	end
 	
+	# what you reblogged, liked, commented etc
+	def notifiable_url
+		if ["Reblog", "Like", "Comment"].include?(self.notification_type)
+			"posts/#{notification_id}"
+		else
+			"blogs/#{notification_id}"
+		end
+	end
 end

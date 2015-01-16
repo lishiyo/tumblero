@@ -30,9 +30,9 @@ class Api::SearchesController < ApplicationController
 	# SINGLE SEARCH
 	def posts
 		if params[:query] && params[:query].empty?
-			@search_results = Post.page(params[:page]).per(2)
+			@search_results = Post.page(params[:page])
 		else
-			@search_results = Post.search_by_tags(params[:query]).page(params[:page]).per(2)
+			@search_results = Post.search_by_tags(params[:query]).page(params[:page])
 		end
 		render 'single_search'
 	end
@@ -45,7 +45,6 @@ class Api::SearchesController < ApplicationController
     @search_results = PgSearch
 		.multisearch(query)
 			.page(params[:page])
-			.per(2)
 		
 		render 'multi_search'
 	end

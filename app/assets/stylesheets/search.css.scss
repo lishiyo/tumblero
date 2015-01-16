@@ -1,16 +1,13 @@
 /* /explore/:tags */
 input#main-search {
-	width: 15%;
+	width: 300px;
 	display: inline-block;
 	vertical-align: top;
-	border-radius: none;
+	border-radius: none !important;
 	border: none;
 	outline: none;
-}
-
-/* navbar search */
-input#nav-search {
-	
+	height: 34px;
+	margin-left: 10px;
 }
 
 /* inline search on dashboard or blog */
@@ -22,5 +19,22 @@ input#nav-search {
 	input {
 		border: none;
 		border-radius: none;
+	}
+}
+
+#main-search-container {
+	padding: 20px;
+}
+
+#blogs-results {
+	div {
+		margin: 0 auto;
+	}
+}
+
+#posts-results {
+	margin-bottom: 10px;
+	.post {
+		width: 400px;
 	}
 }

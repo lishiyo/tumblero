@@ -1,1 +1,1 @@
-json.extract! note, :user_id, :id, :noter_id, :noter_content, :notification_type, :notification_id, :notifiable_url
+json.extract! note, :user_id, :id, :noter_id, :noter_content, :notifiable_url

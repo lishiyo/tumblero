@@ -63,10 +63,6 @@ blockquote.post-quote {
 		outline: none;
 	}
 	
-	btn-default {
-		
-	}
-	
 	i {
 		color: inherit;
 		background: inherit;
@@ -206,8 +202,8 @@ li.bbm-modal__tab:hover, li.bbm-modal__tab:active {
 .full-modal #post_blog_id {
 	width: 230px;
 	position: absolute;
-	top: 33px;
-	left: 3%;
+	top: 13px;
+	left: 2%;
 }
 
 .wysiwyg iframe{
@@ -220,10 +216,11 @@ input[type="text"].tags {
 }
 
 #submit-post-btn {
-	width: 93%;
+	width: 100%;
 	border: none;
 	span:before {
 		background: transparent;
+		width: inherit;
 	}
 }
 

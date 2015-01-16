@@ -6,14 +6,26 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 	},
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
-		this.listenTo(this.currentUser, 'sync', this.render);
-		this.listenTo(this.collection, 'sync add remove', this.render);
-
+// 		this.listenTo(this.currentUser, 'sync', this.render);
+		this.listenTo(this.collection, 'sync', this.addAllBlogs);
+	},
+	
+	addAllBlogs: function(){
 		// add subviews for blog
 		this.collection.each(function(blog){
 			this.addBlogSubview(blog);
 		}.bind(this));
 		
+		this.initMasonry();
+	},
+	
+	initMasonry: function(){
+		var $container = $('#masonry');
+		$container.masonry({
+// 			columnWidth: 200,
+			itemSelector: '.item',
+			gutter: 20
+		});			
 	},
 	
 	addBlogSubview: function(blog){
@@ -23,16 +35,15 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 			currentUser: this.currentUser
     });
 		
-    this.addSubview(".blogs-explore-index", subview);
+    this.addSubview(".blogs-index", subview);
 	},
 	
 	render: function(){
-		
 		var content = this.template();
     this.$el.html(content);
-    this.attachSubviews();
 		
 		
+//     this.attachSubviews();
     return this;
 	}
 	

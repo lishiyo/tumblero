@@ -1,0 +1,44 @@
+<div class="post post-item">
+	
+<h3><% if (post.get('title')) { %>
+			<%= post.get('title') %>
+		<% } %>
+</h3>
+
+	<% if (post.get('filepicker_urls') && post.get('filepicker_urls').length > 0) { %>
+		<% post.get('filepicker_urls').split(",").forEach(function(file_url) { %>
+			<img src="<%= file_url %>">
+		<% }); %>
+	<% } %>
+	
+	<p>
+		<% if (post.get('content')) { %>
+			<%= post.get('content') %>
+		<% } %>
+	</p>
+	
+	<p>
+		<% tag_names.forEach(function(tag){ %>
+			<span class="tags"><a href="">#<%= tag.escape('name') %></a></span>
+		<% }); %>
+	</p>
+
+	<div class="toggleable group">
+		
+		<span class="count-notes pull-left"><%= post.escape('notes_count') %> notes</span>
+
+		<span class="pull-right">
+		<button class="like-btn like-post" data-likeable-type="Post" data-likeable-id="<%= post.id %>" data-initial-like-state='<%= initialLikeState%>'><i class='fa fa-heart'></i></button>
+
+		<button class="reblog-btn" data-post-id="<%= post.id %>"><i class="fa fa-retweet"></i></button>
+
+		<a class="open-comments" data-open-comments="#/posts/<%= post.id %>/comments" href="#/posts/<%= post.id %>/comments"><span class="count-comments" data-curr-count="<%= count_comments %>"><%= count_comments %></span> comments</a>
+	
+		</span>
+		
+	</div>
+	
+	<div id="post-comments-<%= post.id %>" class="comments-container">	
+	</div>
+	
+</div>

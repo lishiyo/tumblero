@@ -60,6 +60,7 @@ Tumblero.Utils.Sortable = {
 	},
 	
 	addAllPosts: function(coll) {		
+		
 		this.removeSubviewsFor(this.postsCont);
 		this.removeSubviewsFor("#pagination-nav");
 		

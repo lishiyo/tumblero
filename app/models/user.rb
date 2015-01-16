@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
 
 	has_many :blogs, inverse_of: :user, dependent: :destroy
+	
 	has_many :posts, through: :blogs
 	has_one :dashboard, inverse_of: :user, dependent: :destroy
 	has_many :followings, dependent: :destroy
@@ -33,16 +34,22 @@ class User < ActiveRecord::Base
 		end
 	end
 	
+	
+	def self.reset_notifications
+		User.all.each do |u|
+			User.reset_counters(u.id, :notifications)
+		end
+	end
+	
 	def ensure_main_blog
 		return unless self.main_blog_id.nil?
 		
 		self.main_blog_id = self.blogs.first.id
 	end
 	
-	def self.reset_notifications
-		User.all.each do |u|
-			User.reset_counters(u.id, :notifications)
-		end
+	
+	def main_blog
+		Blog.find(self.main_blog_id)
 	end
 	
 	# NOTIFICATIONS

@@ -70,8 +70,20 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 		this.collection.currPage = this.searchResPosts._page;
 		this.collection.totalPages = this.searchResPosts.total_pages;
 		this.addAllPosts(this.collection);
+		
+		this.initMasonry();
 	},
 	
+	initMasonry: function(){
+	
+		var container = document.querySelector('#posts-results');
+		var msnry = new Masonry( container, {
+// 			columnWidth: 300,
+			itemSelector: '.post-show',
+			gutter: 20
+		});
+	
+	},
 	
 	addBlogSubview: function(blog) {
 		var subview = new Tumblero.Views.BlogProfile({
@@ -83,12 +95,13 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 	},
 	
 	addPostSubview: function(post) {
+	
 		var subview = new Tumblero.Views.PostShow({
 			model: post,
 			currentUser: (this.currentUser || Tumblero.current_user),
 		});
 		
-		this.addSubview(this.postsCont, subview);
+		this.addSubview(this.postsCont, subview);	
 	},
 	
 	// pass in the collection you are showing
@@ -105,9 +118,7 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 		this.addSubview('#pagination-nav', subview);
 	},
 	
-	render: function () {
-		console.log("rendering with", this.queryStr);
-		
+	render: function () {		
 		var content = this.template({ 
 			query: this.queryStr
 		});	

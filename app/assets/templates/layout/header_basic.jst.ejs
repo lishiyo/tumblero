@@ -6,16 +6,18 @@
 <a class="navbar-brand page-scroll" href="#">tumblero</a>
 		
 	<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav navbar-right header-list-group">
+				<ul class="nav navbar-nav navbar-right header-list group">
 <% if (Tumblero.current_user) { %>
 					<li class="inline-notifications hidden"></li>
 					
 					<li>
 						<a href="#">Notifications <strong class="badge">3</strong></a>
-						<ul class="header-notifications">
-							<li><a href="#">Constance likes your photo.</a></li>
+						<ul class="header-notifications" id="notifications-dropdown">
+				
+							
+<!-- 							<li><a href="#">Constance likes your photo.</a></li>
 							<li><a href="#">Tommy left you a comment.</a></li>
-							<li><a href="#">Jonathan is now following you.</a></li>
+							<li><a href="#">Jonathan is now following you.</a></li> -->
 						</ul>
 					</li>
 						
@@ -30,8 +32,8 @@
 							<a href="/#/explore/blogs">Explore</a>
 						</li>
 
-					<li>
-						<a href="#">ME</a>
+					<li class="user-profile-btn">
+						<a href="#"><i class="fa fa-user fa-2x"></i></a>
 						<ul class="header-notifications">
 							<li><a href="/#users/profile" class="user-profile-btn">Profile</a></li>
 							<li><a class="logout-btn" rel="nofollow" data-method="delete" href="/session">Logout</a>
@@ -39,7 +41,7 @@
 						</ul>
 					</li>
 					
-					<li>
+					<li class="query">
 						<input type="text" id="nav-search" class="form-control query" placeholder="search tags">
 					</li>
 

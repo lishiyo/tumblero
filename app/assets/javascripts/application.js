@@ -20,6 +20,7 @@
 //= require backbone
 //= require backbone.autocomplete.min
 //= require bootstrap-wysihtml5
+//= require masonry.min
 
 //= require tumblero
 //= require assets

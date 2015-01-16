@@ -3,20 +3,45 @@
 
 /** blogs index **/
 
-ul.blogs-index {
-	max-width: 75%;
-	margin: 0 auto;
+.gray-bg {
+	background: $gray-line;
+	width: 1400px;
+	margin-top: -30px;
+	padding-top: 30px;
+}
+
+.blogs-index {
+	margin: 25px auto;
+	margin-left: 15%;
+}
+
+.item {
+	width: 25%;
 }
 
 .blog-profile {
+	background: #fff;
 	text-align: center;
-	float: left;
-	width: 250px;
-	margin: 10px auto;
+	padding: 20px 0;
+/* 	float: left; */
+/* 	width: 250px; */
+/* 	margin: 10px auto; */
+	margin-bottom: 20px;
 	display: block;
 	position: relative; /* to place follow button */
 	figcaption {
-		color: white;
+		color: $bg-black;
+		padding: 5px 20px;
+	}
+	a {
+		color: $foam-green;
+	}
+}
+
+.blog-main .blog-profile {
+	background: transparent;
+	a {
+		color: #fff;
 	}
 }
 

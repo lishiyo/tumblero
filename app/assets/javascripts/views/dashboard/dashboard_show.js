@@ -9,7 +9,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	initialize: function(opts){
-		Tumblero.perPage = (Tumblero.perPage || 2); // set to a default
+		Tumblero.perPage = (Tumblero.perPage || 4); // set to a default
 		
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
@@ -22,6 +22,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';
+		
+		view = this;
 		
 		this.fetchCollection();
 	},
@@ -57,24 +59,9 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.callFilter("dashboard", queryTag);
 	},
 
-	//only add posts for this.collection.currPage in this.collection
-// 	addAllPosts: function(coll) {		
-// 		var currColl = (coll || this.collection);
-// 		var view = this;
-// 		var perPage = Tumblero.perPage;
-// 		var startPage = (currColl.currPage <= 0) ? 0 : (currColl.currPage - 1);
-// 		var startPost = (startPage==0) ? 0 : (startPage * perPage);
-		
-// 		currColl = _(currColl.rest(perPage*(startPage)));
-// 		currColl = _(currColl.first(perPage)); 
-		
-// 		console.log("coll is", currColl.currPage, currColl);
-// 		currColl.forEach(function(post){
-// 			view.addPostSubview(post);
-// 		}.bind(this));
-// 	},
-	
 	addPostSubview: function(post){
+		console.log("addPostsunview")
+		
 		var subview = new Tumblero.Views.PostShow({
       model: post,
 			blog: this.model,
@@ -111,10 +98,13 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 			var currColl = coll;
 		}
 		
+		console.log("rendering posts")
 		this.addAllPosts(currColl);
 	},
 	
 	renderDash: function(){
+		console.log("render dash");
+		
 		this.renderFollow();
 		this.renderFollowButton(this.$('.follow-btn'));
 	},
@@ -128,10 +118,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
-// 		this.addAllPosts(this.collection);
-// 		this.addPageNav(this.collection);
 
-// 		this.renderLikeButton(this.$('.like-btn'));
+		console.log("render main")
 		this.renderFollowButton(this.$('.follow-btn'));
 		
     return this;

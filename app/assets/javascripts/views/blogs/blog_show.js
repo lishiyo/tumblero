@@ -10,14 +10,14 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	
 	initialize: function(opts){
-		Tumblero.perPage = (Tumblero.perPage || 2); // set to a default
+		Tumblero.perPage = (Tumblero.perPage || 4); // set to a default
 		
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);
 		this.listenTo(this.currentUser, 'sync', this.renderFollow);
 		
-		this.listenTo(this.model, 'sync', this.renderBlog);
+		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.collection, 'sort', this.handleSort);
 		this.listenTo(this.collection, 'add', this.handleAdd);
 // 		this.listenTo(this.collection, 'remove', this.handleRemove);
@@ -27,6 +27,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';
 		
+		view = this;
 		this.fetchCollection();
 	},
 	

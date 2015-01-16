@@ -25,6 +25,8 @@ class Api::UsersController < ApplicationController
   end
 
   def show
+		@notifications = @user.notifications.limit(5)
+		@notes = @user.notes.limit(5)
 		render :show
   end
 	
@@ -49,10 +51,12 @@ class Api::UsersController < ApplicationController
 	end
 	
 	def notifications
+		@notifications = @user.notifications.limit(5)
 		render :notifications
 	end
 	
 	def notes
+		@notes = @user.notifications.limit(5)
 		render :notes
 	end
 	

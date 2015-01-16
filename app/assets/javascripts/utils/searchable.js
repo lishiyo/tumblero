@@ -2,7 +2,6 @@ Tumblero.Utils.Searchable = {
 
 	checkSearch: function(event) {
 		var queryTag = $(event.currentTarget).val();
-		console.log("hit checksearch");
 		if (event.which===13 && queryTag === "") {
 			this.queryStr = "";
 			Backbone.history.navigate("explore", { trigger: true })
@@ -25,7 +24,6 @@ Tumblero.Utils.Searchable = {
 			var filtered = _.filter(tags, function(tag) {
 					return pattern.test(tag);
 				});
-			console.log("got tags", tags, filtered);
 			cb(filtered);
 		}
 		
@@ -55,7 +53,6 @@ Tumblero.Utils.Searchable = {
 		};
 		
 		if (this.$("#nav-search").length > 0) {
-			console.log("in nav search");
 				this.$( "#nav-search" ).autocomplete({
 					source: parseRes,
 					minLength: 2,
@@ -63,14 +60,12 @@ Tumblero.Utils.Searchable = {
 						var query = ui.item.label;
 						query = query.split(" ").join("+");
 						var url = "/explore/" + query;
-						console.log("query is", url);
 						Backbone.history.navigate(url, {trigger: true});
 					
 					}.bind(this)
 				});
 			
 		} else if (this.$('#main-search').length > 0) {
-			console.log("in mainsearch");
 				this.$( "#main-search" ).autocomplete({
 					source: parseRes,
 					minLength: 2,

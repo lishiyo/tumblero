@@ -1,6 +1,9 @@
 Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	
 	template: JST['posts/show'],
+	
+	className: "post-show",
+	
 	events: {
 		"click .open-comments": "openComments",
 		'click button.like-btn': "likeSubject",
@@ -18,7 +21,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.model, 'change:comments_count', this.incrementCommCount);
 		this.listenTo(this.taggings, 'sync', this.render);
 		
-		postshow = this;
 	},
 
 	incrementCommCount: function(){

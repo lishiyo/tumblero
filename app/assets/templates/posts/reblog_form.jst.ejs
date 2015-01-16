@@ -12,7 +12,7 @@
 					<% }); %>
 				</select>
 			
-			<li class="bbm-modal__tab">Reblog</li>
+			<li class="">Reblog</li>
 
 		</ul>
 	</div>
@@ -43,8 +43,7 @@
 	</div>
 	
 	<div class="form-group">
-		<label for="post_tags_string">tags (separate by commas):</label>
-		<input type="text" id="post_tags_string" name="post[tags_string]" class="form-control" value="<%= post.escape('tags_string') %>">
+		<input type="text" id="post_tags_string" name="post[tags_string]" class="form-control tags" value="<%= post.escape('tags_string') %>" placeholder="tags (separate by commas)">
 	</div>
 		
 	<input type="hidden" name="post[reblogged]" value="true">
@@ -53,7 +52,11 @@
 	<input type="hidden" name="post[comments_count]" value="<%= post.get('comments_count') %>">
 	<input type="hidden" name="post[likes_count]" value="<%= post.get('likes_count') %>">
 	
-  <input type="submit" class="submit-el btn btn-info" value="POST">
+<!--   <input type="submit" class="submit-el btn btn-info" value="POST"> -->
+	
+	<button type="submit" class="btn oe-btn oe-btn-red oe-btn-inline-icon submit-el" id="submit-post-btn">
+			<span>SUBMIT POST</span>
+		</button>
 	</form>
 	
 	<div class="modal-screen js-modal-close"></div>

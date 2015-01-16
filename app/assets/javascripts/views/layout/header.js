@@ -10,7 +10,18 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	initialize: function(opts){
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
-		console.log("rendering header");
+		this.listenTo(this.currentUser, 'sync', this.setNotifications);
+	},
+	
+	setNotifications: function(){
+		this.notifications = this.currentUser.notifications();
+		console.log("set notifications", this.currentUser, this.notifications);
+		this.$cont = $('ul#notifications-dropdown');
+		
+		var template = JST['layout/_notifications'];
+		
+		this.$cont.append(template({ notifications: this.notifications }));
+		
 	},
 	
 	render: function(){

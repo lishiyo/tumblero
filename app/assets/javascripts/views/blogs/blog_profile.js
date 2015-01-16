@@ -8,13 +8,18 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 	
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
-		this.listenTo(this.currentUser, 'sync', this.render);
+		this.listenTo(this.currentUser, 'sync', this.renderFollow);
 		this.listenTo(this.model, 'sync', this.render);	
 		
 		this.followBtnId = "button#follow-btn-" + this.model.id;
 	},
 	
+	renderFollow: function(){
+		this.setFollowState();
+	},
+	
 	render: function(){
+		console.log("called render in blog profile");
 		
 		this.setFollowState();
 		

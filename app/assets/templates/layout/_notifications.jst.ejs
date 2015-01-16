@@ -1,0 +1,8 @@
+<% notifications.each(function(note) { %>
+	<li>
+		<a href="#<%= note.escape('noter_blog_url') %>" class="blog-handle"><%= note.escape('noter_blog_handle') %></a> 
+		<a href="#<%= note.escape('notifiable_url') %>"> <%= note.escape('content') %>
+ <i class="fa fa-arrow-right"></i></a>
+		
+		</li>	
+<% }); %>

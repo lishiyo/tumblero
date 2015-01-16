@@ -106,11 +106,24 @@ textarea {
 	opacity: 0;
 }
 
-
 h1, h2, h3, h4 {
 	text-align: center;
 }
 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+	outline: none !important; 
+	outline-style: none; 
+} 
+
+input:focus, input:active:focus, input:active, textarea, input {
+	outline: none !important;
+	outline-style: none;
+}
+
+.form-control:focus, .form-control:active {
+	outline: none !important;
+	outline-style: none;
+}
 
 
 /** ===== UNIVERSAL ===== **/
@@ -160,6 +173,14 @@ a:hover {
 	text-decoration: none;
 }
 
+li {
+	transition: background 0.25s ease-in-out 0s;
+	-moz-transition: background 0.25s ease-in-out 0s;
+	-webkit-transition: background 0.25s ease-in-out 0s;
+	-o-transition: background 0.25s ease-in-out 0s;
+	-ms-transition: background 0.25s ease-in-out 0s;
+}
+
 i {
 	transition: all 0.25s ease-in-out 0s;
 	-moz-transition: all 0.25s ease-in-out 0s;
@@ -177,6 +198,10 @@ form {
 img.avatar {
 	max-width: 100px;
 	max-height: 100px;
+}
+
+.navbar-nav > li > a {
+	max-height: 50px;
 }
 
 /* ==== SHARED ==== */
