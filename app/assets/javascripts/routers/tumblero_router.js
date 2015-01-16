@@ -82,6 +82,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 				
     this._swapView(userNewView);
 		
+		
+		$('body').addClass('default-background');
 // 		this.refreshHeader();
 	},
 	
@@ -92,7 +94,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 
 
     this._swapView(sessionNewView);
-		
+		$('body').addClass('default-background');
 // 		this.refreshHeader();
   },
 
