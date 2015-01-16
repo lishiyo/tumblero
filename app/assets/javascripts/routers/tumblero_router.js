@@ -43,6 +43,9 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		});
 		
 		this._swapView(view);
+		
+		$('.post-show').removeClass().toggleClass("post-show-full");
+		$('body').removeClass().toggleClass('bg-red-orange');
 	},
 	
 	// sorted by popularity
@@ -60,6 +63,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		});
 		
 		this._swapView(view);
+		$('body').removeClass().toggleClass('bg-green');
 	},
 	
 	checkUser: function() { 
@@ -146,38 +150,39 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 			}.bind(this)
 		});
 		
-		
 	},
 	
-	current: function() {
-    var Router = this,
-        fragment = Backbone.history.fragment,
-        routes = _.pairs(Router.routes),
-        route = null, params = null, matched;
+// 	current: function() {
+//     var Router = this,
+//         fragment = Backbone.history.fragment,
+//         routes = _.pairs(Router.routes),
+//         route = null, params = null, matched;
 
-    matched = _.find(routes, function(handler) {
-        route = _.isRegExp(handler[0]) ? handler[0] : Router._routeToRegExp(handler[0]);
-        return route.test(fragment);
-    });
+//     matched = _.find(routes, function(handler) {
+//         route = _.isRegExp(handler[0]) ? handler[0] : Router._routeToRegExp(handler[0]);
+//         return route.test(fragment);
+//     });
 
-    if(matched) {
-        // NEW: Extracts the params using the internal
-        // function _extractParameters 
-        params = Router._extractParameters(route, fragment);
-        route = matched[1];
-    }
+//     if(matched) {
+//         // NEW: Extracts the params using the internal
+//         // function _extractParameters 
+//         params = Router._extractParameters(route, fragment);
+//         route = matched[1];
+//     }
 
-    return {
-        route : route,
-        fragment : fragment,
-        params : params
-    };
-	},
+//     return {
+//         route : route,
+//         fragment : fragment,
+//         params : params
+//     };
+// 	},
 	
 	_swapView: function(newView) {
     this._currentView && this._currentView.remove();
     this._currentView = newView;
     this.$rootEl.html(newView.render().$el);
+		$('body').removeClass();
+		$('.loading-overlay').addClass('hidden');
   },
 	
 	_swapHeader: function(newView) {

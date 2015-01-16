@@ -19,9 +19,11 @@ Tumblero.Views.Header = Backbone.View.extend({
 		this.$cont = $('ul#notifications-dropdown');
 		
 		var template = JST['layout/_notifications'];
+		var content = template({ notifications: this.notifications });
+		this.$('strong.badge').text(this.notifications.length);
 		
-		this.$cont.append(template({ notifications: this.notifications }));
-		
+		console.log("notify", this.$('strong.badge'), this.notifications.length);
+		this.$cont.append(content);
 	},
 	
 	render: function(){

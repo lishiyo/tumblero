@@ -1,19 +1,21 @@
 <h2>Recent Notifications</h2>
 
-<% user.notifications().each(function(n){ %>
+<ul class="activity-feed">	
+<% user.notifications().each(function(note){ %>
 	
-	<%= n.escape('content') %>
-
+		<a href="#<%= note.escape('notifiable_url') %>"><li class="oe-btn oe-btn-inline-icon <%= note.get('notification_type') %>">		
+		<%= note.escape('noter_blog_handle') %> 
+		<%= note.escape('content') %>
+ <i class="fa fa-arrow-right"></i>
+		</li></a>
+	
 <% }); %>
-
+</ul>
 
 <h2>Activity Feed</h2>
-<ul>
-<% user.notes().each(function(n){ %>
-	
-<li><a href="#/<%= n.escape('notifiable_url') %>"><%= n.escape('noter_content') %></a></li>
 
+<ul class="activity-feed">
+<% user.notes().each(function(note){ %>
+	<li class="btn oe-btn oe-btn-inline-icon <%= note.get('notification_type') %>"><%= note.get('noter_content') %></li>
 <% }); %>
-
-	
 </ul>

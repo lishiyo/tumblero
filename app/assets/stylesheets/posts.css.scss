@@ -14,6 +14,21 @@
 
 /* Posts */
 
+/* ==== MAIN VIEW ==== */
+
+.post-show-full {
+	width: 80%;
+	margin: 0 auto;
+}
+
+body.bg-red-orange{
+	background: $bg-red-orange;
+}
+
+body.bg-green{
+	background: $foam-green;
+}
+
 .post {
 	display: block;
 	margin: 20px auto;

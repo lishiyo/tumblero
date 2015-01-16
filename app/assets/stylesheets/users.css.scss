@@ -20,3 +20,34 @@
 	color: white;
 	font-weight: 700;
 }
+
+ul.activity-feed {
+	text-align: center;
+	i.fa {
+		color: #fff;
+	}
+	
+	.oe-btn, .oe-btn span,
+	.oe-btn .fa,
+	.oe-btn span:before, .oe-btn span:hover, .oe-btn span:after {
+		color: #ffffff !important;
+	}
+
+	li {
+		padding: 5px 15px;
+		margin-bottom: 5px;
+		border: 1px solid #fff;
+		color: #fff;
+	}
+	
+	li.Like {
+		background: rgba(245, 72, 74, 0.9);
+	}
+	
+	li.Comment {
+	}
+	
+	li.Following {
+		background: #84cbc5;
+	}
+}

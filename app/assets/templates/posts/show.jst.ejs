@@ -19,7 +19,7 @@
 	
 	<p>
 		<% tag_names.forEach(function(tag){ %>
-			<span class="tags"><a href="">#<%= tag.escape('name') %></a></span>
+			<span class="tags"><a href="#/explore/<%= tag.escape('name').split(' ').join('+') %>">#<%= tag.escape('name') %></a></span>
 		<% }); %>
 	</p>
 

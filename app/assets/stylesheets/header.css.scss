@@ -64,13 +64,13 @@
   display: inline;
   font-size: 14px;
   padding: 1px 6px;
-  background: #000;
+  background: $rosy;
+	color: #fff;
   border-radius: 50%;
 }
 
 li:hover .badge {
-  background: $foam-green;
-	color: #fff;
+  background: $bg-black;
 }
 
 .header-notifications {
@@ -109,13 +109,13 @@ li:hover .header-notifications {
 
 #notifications-dropdown {
 	li {
-		padding: 10px;
+		padding: 5px;
+		font-size: 12px;
 	}
+	
 	.blog-handle {
-/* 		color: $; */
 		font-weight: 700;
-		padding: 2px 6px;
-		margin-left: -8px;
+		padding: 2px 8px 2px 6px;
 		border-radius: 3px;
 		color: $lilac-light;
 		&:hover {
@@ -132,67 +132,8 @@ li:hover .header-notifications {
 	}
 	
 }
+
 /** OTHER **/
-
-/* Header Style */
-/* .codrops-top {
-	background: #fff;
-	background: rgba(255, 255, 255, 0.4);
-	text-transform: uppercase;
-	position: relative;
-	width: 100%;
-	font-size: 0.7em;
-	line-height: 2.2;
-}
-
-.codrops-top a {
-	padding: 0 1em;
-	letter-spacing: 0.1em;
-	color: #888;
-	display: inline-block;
-}
-
-.codrops-top a:hover {
-	background: rgba(255,255,255,0.9);
-}
-
-.codrops-top span.right {
-	float: right;
-}
-
-.codrops-top span.right a {
-	float: left;
-	display: block;
-} 
-
-.codrops-icon:before {
-	font-family: 'codropsicons';
-	margin: 0 4px;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-}
-.codrops-icon-drop:before {
-	content: "\e001";
-}
-.codrops-icon-prev:before {
-	content: "\e004";
-}
-.codrops-icon-archive:before {
-	content: "\e002";
-}
-.codrops-icon-next:before {
-	content: "\e000";
-}
-.codrops-icon-about:before {
-	content: "\e003";
-} */
- 
-
 
 /* Global CSS that are applied for all screen sizes */
 
@@ -271,10 +212,10 @@ a, button {
 		}
 	}
 	
-	i {
+	i.fa {
 		background: transparent;
 		bottom: 1px;
-		right: 4px;
+		right: 6px;
 		position: absolute;
 		max-height: 50px;
 	}
