@@ -79,8 +79,10 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		var newUser = new Tumblero.Models.User();
     var userNewView = new Tumblero.Views.UserNew({ 
 			model: newUser });
-
+				
     this._swapView(userNewView);
+		
+// 		this.refreshHeader();
 	},
 	
 	sessionNew: function(){
@@ -88,7 +90,10 @@ Tumblero.Routers.Router = Backbone.Router.extend({
     var sessionNewView = new Tumblero.Views.SessionNew({ 
 			model: newSession });
 
+
     this._swapView(sessionNewView);
+		
+// 		this.refreshHeader();
   },
 
   userShow: function(id){
@@ -96,6 +101,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		var userShowView = new Tumblero.Views.UserShow({ model: user });
     this._swapView(userShowView);  
+		
+// 		this.refreshHeader();
   },
 	
 	dashboardShow: function(){
@@ -150,6 +157,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 			}.bind(this)
 		});
 		
+// 		this.refreshHeader();
 	},
 	
 // 	current: function() {
@@ -183,6 +191,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
     this.$rootEl.html(newView.render().$el);
 		$('body').removeClass();
 		$('.loading-overlay').addClass('hidden');
+		
   },
 	
 	_swapHeader: function(newView) {

@@ -20,14 +20,11 @@
   margin: 0 auto;
 }
 
-.header-logo {
+a.header-logo {
   float: left;
-  border-right: 1px solid #ccc;
   font-weight: 700;
-	
-	a {
-		color: $rosy;
-	}
+	letter-spacing: 2px;
+	color: $rosy;
 }
 
 .header-logo:hover {

@@ -10,7 +10,10 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	initialize: function(opts){
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
-		this.listenTo(this.currentUser, 'sync', this.setNotifications);
+		
+		if (this.currentUser) {
+			this.listenTo(this.currentUser, 'sync', this.setNotifications);
+		}
 	},
 	
 	setNotifications: function(){

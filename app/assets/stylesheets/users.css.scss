@@ -1,19 +1,49 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "mixins";
 
 .settings-container form, .settings-container .form-group {
 	width: 100%;
 	max-width: 100%;
 }
 
-.btn.user-settings-btn {
-	width: 90%;
+.right-settings-container .btn {
+	width: 300px;
 	margin: 10px auto;
-	background-color: black;
-	color: white;
+	color: #fff;
+	border:none;
+	span {
+		width: 300px;
+		background: inherit;
+		border: inherit;
+		padding: 10px 0 0 0;
+		margin: 0px;
+		font-size: 16px;
+	}
+	
+	i.fa {
+		background: transparent;
+	}
 }
 
+.settings-container .btn.user-settings-btn{
+	background: $gold;
+}
+
+.settings-container .btn.user-notifications {
+	background: $lilac-light;
+}
+
+.blogs-table.blogs-settings .btn{
+	width: 166px;
+	span {
+		width: inherit;
+	}
+}
+
+table.avatar {
+	max-width: 50px;
+	max-height: 50px;
+	float: left;
+}
 
 .inline-notifications.inner {
 	font-size: 12px;

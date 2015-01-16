@@ -1,37 +1,48 @@
-<h2>Welcome back <%= user.escape('email') %>!</h2>
+<h2>welcome back <%= user.escape('email') %>!</h2>
 
 <h3><a class="btn btn-info" href="#<%= Routes.new_blog_path() %>"><i class="fa fa-plus-square"></i> Create a New Blog</a></h3>
 
 <div class="container settings-container">
 	<div class="row">
+		
 		<div class="col-md-8 col-sm-8 col-xs-8">
 			<section id="settings"></section>
 		</div>
 		
-		<div class="col-md-3 col-sm-3 col-xs-3">
+		<div class="right-settings-container">
+			<div class="col-md-3 col-sm-3 col-xs-3">
 			<table class="blogs-table">
-				<tr col-span="3">
-				<a class="btn btn-default user-settings-btn" href="#"><i class="fa fa-wrench"></i> user settings</a>
-				<a class="btn btn-default user-notifications">user notifications</a>
+				<tr class="main-settings">
+					<td col-span="2">
+					<button class="btn oe-btn oe-btn-reflect oe-btn-hover-flap oe-btn-inline-icon user-settings-btn"><span data-btn-text="update me"><i class="fa fa-sliders"></i> user settings</span></button>
+				<button class="btn oe-btn oe-btn-reflect oe-btn-hover-flap oe-btn-inline-icon user-notifications"><span data-btn-text="everyday i'm tumblin'"><i class="fa fa-bell-o"></i> activity feed </span></button>
+						</td>
 				</tr>
+				
+			</table>
+			
+			<table class="blogs-table blogs-settings">
+				<tbody>
 			<% user.blogs().each(function(blog){ %>
-				<tr>
+			<tr>
 					<td>
 						<% if (blog.escape('avatar_url')) { %>
 							<img class="avatar" src="<%= blog.escape('avatar_url') %>">
 						<% } else { %>
-							<img class="avatar" src="<%= Tumblero.Assets.path('default_avatar_02.png') %>">
+							<img class="avatar" src="<%= Tumblero.Assets.path('default_avatar_03.png') %>">
 						<% } %>
 					</td>
-						<td><a href="#/blogs/<%= blog.id %>"><%= blog.escape('name') %></a></td>
-
 					<td>
-						<a class="btn btn-default blog-settings-btn" href="#" data-blog-id="<%= blog.id %>"><i class="fa fa-wrench"></i> settings</a>
+						<button class="btn oe-btn oe-btn-reflect oe-btn-hover-flap oe-btn-inline-icon blog-settings-btn" href="#" data-blog-id="<%= blog.id %>"><span data-btn-text="blog settings"><i class="fa fa-wrench"></i> <%= blog.escape('name') %></span></button>
 					</td>
 				</tr>
 			<% }); %>
+				
+				</tbody>
 		</table>
+		
 		</div>
+		
 	</div>
 </div>
-
+</div>

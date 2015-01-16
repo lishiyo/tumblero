@@ -26,7 +26,6 @@ window.Tumblero = {
 		} else {
 			Tumblero.current_user.fetch({
 				success: function(model){
-// 					this.setPostModal(model);
 				}.bind(this)
 			});
 			

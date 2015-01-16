@@ -40,13 +40,17 @@ class Notification < ActiveRecord::Base
 	def noter_content
 		case notification_type
 		when "Reblog"
-			"<a href='#/posts/#{self.notification_id}'>" + "you reblogged a post" + "</a>"
+			"you reblogged a post"
+# 			"<a href='#/posts/#{self.notification_id}'>" + "you reblogged a post" + "</a>"
 		when "Like"
-			"<a href='#/posts/#{self.notification_id}'>" + "you liked a post" + "</a>"
+			"you liked a post"
+# 			"<a href='#/posts/#{self.notification_id}'>" + "you liked a post" + "</a>"
 		when "Comment" # only for posts 
-			"<a href='#/posts/#{self.notification_id}'>" + "you commented on a post" + "</a>"
+			"you commented on a post"
+# 			"<a href='#/posts/#{self.notification_id}'>" + "you commented on a post" + "</a>"
 		when "Following"
-			"you are now following <a href='#/blogs/" + self.notifiable_url + "'>" + Blog.find(self.notification_id).handle + "</a>"
+			"you are now following #{Blog.find(self.notification_id).handle}"
+# 			"you are now following <a href='#/blogs/" + self.notifiable_url + "'>" + Blog.find(self.notification_id).handle + "</a>"
 		else
 			"new activity"
 		end
