@@ -10,9 +10,9 @@ Tumblero.Assets = {
     // If the file is in our images object, pull the path from there.
     if (this.images && this.images[name]) {
       return this.images[name];
-    }
+    } else {
+			throw 'asset not found';
+		}
  
-    // Otherwise, create a generic asset path.
-    return '/assets/' + name;
   }
 }
