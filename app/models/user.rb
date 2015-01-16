@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
 # 	has_many :notifiers, through: :notifications, source: :noter
 		
 	after_initialize :ensure_session_token
-	after_initialize :ensure_main_blog
 	
 	# HELPERS - reset blogs to first blog
 	def self.reset_all
@@ -34,19 +33,11 @@ class User < ActiveRecord::Base
 		end
 	end
 	
-	
 	def self.reset_notifications
 		User.all.each do |u|
 			User.reset_counters(u.id, :notifications)
 		end
 	end
-	
-	def ensure_main_blog
-		return unless self.main_blog_id.nil?
-		
-		self.main_blog_id = self.blogs.first.id
-	end
-	
 	
 	def main_blog
 		Blog.find(self.main_blog_id)

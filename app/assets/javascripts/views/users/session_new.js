@@ -17,7 +17,7 @@ Tumblero.Views.SessionNew = Backbone.View.extend({
 	
     this.model.save(formData, {
       success: function(model, response, options) {
-				
+				this.$('.errors').addClass('hidden');
 				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
 				Tumblero.current_user.fetch();
 				
@@ -33,7 +33,7 @@ Tumblero.Views.SessionNew = Backbone.View.extend({
 			error: function(model, response, options){
 				console.log(model, response, options);
 				var res = $.parseJSON(response.responseText).join(" ");
-				this.$('.errors').html(res);
+				this.$('.errors').html(res).removeClass('hidden');
 			}.bind(this)
     });
   }

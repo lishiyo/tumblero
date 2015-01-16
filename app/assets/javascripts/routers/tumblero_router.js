@@ -147,6 +147,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		blogs.fetch({
 			success: function(){			
+				console.log("blogsExplore");
 				var view = new Tumblero.Views.BlogsExplore ({
 					currentUser: (this.currentUser || Tumblero.current_user),
 					collection: blogs
@@ -190,6 +191,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
     this._currentView = newView;
     this.$rootEl.html(newView.render().$el);
 		$('body').removeClass();
+		$('.follow-up').addClass('hidden');
 		$('.loading-overlay').addClass('hidden');
 		
   },

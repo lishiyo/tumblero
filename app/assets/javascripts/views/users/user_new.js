@@ -16,11 +16,13 @@ Tumblero.Views.UserNew = Backbone.View.extend({
     var formData = $(event.currentTarget).serializeJSON().user;
 
     this.model.save(formData, {
-      success: function() {
+      success: function(model, response, options) {
 				console.log("saved new user", this.model);
+				this.$('.errors').addClass('hidden');
+				
 				Tumblero.current_user = this.model;
 				Tumblero.current_user.fetch();
-        Backbone.history.navigate("blogs/new", {trigger: true});
+        Backbone.history.navigate("explore/blogs", {trigger: true});
 				Tumblero.Header.refresh();
 				
 //         window.location.replace("#/blogs/new");
@@ -28,7 +30,7 @@ Tumblero.Views.UserNew = Backbone.View.extend({
 			error: function(model, response, options){
 				console.log(model, response, options);
 				var res = $.parseJSON(response.responseText).join(", ");
-				this.$('.errors').html(res);
+				this.$('.errors').html(res).removeClass('hidden');
 			}.bind(this)
     });
   }

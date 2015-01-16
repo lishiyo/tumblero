@@ -27,8 +27,17 @@ input#main-search {
 }
 
 #blogs-results {
-	div {
-		margin: 0 auto;
+	margin: 0 auto;
+	padding: 20px;
+	background: #ccc;
+	border-radius: 10px;
+	div.item {
+		margin: 10px;
+		float: left;
+		width: 330px;
+		-webkit-box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
+-moz-box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
+box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
 	}
 }
 

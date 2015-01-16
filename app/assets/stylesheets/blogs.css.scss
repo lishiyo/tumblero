@@ -1,13 +1,40 @@
 @import "mixins";
 
 
-/** blogs index **/
+/** === BLOGS INDEX === **/
+
+.follow-up {
+	position: fixed;
+	height: 70px;
+	bottom: 0;
+	width: 100%;
+	background: $bg-black;
+}
+
+button#new-blog{
+	float: right;
+	margin: 10px 30px;
+	background: $rosy;
+	color: #fff;
+	height: 50px;
+	width: 300px;
+	
+	span {
+		width: 300px;
+	}
+	
+	i.fa {
+		background: transparent;
+		margin-left: 10px;
+	}
+}
 
 .gray-bg {
 	background: $gray-line;
 	width: 1400px;
-	margin-top: -30px;
 	padding-top: 30px;
+	margin: 0 auto;
+	margin-top: -30px;
 }
 
 .blogs-index {

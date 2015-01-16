@@ -31,12 +31,15 @@ class Api::BlogsController < ApplicationController
 	
 	def create		
 		@blog = current_user.blogs.build(clean_params)
+		
 		if @blog.save
+			ensure_main_blog!
 			render json: @blog
 		else
 			render json: @blog.errors.full_messages, status: 422
 		end
 	end
+	
 	
 	# PUT api/blogs/:id
 	def update
@@ -74,6 +77,12 @@ class Api::BlogsController < ApplicationController
 	
 	
 	private	
+	
+	# created for first blog
+	def ensure_main_blog!
+		return unless current_user.main_blog_id.nil?
+		current_user.main_blog_id = current_user.blogs.first.id
+	end
 	
 	def clean_params
 		params = blog_params

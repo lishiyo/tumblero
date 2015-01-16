@@ -1,9 +1,10 @@
 Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 	
 	template: JST['blogs/explore'],
+	
 	events: {
-		
 	},
+	
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 // 		this.listenTo(this.currentUser, 'sync', this.render);
@@ -17,6 +18,7 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 		}.bind(this));
 		
 		this.initMasonry();
+		this.addFooter();
 	},
 	
 	initMasonry: function(){
@@ -38,11 +40,19 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
     this.addSubview(".blogs-index", subview);
 	},
 	
+	addFooter: function(){
+		$('button#new-blog').removeClass('hidden');
+		$('.follow-up').removeClass('hidden');
+	},
+	
+// 	goNext: function(){
+// 		Backbone.history.navigate("blogs/new", {trigger: true});
+// 	},
+	
 	render: function(){
 		var content = this.template();
     this.$el.html(content);
-		
-		
+// 		this.addFooter();		
 //     this.attachSubviews();
     return this;
 	}

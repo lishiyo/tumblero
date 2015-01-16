@@ -204,6 +204,19 @@ img.avatar {
 	max-height: 50px;
 }
 
+.errors {
+	text-align: center;
+	color: #fff;
+	padding: 10px;
+	opacity: 0.9;
+	background: $bg-red-orange;
+	
+	transition: all 0.25s ease-in-out 0s;
+	-moz-transition: all 0.25s ease-in-out 0s;
+	-webkit-transition: all 0.25s ease-in-out 0s;
+	-o-transition: all 0.25s ease-in-out 0s;
+	-ms-transition: all 0.25s ease-in-out 0s;
+}
 /* ==== SHARED ==== */
 
 .pagination-nav {

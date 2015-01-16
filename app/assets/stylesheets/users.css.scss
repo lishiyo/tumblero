@@ -1,5 +1,61 @@
 @import "mixins";
 
+/* === SIGN UP === */
+
+form.session-form {
+	background: $gray-line;
+	max-width: 100%;
+	width: 700px;
+	padding: 20px;
+	margin-top: 10px;
+	-webkit-box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
+	-moz-box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
+	box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
+	input {
+		border-radius: 0;
+	}
+}
+
+h2.session-form {
+	color: #fff;
+}
+
+button.session-btn {
+	height: 50px;
+	width: 660px;
+	padding: 0px;
+	span {
+		height: inherit;
+		width: inherit;
+		color: #fff;
+		padding: 0;
+	}
+	span:before {
+		color: #fff;
+		height: inherit;
+		width: inherit;
+	}
+	span#inner-span {
+		margin-top: 4px;
+		background: transparent;
+	}
+}
+
+button#create-new-blog{
+	width: 700px;
+	border: none;
+	background: #fff;
+	color: $bg-dark;
+	span {
+		width: 700px;
+		border: none;
+	}
+	a, i.fa {
+		color: $bg-dark;
+	}
+}
+/** ===== USER PROFILE ==== */
+
 .settings-container form, .settings-container .form-group {
 	width: 100%;
 	max-width: 100%;
