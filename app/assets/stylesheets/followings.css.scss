@@ -1,12 +1,12 @@
 @import "mixins";
 
 button.follow-btn {
-/* 	position: absolute; */
 	right: 10px;
 	top: 10px;
 	border: none;
 	margin: 5px;
 	width: 175px;
+	opacity: 0.8;
 }
 
 button.follow-btn.follow-btn-small {

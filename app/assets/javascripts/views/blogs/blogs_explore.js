@@ -7,7 +7,7 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 	
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
-// 		this.listenTo(this.currentUser, 'sync', this.render);
+		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.collection, 'sync', this.addAllBlogs);
 	},
 	

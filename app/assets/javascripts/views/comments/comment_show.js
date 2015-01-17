@@ -21,11 +21,9 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	initialize: function(opts){
 		this.post = opts.post;
 		this.currentUser = opts.currentUser;
-		
-		this.collection = this.model.child_comments();
 		this.postView = opts.postView;
+		this.collection = this.model.child_comments();
 		this.blog_id = this.model.get('main_blog_id');
-		
 		
 		if (this.blog_id === this.currentUser.get('main_blog_id')) {
 			this.shouldShowFollow = false;

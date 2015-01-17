@@ -87,11 +87,6 @@ class Post < ActiveRecord::Base
     where("created_at > ?", time)
  	end
 	
-	# posts created in last day with highest number of notes
-# 	def self.trending
-# 		self.created_after(1.day.ago).sort_by{|p| p.notes_count }.reverse
-# 	end
-	
 	# ONE query - reblogs_count + likes_count + comments_count
 	def notes_count
 		if self.reblogged
@@ -112,6 +107,11 @@ class Post < ActiveRecord::Base
 	def self.most_popular
 		Post.order('total_notes DESC').limit(10)
 	end
+	
+	# posts created in last day with highest number of notes
+# 	def self.trending
+# 		self.created_after(1.day.ago).sort_by{|p| p.notes_count }.reverse
+# 	end
 	
 	# new posts that gained the most notes in last timespan
 	def self.trending_in(time)

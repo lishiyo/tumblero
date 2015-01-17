@@ -5,7 +5,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	events: {
 		'click .re-sort': 'reSortBy',
 		"click button.full-post-modal": "openPostModal",
-		"keyup input#search-tag": 'callFilterWith'
+		"keyup input#search-tag": 'callFilterWith',
 	},
 	
 	initialize: function(opts){
@@ -22,9 +22,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';
-		
-		view = this;
-		
+		dash = this;
 		this.fetchCollection();
 	},
 	
@@ -59,12 +57,9 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.callFilter("dashboard", queryTag);
 	},
 
-	addPostSubview: function(post){
-		console.log("addPostsunview")
-		
+	addPostSubview: function(post){		
 		var subview = new Tumblero.Views.PostShow({
       model: post,
-			blog: this.model,
 			currentUser: this.currentUser,
 			collection: this.collection
     });
@@ -98,19 +93,17 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 			var currColl = coll;
 		}
 		
-		console.log("rendering posts")
 		this.addAllPosts(currColl);
 	},
 	
 	renderDash: function(){
-		console.log("render dash");
-		
 		this.renderFollow();
 		this.renderFollowButton(this.$('.follow-btn'));
 	},
 	
 	render: function(){
 		this.renderFollow();
+		
 		var content = this.template({ 
 			dashboard: this.model,
 			current_user_id: this.currentUser.id,
@@ -119,7 +112,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
     this.$el.html(content);
 
-		console.log("render main")
 		this.renderFollowButton(this.$('.follow-btn'));
 		
     return this;

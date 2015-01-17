@@ -22,7 +22,7 @@ h2.session-form {
 
 button.session-btn {
 	height: 50px;
-	width: 660px;
+	width: 100%;
 	padding: 0px;
 	span {
 		height: inherit;
@@ -38,6 +38,19 @@ button.session-btn {
 	span.inner-span {
 		margin-top: 4px;
 		background: none !important;
+	}
+	span.inner-span:before {
+		background: inherit;
+	}
+}
+
+button#guest-sign-in {
+	margin-top: 10px;
+	span:before {
+		background: $gray-line !important;
+	}
+	span.inner-span {
+		margin-top: 4px;
 	}
 }
 
@@ -92,6 +105,11 @@ button#create-new-blog{
 	width: 166px;
 	span {
 		width: inherit;
+		background: $bg-aqua;
+		&:before {
+			background: inherit;
+			color: inherit;
+		}
 	}
 }
 

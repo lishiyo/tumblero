@@ -1,5 +1,13 @@
 <div class="post">
 	
+	<div class="followable group">
+		<a class="pull-left" href="#/blogs/<%= post.get('blog_id') %>"><%= post.get('blog_handle') %></a>
+		<% if (shouldShowFollow) { %>
+			<button class="follow-btn btn btn-info pull-left follow-btn-small follow-btn-<%= main_blog_id %>" data-blog-id="<%= main_blog_id %>" data-initial-follow-state="<%= initialFollowState %>"></button>
+		<% } %>
+	</div>
+	
+	
 <h3><% if (post.get('title')) { %>
 			<%= post.get('title') %>
 		<% } %>

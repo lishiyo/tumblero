@@ -31,7 +31,6 @@ class Api::BlogsController < ApplicationController
 	
 	def create		
 		@blog = current_user.blogs.build(clean_params)
-		
 		if @blog.save
 			ensure_main_blog!
 			render json: @blog
@@ -81,7 +80,9 @@ class Api::BlogsController < ApplicationController
 	# created for first blog
 	def ensure_main_blog!
 		return unless current_user.main_blog_id.nil?
+		
 		current_user.main_blog_id = current_user.blogs.first.id
+		current_user.save!
 	end
 	
 	def clean_params

@@ -22,9 +22,10 @@ class  Api::PostsController < ApplicationController
 	end
 	
 	def show	
-		respond_to do |f| 
-			f.json { render json: @post.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings) }
-		end
+		render 'show'
+# 		render json: @post.as_json(
+# 				methods: [:notes_count, :likers_ids, :recent_notes_count], 
+# 				include: :taggings)
 	end
 	
 	def new
@@ -107,7 +108,7 @@ class  Api::PostsController < ApplicationController
 	end
 	
 	def set_post
-		@post = Post.find(params[:id])
+		@post = Post.includes(:blog).find(params[:id])
 	end
 	
 	def post_params

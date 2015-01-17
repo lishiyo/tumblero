@@ -24,9 +24,9 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"users/new": "userNew",
 		"users/profile": "userShow",
 		"session/new": "sessionNew",
-		"blogs/new": "blogNew",
-		"blogs/:id": "blogShow",
 		"dashboard": "dashboardShow",
+		"blogs/new": "blogNew",
+		"blogs/:id": "blogShow",	
 		"explore/blogs": "blogsExplore",
 		"explore": "exploreTrending",
 		"explore/:tags": "exploreTags",
@@ -82,9 +82,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 				
     this._swapView(userNewView);
 		
-		
 		$('body').addClass('default-background');
-// 		this.refreshHeader();
 	},
 	
 	sessionNew: function(){
@@ -92,10 +90,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
     var sessionNewView = new Tumblero.Views.SessionNew({ 
 			model: newSession });
 
-
     this._swapView(sessionNewView);
 		$('body').addClass('default-background');
-// 		this.refreshHeader();
   },
 
   userShow: function(id){
@@ -103,8 +99,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		var userShowView = new Tumblero.Views.UserShow({ model: user });
     this._swapView(userShowView);  
-		
-// 		this.refreshHeader();
   },
 	
 	dashboardShow: function(){
@@ -117,6 +111,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 			model: dashboard,
 			currentUser: (this.currentUser || Tumblero.current_user)
 		});
+		
 		this._swapView(view);
 	},
 	
@@ -160,7 +155,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 			}.bind(this)
 		});
 		
-// 		this.refreshHeader();
 	},
 	
 // 	current: function() {

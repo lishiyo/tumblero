@@ -1,13 +1,10 @@
 <li>
-	<span class="group">
-	<a class="commenter pull-left" href="#/blogs/<%= main_blog_id %>"><%= comment.escape('main_blog_handle') %>
-	</a>
-		
+	<span class="followable group">
+		<a class="pull-left" href="#/blogs/<%= main_blog_id %>"><%= comment.escape('main_blog_handle') %></a>	
 		<% if (shouldShowFollow) { %>
 			<button class="follow-btn btn btn-info pull-left follow-btn-small follow-btn-<%= main_blog_id %>" data-blog-id="<%= main_blog_id %>" data-initial-follow-state="<%= initialFollowState %>" id="follow-btn-<%= main_blog_id %>"></button>
 		<% } %>
-		
-		</span>
+	</span>
 	
 	<div class="comment-body-container group">
 		
@@ -15,7 +12,6 @@
 			<%= comment.escape('body') %> 	
 		</div>
 		
-
 		<span class="toggleable group">
 			<button class="like-btn like-comment" data-likeable-type="Comment" data-likeable-id="<%= comment.id %>" data-initial-like-state='<%= initialLikeState%>' id="like-btn-<%= comment.id %>"><i class='fa fa-heart'></i></button>
 			

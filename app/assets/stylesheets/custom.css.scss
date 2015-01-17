@@ -192,6 +192,10 @@ i {
 	-ms-transition: all 0.25s ease-in-out 0s;
 }
 
+i.fa {
+	margin-right: 5px;
+}
+
 form {
 	max-width: 55%;
 	margin: 0 auto;
@@ -220,6 +224,15 @@ img.avatar {
 	-o-transition: all 0.25s ease-in-out 0s;
 	-ms-transition: all 0.25s ease-in-out 0s;
 }
+
+button {
+	transition: all 0.25s ease-in-out 0s;
+	-moz-transition: all 0.25s ease-in-out 0s;
+	-webkit-transition: all 0.25s ease-in-out 0s;
+	-o-transition: all 0.25s ease-in-out 0s;
+	-ms-transition: all 0.25s ease-in-out 0s;
+}
+
 /* ==== SHARED ==== */
 
 .pagination-nav {

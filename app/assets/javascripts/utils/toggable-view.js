@@ -6,23 +6,18 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		this.likeableType = type;
 		this.likeableId = id;
 		this.likeButtonId = (btn || ('button.like-btn'));
-		
 	},
 	
 	renderLikeButton: function(btnId){
 		var $btn = this.$(btnId);
 		if (this.likeState === "liked") {
 			$btn.prop("disabled", false).addClass("liked");
-// 			$btn.html("unlike");
 		} else if (this.likeState === "unliked") {
 			$btn.prop("disabled", false).removeClass("liked");
-// 			$btn.html("like");
 		} else if (this.likeState === "liking") {
 			$btn.prop("disabled", true);
-// 			$btn.html("liking...");
 		} else if (this.likeState === "unliking") {
 			$btn.prop("disabled", true);
-// 			$btn.html("unliking...");
 		}
 	},
 	
@@ -80,7 +75,10 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		}
 	},
 	
-	// you can only follow a blog
+	// FOLLOWINGS 
+	
+	// you can ONLY follow a blog
+	// btnId refers to actual #id when on blog index page, but class on dashboard/posts
 	setFollowState: function(btnId){
 		var isFollowed = this.currentUser.followStateFor(this.model.id);
 		this.followState = ((isFollowed) ? "followed" : "unfollowed");
@@ -92,10 +90,10 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		var $btn = this.$(btnId);
 		if (this.followState === "followed") {
 			$btn.prop("disabled", false).addClass("followed");
-			$btn.html("unfollow");
+			$btn.html("<i class='fa fa-minus'></i>  unfollow");
 		} else if (this.followState === "unfollowed") {
 			$btn.prop("disabled", false).removeClass("followed");
-			$btn.html("+ follow");
+			$btn.html("<i class='fa fa-plus'></i>  follow");
 		} else if (this.followState === "following") {
 			$btn.prop("disabled", true);
 			$btn.html("following...");
@@ -107,12 +105,13 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 	},
 	
 	
-	followBlog: function(event, model_id){
+	followBlog: function(event, model_id, btn_id){
 		event.preventDefault();
 		var followToggle = this,
-				$btn = this.$(this.btnId),
+				$btn = (btn_id || this.$(this.btnId)),
 				user = this.currentUser;
-		var blog_id = model_id || followToggle.model.id;
+		
+		var blog_id = (model_id || followToggle.model.id);
 		
 		if (this.followState === "followed") {
 			this.followState = "unfollowing";
