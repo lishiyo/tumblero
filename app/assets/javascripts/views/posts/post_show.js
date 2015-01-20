@@ -5,7 +5,7 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	className: "post-show",
 	
 	events: {
-		"click .open-comments": "openComments",
+		"click .open-comments": "openOrCloseComments",
 		'click button.like-btn': "likeSubject",
 		"click .reblog-btn": "openReblogModal",
 		'click .edit-post': "openEditPost",
@@ -14,7 +14,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	},
 	
 	initialize: function(opts){
-		
 		this.currentUser = opts.currentUser;
 		this.taggings = this.model.taggings();
 		this.likeButtonId = ('button.like-post');
@@ -106,8 +105,18 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 
 	},
 	
-	openComments: function(event){
+	openOrCloseComments: function(event) {
 		event.preventDefault();
+		if ($(event.currentTarget).data("opened")) { //already opened
+			$(event.currentTarget).data("opened", false);
+			this.$('.comments-container').empty();
+		} else {
+			$(event.currentTarget).data("opened", true);
+			this.openComments();
+		}
+	},
+	
+	openComments: function(){
 		var commCont = '#post-comments-' + this.model.id;
 		var $commCont = $(commCont);
 		var all_comments = new Tumblero.Collections.Comments({
@@ -128,11 +137,11 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		});
 	},
 	
-	renderBtns: function(){
-		this.setupFollowBtn();
-		this.setFollowState(this.followBtnId, this.blog_id); // "button.follow-btn-" + this.blog_id;
-		this.renderFollowButton(this.followBtnId);
-	},
+// 	renderBtns: function(){
+// 		this.setupFollowBtn();
+// 		this.setFollowState(this.followBtnId, this.blog_id); // "button.follow-btn-" + this.blog_id;
+// 		this.renderFollowButton(this.followBtnId);
+// 	},
 	
 	setupEditable: function() {
 		
