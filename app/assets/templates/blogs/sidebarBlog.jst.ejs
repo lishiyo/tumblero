@@ -5,15 +5,15 @@
   </a>
 	
 	<a class="list-group-item">
-		<li class="list-group-item-text">Followers: <%= blog.get('followers_count') %></li>
+		<li class="list-group-item-text"><strong>Followers:</strong> <%= blog.get('followers_count') %></li>
 	</a>
 	
 	<a class="list-group-item">
-		<li class="list-group-item-text">Posts: <%= blog.get('posts_count') %></li>
+		<li class="list-group-item-text"><strong>Posts:</strong> <%= blog.get('posts_count') %></li>
 	</a>
 	
 	<a class="list-group-item">
-		<li class="list-group-item-text">Recent tags: <%= blog.get('tags').join(" ") %></li>
+		<li class="list-group-item-text"><strong>Recent tags:</strong> <%= blog.get('tags') %></li>
 	</a>
 	
 </div>
