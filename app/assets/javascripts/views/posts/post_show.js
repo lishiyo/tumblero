@@ -14,53 +14,22 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	},
 	
 	initialize: function(opts){
-		this.blog_id = this.model.get('blog_id');
+		
 		this.currentUser = opts.currentUser;
 		this.taggings = this.model.taggings();
 		this.likeButtonId = ('button.like-post');
-		this.followBtnId = "button.follow-btn-" + this.blog_id;
-		
-		if (this.blog_id === this.currentUser.get('main_blog_id')) {
-			this.shouldShowFollow = false;
-		} else {
-			this.shouldShowFollow = true;
-		}
 		
 		this.currentUser.fetch();
 		this.listenTo(this.currentUser, 'sync', this.setupEditable);
-		this.listenTo(this.model, 'sync destroy', this.render);
+		this.listenTo(this.model, 'sync destroy', this.renderSetup);
 		this.listenTo(this.model, 'change:comments_count', this.incrementCommCount);
 		this.listenTo(this.taggings, 'sync', this.render);
 	},
 	
+	
 	deletePost: function(event){
 		event.preventDefault();
 		this.deleteBtn.confirmation('show');
-	},
-	
-	setupEditable: function() {
-		var isOwnBlog = function(id) { 
-			return id == this.blog_id; 
-		}.bind(this)
-		
-		if (this.currentUser.get('blog_ids').some(isOwnBlog)) {
-			this.$('.editable').removeClass('hidden');
-		}
-		
-		this.deleteBtn = this.$('.delete-post');
-		var post = this.model;
-		
-		this.deleteBtn.confirmation({
-			popout: true,
-			onConfirm: function(event){
-				event.preventDefault();
-				post.destroy({
-					success: function(){
-						console.log("destroyed!");
-					}
-				})
-			}
-		});
 	},
 	
 	openEditPost: function(event) {
@@ -159,8 +128,57 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		});
 	},
 	
+	renderBtns: function(){
+		this.setupFollowBtn();
+		this.setFollowState(this.followBtnId, this.blog_id); // "button.follow-btn-" + this.blog_id;
+		this.renderFollowButton(this.followBtnId);
+	},
+	
+	setupEditable: function() {
+		
+		var isOwnBlog = function(id) { 
+			return id == this.blog_id; 
+		}.bind(this)
+		
+		if (this.currentUser.get('blog_ids').some(isOwnBlog)) {
+			this.$('.editable').removeClass('hidden');
+		}
+		
+		this.deleteBtn = this.$('.delete-post');
+		var post = this.model;
+		this.deleteBtn.confirmation({
+			popout: true,
+			onConfirm: function(event){
+				event.preventDefault();
+				post.destroy({
+					success: function(){
+						console.log("destroyed!");
+					}
+				})
+			}
+		});
+	},
+	
+	renderSetup: function(){
+		this.blog_id = this.model.get('blog_id'); // "button.follow-btn-" + this.blog_id;
+		this.followBtnId = "button.follow-btn-" + this.blog_id;
+		
+		if (this.blog_id === this.currentUser.get('main_blog_id')) {
+			this.shouldShowFollow = false;
+		} else {
+			this.shouldShowFollow = true;
+		}
+		
+		this.render();
+		this.setFollowState(this.followBtnId, this.blog_id); 
+		this.renderFollowButton(this.followBtnId);
+		this.setupEditable();
+	},
+	
 	render: function(){
 		this.setLikeState('Post', this.model.id, this.likeButtonId);
+		this.blog_id = this.model.get('blog_id');
+		
 		var content = this.template({ 
 			post: this.model,
 			initialLikeState: this.likeState,
@@ -170,15 +188,9 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 			shouldShowFollow: this.shouldShowFollow
 		});
 		
-    this.$el.html(content);
-   	
+    this.$el.html(content);  			
 		this.renderLikeButton(this.likeButtonId);
 		
-		this.setFollowState(this.followBtnId, this.blog_id); // "button.follow-btn-" + this.blog_id;
-		this.renderFollowButton(this.followBtnId);
-		
-		
-// 		this.setupEditable();
     return this;
 	}
 	

@@ -31,8 +31,6 @@ class Post < ActiveRecord::Base
 	default_scope  { order(created_at: :desc) }
 	scope :reblogged, -> { where(reblogged: true) }
 	
-# 	before_save :update_comments_count
-	before_save :ensure_total_notes
 	
 	# HELPERS
 	# reset comments back to 0
@@ -64,19 +62,11 @@ class Post < ActiveRecord::Base
 	end
 	
 	def comments
-		if self.reblogged
-			self.source_post.comments
-		else
-			Comment.where(post_id: self.id)
-		end
+		self.reblogged ? self.source_post.comments : Comment.where(post_id: self.id)
 	end
 	
 	def comments_count
-		if self.reblogged
-			self.source_post.comments_count
-		else
-			Post.where(id: self.id).pluck('comments_count').first
-		end
+		self.reblogged ? self.source_post.comments_count : Post.where(id: self.id).pluck('comments_count').first
 	end
 	
 	def self.created_before(time)
@@ -91,14 +81,10 @@ class Post < ActiveRecord::Base
 	def notes_count
 		if self.reblogged
 			source_post = Post.find(self.source_id)
-			source_post.likes_count + source_post.reblogs_count
+			source_post.likes_count + source_post.reblogs_count + source_post.comments_count
 		else
-			reblogs_count + likes_count
+			reblogs_count + likes_count + comments_count
 		end
-	end
-	
-	def ensure_total_notes
-		self.total_notes = notes_count
 	end
 	
 	# TRENDING
