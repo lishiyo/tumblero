@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
 		Blog.find(self.main_blog_id)
 	end
 	
+	def blog_ids
+		Blog.where(user_id: self.id).pluck('id')
+	end
+	
 	# NOTIFICATIONS
 	# params = user_id/noter_id, notification_type, notification_id
 	def notify(params)

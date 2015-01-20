@@ -19,11 +19,7 @@ class Api::CommentsController < ApplicationController
 		end
 		
 		if @comment.save && create_with_notification(@author, @comment)
-			respond_to do |format|
-				format.json { 
-					render partial: 'comment', 
-					locals: { comment: @comment } }
-			end
+			render partial: 'comment', locals: { comment: @comment }
 		else
 			render json: @comment.errors.full_messages, status: 422
 		end

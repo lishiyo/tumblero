@@ -10,7 +10,7 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	initialize: function(opts){
 		// this.collection is all_comments
 		this.listenTo(this.collection, 'remove change', this.render);
-		this.listenTo(this.collection, 'add', this.render);
+// 		this.listenTo(this.collection, 'add', this.render);
 		this.post = opts.post;
 		this.currentUser = opts.currentUser;
 		this.postView = opts.postView;
@@ -68,12 +68,9 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 	},
 	
 	render: function(){
-		var content = this.template({ 
-			post_id: this.post.id
-		});
+		var content = this.template({ post_id: this.post.id });
 		
-		var $close = $('<a class="close-comments" href="">close</a>');
-		
+		var $close = $('<a href="#"><i class="fa fa-angle-double-up"></i> close <i class="fa fa-angle-double-up"></i></a>').addClass('close-comments');
 		this.$el.html(content).append($close);
 		this.addReplyForm();
 		// attach child comments subviews
@@ -86,8 +83,6 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 		event.preventDefault();
 		var $commentCont = $(event.currentTarget).closest('.comments-container');
 		$commentCont.empty();
-		
-// 		Backbone.history.navigate("", { replace: true });
 	},
 	
 	openReplyForm: function(event) {
@@ -117,7 +112,6 @@ Tumblero.Views.CommentsIndex = Backbone.CompositeView.extend({
 		}
 		
 		$a.replaceWith(newCommView.render().$el);
-		
 	}
 	
 	

@@ -17,22 +17,20 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 // 		return contEl;
 // 	},
 	
-	// this.model = comment with child_comments
 	initialize: function(opts){
 		this.post = opts.post;
 		this.currentUser = opts.currentUser;
 		this.postView = opts.postView;
 		this.collection = this.model.child_comments();
 		this.blog_id = this.model.get('main_blog_id');
-		
-		if (this.blog_id === this.currentUser.get('main_blog_id')) {
+				
+		if (typeof this.blog_id === "undefined" || this.blog_id === this.currentUser.get('main_blog_id')) {
 			this.shouldShowFollow = false;
 		} else {
 			this.shouldShowFollow = true;
 		}
 		
 		this.listenTo(this.model, 'sync change', this.render);
-// 		this.listenTo(this.collection, 'sync', this.render);
 		this.listenTo(this.collection, 'remove', this.removeComment);
 		this.listenTo(this.collection, 'add', this.addComment);
 		
@@ -51,11 +49,9 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 	
 	addComment: function(comment){
 		this.addCommSubview(comment);
-// 		this.render();
 	},
 	
 	addAllComments: function(){
-		// add subviews for child_comments
 		if (this.model.child_comments().length > 0) {
 			this.collection.each(function(comment){
 				this.addCommSubview(comment);
@@ -100,8 +96,6 @@ Tumblero.Views.CommentShow = Tumblero.ToggableView.extend({
 		}
 		
 		$elem.replaceWith(newCommView.render().$el);
-
-// 		$a.replaceWith(newCommView.render().$el);
 	},
 	
 	setFollowState: function(btnId){

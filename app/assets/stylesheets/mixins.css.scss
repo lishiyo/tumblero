@@ -4,7 +4,7 @@ $gray-medium-light: #eaeaea;
 $gray-light: #F0F8FF;
 $gray-darker: #778899;
 $lilac-light: rgba(172, 159, 211, 0.8);
-$lemon-light: rgba(236, 210, 40, 0.4);
+$lemon-light: rgba(236, 210, 40, 0.85);
 $tumblr-standard: #36465d;
 $gold: #EBDC2B;
 $rosy: #FC0650;
@@ -14,7 +14,6 @@ $orange-dull: rgb(208, 101, 3);
 $gold: rgb(233, 147, 26);
 $skyblue: rgb(22, 145, 190);
 $dark-blue: rgb(27, 54, 71);
-
 $gray-line: #ccc;
 
 /* envato */
@@ -41,7 +40,7 @@ $post-img-height: 400px;
 $follow-small-width: 80px;
 $follow-small-height: 25px;
 $reply-btn-width: 150px;
-$reply-btn-height: 30px;
+$reply-btn-height: 24px;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;

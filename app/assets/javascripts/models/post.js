@@ -26,7 +26,6 @@ Tumblero.Models.Post = Backbone.Model.extend({
 				return obj.name;
 			});
 			
-			console.log("resp.tagNames", resp.tagNames);
 			delete resp.taggings;
 		} 
 			

@@ -5,7 +5,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	events: {
 		'click .re-sort': 'reSortBy',
 		'click button.follow-btn': "followBlog",
-		"keyup input#search-tag": 'callFilterWith'
+		"keyup input#search-tag": 'callFilterWith',
+		'click button.follow-btn': "followPoster"
 	},
 	
 	
@@ -20,15 +21,23 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.collection, 'sort', this.handleSort);
 		this.listenTo(this.collection, 'add', this.handleAdd);
-// 		this.listenTo(this.collection, 'remove', this.handleRemove);
-		this.listenTo(this.collection, 'sync', this.renderPosts);
+		this.listenTo(this.collection, 'sync remove', this.renderPosts);
 		this.listenTo(this.collection, "addNewPost", this.addNewPost);
 		
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';
 		
-		view = this;
 		this.fetchCollection();
+	},
+	
+	followPoster: function(event){
+		event.preventDefault();
+		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
+		
+		Tumblero.FollowChan.commands.execute("followBlog", { 
+			view: this,
+			btnId: btnId
+		});
 	},
 	
 	callFilterWith: function(event) {
@@ -47,9 +56,9 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	// posts container
 	renderPosts: function(coll){
-		// avoid rendering if coll is NOT a collection
+		// avoid rendering if coll is a post rather than collection
 		if (!coll || coll._taggings) {
-			var currColl = this.collection
+			var currColl = this.collection;
 		} else {
 			var currColl = coll;
 		}
@@ -69,7 +78,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	handleSort: function(post) {
-		console.log("handleSort", post);
 		this.renderPosts();
 	},
 	
@@ -113,8 +121,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	render: function(){	
-		this.renderFollow();		
-		
 		var content = this.template({ 
 			blog: this.model,
 			current_user_id: this.currentUser.id,
@@ -122,8 +128,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
-		
-		this.renderFollowButton('.follow-btn');
+		this.renderBlog();
 
     return this;
 	}

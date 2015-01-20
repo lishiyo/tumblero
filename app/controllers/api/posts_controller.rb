@@ -2,30 +2,18 @@ class  Api::PostsController < ApplicationController
 	
 	wrap_parameters false
 	
-	before_action :set_post, only: [:show, :comments, :reblog, :new_comment]
+	before_action :set_post, only: [:show, :comments, :reblog, :new_comment, :update, :destroy]
 	
 	# GET api/blogs/:blog_id/posts
 	def index
 		@blog = Blog.find(params[:blog_id])
-# 		@posts = @blog.posts
-		# 		render json: @posts.as_json(methods: [:notes_count, :likers, :recent_notes_count], include: :taggings)
-		
 		@posts = @blog.posts.page(params[:page])
 		
 		render 'index'
-		
-# 		render :json => {
-#         :models => @posts.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings),
-#         :page => params[:page],
-#         :total_pages => @posts.total_pages 
-#     }
 	end
 	
 	def show	
 		render 'show'
-# 		render json: @post.as_json(
-# 				methods: [:notes_count, :likers_ids, :recent_notes_count], 
-# 				include: :taggings)
 	end
 	
 	def new
@@ -46,15 +34,31 @@ class  Api::PostsController < ApplicationController
 			
 		@post = @blog.posts.build(post_params)
 		
-		if full_transact?
-			respond_to do |format|
-				format.html { redirect_to blog_url(blog) }
-				format.json { render json: @post.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings) }
-			end
+		if full_transact?			
+			render json: @post.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings)
 		else
-			flash.now[:errors] = "woops"
 			render json: nil, status: 422
 		end
+	end
+	
+	def update
+		if post_params[:tags_string]
+			@tags_array = post_params[:tags_string].split(",").map(&:strip)
+			post_params[:tags_string] = post_params[:tags_string]
+				.split(",").map(&:strip).join(", ")
+		end
+		
+		if @post.update(post_params) && (@post.update_new_taggings(@tags_array, current_user) if @tags_array)
+			render json: @post.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings)
+		else
+			render json: nil, status: 422
+		end
+	end
+	
+	def destroy
+		@post.destroy!
+		
+		render json: nil, status: 200
 	end
 	
 	# POST /api/posts/:id/reblog 

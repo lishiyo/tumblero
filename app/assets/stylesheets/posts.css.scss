@@ -35,6 +35,51 @@ body.bg-green{
 	padding: 20px;
 	background-color: white;
 	border-radius: 10px;
+	position: relative;
+	
+	.popover-content .btn-danger {
+		margin-bottom: 5px;
+		color: #fff;
+		background: $rosy;
+		border: none;
+		width: 72px;
+		&:hover {
+			background: $bg-black;
+		}
+	}
+	
+	.post-inner button {
+		float: left;
+	}
+	
+	button.submit-el {
+		width: 66%;
+	}
+	
+	button.cancel-post {
+		width: 30%;
+	}
+	
+	.editable i.fa {
+		color: $gray-line;
+		font-size: 19px;
+		&:hover {
+			color: $foam-green;
+		}
+	}
+	
+	.editable i.edit-post {
+		position: absolute;
+		top: 8px;
+		right: 25px;
+		color: $rosy-coral;
+	}
+	
+	.editable i.fa-remove {
+		position: absolute;
+		top: 7px;
+		right: 3px;
+	}
 	
 	img {
 		max-width: $post-img-width;
@@ -43,11 +88,32 @@ body.bg-green{
 
 	a {
 		text-decoration: none;
-		color: gray;
+		color: $gray-line;
+	}
+	
+	a.close-comments {
+		display:block;
+		text-align: center;
+		color: $gray-line;
 	}
 	
 	p {
 		padding: 0 10px;
+	}
+	
+	ul:not(.wysihtml5-toolbar) li, ul:not(.comments-index) li {
+		list-style-type: disc;
+		margin-left: 40px;
+	}
+	
+	ol:not(.wysihtml5-toolbar) li, ol:not(.comments-index) li {
+		list-style-type: decimal;
+		margin-left: 40px;
+	}
+	
+	ol.comments-index li {
+		list-style: none;
+		margin-left: none;
 	}
 	
 }

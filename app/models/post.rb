@@ -171,7 +171,7 @@ class Post < ActiveRecord::Base
 	end
 	
 	# called on update of existing post
-	def update_new_taggings(tagging_names)
+	def update_new_taggings(tagging_names, user)
 		return unless tagging_names.length > 0
 		
 		old_names = self.taggings.map(&:name)
@@ -182,7 +182,7 @@ class Post < ActiveRecord::Base
 		Tagging.transaction do
 			Tagging.where(taggable_type: "Post", taggable_id: self.id, name: names_to_destroy).destroy_all
 			new_names.each do |new_name|
-				tagging = self.taggings.build(name: new_name, user_id: current_user.id)
+				tagging = self.taggings.build(name: new_name, user_id: user.id)
 				tagging.save!
 			end
 		end

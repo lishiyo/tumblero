@@ -3,15 +3,21 @@
 	<div class="followable group">
 		<a class="pull-left" href="#/blogs/<%= post.get('blog_id') %>"><%= post.get('blog_handle') %></a>
 		<% if (shouldShowFollow) { %>
-			<button class="follow-btn btn btn-info pull-left follow-btn-small follow-btn-<%= main_blog_id %>" data-blog-id="<%= main_blog_id %>" data-initial-follow-state="<%= initialFollowState %>"></button>
+			<button class="follow-btn btn btn-info pull-left follow-btn-small follow-btn-<%= main_blog_id %>" data-blog-id="<%= main_blog_id %>" data-initial-follow-state></button>
 		<% } %>
+		
+		<div class="editable pull-right hidden">
+			<i class="fa fa-edit pull-left edit-post"></i>
+			<a class="confirmation"><i class="fa fa-remove delete-post pull-left"></i></a>
+		</div>
 	</div>
 	
-	
-<h3><% if (post.get('title')) { %>
-			<%= post.get('title') %>
-		<% } %>
-</h3>
+<div class="post-inner">
+		
+	<h3><% if (post.get('title')) { %>
+				<%= post.get('title') %>
+			<% } %>
+	</h3>
 
 	<% if (post.get('filepicker_urls') && post.get('filepicker_urls').length > 0) { %>
 		<% post.get('filepicker_urls').split(",").forEach(function(file_url) { %>
@@ -30,6 +36,8 @@
 			<span class="tags"><a href="#/explore/<%= tag.escape('name').split(' ').join('+') %>">#<%= tag.escape('name') %></a></span>
 		<% }); %>
 	</p>
+		
+</div> <!-- post-inner -->
 
 	<div class="toggleable group">
 		
@@ -46,7 +54,6 @@
 		
 	</div>
 	
-	<div id="post-comments-<%= post.id %>" class="comments-container">	
-	</div>
+	<div id="post-comments-<%= post.id %>" class="comments-container"></div>
 	
 </div>

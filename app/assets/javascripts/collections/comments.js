@@ -10,9 +10,9 @@ Tumblero.Collections.Comments = Backbone.Collection.extend({
 		this.parent_comment = (opts.parent_comment || null);
 	},
 	
-// 	comparator: function(comment) {
-// 		return comment.get('count_likes');
-// 	},
+	comparator: function(comment) {
+		return -comment.get('likes_count');
+	},
 	
 	// grab comments_by_parent hash and parse out top level comments
 	// do a fetch on each key (root comment) with parse: true

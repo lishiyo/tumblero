@@ -6,6 +6,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		'click .re-sort': 'reSortBy',
 		"click button.full-post-modal": "openPostModal",
 		"keyup input#search-tag": 'callFilterWith',
+		'click button.follow-btn': "followPoster"
 	},
 	
 	initialize: function(opts){
@@ -22,13 +23,22 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';
-		dash = this;
+		
 		this.fetchCollection();
+	},
+	
+	followPoster: function(event){
+		event.preventDefault();
+		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
+		
+		Tumblero.FollowChan.commands.execute("followBlog", { 
+			view: this,
+			btnId: btnId
+		});
 	},
 	
 	openPostModal: function(event){
 		event.preventDefault();
-		
 		var startTab = ($(event.currentTarget).data("tab-num") || 1),
 				post = new Tumblero.Models.Post();
 
@@ -102,8 +112,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	render: function(){
-		this.renderFollow();
-		
+	
 		var content = this.template({ 
 			dashboard: this.model,
 			current_user_id: this.currentUser.id,
@@ -112,8 +121,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
     this.$el.html(content);
 
-		this.renderFollowButton(this.$('.follow-btn'));
-		
     return this;
 	}
 	

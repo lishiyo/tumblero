@@ -19,8 +19,10 @@
 //= require underscore
 //= require backbone
 //= require backbone.autocomplete.min
+//= require backbone.marionette.min
 //= require bootstrap-wysihtml5
 //= require masonry.min
+//= require bootstrap-confirmation
 
 //= require tumblero
 //= require assets

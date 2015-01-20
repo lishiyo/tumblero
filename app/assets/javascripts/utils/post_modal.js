@@ -83,7 +83,6 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		
 		// blog post is submitting to
 		var blogId = $('select#post_blog_id').val(),
-// 				blogName = $('self#post_blog_id').data("blog-name"),
 				blog = Tumblero.Collections.blogs.getOrFetch(blogId),
 				modalView = this,
 				collection = (this.collection || blog.posts());

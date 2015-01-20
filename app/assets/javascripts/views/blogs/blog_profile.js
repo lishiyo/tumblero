@@ -3,7 +3,7 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 	template: JST['blogs/profile'],
 	
 	events: {
-		'click button.follow-btn': "followBlog"
+		'click button.follow-btn': "followPoster"
 	},
 	
 	initialize: function(opts){
@@ -14,15 +14,19 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 		this.followBtnId = "button#follow-btn-" + this.model.id;
 	},
 	
+	followPoster: function(event){
+		event.preventDefault();
+		Tumblero.FollowChan.commands.execute("followBlog", { 
+			view: this,
+			btnId: this.followBtnId
+		});
+	},
+	
 	renderFollow: function(){
 		this.setFollowState();
 	},
 	
 	render: function(){
-		console.log("called render in blog profile");
-		
-		this.setFollowState();
-		
 		var content = this.template({ 
 			blog: this.model,
 			current_user_id: this.currentUser.id,
@@ -30,6 +34,7 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 		});
 		
 		this.$el.html(content);
+		this.setFollowState();
 		this.renderFollowButton(this.followBtnId);
 	
 		return this;

@@ -1,0 +1,45 @@
+<form class="post edit-form">
+			
+	<div class="form-group">
+		<h3>
+			<% if (post.get('title')) { %>
+				<%= post.get('title') %>
+				<input type="hidden" name="post[title]" value="<%= post.escape('title') %>">
+			<% } %>
+		</h3>
+	</div>
+	
+	<div class="form-group">
+		<input type="hidden" name="post[filepicker_urls]" id="post_filepicker_urls" value="<%= post.escape('filepicker_urls') %>">
+		<div class="image-thumbnails">
+			<% if (post.get('filepicker_urls') && post.get('filepicker_urls').length > 0) { %>
+				<% post.get('filepicker_urls').split(",").forEach(function(file_url) { %>
+					<img src="<%= file_url %>">
+				<% }); %>
+			<% } %>
+		</div>
+	</div>	
+	
+	<div class="form-group wysiwyg">
+    <textarea id="post-content" name="post[content]"></textarea>
+	</div>
+	
+	<div class="form-group">
+		<i class="fa fa-tags"></i> <input type="text" id="post_tags_string" name="post[tags_string]" class="form-control tags" value="<%= post.get('tags_string') %>" placeholder="tags (separate by commas)">
+	</div>
+		
+	<input type="hidden" name="post[reblogged]" value="<%= post.reblogged %>">
+	<input type="hidden" name="post[source_id]" value="<%= post.get('source_id') %>">
+	<input type="hidden" name="post[reblogs_count]" value="<%= post.get('reblogs_count') %>">
+	<input type="hidden" name="post[comments_count]" value="<%= post.get('comments_count') %>">
+	<input type="hidden" name="post[likes_count]" value="<%= post.get('likes_count') %>">
+	
+	<div class="group">
+		<button type="submit" class="btn oe-btn oe-btn-red oe-btn-inline-icon submit-el submit-edit">
+			<span><i class="fa fa-check-square-o"></i> update post</span>
+		</button>
+		<button class="btn cancel-post">
+			<span>cancel</span>
+		</button>
+	</div>
+</form>

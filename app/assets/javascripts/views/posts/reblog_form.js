@@ -30,7 +30,6 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 			view.submitForm(event);
 			view.model.fetch();
 // 			view.model.trigger("change", view.model);
-			console.log("triggered model", view.model);
 		}).fail(function(jqXHR, textStatus, error) {
 			console.log("failed", textStatus, error);
 		}).always(function(data, textStatus, error){
@@ -49,6 +48,7 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 		this.$el.html(content);
 		
 		this.setEditor();
+		
 		if (this.model.escape('content')) {
 			var postContent = "<blockquote>" + this.model.escape('content') + "</blockquote><br>";
 			this.$('#post-content').html(postContent);

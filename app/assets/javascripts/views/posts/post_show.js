@@ -8,7 +8,9 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		"click .open-comments": "openComments",
 		'click button.like-btn': "likeSubject",
 		"click .reblog-btn": "openReblogModal",
-		'click button.follow-btn': "followPoster"
+		'click .edit-post': "openEditPost",
+		'submit form.edit-form': "submitEditForm",
+		'click .delete-post': 'deletePost'
 	},
 	
 	initialize: function(opts){
@@ -24,15 +26,87 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 			this.shouldShowFollow = true;
 		}
 		
-// 		this.listenTo(this.currentUser, 'sync', this.render);
-		this.listenTo(this.model, 'sync', this.render);
+		this.currentUser.fetch();
+		this.listenTo(this.currentUser, 'sync', this.setupEditable);
+		this.listenTo(this.model, 'sync destroy', this.render);
 		this.listenTo(this.model, 'change:comments_count', this.incrementCommCount);
 		this.listenTo(this.taggings, 'sync', this.render);
+	},
+	
+	deletePost: function(event){
+		event.preventDefault();
+		this.deleteBtn.confirmation('show');
+	},
+	
+	setupEditable: function() {
+		var isOwnBlog = function(id) { 
+			return id == this.blog_id; 
+		}.bind(this)
+		
+		if (this.currentUser.get('blog_ids').some(isOwnBlog)) {
+			this.$('.editable').removeClass('hidden');
+		}
+		
+		this.deleteBtn = this.$('.delete-post');
+		var post = this.model;
+		
+		this.deleteBtn.confirmation({
+			popout: true,
+			onConfirm: function(event){
+				event.preventDefault();
+				post.destroy({
+					success: function(){
+						console.log("destroyed!");
+					}
+				})
+			}
+		});
+	},
+	
+	openEditPost: function(event) {
+		event.preventDefault();
+		var editForm = JST['posts/edit_post'];
+		var content = editForm({ post: this.model });
+		
+		this.$('.post-inner').html(content);
+		
+		// attach wysiwyg content
+		this.setEditor();
+		if (this.model.get('content')) {
+			this.$('#post-content').html(this.model.get('content'));
+		}
+	},
+	
+	submitEditForm: function(event) {
+		event.preventDefault();
+		var formData = $(event.currentTarget).serializeJSON().post;
+		
+		this.model.save(formData, {
+			success: function(model) {		
+				console.log("post updated!")
+				model.fetch();
+			},
+			error: function() {
+				console.log("something went wrong");
+			}
+		});
 		
 	},
 	
-	followPoster: function(event){
-		this.followBlog(event, this.blog_id);
+	setEditor: function(){
+		this.$('#post-content').wysihtml5({
+			toolbar: {
+				"font-styles": true, 
+				"emphasis": true, //Italics, bold, etc. Default true
+				"lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+				"html": false, //Button which allows you to edit the generated HTML. Default false
+				"link": false, 
+				"image": false, 
+				"color": true, //Button to change color of font  
+				"blockquote": true, //Blockquote  
+				"fa": true
+			}
+		});
 	},
 	
 	incrementCommCount: function(){
@@ -85,32 +159,26 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		});
 	},
 	
-	setFollowState: function(btnId){
-		var isFollowed = this.currentUser.followStateFor(this.blog_id);
-		this.followState = ((isFollowed) ? "followed" : "unfollowed");
-		
-		this.btnId = (btnId || ('button.follow-btn'));
-	},
-	
 	render: function(){
 		this.setLikeState('Post', this.model.id, this.likeButtonId);
-		this.setFollowState(this.followBtnId);
-
 		var content = this.template({ 
 			post: this.model,
 			initialLikeState: this.likeState,
 			tag_names: this.taggings,
 			count_comments: this.model.get('comments_count'),
-			shouldShowFollow: this.shouldShowFollow,
 			main_blog_id: this.blog_id,
-			initialFollowState: this.followState
+			shouldShowFollow: this.shouldShowFollow
 		});
 		
     this.$el.html(content);
    	
 		this.renderLikeButton(this.likeButtonId);
+		
+		this.setFollowState(this.followBtnId, this.blog_id); // "button.follow-btn-" + this.blog_id;
 		this.renderFollowButton(this.followBtnId);
 		
+		
+// 		this.setupEditable();
     return this;
 	}
 	

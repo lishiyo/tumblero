@@ -36,7 +36,6 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		if (this.likeState === "liked") {
 			this.likeState = "unliking";
 			this.renderLikeButton($btn);
-
 			$.ajax({
 				url: "/api/like",
 				dataType: "json",
@@ -47,6 +46,7 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 					likeToggle.likeState = "unliked";
 					likeToggle.renderLikeButton($btn);
 					likeToggle.model.fetch();
+					console.log("deleted like!");
 				},
 				error: function(data) {
 					console.log("error in like delete", data);
@@ -75,19 +75,33 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		}
 	},
 	
-	// FOLLOWINGS 
+	// FOLLOWINGS (blog_show and blog_profile)
 	
-	// you can ONLY follow a blog
+	// you can ONLY follow a blog (this.model)
 	// btnId refers to actual #id when on blog index page, but class on dashboard/posts
-	setFollowState: function(btnId){
-		var isFollowed = this.currentUser.followStateFor(this.model.id);
-		this.followState = ((isFollowed) ? "followed" : "unfollowed");
+// 	setFollowState: function(btnId){
+// 		var isFollowed = this.currentUser.followStateFor(this.model.id);
+// 		this.btnId = (btnId || ('button.follow-btn'));
 		
-		this.btnId = (btnId || ('button.follow-btn'));
+// 		this.followState = ((isFollowed) ? "followed" : "unfollowed");
+// 	},
+	
+	setFollowState: function(btnId, model_id) {
+		var id = (model_id || this.model.id);
+		var isFollowed = this.currentUser.followStateFor(id);
+		var btnId = (btnId || ('button.follow-btn'));
+		
+		if (isFollowed) {
+			this.$(btnId).data("initial-follow-state", "followed");
+		} else {
+			this.$(btnId).data("initial-follow-state", "unfollowed");
+		}
 	},
 	
 	renderFollowButton: function(btnId){
 		var $btn = this.$(btnId);
+		this.followState = $btn.first().data("initial-follow-state");
+		
 		if (this.followState === "followed") {
 			$btn.prop("disabled", false).addClass("followed");
 			$btn.html("<i class='fa fa-minus'></i>  unfollow");
@@ -104,18 +118,16 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		
 	},
 	
-	
-	followBlog: function(event, model_id, btn_id){
+	followBlog: function(event, model_id){
 		event.preventDefault();
 		var followToggle = this,
-				$btn = (btn_id || this.$(this.btnId)),
-				user = this.currentUser;
-		
-		var blog_id = (model_id || followToggle.model.id);
+				$btn = this.$(this.btnId),
+				user = this.currentUser,
+				blog_id = (model_id || followToggle.model.id);
 		
 		if (this.followState === "followed") {
 			this.followState = "unfollowing";
-			this.renderFollowButton($btn);
+			this.renderFollowButton(this.btnId);
 			
 			$.ajax({
 				url: "/api/blogs/" + blog_id + "/following",
@@ -125,16 +137,16 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 					console.log("successful delete", data);
 					followToggle.followState = "unfollowed";
 					followToggle.currentUser.fetch();
-					followToggle.renderFollowButton($btn);		
+					followToggle.renderFollowButton(this.btnId);		
 // 					followToggle.model.fetch();
-				},
+				}.bind(this),
 				error: function(data) {
 					console.log("error in delete", data);
 				}
 			});
 		} else if (this.followState === "unfollowed") {
 			this.followState = "following"
-			this.renderFollowButton($btn);
+			this.renderFollowButton(this.btnId);
 			
 			$.ajax({
 				url: "/api/blogs/" + blog_id + "/following",
@@ -144,15 +156,14 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 					console.log("successful follow", data);
 					followToggle.followState = "followed";
 					followToggle.currentUser.fetch();
-					followToggle.renderFollowButton($btn);
+					followToggle.renderFollowButton(this.btnId);
 // 					followToggle.model.fetch();
-				},
+				}.bind(this),
 				error: function(data) {
 					console.log("error in follow creation", data);
 				}
 			});
 		}
-		
 	}	
 	
 })
