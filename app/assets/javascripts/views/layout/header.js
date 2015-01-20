@@ -10,10 +10,14 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	initialize: function(opts){
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
+		this.currentUser.fetch();
 		
 		if (this.currentUser) {
+			this.listenTo(this.currentUser, 'sync', this.setProfile);
 			this.listenTo(this.currentUser, 'sync', this.setNotifications);
 		}
+				
+		h = this;
 	},
 	
 	setNotifications: function(){
@@ -28,25 +32,27 @@ Tumblero.Views.Header = Backbone.View.extend({
 		this.$cont.append(content);
 	},
 	
+	setProfile: function(){
+		$('ul.header-notifications .user-blog').remove();
+		
+		this.currentUser.blogs().each(function(blog) {
+			var a = $('<a></a>').attr("href", "#/blogs/"+blog.id).html('<i class="fa fa-bolt"></i> '+ blog.escape('handle'));
+			var content = $('<li class="user-blog"></li>').append(a);
+			content.appendTo($('ul.header-notifications'));
+		});
+	},
+	
 	render: function(){
-		var content = this.template();
+		var content = this.template({ user: this.currentUser });
+		
 		this.$el.html(content);
 		return this;
 	},
 	
 	refresh: function(){
+		
 		this.render();
 	},
-	
-// 	mainSearch: function(event) {
-// 		event.preventDefault();
-// 		var query = this.$("#nav-search").val().split(" ").join("+");
-		
-// 		// pass in query to router, which swaps view to SearchTags
-// 		var url = "/explore/" + query;
-// 		console.log("query is", url);
-// 		Backbone.history.navigate(url, {trigger: true});
-// 	},
 	
 	openPostModal: function(event){
 		event.preventDefault();
@@ -63,7 +69,19 @@ Tumblero.Views.Header = Backbone.View.extend({
 
 		newPostFull.setActive({ tabNum: startTab });
 		
-	}
+	},
+	
+	
+// 	mainSearch: function(event) {
+// 		event.preventDefault();
+// 		var query = this.$("#nav-search").val().split(" ").join("+");
+		
+// 		// pass in query to router, which swaps view to SearchTags
+// 		var url = "/explore/" + query;
+// 		console.log("query is", url);
+// 		Backbone.history.navigate(url, {trigger: true});
+// 	},
+	
 	
 });
 

@@ -30,6 +30,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	followPoster: function(event){
 		event.preventDefault();
 		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
+		console.log("followPoster!", btnId);
 		
 		Tumblero.FollowChan.commands.execute("followBlog", { 
 			view: this,

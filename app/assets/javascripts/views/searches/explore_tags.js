@@ -1,5 +1,5 @@
 // searching in main header => /explore/One+Direction
-Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
+Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 	
 	template: JST["searches/tags"],
 	
@@ -7,7 +7,19 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 // 		"click #main-search-btn": "searchMain",
 		"click .next-page": "nextPage",
 		'focus #main-search': 'initAutocomplete',
-		'keyup #main-search': 'checkSearch'
+		'keyup #main-search': 'checkSearch',
+		'click button.follow-btn': "followPoster"
+	},
+	
+	followPoster: function(event){
+		event.preventDefault();
+		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
+		console.log("followPoster!", btnId);
+		
+		Tumblero.FollowChan.commands.execute("followBlog", { 
+			view: this,
+			btnId: btnId
+		});
 	},
 	
 	initialize: function (opts) {
@@ -24,16 +36,17 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 		this.queryStr = opts.queryStr; // initial querystring
 		this.blogsCont = '#blogs-results';
 		this.postsCont = '#posts-results';
+		this.currentUser = opts.currentUser;
 		
 		this.listenTo(this.searchResBlogs, "sync", this.renderBlogResults);
 		this.listenTo(this.searchResPosts, "sync remove sort", this.renderPostResults);
 		
+		this.currentUser.fetch();
 	},
 	
 	searchMain: function (event) {
 		event.preventDefault();
-		this.queryStr = this.$("#main-search").val();
-		
+		this.queryStr = this.$("#main-search").val();	
 		this.initSearchBlogs(this.queryStr);
 		this.initSearchPosts(this.queryStr);
 	},
@@ -95,7 +108,8 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 	},
 	
 	addPostSubview: function(post) {
-	
+		somepost = post;
+		
 		var subview = new Tumblero.Views.PostShow({
 			model: post,
 			currentUser: (this.currentUser || Tumblero.current_user),
@@ -106,7 +120,6 @@ Tumblero.Views.ExploreTags = Backbone.CompositeView.extend({
 	
 	// pass in the collection you are showing
 	addPageNav: function(coll){
-		
 		var subview = new Tumblero.Views.PageNav({
 			currPage: (coll.currPage),
 			totalPages: coll.totalPages,

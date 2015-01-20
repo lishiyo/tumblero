@@ -17,10 +17,9 @@ Tumblero.Models.User = Backbone.Model.extend({
 				return (elem === type_id);
 			});
 		} else if (type == 'Comment' && user.get('liked_comments_ids')) {
-					return user.get('liked_comments_ids').some(function(elem){
-						return (elem === type_id);
+			return user.get('liked_comments_ids').some(function(elem){
+				return (elem === type_id);
 			});
-
 		}
 		
 		return false;

@@ -11,4 +11,4 @@ json.notes @notes do |n|
 	json.partial! "api/users/note", note: n
 end
 
-json.blogs @user.blogs, :id, :user_id, :name, :description, :avatar_url, :created_at, :updated_at
+json.blogs @user.blogs, :id, :user_id, :name, :description, :avatar_url, :created_at, :updated_at, :handle

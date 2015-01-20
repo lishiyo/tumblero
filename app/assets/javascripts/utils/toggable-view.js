@@ -77,14 +77,23 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 	
 	// FOLLOWINGS (blog_show and blog_profile)
 	
-	// you can ONLY follow a blog (this.model)
-	// btnId refers to actual #id when on blog index page, but class on dashboard/posts
 // 	setFollowState: function(btnId){
 // 		var isFollowed = this.currentUser.followStateFor(this.model.id);
 // 		this.btnId = (btnId || ('button.follow-btn'));
 		
 // 		this.followState = ((isFollowed) ? "followed" : "unfollowed");
 // 	},
+	
+	followFromPost: function(event){
+		event.preventDefault();
+		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
+		console.log("followFromPost!", btnId);
+		
+		Tumblero.FollowChan.commands.execute("followBlog", { 
+			view: this,
+			btnId: btnId
+		});
+	},
 	
 	setFollowState: function(btnId, model_id) {
 		var id = (model_id || this.model.id);

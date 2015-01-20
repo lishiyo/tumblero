@@ -26,10 +26,8 @@ Tumblero.Utils.Sortable = {
 			success: function(coll){
 				this.collection.currPage = coll._page;
 				this.collection.totalPages = coll.total_pages;
-				console.log("fetched Collection", this.collection.currPage, this.collection.totalPages)
 			}.bind(this)
 		});
-
 	},
 	
 	// render this.searchResults for single searches
@@ -60,7 +58,6 @@ Tumblero.Utils.Sortable = {
 	},
 	
 	addAllPosts: function(coll) {		
-		
 		this.removeSubviewsFor(this.postsCont);
 		this.removeSubviewsFor("#pagination-nav");
 		
@@ -80,21 +77,4 @@ Tumblero.Utils.Sortable = {
 		this.addPageNav(this.collection);
 	},
 	
-// 	filterBy: function(tag) {
-		
-// 		var view = this;
-// 		$.ajax({
-// 			url: "/api/blogs/"+this.model.id+"/all_posts",
-// 			type: "GET",
-// 			dataType: "json",
-// 			success: function(data){
-// 				var allPosts = new Tumblero.Collections.Posts(data, { blog: view.model });
-// 				view.filteredCollection = allPosts.filterByTag(tag);
-// 				console.log("current tag", tag, "allPosts", view.filteredCollection);
-		
-// 				return view.filteredCollection;
-// 			}
-// 		});
-		
-// 	}
 }

@@ -2,9 +2,6 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 	
 	template: JST['blogs/explore'],
 	
-	events: {
-	},
-	
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 		this.listenTo(this.currentUser, 'sync', this.render);
@@ -44,10 +41,6 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 		$('button#new-blog').removeClass('hidden');
 		$('.follow-up').removeClass('hidden');
 	},
-	
-// 	goNext: function(){
-// 		Backbone.history.navigate("blogs/new", {trigger: true});
-// 	},
 	
 	render: function(){
 		var content = this.template();

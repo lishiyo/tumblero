@@ -6,7 +6,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
 		
 		Tumblero.Collections.blogs = new Tumblero.Collections.Blogs({ user: this.currentUser });
-		Tumblero.perPage = 4; // CHANGE!!!
+		Tumblero.perPage = 4; // EXAMPLE
 		
 		this.refreshHeader();
 	},
@@ -50,7 +50,10 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	// sorted by popularity
 	exploreTrending: function(){
-		var view = new Tumblero.Views.ExploreTags({ queryStr: "" });
+		var view = new Tumblero.Views.ExploreTags({ 
+			queryStr: "",
+			currentUser: this.currentUser
+		});
 		
 		this._swapView(view);
 	},
@@ -59,7 +62,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		var queryStr = query.split("+").join(" "); // EX: "One Direction"
 		
 		var view = new Tumblero.Views.ExploreTags({
-			queryStr: queryStr
+			queryStr: queryStr,
+			currentUser: this.currentUser
 		});
 		
 		this._swapView(view);
@@ -95,9 +99,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id){
-    var user = (this.currentUser || Tumblero.current_user);
-		
-		var userShowView = new Tumblero.Views.UserShow({ model: user });
+		var userShowView = new Tumblero.Views.UserShow({ model: this.currentUser });
     this._swapView(userShowView);  
   },
 	
@@ -109,7 +111,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		var view = new Tumblero.Views.DashboardShow({ 
 			model: dashboard,
-			currentUser: (this.currentUser || Tumblero.current_user)
+			currentUser: this.currentUser
 		});
 		
 		this._swapView(view);
@@ -119,7 +121,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		var blog = Tumblero.Collections.blogs.getOrFetch(blog_id);
 		
 		var blogShowView = new Tumblero.Views.BlogShow({
-			currentUser: (this.currentUser || Tumblero.current_user), 
+			currentUser: this.currentUser,
 			model: blog
 		});
 		
@@ -130,7 +132,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		var blog = new Tumblero.Models.Blog({ user: this.currentUser });
 		var view = new Tumblero.Views.BlogNew({
-			currentUser: (this.currentUser || Tumblero.current_user),
+			currentUser: this.currentUser,
 			model: blog
 		});
 		
@@ -146,7 +148,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 			success: function(){			
 				console.log("blogsExplore");
 				var view = new Tumblero.Views.BlogsExplore ({
-					currentUser: (this.currentUser || Tumblero.current_user),
+					currentUser: this.currentUser,
 					collection: blogs
 				});
 

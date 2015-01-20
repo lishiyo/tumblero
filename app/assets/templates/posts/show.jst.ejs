@@ -15,7 +15,7 @@
 <div class="post-inner">
 		
 	<h3><% if (post.get('title')) { %>
-				<%= post.get('title') %>
+				<a href="#/posts/<%= post.id %>"><%= post.get('title') %></a>
 			<% } %>
 	</h3>
 

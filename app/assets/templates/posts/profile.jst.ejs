@@ -1,9 +1,22 @@
 <div class="post post-item">
 	
-<h3><% if (post.get('title')) { %>
-			<%= post.get('title') %>
+	<div class="followable group">
+		<a class="pull-left" href="#/blogs/<%= post.get('blog_id') %>"><%= post.get('blog_handle') %></a>
+		<% if (shouldShowFollow) { %>
+			<button class="follow-btn btn btn-info pull-left follow-btn-small follow-btn-<%= main_blog_id %>" data-blog-id="<%= main_blog_id %>" data-initial-follow-state></button>
 		<% } %>
-</h3>
+		
+		<div class="editable pull-right hidden">
+			<i class="fa fa-edit pull-left edit-post"></i>
+			<a class="confirmation"><i class="fa fa-remove delete-post pull-left"></i></a>
+		</div>
+	</div>
+	
+	<div class="post-inner">
+	<h3><% if (post.get('title')) { %>
+				<%= post.get('title') %>
+			<% } %>
+	</h3>
 
 	<% if (post.get('filepicker_urls') && post.get('filepicker_urls').length > 0) { %>
 		<% post.get('filepicker_urls').split(",").forEach(function(file_url) { %>
@@ -28,17 +41,16 @@
 		<span class="count-notes pull-left"><%= post.escape('notes_count') %> notes</span>
 
 		<span class="pull-right">
-		<button class="like-btn like-post" data-likeable-type="Post" data-likeable-id="<%= post.id %>" data-initial-like-state='<%= initialLikeState%>'><i class='fa fa-heart'></i></button>
+			<button class="like-btn like-post" data-likeable-type="Post" data-likeable-id="<%= post.id %>" data-initial-like-state='<%= initialLikeState%>'><i class='fa fa-heart'></i></button>
 
-		<button class="reblog-btn" data-post-id="<%= post.id %>"><i class="fa fa-retweet"></i></button>
+			<button class="reblog-btn" data-post-id="<%= post.id %>"><i class="fa fa-retweet"></i></button>
 
-		<a class="open-comments" data-open-comments="#/posts/<%= post.id %>/comments" href="#/posts/<%= post.id %>/comments"><span class="count-comments" data-curr-count="<%= count_comments %>"><%= count_comments %></span> comments</a>
+			<a class="open-comments" data-open-comments="#/posts/<%= post.id %>/comments" href="#/posts/<%= post.id %>/comments"><span class="count-comments" data-curr-count="<%= count_comments %>"><%= count_comments %></span> comments</a>
 	
 		</span>
 		
 	</div>
 	
-	<div id="post-comments-<%= post.id %>" class="comments-container">	
-	</div>
+	<div id="post-comments-<%= post.id %>" class="comments-container">	</div>
 	
 </div>
