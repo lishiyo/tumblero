@@ -8,20 +8,8 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		"click .next-page": "nextPage",
 		'focus #main-search': 'initAutocomplete',
 		'keyup #main-search': 'checkSearch',
-		'click button.follow-btn': "followPoster"
 	},
-	
-	followPoster: function(event){
-		event.preventDefault();
-		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
-		console.log("followPoster!", btnId);
-		
-		Tumblero.FollowChan.commands.execute("followBlog", { 
-			view: this,
-			btnId: btnId
-		});
-	},
-	
+
 	initialize: function (opts) {
 		this.searchResBlogs = new Tumblero.Collections.SearchResults([], {
 			searchType: "single",

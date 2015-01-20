@@ -23,14 +23,12 @@ Tumblero.Views.UserNew = Backbone.View.extend({
 		
 		newSession.save(formData, {
 			success:function(response){
-				console.log("guest sign in");
 				this.$('.errors').addClass('hidden');
 				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
 				Tumblero.current_user.fetch();
 				
         Backbone.history.navigate("/dashboard", {trigger: true});
-				Tumblero.Header.refresh();
-				
+				Tumblero.Header.refresh({ currentUser: Tumblero.current_user });				
 			}.bind(this)
 		})
 	},

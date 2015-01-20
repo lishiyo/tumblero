@@ -10,14 +10,10 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	initialize: function(opts){
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
-		this.currentUser.fetch();
-		
 		if (this.currentUser) {
 			this.listenTo(this.currentUser, 'sync', this.setProfile);
 			this.listenTo(this.currentUser, 'sync', this.setNotifications);
 		}
-				
-		h = this;
 	},
 	
 	setNotifications: function(){
@@ -34,7 +30,6 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	setProfile: function(){
 		$('ul.header-notifications .user-blog').remove();
-		
 		this.currentUser.blogs().each(function(blog) {
 			var a = $('<a></a>').attr("href", "#/blogs/"+blog.id).html('<i class="fa fa-bolt"></i> '+ blog.escape('handle'));
 			var content = $('<li class="user-blog"></li>').append(a);
@@ -44,22 +39,21 @@ Tumblero.Views.Header = Backbone.View.extend({
 	
 	render: function(){
 		var content = this.template({ user: this.currentUser });
-		
 		this.$el.html(content);
 		return this;
 	},
 	
-	refresh: function(){
-		
-		this.render();
+	refresh: function(opts){
+		this.currentUser = (opts.currentUser || Tumblero.current_user);
+		this.listenTo(this.currentUser, 'sync', this.setProfile);
+		this.listenTo(this.currentUser, 'sync', this.setNotifications);
+		this.render();		
 	},
 	
 	openPostModal: function(event){
-		event.preventDefault();
-		
+		event.preventDefault();		
 		var startTab = ($(event.currentTarget).data("tab-num") || 1),
 				post = new Tumblero.Models.Post();
-
 		var newPostFull = new Tumblero.Views.NewPostFull({
 			model: post,
 			currentUser: this.currentUser
@@ -67,8 +61,7 @@ Tumblero.Views.Header = Backbone.View.extend({
 
 		$('.modal-container').html(newPostFull.render().$el);
 
-		newPostFull.setActive({ tabNum: startTab });
-		
+		newPostFull.setActive({ tabNum: startTab });		
 	},
 	
 	

@@ -14,17 +14,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		'click button.follow-btn': "followFromPost"
 	},
 	
-// 	followPoster: function(event){
-// 		event.preventDefault();
-// 		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
-// 		console.log("followPoster!", btnId);
-		
-// 		Tumblero.FollowChan.commands.execute("followBlog", { 
-// 			view: this,
-// 			btnId: btnId
-// 		});
-// 	},
-	
 	initialize: function(opts){
 		this.currentUser = opts.currentUser;
 		this.taggings = this.model.taggings();
@@ -199,9 +188,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
     this.$el.html(content);  			
 		this.renderLikeButton(this.likeButtonId);
 		
-// 		this.setFollowState(this.followBtnId, this.blog_id); 
-// 		this.renderFollowButton(this.followBtnId);
-// 		this.setupEditable();
     return this;
 	}
 	

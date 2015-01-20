@@ -6,7 +6,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		'click .re-sort': 'reSortBy',
 		'click button.follow-btn': "followBlog",
 		"keyup input#search-tag": 'callFilterWith',
-		'click button.follow-btn': "followPoster"
 	},
 	
 	
@@ -28,17 +27,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 
 		this.fetchCollection();
 	},
-	
-	followPoster: function(event){
-		event.preventDefault();
-		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
-		
-		Tumblero.FollowChan.commands.execute("followBlog", { 
-			view: this,
-			btnId: btnId
-		});
-	},
-	
 	
 	callFilterWith: function(event) {
 		event.preventDefault();

@@ -99,19 +99,21 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id){
-		var userShowView = new Tumblero.Views.UserShow({ model: this.currentUser });
+		var userShowView = new Tumblero.Views.UserShow({ 
+			model: (this.currentUser || Tumblero.current_user)
+		});
     this._swapView(userShowView);  
   },
 	
 	dashboardShow: function(){
+		var user = (this.currentUser || Tumblero.current_user);
 		var dashboard = new Tumblero.Models.Dashboard({ 
-			user: this.currentUser });
-		
+			user: user });	
 		dashboard.fetch();
 		
 		var view = new Tumblero.Views.DashboardShow({ 
 			model: dashboard,
-			currentUser: this.currentUser
+			currentUser: user
 		});
 		
 		this._swapView(view);
@@ -129,10 +131,9 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogNew: function(){
-		
 		var blog = new Tumblero.Models.Blog({ user: this.currentUser });
 		var view = new Tumblero.Views.BlogNew({
-			currentUser: this.currentUser,
+			currentUser: (this.currentUser || Tumblero.current_user),
 			model: blog
 		});
 		
@@ -140,58 +141,30 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogsExplore: function() {
-		
 		// create global
 		var blogs = Tumblero.Collections.blogs;
 		
 		blogs.fetch({
 			success: function(){			
-				console.log("blogsExplore");
 				var view = new Tumblero.Views.BlogsExplore ({
-					currentUser: this.currentUser,
+					currentUser: (this.currentUser || Tumblero.current_user),
 					collection: blogs
 				});
 
 				this._swapView(view);
-				
 			}.bind(this)
 		});
 		
 	},
-	
-// 	current: function() {
-//     var Router = this,
-//         fragment = Backbone.history.fragment,
-//         routes = _.pairs(Router.routes),
-//         route = null, params = null, matched;
 
-//     matched = _.find(routes, function(handler) {
-//         route = _.isRegExp(handler[0]) ? handler[0] : Router._routeToRegExp(handler[0]);
-//         return route.test(fragment);
-//     });
-
-//     if(matched) {
-//         // NEW: Extracts the params using the internal
-//         // function _extractParameters 
-//         params = Router._extractParameters(route, fragment);
-//         route = matched[1];
-//     }
-
-//     return {
-//         route : route,
-//         fragment : fragment,
-//         params : params
-//     };
-// 	},
-	
 	_swapView: function(newView) {
     this._currentView && this._currentView.remove();
     this._currentView = newView;
     this.$rootEl.html(newView.render().$el);
+		
 		$('body').removeClass();
 		$('.follow-up').addClass('hidden');
 		$('.loading-overlay').addClass('hidden');
-		
   },
 	
 	_swapHeader: function(newView) {
