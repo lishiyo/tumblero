@@ -101,6 +101,7 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		var subview = new Tumblero.Views.PostShow({
 			model: post,
 			currentUser: (this.currentUser || Tumblero.current_user),
+			parentView: this
 		});
 		
 		this.addSubview(this.postsCont, subview);	

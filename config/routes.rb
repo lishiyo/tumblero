@@ -58,10 +58,10 @@ Rails.application.routes.draw do
 	
 # 	resources :static_pages, only: [:index]
 	
-	resources :blogs, only: [:new, :create, :show] do 
+# 	resources :blogs, only: [:new, :create, :show] do 
 # 		resources :posts, only: [:index]
 # 		resource :following, only: [:create, :destroy]
-	end
+# 	end
 	
 # 	resources :posts, only: [:new, :show, :create] do
 # 		resources :comments, only: [:new]

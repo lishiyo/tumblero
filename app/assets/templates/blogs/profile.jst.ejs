@@ -1,5 +1,5 @@
 <div class="item blog-profile">
-<h3><a href="#<%= Routes.blog_path(blog) %>"><%= blog.get('name') %></a></h3>
+<h3><a href="#/blogs/<%= blog.id %>"><%= blog.get('name') %></a></h3>
 	<!-- follow button -->
 	<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>" id="follow-btn-<%= blog.id %>"></button>
 	
@@ -11,6 +11,5 @@
 	<% } %>
 	<figcaption><%= blog.escape('description') %></figcaption>
 </figure>
-
 
 </div>

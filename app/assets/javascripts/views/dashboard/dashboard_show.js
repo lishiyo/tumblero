@@ -59,7 +59,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		var subview = new Tumblero.Views.PostShow({
       model: post,
 			currentUser: this.currentUser,
-			collection: this.collection
+			collection: this.collection,
+			parentView: this
     });
 		
     this.addSubview(".posts-container", subview);

@@ -10,6 +10,11 @@
 			<i class="fa fa-edit pull-left edit-post"></i>
 			<a class="confirmation"><i class="fa fa-remove delete-post pull-left"></i></a>
 		</div>
+		<% if (post.get('reblogged')) { %>
+			<div class="source-url">
+				<a href="#/posts/<%= post.get('source_id') %>">source</a>
+			</div>
+		<% } %>
 	</div>
 	
 <div class="post-inner">

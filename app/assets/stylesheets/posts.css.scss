@@ -49,6 +49,13 @@ body.bg-green{
 		}
 	}
 	
+	.source-url {
+		position: absolute;
+		font-size: 14px;
+		top: 7px;
+		right: 58px;
+	}
+	
 	.post-inner button {
 		float: left;
 	}
@@ -71,24 +78,28 @@ body.bg-green{
 	}
 	
 	.editable i.fa {
-		color: $gray-line;
 		font-size: 19px;
-		&:hover {
-			color: $foam-green;
-		}
 	}
 	
 	.editable i.edit-post {
 		position: absolute;
 		top: 8px;
 		right: 25px;
-		color: $lemon-light;
+		color: $gray-line;
+		&:hover {
+			color: $foam-green;
+		}
 	}
 	
 	.editable i.fa-remove {
 		position: absolute;
 		top: 7px;
 		right: 3px;
+		color: $rosy-coral;
+		opacity: 0.75;
+		&:hover {
+			color: $bg-dark;
+		}
 	}
 	
 	img {

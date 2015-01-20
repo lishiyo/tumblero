@@ -106,6 +106,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		var userShowView = new Tumblero.Views.UserShow({ 
 			model: this.user()
 		});
+		
     this._swapView(userShowView);  
   },
 	
