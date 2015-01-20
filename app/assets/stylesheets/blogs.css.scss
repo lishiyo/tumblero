@@ -11,6 +11,10 @@
 	background: $bg-black;
 }
 
+form#new-blog-form {
+	max-width: 55%;
+}
+
 button#new-blog{
 	float: right;
 	margin: 10px 30px;
