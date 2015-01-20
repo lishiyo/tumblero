@@ -15,7 +15,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);
-		this.listenTo(this.currentUser, 'sync', this.renderFollow);
+		
+		this.listenTo(this.currentUser, 'sync', this.renderBlog);
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';
 		
@@ -50,7 +51,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 			var currColl = coll;
 		}
 
-		console.log("renderPosts", currColl);
+		console.log("renderPosts", currColl, this.collection);
 		this.addAllPosts(currColl);
 	},
 	
@@ -97,13 +98,12 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.addSubview('#pagination-nav', subview);
 	},
 	
-	renderFollow: function(){
-		// no btnId passed in = default
-		this.setFollowState();
-	},
+// 	renderFollow: function(){
+// 		this.setFollowState();
+// 	},
 	
 	renderBlog: function(){
-		this.renderFollow();	
+		this.setFollowState();
 		this.renderFollowButton('.follow-btn');
 	},
 	
@@ -116,10 +116,8 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		
     this.$el.html(content);
 		this.renderBlog();
-
     return this;
 	}
-	
 	
 });
 

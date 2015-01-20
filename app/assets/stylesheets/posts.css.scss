@@ -36,6 +36,7 @@ body.bg-green{
 	background-color: white;
 	border-radius: 10px;
 	position: relative;
+	text-align: center;
 	
 	.popover-content .btn-danger {
 		margin-bottom: 5px;
@@ -52,12 +53,21 @@ body.bg-green{
 		float: left;
 	}
 	
-	button.submit-el {
-		width: 66%;
+	button.submit-edit {
+		width: 440px;
+		span {
+			width: 440px;
+		}
 	}
 	
 	button.cancel-post {
-		width: 30%;
+		width: 175px;
+		height: 50px;
+		border-radius: 0;
+		&:hover {
+			background: $bg-dark;
+			color: #fff;
+		}
 	}
 	
 	.editable i.fa {
@@ -84,6 +94,7 @@ body.bg-green{
 	img {
 		max-width: $post-img-width;
 		max-height: $post-img-height;
+		text-align: left;
 	}
 
 	a {
@@ -101,12 +112,16 @@ body.bg-green{
 		padding: 0 10px;
 	}
 	
-	ul:not(.wysihtml5-toolbar) li, ul:not(.comments-index) li {
+	ul, ol {
+		text-align: left;
+	}
+	
+	ul:not(.wysihtml5-toolbar):not(.comments-index) li {
 		list-style-type: disc;
 		margin-left: 40px;
 	}
 	
-	ol:not(.wysihtml5-toolbar) li, ol:not(.comments-index) li {
+	ol:not(.wysihtml5-toolbar):not(.comments-index) li {
 		list-style-type: decimal;
 		margin-left: 40px;
 	}
@@ -114,6 +129,7 @@ body.bg-green{
 	ol.comments-index li {
 		list-style: none;
 		margin-left: none;
+		text-align: left;
 	}
 	
 }
@@ -190,6 +206,15 @@ blockquote.post-quote {
 .modal.post-modal {
   display: none;
 	overflow: auto;
+	i.fa {
+		color: $gray-line;
+		&:hover, &:active, &:focus {
+			color: $rosy;
+		}
+	}
+	.active i.fa {
+		color: $rosy;	
+	}
 }
 
 .modal.is-open {
@@ -204,6 +229,11 @@ blockquote.post-quote {
   left: 0;
   right: 0;
   z-index: 2;
+}
+
+#tab4 input[type="text"] {
+	width: 100%;
+	margin-left: 0;
 }
 
 .modal-form {
@@ -269,15 +299,19 @@ blockquote.post-quote {
 }
 
 li.bbm-modal__tab {
-	color: gray;
-}
-
-li.bbm-modal__tab:hover, li.bbm-modal__tab:active {
-/* 	background-color: yellow; */
-	color: $lilac-light !important;
 	padding: 4px 10px;
 	border-radius: 5px;
 	text-decoration: none;
+	width: 75px;
+	
+	a {
+		color: $gray-line;
+	}
+}
+
+li.bbm-modal__tab:hover, li.bbm-modal__tab:active{
+/* 	background-color: yellow; */
+	color: $rosy !important;
 }
 
 .full-modal #post_blog_id {
@@ -297,7 +331,7 @@ input[type="text"].tags {
 }
 
 #submit-post-btn {
-	width: 100%;
+	width: 93%;
 	border: none;
 	span:before {
 		background: transparent;

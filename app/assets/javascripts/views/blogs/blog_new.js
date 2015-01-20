@@ -15,7 +15,6 @@ Tumblero.Views.BlogNew = Tumblero.Filepickerable.extend({
 	showHandle: function(event){
 		var input = $(event.currentTarget).val();
 		var newHandle = input.toLowerCase().replace(/\s+/g, "-");
-		
 		$('span.tumblero-url').text(newHandle);
 	},
 	// override filepickerable

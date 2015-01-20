@@ -22,6 +22,10 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 				break;
 			case 3:
 				this.showTab3(post, user);
+				break;
+			case 4:
+				this.showTab4(post, user);
+				break;
 			default:
 				console.log("couldn't find tab");
 		}
@@ -54,6 +58,15 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 	
 	showTab3: function(post, user) {
 		var view = new Tumblero.Views.NewPostT3({
+			model: post,
+			currentUser: user
+		});
+		
+		$('.tab-container').html(view.render().$el);
+	},
+	
+	showTab4: function(post, user) {
+		var view = new Tumblero.Views.NewPostT4({
 			model: post,
 			currentUser: user
 		});

@@ -11,6 +11,10 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		this.refreshHeader();
 	},
 	
+	user: function(){
+		return (this.currentUser || Tumblero.current_user);
+	},
+	
 	refreshHeader: function(){
 		Tumblero.Header = new Tumblero.Views.Header({
 			currentUser: this.currentUser
@@ -52,7 +56,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	exploreTrending: function(){
 		var view = new Tumblero.Views.ExploreTags({ 
 			queryStr: "",
-			currentUser: this.currentUser
+			currentUser: this.user()
 		});
 		
 		this._swapView(view);
@@ -63,7 +67,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		var view = new Tumblero.Views.ExploreTags({
 			queryStr: queryStr,
-			currentUser: this.currentUser
+			currentUser: this.user()
 		});
 		
 		this._swapView(view);
@@ -100,13 +104,14 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 
   userShow: function(id){
 		var userShowView = new Tumblero.Views.UserShow({ 
-			model: (this.currentUser || Tumblero.current_user)
+			model: this.user()
 		});
     this._swapView(userShowView);  
   },
 	
 	dashboardShow: function(){
-		var user = (this.currentUser || Tumblero.current_user);
+		
+		var user = this.user();
 		var dashboard = new Tumblero.Models.Dashboard({ 
 			user: user });	
 		dashboard.fetch();
@@ -123,7 +128,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		var blog = Tumblero.Collections.blogs.getOrFetch(blog_id);
 		
 		var blogShowView = new Tumblero.Views.BlogShow({
-			currentUser: this.currentUser,
+			currentUser: this.user(),
 			model: blog
 		});
 		
@@ -133,7 +138,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	blogNew: function(){
 		var blog = new Tumblero.Models.Blog({ user: this.currentUser });
 		var view = new Tumblero.Views.BlogNew({
-			currentUser: (this.currentUser || Tumblero.current_user),
+			currentUser: this.user(),
 			model: blog
 		});
 		
@@ -147,7 +152,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		blogs.fetch({
 			success: function(){			
 				var view = new Tumblero.Views.BlogsExplore ({
-					currentUser: (this.currentUser || Tumblero.current_user),
+					currentUser: this.user(),
 					collection: blogs
 				});
 

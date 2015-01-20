@@ -38,7 +38,7 @@ Tumblero.Views.Header = Backbone.View.extend({
 	},
 	
 	render: function(){
-		var content = this.template({ user: this.currentUser });
+		var content = this.template();
 		this.$el.html(content);
 		return this;
 	},

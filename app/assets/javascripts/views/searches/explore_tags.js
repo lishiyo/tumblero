@@ -29,7 +29,7 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		this.listenTo(this.searchResBlogs, "sync", this.renderBlogResults);
 		this.listenTo(this.searchResPosts, "sync remove sort", this.renderPostResults);
 		
-		this.currentUser.fetch();
+// 		this.currentUser.fetch();
 	},
 	
 	searchMain: function (event) {
