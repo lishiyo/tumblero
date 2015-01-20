@@ -1,0 +1,18 @@
+<!-- BLOG SIDEBAR -->
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+    <%= main_blog.escape('handle') %>
+    <span class="caret"></span>
+  </button>
+	
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+		<% other_blogs.forEach(function(blog) { %>
+			<li role="presentation"><a role="menuitem" class="blog-select" tabindex="-1" href="" data-blog-id="<%= blog.id %>"><%= blog.escape('handle') %></a></li>
+		<% }); %>
+    
+  </ul>
+	
+</div>
+
+<div class="sidebar-blog-profile"></div>

@@ -3,7 +3,8 @@
 
 // Run button configuration
   "commands": {
-        "Start Rails Server": "TRUSTED_IP=172.17.42.1 rails s -b 0.0.0.0"
+    "Start Rails Server": "TRUSTED_IP=172.17.42.1 rails s -b 0.0.0.0",
+		"Current File (static)": "https://{{domain}}/{{filepath}}"
   },
 
 // Preview button configuration

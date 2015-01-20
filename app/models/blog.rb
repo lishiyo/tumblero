@@ -22,7 +22,9 @@ class Blog < ActiveRecord::Base
 	
 		# top five blogs that gained the most followers in 1 day, month, year
 	def self.trending_in(time)
-		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id').where('followings.created_at > ?', 1.week.ago).order('blogs.followers_count DESC').limit(5)	
+		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id')
+				.where('followings.created_at > ?', 1.week.ago)
+				.order('blogs.followers_count DESC').limit(5)	
 	end
 	
 		# 10 most popular all-time
@@ -30,8 +32,9 @@ class Blog < ActiveRecord::Base
 		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id').order('blogs.followers_count DESC')
 	end
 	
+	# last five tags
 	def tags
-		self.taggings.pluck('name').uniq
+		self.taggings.pluck('name').uniq.take(5)
 	end
 		
 	def tags_string

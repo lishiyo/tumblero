@@ -1,0 +1,19 @@
+<div class="list-group group">
+  <a class="list-group-item header">
+    <h4><%= blog.escape('name') %></h4>
+    <p class="list-group-item-text"><%= blog.escape('description') %></p>
+  </a>
+	
+	<a class="list-group-item">
+		<li class="list-group-item-text">Followers: <%= blog.get('followers_count') %></li>
+	</a>
+	
+	<a class="list-group-item">
+		<li class="list-group-item-text">Posts: <%= blog.get('posts_count') %></li>
+	</a>
+	
+	<a class="list-group-item">
+		<li class="list-group-item-text">Recent tags: <%= blog.get('tags').join(" ") %></li>
+	</a>
+	
+</div>
