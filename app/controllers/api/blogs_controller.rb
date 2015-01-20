@@ -13,15 +13,6 @@ class Api::BlogsController < ApplicationController
 		@posts = @blog.posts.page(params[:page])
 			
 		render 'show'
-		
-# 		render json: @blog.as_json(:include => { posts: { methods: [:count_notes, :likers_ids], include: :taggings }})
-		
-# 		render :json => {
-#         :models => @posts,
-#         :page => params[:page],
-#         :total_pages => @posts.total_pages # thanks kaminari!
-#     }
-		
 	end
 	
 	def new
@@ -66,14 +57,6 @@ class Api::BlogsController < ApplicationController
 		@blog = Blog.find(params[:id])
 		render json: @blog.tags
 	end
-	
-# 	def all_posts
-# 		@blog = Blog.find(params[:id])
-# 		@posts = @blog.posts
-		
-# 		render json: @posts.as_json(methods: [:notes_count, :likers, :recent_notes_count], include: :taggings)
-# 	end
-	
 	
 	private	
 	
