@@ -79,7 +79,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		if (this.currentUser){
 			this.userShow();
 		} else {
-			this.sessionNew();
+			this.userNew();
 		}
 	},
 	

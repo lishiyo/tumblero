@@ -9,6 +9,25 @@ class Api::UsersController < ApplicationController
     @user = User.new
     render json: @user
   end
+	
+	def create_guest
+		old_guest = User.find_by(email: "guest@tumblero.com")
+		custom_params = { email: "guest@tumblero.com", password: "demodemo" }
+		
+		User.transaction do
+			old_guest.destroy!
+			@user = User.new(custom_params)
+			@user.create_dashboard
+		end
+		
+		if @user.save
+      log_in!(@user)
+      render json: @user
+    else
+      render json: @user.errors.full_messages, status: 422
+    end
+		
+	end
 
   def create
 		User.transaction do
@@ -62,7 +81,6 @@ class Api::UsersController < ApplicationController
 	
 	# GET /dashboard
 	def dashboard
-		
 	end
 
   private

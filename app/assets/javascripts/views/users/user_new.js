@@ -3,7 +3,7 @@ Tumblero.Views.UserNew = Backbone.View.extend({
 
   events: {
     "submit form": "createUser",
-		"click #guest-sign-in": "guestSignIn"
+		"click #guest-sign-in": "guestSignUp"
   },
 
   render: function () {
@@ -13,24 +13,38 @@ Tumblero.Views.UserNew = Backbone.View.extend({
     return this;
   },
 	
-	guestSignIn: function(event){
+	guestSignUp: function(event){
 		event.preventDefault();		
-		var formData = {
-			email: "guest@tumblero.com",
-			password: "demodemo"
-		}		
-		var newSession = new Tumblero.Models.Session();
-		
-		newSession.save(formData, {
-			success:function(response){
+		$.ajax({
+			type: "GET",
+			url: "api/guest_signup",
+			success: function(response){
+				console.log("successful sign up with user", response);
 				this.$('.errors').addClass('hidden');
 				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
 				Tumblero.current_user.fetch();
 				
-        Backbone.history.navigate("/dashboard", {trigger: true});
-				Tumblero.Header.refresh({ currentUser: Tumblero.current_user });				
+				Backbone.history.navigate("explore/blogs", {trigger: true});
+				Tumblero.Header.refresh({ currentUser: Tumblero.current_user });
 			}.bind(this)
-		})
+		});
+		
+// 		var formData = {
+// 			email: "guest@tumblero.com",
+// 			password: "demodemo"
+// 		}		
+// 		var newSession = new Tumblero.Models.Session();
+		 
+// 		newSession.save(formData, {
+// 			success:function(response){
+// 				this.$('.errors').addClass('hidden');
+// 				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
+// 				Tumblero.current_user.fetch();
+				
+//         Backbone.history.navigate("/dashboard", {trigger: true});
+// 				Tumblero.Header.refresh({ currentUser: Tumblero.current_user });				
+// 			}.bind(this)
+// 		})
 	},
 
   createUser: function (event){

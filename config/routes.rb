@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 		resources :comments, only: [:create, :show, :destroy]
 		resources :taggings, only: [:create, :show, :destroy]
 		
+		get "guest_signup", to: "users#create_guest"
 		get "explore/blogs", to: "blogs#index"
 		get "search", to: "searches#index"
 		get "search/blogs", to: "searches#blogs"
