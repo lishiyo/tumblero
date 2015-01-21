@@ -9,6 +9,7 @@ Tumblero.Views.BlogSettings = Tumblero.Filepickerable.extend({
 	
 	initialize: function(opts){
 		this.blogs = opts.currentUser.blogs();
+		
 		this.listenTo(this.model, 'sync change', this.render);
 		this.listenTo(this.model, 'invalid', this.noteInvalid);
 		
@@ -58,7 +59,7 @@ Tumblero.Views.BlogSettings = Tumblero.Filepickerable.extend({
 			success: function(){
 				console.log("successful update of blog");
 // 				view.$('.inline-notifications.inner').html("success!").removeClass("hidden");
-				view.currentUser.blogs().add(view.model, { merge: true });
+				view.blogs.add(view.model, { merge: true });
 				view.alertNotification("successful update");
 				view.remove();
 // 				Backbone.history.navigate("/blogs/"+view.model.id, { 

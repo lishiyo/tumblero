@@ -39,6 +39,16 @@ class User < ActiveRecord::Base
 		end
 	end
 	
+	# re-create guest blog each time
+	def create_guest_blog!
+		blog = self.blogs.create!(name: "One Kickass Blog", 
+			handle: "one-kickass-blog", 
+			avatar_url: "https://www.filepicker.io/api/file/AEZhGspGTDC4q8MKBawA",
+			description: "Hey there, welcome to Tumblero! Why not follow some blogs and add, edit, and repost some posts to me?")
+		
+		blog
+	end
+	
 	def main_blog
 		Blog.find(self.main_blog_id)
 	end
