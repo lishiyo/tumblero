@@ -10,25 +10,25 @@ Tumblero.Views.BlogSidebar = Tumblero.ToggableView.extend({
 		this.currentUser = opts.currentUser;
 		this.collection = opts.blogs;
 		this.main_blog = opts.main_blog;
-		
-		var diff = function(first, second) {
-			return first.filter(function(elem) { 
-				return (second.indexOf(elem) < 0)
-			});
-		};
-		
-		this.other_blogs = diff(this.collection, [this.main_blog]);
-		console.log("render", this.collection, this.main_blog, this.other_blogs);
-		
-		blog = this;
+	},
+	
+	diff: function(first, second) {
+		return first.filter(function(elem) { 
+			return (second.indexOf(elem) < 0)
+		});
 	},
 		
 	selectBlog: function(e){
 		e.preventDefault();
 		var blog = this.collection.getOrFetch($(e.currentTarget).data("blog-id"));
-		console.log('selectBlog', blog, $(e.currentTarget).data("blog-id"));
+		
 		var content = JST["blogs/sidebarBlog"]({ blog: blog });
 		
+		this.$('.sidebar-blog-profile').empty().html(content);
+	},
+	
+	attachMainBlog: function(){
+		var content = JST["blogs/sidebarBlog"]({ blog: this.main_blog });
 		this.$('.sidebar-blog-profile').empty().html(content);
 	},
 	
@@ -39,6 +39,7 @@ Tumblero.Views.BlogSidebar = Tumblero.ToggableView.extend({
 		});
 		
 		this.$el.html(content);
+		this.attachMainBlog();
 		return this;
 	},
 	

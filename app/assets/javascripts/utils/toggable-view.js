@@ -1,5 +1,22 @@
 Tumblero.ToggableView = Backbone.CompositeView.extend({
 	
+	renderSidebar: function(){
+		if (this._shownSidebar) { return; }
+		
+		this.main_blog = this.blogs.getOrFetch(this.currentUser.get('main_blog_id'));
+		
+		var subview = new Tumblero.Views.BlogSidebar({
+			currentUser: this.currentUser,
+			blogs: this.blogs,
+			main_blog: this.main_blog
+    });
+		
+    this.addSubview("#blog-sidebar", subview);
+		this._shownSidebar = true;
+	},
+	
+	// LIKES
+	
 	setLikeState: function(type, id, btn){	
 		var isLiked = this.currentUser.likeStateFor(type, this.model.id);	
 		this.likeState = (isLiked) ? "liked" : "unliked";

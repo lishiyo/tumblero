@@ -26,8 +26,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 		this.currentUser.fetch();
 		this.fetchCollection();
-		
-		dash = this;
 	},
 	
 	openPostModal: function(event){
@@ -99,22 +97,8 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	renderDash: function(){
-		this.renderFollow();
+		this.setFollowState();
 		this.renderFollowButton(this.$('.follow-btn'));
-	},
-	
-	renderSidebar: function(){
-		if (this.main_blog) { return; }
-		
-		this.main_blog = this.blogs.getOrFetch(this.currentUser.get('main_blog_id'));
-		
-		var subview = new Tumblero.Views.BlogSidebar({
-			currentUser: this.currentUser,
-			blogs: this.blogs,
-			main_blog: this.main_blog
-    });
-		
-    this.addSubview("#blog-sidebar", subview);
 	},
 	
 	render: function(){

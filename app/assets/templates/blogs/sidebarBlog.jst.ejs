@@ -1,19 +1,25 @@
 <div class="list-group group">
-  <a class="list-group-item header">
-    <h4><%= blog.escape('name') %></h4>
-    <p class="list-group-item-text"><%= blog.escape('description') %></p>
-  </a>
-	
-	<a class="list-group-item">
-		<li class="list-group-item-text"><strong>Followers:</strong> <%= blog.get('followers_count') %></li>
+  <a href="#/blogs/<%= blog.id %>">
+		<div class="list-group-item header">
+			<h4><%= blog.escape('name') %></h4>
+    	<p class="list-group-item-text"><%= blog.escape('description') %></p>		
+  	</div>
 	</a>
 	
 	<a class="list-group-item">
-		<li class="list-group-item-text"><strong>Posts:</strong> <%= blog.get('posts_count') %></li>
+		<li><strong><%= blog.get('followers_count') %> followers</strong></li>
 	</a>
 	
 	<a class="list-group-item">
-		<li class="list-group-item-text"><strong>Recent tags:</strong> <%= blog.get('tags') %></li>
+		<li><strong><%= blog.get('posts_count') %> posts</strong></li>
 	</a>
+	
+	<div class="list-group-item">
+		<strong>Recent tags:</strong>
+		<% blog.get('tags').forEach(function(tag){ %>
+			<span class="tags"><a href="#/explore/<%= tag.split(' ').join('+') %>"><i class="fa fa-tags"></i> <%= tag %></a></span>
+		<% }); %>
+		
+	</div>
 	
 </div>

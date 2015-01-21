@@ -8,17 +8,14 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		"keyup input#search-tag": 'callFilterWith',
 	},
 	
-	
 	initialize: function(opts){
 		Tumblero.perPage = (Tumblero.perPage || 4); // set to a default
+		this.postsCont = '.posts-container';
+		this.paginationCont = '#pagination-nav';
 		
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);
-		
-		this.listenTo(this.currentUser, 'sync', this.renderBlog);
-		this.postsCont = '.posts-container';
-		this.paginationCont = '#pagination-nav';
 		
 		this.listenTo(this.model, 'sync', this.render);
 		this.listenTo(this.collection, 'sort', this.handleSort);
@@ -54,7 +51,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		console.log("renderPosts", currColl, this.collection);
 		this.addAllPosts(currColl);
 	},
-	
 	
 	// manual addition for new posts from post modal
 	addNewPost: function(post){
@@ -104,10 +100,15 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	renderBlog: function(){
 		this.setFollowState();
 		this.renderFollowButton('.follow-btn');
+		
+		if (this.currentUser.get('id') !== this.model.get('user_id')) {
+			this.$('.follow-btn').removeClass('hidden');
+		} else {
+			this.$('.follow-btn').addClass('hidden');
+		}
 	},
 	
 	render: function(){	
-		console.log("render")
 		var content = this.template({ 
 			blog: this.model,
 			current_user_id: this.currentUser.id,
@@ -115,7 +116,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
-		this.renderBlog();
+		
     return this;
 	}
 	
