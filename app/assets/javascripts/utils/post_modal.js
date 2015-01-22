@@ -108,7 +108,7 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 		newPost.save(formData, {
 			success: function(model) {		
 // 				collection.add(newPost);
-				modalView.submit(blog);	
+				modalView.submit(blog);
 				collection.trigger("addNewPost", model);
 			},
 			error: function() {
@@ -128,7 +128,6 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 	submit: function(blog) {
 		$(".modal").removeClass("is-open");		
 		this.alertSuccess(blog);		
-
 	}
 	
 });

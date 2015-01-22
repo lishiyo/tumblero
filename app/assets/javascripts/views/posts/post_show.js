@@ -19,8 +19,9 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		this.taggings = this.model.taggings();
 		this.likeButtonId = ('button.like-post');
 		this.parentView = opts.parentView;
+		this.collection = opts.collection;
 		
-		this.listenTo(this.currentUser, 'sync', this.setupEditable);
+		this.listenTo(this.currentUser, 'sync', this.render);
 		this.listenTo(this.model, 'sync destroy', this.render);
 		this.listenTo(this.model, 'change:comments_count', this.incrementCommCount);
 		this.listenTo(this.taggings, 'sync', this.render);
@@ -161,11 +162,15 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	
 	},
 	
-	renderSetup: function(){
+	renderSetup: function(){		
 		this.blog_id = this.model.get('blog_id'); // "button.follow-btn-" + this.blog_id;
 		this.followBtnId = "button.follow-btn-" + this.blog_id;
-				
-		if (this.blog_id === this.currentUser.get('main_blog_id')) {
+		var view = this;
+		var inBlogs = function(id) {
+			return id === view.blog_id
+		}
+		
+		if (this.currentUser.get('blog_ids').some(inBlogs)) {
 			this.shouldShowFollow = false;
 		} else {
 			this.shouldShowFollow = true;
@@ -174,8 +179,9 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	
 	render: function(){
 		
-		this.renderSetup();
 		this.setLikeState('Post', this.model.id, this.likeButtonId);	
+		
+		this.renderSetup();
 		
 		var content = this.template({ 
 			post: this.model,
@@ -186,8 +192,11 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 			shouldShowFollow: this.shouldShowFollow
 		});
 		
-    this.$el.html(content);  			
+		
+    this.$el.html(content);  
+		
 		this.renderLikeButton(this.likeButtonId);
+		
 		this.setFollowState(this.followBtnId, this.blog_id); 
 		this.renderFollowButton(this.followBtnId);
 		

@@ -48,17 +48,18 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 			var currColl = coll;
 		}
 
-		console.log("renderPosts", currColl, this.collection);
+		console.log("renderPosts", coll, currColl, this.collection);
 		this.addAllPosts(currColl);
 	},
 	
 	// manual addition for new posts from post modal
 	addNewPost: function(post){
+		
 		this.collection.add(post, { at: 0 });
 	},
 	
 	handleAdd: function(post) {
-		console.log("handleadd")
+		console.log("handleadd");
 		this.renderPosts();
 	},
 	
@@ -80,6 +81,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 			collection: this.collection,
 			parentView: this
     });
+		
 		
     this.addSubview(this.postsCont, subview);
 	},
@@ -116,6 +118,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
+		this.renderPosts();
 		
     return this;
 	}
