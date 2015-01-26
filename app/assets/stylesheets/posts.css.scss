@@ -30,6 +30,11 @@ body.bg-green{
 }
 
 .post {
+	.post-inner img {
+		max-width: 350px;
+		height: auto;
+	}
+	
 	display: block;
 	margin: 20px auto;
 	padding: 20px;
