@@ -21,10 +21,11 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		this.parentView = opts.parentView;
 		this.collection = opts.collection;
 		
-		this.listenTo(this.currentUser, 'sync', this.render);
+		this.listenTo(this.currentUser, 'sync', this.setupEditable);
 		this.listenTo(this.model, 'sync destroy', this.render);
 		this.listenTo(this.model, 'change:comments_count', this.incrementCommCount);
-		this.listenTo(this.taggings, 'sync', this.render);
+// 		this.listenTo(this.taggings, 'sync', this.render);
+		
 	},
 	
 	
@@ -140,7 +141,8 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	},
 	
 	setupEditable: function() {
-		this.renderSetup();
+		console.log("called setupEditable");
+// 		this.renderSetup();
 		
 		var isOwnBlog = function(id) { 
 			return id == this.blog_id; 
@@ -178,7 +180,7 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	},
 	
 	render: function(){
-		
+		console.log("called render");
 		this.setLikeState('Post', this.model.id, this.likeButtonId);	
 		
 		this.renderSetup();
@@ -199,7 +201,7 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 		
 		this.setFollowState(this.followBtnId, this.blog_id); 
 		this.renderFollowButton(this.followBtnId);
-		
+		this.setupEditable();
     return this;
 	}
 	
