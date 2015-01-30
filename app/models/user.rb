@@ -39,14 +39,38 @@ class User < ActiveRecord::Base
 		end
 	end
 	
-	# re-create guest blog each time
-	def create_guest_blog!
-		blog = self.blogs.create!(name: "One Kickass Blog", 
-			handle: "one-kickass-blog", 
-			avatar_url: "https://www.filepicker.io/api/file/AEZhGspGTDC4q8MKBawA",
-			description: "Hey there, welcome to Tumblero! Why not follow some blogs and add, edit, and repost some posts to me?")
+	# GUEST ACCOUNTS
+	
+	# create one new guest blog for each guest
+	def create_guest_blog_with_posts!		
+		begin
+			title = CoolFaker::Team.name.downcase.split(" ")
+			blog = self.blogs.create!(
+				name: title.join(" ").titleize, 
+				handle: title.join("-"), 
+				avatar_url: "https://www.filepicker.io/api/file/AEZhGspGTDC4q8MKBawA",
+				description: CoolFaker::Team.slogan,
+				guest: true)
+			
+			self.ensure_main_blog!(blog.id)
+			
+			blog.create_guest_posts!
+		rescue # in case blog handle already taken
+			self.create_guest_blog_with_posts!
+		end
 		
 		blog
+	end	
+	
+	
+	# BLOGS
+	
+	# created for first blog
+	def ensure_main_blog!(blog_id)
+		return unless self.main_blog_id.nil?
+		
+		self.main_blog_id = blog_id
+		self.save!
 	end
 	
 	def main_blog

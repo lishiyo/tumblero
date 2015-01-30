@@ -7,7 +7,7 @@ class Blog < ActiveRecord::Base
   }
 			
 	belongs_to :user
-	has_many :posts, inverse_of: :blog
+	has_many :posts, inverse_of: :blog, dependent: :destroy
 	has_many :followings, dependent: :destroy
 	has_many :followers, through: :followings, source: :user
 	has_many :taggings, through: :posts
@@ -20,16 +20,35 @@ class Blog < ActiveRecord::Base
 	validates :description, length: { maximum: 300 }
 	validate :handle_must_be_one_word
 	
-		# top five blogs that gained the most followers in 1 day, month, year
+	# GUEST blogs 
+	def create_guest_posts!
+		
+		post_params = {
+			title: "Whoa! Welcome to Tumblero!",
+			content: "",
+			filepicker_urls: "https://www.filepicker.io/api/file/m1YrGBa3SyiuFCvSYDLU"
+			}
+		
+		begin
+			self.posts.create!
+		rescue
+			
+		end
+	end
+		
+	# top five blogs that gained the most followers in 1 day, month, year
 	def self.trending_in(time)
 		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id')
 				.where('followings.created_at > ?', 1.week.ago)
-				.order('blogs.followers_count DESC').limit(5)	
+				.order('blogs.followers_count DESC')
+				.limit(5)	
 	end
 	
-		# 10 most popular all-time
+		# top 5 most popular all-time
 	def self.most_popular
-		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id').order('blogs.followers_count DESC')
+		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id')
+				.order('blogs.followers_count DESC')
+				.limit(5)
 	end
 	
 	# last five tags

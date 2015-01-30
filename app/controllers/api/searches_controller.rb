@@ -19,15 +19,15 @@ class Api::SearchesController < ApplicationController
 	# SINGLE SEARCH through index of all blogs that are not yours
 	def blogs
 		if params[:query] && params[:query].empty?
-			@search_results = Blog.where.not(user_id: current_user.id).page(params[:page]).per(10)
+			@search_results = Blog.where.not(user_id: current_user.id).page(params[:page]).per(4)
 		else
-			@search_results = Blog.where.not(user_id: current_user.id).search_by_tags(params[:query]).page(params[:page]).per(10)
+			@search_results = Blog.where.not(user_id: current_user.id).search_by_tags(params[:query]).page(params[:page]).per(4)
 		end
 		
 		render 'single_search'
 	end
 	
-	# SINGLE SEARCH through index of all posts
+	# SINGLE SEARCH through index of all posts (10 per page)
 	def posts
 		if params[:query] && params[:query].empty?
 			@search_results = Post.includes(:taggings).page(params[:page])

@@ -58,12 +58,9 @@ Tumblero.Views.BlogSettings = Tumblero.Filepickerable.extend({
 		this.model.save(formData, {
 			success: function(){
 				console.log("successful update of blog");
-// 				view.$('.inline-notifications.inner').html("success!").removeClass("hidden");
 				view.blogs.add(view.model, { merge: true });
 				view.alertNotification("successful update");
 				view.remove();
-// 				Backbone.history.navigate("/blogs/"+view.model.id, { 
-// 					trigger: true });
 			},
 			error: function(model, response){
 				view.alertNotification("something went wrong");

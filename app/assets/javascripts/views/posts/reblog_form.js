@@ -19,7 +19,7 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 		
 		dataParams = { post: { reblog_blog_id: blogId } };
 		
-		// create reblog assocation for self only
+		// create reblog assocation for self
 		$.ajax({
 			url: '/api/posts/'+this.model.id+"/reblog",
 			type: 'POST',
@@ -32,8 +32,6 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 // 			view.model.trigger("change", view.model);
 		}).fail(function(jqXHR, textStatus, error) {
 			console.log("failed", textStatus, error);
-		}).always(function(data, textStatus, error){
-			console.log("always", data);
 		});
 		
 	},
@@ -45,6 +43,7 @@ Tumblero.Views.ReblogForm = Tumblero.PostModal.extend({
 			blogs: this.blogs,
 			source_id: source_id
 		});
+		
 		this.$el.html(content);
 		
 		this.setEditor();

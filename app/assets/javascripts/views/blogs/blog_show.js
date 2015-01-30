@@ -48,7 +48,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 			var currColl = coll;
 		}
 
-		console.log("renderPosts", coll, currColl, this.collection);
 		this.addAllPosts(currColl);
 	},
 	
@@ -59,12 +58,10 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	handleAdd: function(post) {
-		console.log("handleadd");
 		this.renderPosts();
 	},
 	
 	handleSort: function(post) {
-		console.log("handlesort")
 		this.renderPosts();
 	},
 	
@@ -118,6 +115,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		});
 		
     this.$el.html(content);
+		
 		this.renderPosts();
 		
     return this;

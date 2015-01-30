@@ -1,38 +1,21 @@
-#Tumblero
+##Welcome to Tumblero
 
-## FEATURES
+Tumblero is a tumblr-inspired social sharing site with many of Tumblr's most famous features (following, reblogging, tagging, and more) combined with Reddit-like functionalities like sorting and commenting in a fun, friendly single-page design. 
 
-Posts
-Reblog
-Like, Follow, Comment
+Why not give it a spin? Just click 'login as guest' and you're good to go!
 
+## MAIN FEATURES
 
-##TODOS:
-* http://navnav.co/
-* http://tympanus.net/codrops/2013/05/08/responsive-retina-ready-menu/
-* http://codyhouse.co/demo/secondary-fixed-navigation/index.html
-* http://tympanus.net/Development/FullscreenOverlayStyles/index8.html
-* http://www.roblukedesign.com/trunk/trunk.html
+**You can** :
 
-
-* http://fatiherikli.github.io/backbone-autocomplete/
-* inline post editing (if own post)
-* Search features: https://www.tumblr.com/explore/trending
-* search by tag in header
-* search by clicking on tags
-* recommended blogs
-
-##Minimal Viable Product: Features
-Barebones tumblr - you can create multiple blogs and posts for each blog, and follow other blogs. If you follow a blog, you'll see their posts on your dashboard home. You can also "like" and "reblog" posts onto your own blog(s).
-
-**Users can** :
-
-1. Have many blogs and posts, and one dashboard
-2. Create Posts (4 types, with attachments): Text, Photo, Link, Quote
-3. Follow/unfollow Blogs (get dashboard working!)
-4. Like Posts
-5. Reblog Posts onto one or more owned blogs
-6. Sort posts on dashboard by Recent, Trending (fast-rising in last 24 hours), Popular (week/month/all-time)
+1. Create multiple blogs and posts (text, photo, link, and quote)
+2. Follow/unfollow blogs to see their posts on your dashboard
+3. Reblog posts to share with your followers
+4. Comment on posts, and Like posts and comments to push them to the top
+5. Edit and delete posts all inline for ease
+6. Instant notifications whenever someone follows, reblogs, likes, or comments on your posts
+5. Search through your dash, a blog, or all blogs by tag
+6. Sort posts on your dash or a blog by Recent, Trending (fast-rising in last 24 hours), and Popular (all-time/month/year)
 
 
 ##Additional Features
@@ -49,58 +32,9 @@ Barebones tumblr - you can create multiple blogs and posts for each blog, and fo
   * inspired by Twitter - refresh
 
 
-##Models/Schema outline
-1. User.rb
-  * :id, :email, :password_digest, :session_token
-  * has_many :blogs, :liked_posts, :comments, :followed_blogs (blogs that I follow)
-  * has_one :dashboard
-2. Blog.rb
-  * :id, :avatar_url, :user_id, :name, :description
-  * belongs_to :user
-  * has_many :followings/:followers (users who follow this blog), :posts, :reblogs
-  * has_many :tags, through: :posts, source: :tags
-  * **methods**: top_five_tags, count_posts_tagged(tag), tag_score(tag) = (number of posts with this tag * notes per post)
-3. Dashboard.rb
-  * :id, :user_id
-  * belongs_to :user
-  * has_many :posts, :followed_blogs
-  * displays only posts by followed_blogs (not own posts)
-4. Post.rb
-  * :id, :blog_id, :content (text), :filepicker_urls (optional)
-  * belongs_to :blog (source blog)
-  * has_many :likes, :comments, :attachments, :reblogs, :taggings, :tags 
-  * Types: Text, Image, Quote, Link
-  * **methods**: notes_count (reblogs + likes)
-5. Attachment.rb (as Attachable => user, post, blog)
-  * :id, :attachable_type (user, post, blog), :attachable_id, :user_id, :filepicker_url
-  * belongs_to :attacher
-  * may be optional if using filepicker
-6. Like.rb (as Likeable => post, comment)
-  * :id, :likeable_type, :likeable_id, :user_id
-7. Following.rb
-  * :id, :user_id (follower_id), :blog_id (followed_id)
-  * belongs_to :follower (:user_id), :blog
-8. Comment.rb
-  * :id, :user_id, :post_id, :parent_comment_id
-  * belongs_to :user, :post
-	* you can simply "Comment" or "Comment + Reblog" onto your own blog(s)
-9. Reblog - this is a method, not a resource! The resource is a Post.
-  * :id, :blog_id, :post_id 
-  * a blog has_many reblogged_posts; a post has_many :reblogger_blogs
-  * a user's blog displays both blog’s own posts and reblogged posts
-  * you don't need to follow a blog to reblog a post (i.e. you can reblog any post)
-	* reblog means you create a new post onto your own blog via a copy
-10. Tagging.rb (as Taggable)
-  * :id, :name
-  * has_many :taggings, :posts (through :taggings)
-11. Tagging.rb (http://www.sitepoint.com/tagging-scratch-rails/)
-  * :id, :tag_id, :post_id (=> user_id)
-  * belongs_to :tag, :post, :user (through post)
-
-
 ## Basic Usage
 
-Check out the Docs folder to see screenshots of the prototype!
+For developers who'd like to contribute, feel free to fork!
 
 ```bash
 bundle install

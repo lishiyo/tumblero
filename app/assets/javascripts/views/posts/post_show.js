@@ -141,7 +141,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	},
 	
 	setupEditable: function() {
-		console.log("called setupEditable");
 // 		this.renderSetup();
 		
 		var isOwnBlog = function(id) { 
@@ -180,7 +179,6 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 	},
 	
 	render: function(){
-		console.log("called render");
 		this.setLikeState('Post', this.model.id, this.likeButtonId);	
 		
 		this.renderSetup();
@@ -194,14 +192,13 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 			shouldShowFollow: this.shouldShowFollow
 		});
 		
-		
     this.$el.html(content);  
 		
-		this.renderLikeButton(this.likeButtonId);
-		
+		this.renderLikeButton(this.likeButtonId);	
 		this.setFollowState(this.followBtnId, this.blog_id); 
 		this.renderFollowButton(this.followBtnId);
 		this.setupEditable();
+		
     return this;
 	}
 	

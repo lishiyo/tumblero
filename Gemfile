@@ -60,6 +60,8 @@ gem 'bootstrap-wysihtml5-rails'
 gem 'filepicker-rails'
 gem 'kaminari'
 gem 'jquery-ui-rails'
+gem 'faker'
+gem 'cool_faker'
 
 gem 'backbone-on-rails'
 gem 'js-routes'

@@ -82,7 +82,7 @@ Tumblero.PostModal = Tumblero.Filepickerable.extend({
 				"emphasis": true, //Italics, bold, etc. Default true
 				"lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
 				"html": false, //Button which allows you to edit the generated HTML. Default false
-				"link": false, 
+				"link": true, 
 				"image": false, 
 				"color": true, //Button to change color of font  
 				"blockquote": true, //Blockquote  

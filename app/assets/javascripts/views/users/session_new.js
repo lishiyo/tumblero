@@ -14,7 +14,8 @@ Tumblero.Views.SessionNew = Backbone.View.extend({
   createSession: function (event){
     event.preventDefault();
     var formData = $(event.currentTarget).serializeJSON().user;
-	
+		console.log("createSession", formData);
+		
     this.model.save(formData, {
       success: function(model, response, options) {
 				this.$('.errors').addClass('hidden');
@@ -23,11 +24,7 @@ Tumblero.Views.SessionNew = Backbone.View.extend({
 				
         Backbone.history.navigate("/dashboard", {trigger: true});
 				Tumblero.Header.refresh({ currentUser: Tumblero.current_user });
-// 				Backbone.history.loadUrl();
-// 				window.location.replace("#/dashboard");
 
-// 					window.location = "/#/dashboard";
-// 				window.location.reload();
       }.bind(this),
 			
 			error: function(model, response, options){

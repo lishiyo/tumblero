@@ -2,13 +2,15 @@ Tumblero.Utils.Searchable = {
 
 	checkSearch: function(event) {
 		var queryTag = $(event.currentTarget).val();
+		
 		if (event.which===13 && queryTag === "") {
 			this.queryStr = "";
-			Backbone.history.navigate("explore", { trigger: true })
-// 			this.render();
+			if (Backbone.history.location.hash === "#explore") {
+				Backbone.history.loadUrl(Backbone.history.fragment); //reload page
+			} else {
+				Backbone.history.navigate("explore", { trigger: true });
+			}
 			return;
-// 		} else if (event.which === 13) {
-// 			return;
 		} 
 		
 	},

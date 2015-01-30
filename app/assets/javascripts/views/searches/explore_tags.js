@@ -1,4 +1,4 @@
-// searching in main header => /explore/One+Direction
+// searching in main header => /explore/Star+Trek
 Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 	
 	template: JST["searches/tags"],
@@ -22,11 +22,11 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		
 		this.$container = $('#main-search-container');
 		this.queryStr = opts.queryStr; // initial querystring
-		this.blogsCont = '#blogs-results';
-		this.postsCont = '#posts-results';
 		this.currentUser = opts.currentUser;
+		this.searchResPosts.cont = '#posts-results';
+		this.searchResBlogs.cont = '#blogs-results';
 		
-		this.listenTo(this.searchResBlogs, "sync", this.renderBlogResults);
+		this.listenTo(this.searchResBlogs, "sync remove sort", this.renderBlogResults);
 		this.listenTo(this.searchResPosts, "sync remove sort", this.renderPostResults);
 		
 // 		this.currentUser.fetch();
@@ -43,7 +43,10 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		this.searchResBlogs.reset();
 		this.searchResBlogs._query = query;
 		this.searchResBlogs.fetch({
-			data: { query: this.searchResBlogs._query },
+			data: { 
+				query: this.searchResBlogs._query,
+				page: (this.searchResBlogs._page || 1)
+			},
 		});
 	},
 	
@@ -59,25 +62,22 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 	},
 	
 	renderBlogResults: function(){
-		this.removeSubviewsFor(this.blogsCont);
-		
-		this.searchResBlogs.each(function (model) {
-			this.addBlogSubview(model);
-		}.bind(this));
+		this.searchResBlogs.currPage = this.searchResBlogs._page;
+		this.searchResBlogs.totalPages = this.searchResBlogs.total_pages;
+		this.addBlogsPage(this.searchResBlogs)
 	},
 	
 	renderPostResults: function () {
-		this.collection = this.searchResPosts;
-		this.collection.currPage = this.searchResPosts._page;
-		this.collection.totalPages = this.searchResPosts.total_pages;
-		this.addAllPosts(this.collection);
+// 		this.collection = this.searchResPosts;
+		this.searchResPosts.currPage = this.searchResPosts._page;
+		this.searchResPosts.totalPages = this.searchResPosts.total_pages;
+		this.addAllPosts(this.searchResPosts);
 		
 		this.initMasonry();
 	},
 	
 	initMasonry: function(){
-	
-		var container = document.querySelector('#posts-results');
+		var container = document.querySelector(this.searchResPosts.cont);
 		var msnry = new Masonry( container, {
 // 			columnWidth: 300,
 			itemSelector: '.post-show',
@@ -92,19 +92,29 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 			currentUser: (this.currentUser || Tumblero.current_user),
 		});
 		
-		this.addSubview(this.blogsCont, subview);
+		this.addSubview(this.searchResBlogs.cont, subview);
 	},
 	
 	addPostSubview: function(post) {
-		somepost = post;
-		
 		var subview = new Tumblero.Views.PostShow({
 			model: post,
 			currentUser: (this.currentUser || Tumblero.current_user),
 			parentView: this
 		});
 		
-		this.addSubview(this.postsCont, subview);	
+		this.addSubview(this.searchResPosts.cont, subview);	
+	},
+	
+	addBlogPageNav: function(coll){		
+		var subview = new Tumblero.Views.PageNav({
+			currPage: coll._page,
+			totalPages: coll.total_pages,
+			collection: coll,
+			query: coll._query,
+			blogsCont: coll.cont,
+		});
+		
+		this.addSubview('#pagination-nav-blog', subview);
 	},
 	
 	// pass in the collection you are showing
@@ -114,7 +124,7 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 			totalPages: coll.totalPages,
 			collection: coll,
 			query: coll._query,
-			postsCont: this.postsCont,
+			postsCont: coll.cont,
 		});
 		
 		this.addSubview('#pagination-nav', subview);

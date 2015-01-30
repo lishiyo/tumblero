@@ -44,8 +44,6 @@ Tumblero.Views.BlogsExplore = Backbone.CompositeView.extend({
 	render: function(){
 		var content = this.template();
     this.$el.html(content);
-// 		this.addFooter();		
-//     this.attachSubviews();
     return this;
 	}
 	

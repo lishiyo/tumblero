@@ -7,7 +7,6 @@ window.Tumblero = {
 	Utils: {},
 	
   initialize: function() {
-		
     var $main = $("#main"),
 				$nav = $('#main-nav');
 		

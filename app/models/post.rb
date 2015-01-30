@@ -14,12 +14,12 @@ class Post < ActiveRecord::Base
 	has_one :user, through: :blog, source: :user
 	
 	# each source post gets a row in the table when reblogged
-	has_many :reblogs, class_name: "Reblog", foreign_key: :post_id, inverse_of: :post
+	has_many :reblogs, class_name: "Reblog", foreign_key: :post_id, inverse_of: :post, dependent: :destroy
 	has_many :reblogging_blogs, through: :reblogs, source: :blog
 	# source post is where :reblogged => false
 	belongs_to :source_post, class_name: "Post", foreign_key: :source_id, primary_key: :id
 	# posts that reblogged the source post
-	has_many :reblogged_posts, class_name: "Post", foreign_key: :source_id, inverse_of: :source_post
+	has_many :reblogged_posts, class_name: "Post", foreign_key: :source_id, inverse_of: :source_post, dependent: :destroy
 	has_many :liking_users, through: :likes, source: :user
 	
 	has_many :comments, inverse_of: :post, dependent: :destroy

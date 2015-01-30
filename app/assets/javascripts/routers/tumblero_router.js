@@ -6,7 +6,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
 		
 		Tumblero.Collections.blogs = new Tumblero.Collections.Blogs({ user: this.currentUser });
-		Tumblero.perPage = 4; // EXAMPLE
+		Tumblero.perPage = 10; // EXAMPLE
 		
 		this.refreshHeader();
 	},
@@ -63,7 +63,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	exploreTags: function(query) {
-		var queryStr = query.split("+").join(" "); // EX: "One Direction"
+		var queryStr = query.split("+").join(" "); // EX: "Star+Wars"
 		
 		var view = new Tumblero.Views.ExploreTags({
 			queryStr: queryStr,

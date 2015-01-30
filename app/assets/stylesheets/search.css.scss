@@ -34,10 +34,11 @@ input#main-search {
 	div.item {
 		margin: 10px;
 		float: left;
-		width: 330px;
+		width: 295px;
+		min-height: 350px;
 		-webkit-box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
--moz-box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
-box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
+		-moz-box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
+		box-shadow: 3px 2px 9px 0px rgba(0,0,0,0.31);
 	}
 }
 

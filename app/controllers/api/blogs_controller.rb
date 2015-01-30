@@ -4,7 +4,7 @@ class Api::BlogsController < ApplicationController
 	
 	# GET /explore/blogs 
 	def index 
-		@blogs = Blog.most_popular.where.not(user_id: current_user.id)
+		@blogs = Blog.most_popular.where.not(user_id: current_user.id).where(guest: false)
 		render json: @blogs
 	end
 	
@@ -23,13 +23,12 @@ class Api::BlogsController < ApplicationController
 	def create		
 		@blog = current_user.blogs.build(clean_params)
 		if @blog.save
-			ensure_main_blog!
+			current_user.ensure_main_blog!(@blog.id)
 			render json: @blog
 		else
 			render json: @blog.errors.full_messages, status: 422
 		end
 	end
-	
 	
 	# PUT api/blogs/:id
 	def update
@@ -59,14 +58,6 @@ class Api::BlogsController < ApplicationController
 	end
 	
 	private	
-	
-	# created for first blog
-	def ensure_main_blog!
-		return unless current_user.main_blog_id.nil?
-		
-		current_user.main_blog_id = current_user.blogs.first.id
-		current_user.save!
-	end
 	
 	def clean_params
 		params = blog_params

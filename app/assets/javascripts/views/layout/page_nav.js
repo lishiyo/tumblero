@@ -13,8 +13,7 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 		this.totalPages = (opts.totalPages || this.collection.totalPages);
 		this.currPage = (opts.currPage || this.collection.currPage);
 		this.query = (opts.query || null);
-		this.postsCont = opts.postsCont;
-		
+// 		this.cont = (opts.postsCont || opts.blogsCont);
 	},
 	
 	previousPage: function(e){
@@ -42,7 +41,6 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 	
 	nextPage: function(e){
 		e.preventDefault();
-		console.log("clicked next!", this.currPage, this.totalPages);
 		
 		if ( (typeof this.totalPages === "undefined") || this.currPage >= this.totalPages ) { 
 				return; }

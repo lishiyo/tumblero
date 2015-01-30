@@ -57,9 +57,30 @@ Tumblero.Utils.Sortable = {
 		
 	},
 	
+	addBlogsPage: function(coll) {		
+		this.removeSubviewsFor(coll.cont);
+		this.removeSubviewsFor("#pagination-nav-blog");
+		
+		var currColl = (coll || this.collection);
+		var view = this;
+		var perPage = Tumblero.perPage;
+		var startPage = (coll.currPage <= 0) ? 0 : (coll.currPage - 1);
+		var startPost = (startPage==0) ? 0 : (startPage * perPage);
+			
+		currColl = _(currColl.rest(perPage*(startPage)));
+		currColl = _(currColl.first(perPage)); 
+		
+		currColl.forEach(function(blog){
+			view.addBlogSubview(blog);
+		}.bind(this));
+		
+		this.addBlogPageNav(this.searchResBlogs);
+	},
+	
+	
 	addAllPosts: function(coll) {		
-		console.log("addAllPosts", coll);
-		this.removeSubviewsFor(this.postsCont);
+		var container = coll.cont || this.postsCont;
+		this.removeSubviewsFor(container);
 		this.removeSubviewsFor("#pagination-nav");
 		
 		var currColl = (coll || this.collection);
@@ -75,7 +96,7 @@ Tumblero.Utils.Sortable = {
 			view.addPostSubview(post);
 		}.bind(this));
 		
-		this.addPageNav(this.collection);
+		this.addPageNav(this.searchResPosts);
 	},
 	
 }

@@ -10,19 +10,24 @@ class Api::UsersController < ApplicationController
     render json: @user
   end
 	
+	# destroy guests and associated blogs and posts periodically
 	def create_guest
-		old_guest = User.find_by(email: "guest@tumblero.com")
-		custom_params = { email: "guest@tumblero.com", password: "demodemo" }
+# 		old_guest = User.find_by(email: "guest@tumblero.com")
+		custom_params = { 
+			email: Faker::Internet.email, 
+			password: "demodemo",
+			guest: true
+		}		
 		
 		User.transaction do
-			old_guest.destroy!
+# 			old_guest.destroy!
 			@user = User.new(custom_params)
 			@user.create_dashboard
 		end
 		
 		if @user.save
       log_in!(@user)
-			@user.create_guest_blog!
+			@user.create_guest_blog_with_posts!
       render json: @user
     else
       render json: @user.errors.full_messages, status: 422
