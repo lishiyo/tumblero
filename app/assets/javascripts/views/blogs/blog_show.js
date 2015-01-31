@@ -9,7 +9,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	},
 	
 	initialize: function(opts){
-		Tumblero.perPage = (Tumblero.perPage || 4); // set to a default
+		Tumblero.perPage = (Tumblero.perPage || 10); // set to a default
 		this.postsCont = '.posts-container';
 		this.paginationCont = '#pagination-nav';
 		
@@ -53,7 +53,6 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 	
 	// manual addition for new posts from post modal
 	addNewPost: function(post){
-		
 		this.collection.add(post, { at: 0 });
 	},
 	
@@ -83,9 +82,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
     this.addSubview(this.postsCont, subview);
 	},
 	
-	// pass in the collection you are showing
 	addPageNav: function(coll){
-		
 		var subview = new Tumblero.Views.PageNav({
 			currPage: (coll.currPage),
 			totalPages: coll.totalPages,

@@ -96,7 +96,7 @@ Tumblero.Utils.Sortable = {
 			view.addPostSubview(post);
 		}.bind(this));
 		
-		this.addPageNav(this.searchResPosts);
+		this.addPageNav(this.collection);
 	},
 	
 }

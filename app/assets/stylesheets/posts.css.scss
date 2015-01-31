@@ -205,10 +205,19 @@ blockquote.post-quote {
 	}
 }
 
-
-
-
 /* ==== Post Modal ==== */
+
+div.bootstrap-wysihtml5-insert-link-modal.modal {
+	display: none;
+	.modal-body .checkbox label {
+		width: auto !important;
+	}
+	.modal-footer .btn-primary {
+		background: #fc0650;
+		color: #fff;
+		border: none;
+	}
+}
 
 .tab-container {
 	a {
@@ -326,7 +335,6 @@ li.bbm-modal__tab {
 }
 
 li.bbm-modal__tab:hover, li.bbm-modal__tab:active{
-/* 	background-color: yellow; */
 	color: $rosy !important;
 }
 

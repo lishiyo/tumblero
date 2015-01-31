@@ -25,15 +25,16 @@ class Blog < ActiveRecord::Base
 		
 		post_params = {
 			title: "Whoa! Welcome to Tumblero!",
-			content: "",
-			filepicker_urls: "https://www.filepicker.io/api/file/m1YrGBa3SyiuFCvSYDLU"
+			content: "Hey there, stranger! Glad to see you here. Why not:<br><ul><li>Create a new post (try drag-and-dropping some images!)</li><li>Follow some more blogs? (Click&nbsp;<a target=\"_blank\" rel=\"nofollow\" href=\"http://tumblero.com/#/explore\">Explore</a>&nbsp;on the top bar.)</li><li>Reblog the posts that you'd like to share with your followers</li><li>Leave a comment or two on a post</li><li>Search by tags via:<ul><li>the navigation searchbar to search throughout the whole site</li><li>the blog or dash searchbar to search through a single blog or dash</li></ul></li><li>Sort your dashboard or a blog by popularity or trending in the last 24 hours</li></ul>",
+			filepicker_urls: "https://www.filepicker.io/api/file/cczc3wezQC5gzQPLTdvQ",
+			reblogged: false,
+			source_id: nil,
+			guest: true,
+			tags_string: "demo, tutorial"
 			}
 		
-		begin
-			self.posts.create!
-		rescue
-			
-		end
+		self.posts.create(post_params)
+		self
 	end
 		
 	# top five blogs that gained the most followers in 1 day, month, year
