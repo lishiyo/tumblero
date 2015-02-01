@@ -53,6 +53,13 @@ class Blog < ActiveRecord::Base
 		first_post.create_reblog_for!(self.id)
 		second_post.create_reblog_for!(self.id)
 		
+		# Create post taggings
+		guest = self.user
+		first_tags_array = ["cute", "random", "tutorial", "demo"]
+		second_tags_array = ["demo", "tutorial", "official"]
+		first_post.create_new_taggings!(first_tags_array, guest)
+		second_post.create_new_taggings!(second_tags_array, guest)
+		
 		# PRODUCTION - notify admin account of reblogged posts 
 		guest = self.user
 		notify_guest_creation(guest.id, first_post.id)
