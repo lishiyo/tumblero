@@ -14,16 +14,31 @@ form.session-form {
 	input {
 		border-radius: 0;
 	}
+	small {
+		margin-top: 10px;
+		font-style: italic;
+		display: block;
+	}
 }
 
-h2.session-form {
+h2.session-form{
 	color: #fff;
+	margin-bottom: 10px;
+}
+
+h3.session-form {
+	color: #fff;
+	margin-bottom: 30px;
+	em {
+		opacity: 0.8;
+	}
 }
 
 button.session-btn {
 	height: 50px;
 	width: 100%;
 	padding: 0px;
+	background: #84cbc5;
 	span {
 		height: inherit;
 		width: inherit;
@@ -46,6 +61,7 @@ button.session-btn {
 
 button#guest-sign-in {
 	margin-top: 10px;
+	width: 100%;
 	span:before {
 		background: $gray-line !important;
 	}

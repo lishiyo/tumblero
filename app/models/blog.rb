@@ -45,11 +45,10 @@ class Blog < ActiveRecord::Base
 				.limit(5)	
 	end
 	
-		# top 5 most popular all-time
+		# most popular all-time
 	def self.most_popular
 		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id')
 				.order('blogs.followers_count DESC')
-				.limit(5)
 	end
 	
 	# last five tags
