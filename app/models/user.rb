@@ -42,22 +42,17 @@ class User < ActiveRecord::Base
 	# GUEST ACCOUNTS
 	
 	# create one new guest blog for each guest
-	def create_guest_blog_with_posts!		
-		begin
-			title = CoolFaker::Team.name.downcase.split(" ")
-			blog = self.blogs.create!(
-				name: title.join(" ").titleize, 
-				handle: title.join("-"), 
-				avatar_url: "https://www.filepicker.io/api/file/AEZhGspGTDC4q8MKBawA",
-				description: CoolFaker::Team.slogan,
-				guest: true)
-			
-			self.ensure_main_blog!(blog.id)
-			
-			blog.create_guest_posts!
-		rescue # in case blog handle already taken
-			self.create_guest_blog_with_posts!
-		end
+	def create_guest_blog_with_posts!				
+		title = CoolFaker::Team.name.downcase.split(" ")
+		blog = self.blogs.create!(
+			name: title.join(" ").titleize, 
+			handle: title.join("-"), 
+			avatar_url: "https://www.filepicker.io/api/file/AEZhGspGTDC4q8MKBawA",
+			description: "a totally kickass blog",
+			guest: true)
+
+		self.ensure_main_blog!(blog.id)
+		blog.create_guest_posts!
 		
 		blog
 	end	

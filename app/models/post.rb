@@ -46,7 +46,6 @@ class Post < ActiveRecord::Base
 		end
 	end
 	
-	
 	# all users who like me
 	def likers
 		if self.reblogged
@@ -113,17 +112,6 @@ class Post < ActiveRecord::Base
 		else
 			Like.where('created_at > ?', 1.day.ago).where('likeable_type = ? AND likeable_id = ?', 'Post', self.id).size + Reblog.where('created_at > ? AND post_id = ?', 1.day.ago, self.id).size
 		end
-	end
-	
-	# { 0 => [1,2,3], 2 => [4,5,6] }
-	def comments_by_parent
-		comments_by_parent = Hash.new { |hash, key| hash[key] = [] }
-
-		self.comments.includes(:user).each do |comment|
-			comments_by_parent[comment.parent_comment_id] << comment
-    end
-
-    comments_by_parent
 	end
 	
 	# create reblog association for the *source* post rather than self
