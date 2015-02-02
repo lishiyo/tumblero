@@ -98,7 +98,7 @@ Tumblero.Utils.Sortable = {
 		this.addPageNav(this.collection);
 		
 		if (callback) {
-			callback(true);
+			callback("finished");
 		}
 	},
 	

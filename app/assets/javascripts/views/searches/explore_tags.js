@@ -73,7 +73,7 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		this.collection.totalPages = this.searchResPosts.total_pages;
 		// callback to make sure all posts have been added before using masonry
 		this.addAllPosts(this.collection, function(res){
-			if (res) {
+			if (res === "finished") {
 				this.initMasonry();
 			}
 		}.bind(this));
