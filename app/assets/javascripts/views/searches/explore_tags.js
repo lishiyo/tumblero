@@ -72,25 +72,24 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		this.collection.currPage = this.searchResPosts._page;
 		this.collection.totalPages = this.searchResPosts.total_pages;
 		// callback to make sure all posts have been added before using masonry
+		view = this;
 		this.addAllPosts(this.collection, function(res){
 			if (res === "finished") {
-				console.log("initiating masonry");
-				this.initMasonry();
+				view.initMasonry();			
 			}
-		}.bind(this));
+		});
 	},
 	
 	initMasonry: function(){
 		var container = document.querySelector(this.searchResPosts.cont);
 		var postCont = '.post-show';
-		
-		if ($(postCont).length === this.searchResPosts.length) {
-				var masonry = new Masonry( container, {
+		$(function(){
+			var masonry = new Masonry( container, {
 	// 			columnWidth: 300,
 				itemSelector: '.post-show',
 				gutter: 20
 			});
-		}
+		});
 	},
 	
 	addBlogSubview: function(blog) {
