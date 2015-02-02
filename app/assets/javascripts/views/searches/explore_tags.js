@@ -74,6 +74,7 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		// callback to make sure all posts have been added before using masonry
 		this.addAllPosts(this.collection, function(res){
 			if (res === "finished") {
+				console.log("initiating masonry");
 				this.initMasonry();
 			}
 		}.bind(this));
@@ -81,12 +82,15 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 	
 	initMasonry: function(){
 		var container = document.querySelector(this.searchResPosts.cont);
-		var msnry = new Masonry( container, {
-// 			columnWidth: 300,
-			itemSelector: '.post-show',
-			gutter: 20
-		});
-	
+		var postCont = '.post-show';
+		
+		if ($(postCont).length === this.searchResPosts.length) {
+				var masonry = new Masonry( container, {
+	// 			columnWidth: 300,
+				itemSelector: '.post-show',
+				gutter: 20
+			});
+		}
 	},
 	
 	addBlogSubview: function(blog) {

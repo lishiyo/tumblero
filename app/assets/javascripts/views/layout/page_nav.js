@@ -13,9 +13,6 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 		this.totalPages = (opts.totalPages || this.collection.totalPages);
 		this.currPage = (opts.currPage || this.collection.currPage);
 		this.query = (opts.query || null);
-		
-		console.log("page nav", this.collection);
-// 		this.cont = (opts.postsCont || opts.blogsCont);
 	},
 	
 	previousPage: function(e){
@@ -30,11 +27,6 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 				page: newPage,
 				query: this.query
 			},
-// 			success: function() {
-// 				console.log("fetched prevpage", newPage);
-// 				this.currPage = newPage;
-// 				this.parentView.currPage = newPage;
-// 			}.bind(this)
 		});
 		
 		this.currPage = newPage;
