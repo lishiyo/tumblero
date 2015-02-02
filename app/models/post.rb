@@ -79,7 +79,6 @@ class Post < ActiveRecord::Base
 	# ONE query - reblogs_count + likes_count + comments_count
 	def notes_count
 		if self.reblogged
-			source_post = Post.find(self.source_id)
 			source_post.likes_count + source_post.reblogs_count + source_post.comments_count
 		else
 			reblogs_count + likes_count + comments_count
@@ -103,11 +102,8 @@ class Post < ActiveRecord::Base
 		Post.where('created_at > ?', time).order('total_notes DESC').limit(10)
 	end
 	
-	# add notes_count column 
-	# create Notable model? join post_id, :created_at, :notable_type, :notable_id
 	def recent_notes_count
 		if self.reblogged
-			source_post = Post.find(self.source_id)
 			Like.where('created_at > ?', 1.day.ago).where('likeable_type = ? AND likeable_id = ?', 'Post', source_post.id).size + Reblog.where('created_at > ? AND post_id = ?', 1.day.ago, source_post.id).size
 		else
 			Like.where('created_at > ?', 1.day.ago).where('likeable_type = ? AND likeable_id = ?', 'Post', self.id).size + Reblog.where('created_at > ? AND post_id = ?', 1.day.ago, self.id).size
@@ -162,33 +158,5 @@ class Post < ActiveRecord::Base
 		end
 	end
 	
-	
-# 	def count_comments
-# 		comments_count
-# 	end
-	
-# 	def count_notes
-# 		if self.reblogged
-			
-# 		else
-# 			Post.joins("LEFT JOIN likes ON likes.likeable_type = 'Post' AND likes.likeable_id = posts.id").joins("LEFT JOIN comments on comments.post_id = posts.id").joins("LEFT JOIN reblogs on reblogs.post_id = posts.id").where("posts.id = ?", self.id).count
-# 		end
-		
-# 		count_likes + count_reblogs + count_comments
-# 	end
-	
-# 	def count_comments
-# 		comments.size
-# 	end
-
-	
-	# count your own reblogs if a source post, else count source's
-# 	def reblogs_count
-# 		if self.reblogged
-# 			Reblog.where(post_id: self.source_id).size
-# 		else # source_post
-# 			Post.where(id: self.id).pluck('reblogs_count').first
-# 		end
-# 	end
 	
 end

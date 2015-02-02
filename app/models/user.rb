@@ -94,19 +94,6 @@ class User < ActiveRecord::Base
 		self.followed_blogs.include?(blog)
 	end
 	
-	# include post and all its reblogged posts
-	def all_liked_posts
-		posts = []
-		self.liked_posts.each do |post|
-			posts << post.id
-			if !post.reblogged # soruce post
-				post.reblogged_posts.each {|r| posts << r.id } 
-			end
-		end
-			
-		posts.uniq
-	end
-	
 	def likes?(likeable)
 		if likeable.class == Post
 			self.liked_posts.include?(likeable)	
@@ -116,18 +103,31 @@ class User < ActiveRecord::Base
 	end
 	
 	def liked_posts_ids
-		all_liked_posts
-# 		self.liked_posts.map(&:id)
+		User.find(self.id).liked_posts.pluck('id')
+	end
+	
+	# liked post and all its reblogs
+	def all_liked_posts
+		posts = []
+		self.liked_posts.each do |post|
+			posts << post.id
+			if !post.reblogged # a source post
+				post.reblogged_posts.each {|r| posts << r.id } 
+			end
+		end
+			
+		posts.uniq
 	end
 	
 	def liked_comments_ids
-		self.liked_comments.map(&:id)
+		User.find(self.id).liked_comments.pluck('id')
+# 		self.liked_comments.map(&:id)
 	end
 	
 	def followed_blogs_ids
-		self.followed_blogs.map(&:id)
+		User.find(self.id).followed_blogs.pluck('id')
+# 		self.followed_blogs.map(&:id)
 	end
-
 	
 	# USER AUTH
   def self.generate_session_token

@@ -68,7 +68,6 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 	},
 	
 	renderPostResults: function () {
-// 		this.collection = this.searchResPosts;
 		this.searchResPosts.currPage = this.searchResPosts._page;
 		this.searchResPosts.totalPages = this.searchResPosts.total_pages;
 		this.addAllPosts(this.searchResPosts);

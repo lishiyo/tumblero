@@ -1,5 +1,6 @@
 Tumblero.ToggableView = Backbone.CompositeView.extend({
 	
+	// dashboard sidebar
 	renderSidebar: function(){
 		if (this._shownSidebar) { return; }
 		
@@ -93,13 +94,6 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 	},
 	
 	// FOLLOWINGS (blog_show and blog_profile)
-	
-// 	setFollowState: function(btnId){
-// 		var isFollowed = this.currentUser.followStateFor(this.model.id);
-// 		this.btnId = (btnId || ('button.follow-btn'));
-		
-// 		this.followState = ((isFollowed) ? "followed" : "unfollowed");
-// 	},
 	
 	followFromPost: function(event){
 		event.preventDefault();

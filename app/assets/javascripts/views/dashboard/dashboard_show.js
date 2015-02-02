@@ -6,18 +6,20 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		'click .re-sort': 'reSortBy',
 		"click button.full-post-modal": "openPostModal",
 		"keyup input#search-tag": 'callFilterWith',
+		'click .liked-posts': 'renderLiked',
 	},
 	
 	initialize: function(opts){
 		Tumblero.perPage = (Tumblero.perPage || 4); // set to a default
 		
 		this.currentUser = opts.currentUser;
-		this.collection = this.model.posts();
+		this.collection = this.all_posts || this.model.posts();
+		
 		this.collection.currPage = (this.model._page || 1);
 		
+		view = this;
 		this.blogs = this.currentUser.blogs();
-		this.listenTo(this.currentUser, 'sync', this.renderSidebar);
-		this.listenTo(this.currentUser, 'sync', this.renderFollow);
+		this.listenTo(this.currentUser, 'sync', this.renderUserFn);
 		this.listenTo(this.model, 'sync', this.renderDash);
 		this.listenTo(this.collection, 'sort sync add', this.renderPosts);
 		
@@ -26,6 +28,12 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		
 		this.currentUser.fetch();
 		this.fetchCollection();
+	},
+	
+	// render blog sidebar and renderFollow
+	renderUserFn: function(){
+		this.renderSidebar();
+		this.renderFollow();
 	},
 	
 	openPostModal: function(event){
@@ -46,7 +54,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	callFilterWith: function(event) {
 		event.preventDefault();
-		var queryTag = $(event.currentTarget).val(); // current val in input box
+		var queryTag = $(event.currentTarget).val(); // current search val
 		if ( event.which == 13 ) { 
 			return;
 		} else if (queryTag === "") {
@@ -68,7 +76,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
     this.addSubview(".posts-container", subview);
 	},
 	
-	
 	addPageNav: function(coll){
 		var coll = (coll || this.collection);
 		
@@ -86,7 +93,14 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.setFollowState();
 	},
 	
-	renderPosts: function(coll){
+	renderLiked: function(){
+		console.log("renderLiked", this.model.posts(), this.model.liked_posts());
+		this.all_posts = this.collection;
+		this.collection = this.model.liked_posts();	
+		this.renderPosts(this.model.liked_posts());
+	},
+	
+	renderPosts: function(coll){		
 		if (!coll || coll._taggings) {
 			var currColl = this.collection
 		} else {
@@ -104,7 +118,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	render: function(){
 		var content = this.template({ 
 			dashboard: this.model,
-			current_user_id: this.currentUser.id,
+			user: this.currentUser,
 			initialFollowState: this.followState
 		});
 		

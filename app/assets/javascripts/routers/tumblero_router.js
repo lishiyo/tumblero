@@ -28,6 +28,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"users/new": "userNew",
 		"users/profile": "userShow",
 		"session/new": "sessionNew",
+		"dashboard/liked": "dashboardLiked",
 		"dashboard": "dashboardShow",
 		"blogs/new": "blogNew",
 		"blogs/:id": "blogShow",	
@@ -112,17 +113,22 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	dashboardShow: function(){
 		
-		var user = this.user();
+		var user = this.user();	
 		var dashboard = new Tumblero.Models.Dashboard({ 
 			user: user });	
-		dashboard.fetch();
-		
-		var view = new Tumblero.Views.DashboardShow({ 
-			model: dashboard,
-			currentUser: user
+				
+		dashboard.fetch({
+			success: function(){
+				var view = new Tumblero.Views.DashboardShow({ 
+					model: dashboard,
+					currentUser: user
+				});
+
+				this._swapView(view);
+			}.bind(this)
 		});
 		
-		this._swapView(view);
+		
 	},
 	
 	blogShow: function(blog_id){

@@ -1,6 +1,4 @@
-// Place all the styles related to the dashboards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
 @import "mixins";
 
 section.dashboard-main {
@@ -149,5 +147,28 @@ button#link-post-btn span {
 				color: $foam-green;
 			}
 		}
+	}
+}
+
+/* ==== ACCOUNT SIDEBAR ==== */
+
+.account-sidebar {
+	width: 19%;
+	font-size: 14px;
+	font-family: 'Lato';
+	position: absolute;
+	top: 400px;
+	right: 2%;
+	ul li:first-child {
+		background: $foam-green;
+		color: #fff;
+		&:hover {
+			background: $bg-red-orange;
+			color: #fff;
+		}
+	}
+	ul li:nth-child(2) {
+		background: #ccc;
+		color: rgba(49, 60, 65, 0.6);
 	}
 }

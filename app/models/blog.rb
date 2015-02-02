@@ -7,7 +7,8 @@ class Blog < ActiveRecord::Base
   }
 			
 	belongs_to :user
-	has_many :posts, inverse_of: :blog, dependent: :destroy
+	# don't destroy posts because source_post needs to exist
+	has_many :posts, inverse_of: :blog
 	has_many :followings, dependent: :destroy
 	has_many :followers, through: :followings, source: :user
 	has_many :taggings, through: :posts

@@ -12,6 +12,7 @@ Tumblero.Views.BlogSidebar = Tumblero.ToggableView.extend({
 		this.main_blog = opts.main_blog;
 	},
 	
+	// other blogs
 	diff: function(first, second) {
 		return first.filter(function(elem) { 
 			return (second.indexOf(elem) < 0)
@@ -20,13 +21,13 @@ Tumblero.Views.BlogSidebar = Tumblero.ToggableView.extend({
 		
 	selectBlog: function(e){
 		e.preventDefault();
-		var blog = this.collection.getOrFetch($(e.currentTarget).data("blog-id"));
-		
+		var blog = this.collection.getOrFetch($(e.currentTarget).data("blog-id"));		
 		var content = JST["blogs/sidebarBlog"]({ blog: blog });
 		
 		this.$('.sidebar-blog-profile').empty().html(content);
 	},
 	
+	// main (first) blog is the default selection
 	attachMainBlog: function(){
 		var content = JST["blogs/sidebarBlog"]({ blog: this.main_blog });
 		this.$('.sidebar-blog-profile').empty().html(content);

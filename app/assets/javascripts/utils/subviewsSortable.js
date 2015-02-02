@@ -17,7 +17,6 @@ Tumblero.Utils.Sortable = {
 		// reset current page
 		this.collection.currPage = 1;
 		this.collection.sort({ data: { page: this.collection.currPage } });
-		
 	},
 	
 	fetchCollection: function(){
@@ -88,7 +87,7 @@ Tumblero.Utils.Sortable = {
 		var perPage = Tumblero.perPage;
 		var startPage = (coll.currPage <= 0) ? 0 : (coll.currPage - 1);
 		var startPost = (startPage==0) ? 0 : (startPage * perPage);
-			
+				
 		currColl = _(currColl.rest(perPage*(startPage)));
 		currColl = _(currColl.first(perPage)); 
 		

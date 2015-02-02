@@ -5,7 +5,8 @@ Tumblero.Views.Header = Backbone.View.extend({
 	events: {
 		"click button#nav-post": "openPostModal",
 		"focus #nav-search": "initAutocomplete",
-		'keyup #nav-search': 'checkSearch'
+		'keyup #nav-search': 'checkSearch',
+		"click #nav-dashboard": 'reloadDashboard'
 	},
 	
 	initialize: function(opts){
@@ -13,6 +14,16 @@ Tumblero.Views.Header = Backbone.View.extend({
 		if (this.currentUser) {
 			this.listenTo(this.currentUser, 'sync', this.setProfile);
 			this.listenTo(this.currentUser, 'sync', this.setNotifications);
+		}
+	},
+	
+	reloadDashboard: function(event){
+		event.preventDefault();	
+		//reload if coming from liked_posts
+		if (Backbone.history.location.hash === "#dashboard") {
+				Backbone.history.loadUrl(Backbone.history.fragment); 
+		} else {
+			Backbone.history.navigate("dashboard", { trigger: true });
 		}
 	},
 	
