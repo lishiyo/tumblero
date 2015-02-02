@@ -6,7 +6,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		this.currentUser = (opts.currentUser || Tumblero.current_user);
 		
 		Tumblero.Collections.blogs = new Tumblero.Collections.Blogs({ user: this.currentUser });
-		Tumblero.perPage = 10; // EXAMPLE
+		Tumblero.perPage = 6; // EXAMPLE
 		
 		this.refreshHeader();
 	},
