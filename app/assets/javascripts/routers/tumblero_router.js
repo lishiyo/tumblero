@@ -111,8 +111,7 @@ Tumblero.Routers.Router = Backbone.Router.extend({
     this._swapView(userShowView);  
   },
 	
-	dashboardShow: function(){
-		
+	dashboardShow: function(){		
 		var user = this.user();	
 		var dashboard = new Tumblero.Models.Dashboard({ 
 			user: user });	

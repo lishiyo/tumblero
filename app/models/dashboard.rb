@@ -13,8 +13,4 @@ class Dashboard < ActiveRecord::Base
 		self.taggings.pluck('name').uniq
 	end
 	
-# 	def posts
-# 		followed_posts.sort_by{|post| post.created_at }.reverse
-# 	end
-	
 end

@@ -1,6 +1,5 @@
 Tumblero.Collections.Posts = Backbone.Collection.extend({
-// 	url: "/api/posts",
-	
+
 	url: function(){
 		if (this.dashboard) {
 			return this.dashboard.urlRoot + "/posts.json"
@@ -27,11 +26,11 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 		}));
 	},
 	
-	// hits api/posts
+	// api/posts
 	parse: function(response) {
 		this._page = ( Number(response._page) || 1);
 		this.total_pages = response.total_pages;
-		// deal with any nested resources on response.models and return
+		// deal with any nested resources on response.models
 		return response.models;
 	}
 	

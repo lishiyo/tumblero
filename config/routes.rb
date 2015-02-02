@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 			end
 		end
 		
+		
 		resource :dashboard, only: [:show] do
 			resources :taggings, only: [:index]
 			member do
@@ -50,6 +51,7 @@ Rails.application.routes.draw do
 		get "search/posts", to: "searches#posts"
 		get "search/all", to: "searches#all"
 		get "tags/all", to: "taggings#all"
+		get "dashboard/:id", to: "dashboards#show"
 	end
 	
 	root to: "static_pages#index"

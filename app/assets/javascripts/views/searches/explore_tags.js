@@ -119,8 +119,8 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 	// pass in the collection you are showing
 	addPageNav: function(coll){
 		var subview = new Tumblero.Views.PageNav({
-			currPage: (coll.currPage),
-			totalPages: coll.totalPages,
+			currPage: (coll.currPage || coll._page),
+			totalPages: (coll.totalPages || coll.total_pages),
 			collection: coll,
 			query: coll._query,
 			postsCont: coll.cont,

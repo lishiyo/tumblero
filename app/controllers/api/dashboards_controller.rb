@@ -12,14 +12,7 @@ class Api::DashboardsController < ApplicationController
 		@dashboard = current_user.dashboard
 		@posts = @dashboard.followed_posts.page(params[:page])
 		
-		render 'api/posts/index'
-		
-# 		render :json => {
-# 			:models => @posts.as_json(methods: [:notes_count, :likers_ids, :recent_notes_count], include: :taggings),
-#         :page => params[:page],
-#         :total_pages => @posts.total_pages # thanks kaminari!
-#     }
-		
+		render 'api/posts/index'		
 	end
 	
 	# GET /api/dashboard

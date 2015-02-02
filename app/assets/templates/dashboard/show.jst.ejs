@@ -11,12 +11,12 @@
 <div class="sidebar-blog-profile">
 <div class="account-sidebar">
 	<ul>
-		<% if (user) { %> 
+		<% if (typeof user !== "undefined") { %> 
 		<li class="list-group-item liked-posts"><i class="fa fa-heart"></i> 
 				<%= user.get('liked_posts_ids').length %> Likes		
 		</li>
 		<li class="list-group-item followed-blogs"><i class="fa fa-plus-circle"></i> 
-			<%= user.get('followed_blogs_ids').length %> Followed Blogs
+				<%= user.get('followed_blogs_ids').length %> Followed Blogs
 		</li>
 		<% } %>			
 	</ul>

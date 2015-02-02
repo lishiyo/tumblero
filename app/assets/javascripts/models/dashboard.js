@@ -41,9 +41,7 @@ Tumblero.Models.Dashboard = Backbone.Model.extend({
 		} 
 		
 		if (response.liked_posts) {
-			this.liked_posts().set(response.liked_posts, { 
-				parse: true
-			});
+			this.liked_posts().set(response.liked_posts, { });
 			delete response.liked_posts;
 		} 
 			

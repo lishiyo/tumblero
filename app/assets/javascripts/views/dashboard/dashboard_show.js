@@ -6,18 +6,16 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		'click .re-sort': 'reSortBy',
 		"click button.full-post-modal": "openPostModal",
 		"keyup input#search-tag": 'callFilterWith',
-		'click .liked-posts': 'renderLiked',
+		'click .liked-posts': 'renderLikedPosts',
 	},
 	
 	initialize: function(opts){
 		Tumblero.perPage = (Tumblero.perPage || 4); // set to a default
-		
+		view = this;
 		this.currentUser = opts.currentUser;
-		this.collection = this.all_posts || this.model.posts();
-		
+		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);
 		
-		view = this;
 		this.blogs = this.currentUser.blogs();
 		this.listenTo(this.currentUser, 'sync', this.renderUserFn);
 		this.listenTo(this.model, 'sync', this.renderDash);
@@ -93,11 +91,15 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.setFollowState();
 	},
 	
-	renderLiked: function(){
-		console.log("renderLiked", this.model.posts(), this.model.liked_posts());
-		this.all_posts = this.collection;
-		this.collection = this.model.liked_posts();	
-		this.renderPosts(this.model.liked_posts());
+	renderLikedPosts: function(){
+		var dash = this.model;
+		console.log('renderLikedPosts', this.model.liked_posts());
+		dash.fetch({
+			success: function(){
+				console.log("fetced", dash.liked_posts());
+				view.renderPosts(dash.liked_posts());
+			}
+		});				
 	},
 	
 	renderPosts: function(coll){		
