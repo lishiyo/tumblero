@@ -77,7 +77,7 @@ Tumblero.Utils.Sortable = {
 	},
 	
 	
-	addAllPosts: function(coll) {		
+	addAllPosts: function(coll, callback) {		
 		var container = coll.cont || this.postsCont;
 		this.removeSubviewsFor(container);
 		this.removeSubviewsFor("#pagination-nav");
@@ -95,7 +95,11 @@ Tumblero.Utils.Sortable = {
 			view.addPostSubview(post);
 		}.bind(this));
 		
-		this.addPageNav(currColl);
+		this.addPageNav(this.collection);
+		
+		if (callback) {
+			callback(true);
+		}
 	},
 	
 }

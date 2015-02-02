@@ -13,6 +13,8 @@ Tumblero.Views.PageNav = Backbone.View.extend({
 		this.totalPages = (opts.totalPages || this.collection.totalPages);
 		this.currPage = (opts.currPage || this.collection.currPage);
 		this.query = (opts.query || null);
+		
+		console.log("page nav", this.collection);
 // 		this.cont = (opts.postsCont || opts.blogsCont);
 	},
 	

@@ -68,11 +68,15 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 	},
 	
 	renderPostResults: function () {
-		this.searchResPosts.currPage = this.searchResPosts._page;
-		this.searchResPosts.totalPages = this.searchResPosts.total_pages;
-		this.addAllPosts(this.searchResPosts);
-		
-		this.initMasonry();
+		this.collection = this.searchResPosts;
+		this.collection.currPage = this.searchResPosts._page;
+		this.collection.totalPages = this.searchResPosts.total_pages;
+		// callback to make sure all posts have been added before using masonry
+		this.addAllPosts(this.collection, function(res){
+			if (res) {
+				this.initMasonry();
+			}
+		}.bind(this));
 	},
 	
 	initMasonry: function(){
