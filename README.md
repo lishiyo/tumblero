@@ -1,6 +1,6 @@
 ##Welcome to Tumblero
 
-Tumblero is a tumblr-inspired social sharing site with many of Tumblr's most famous features (following, reblogging, tagging, and more) combined with Reddit-like functionalities like sorting and commenting in a fun, friendly single-page design. 
+Tumblero is a tumblr-inspired social sharing site with many of Tumblr's most well-known features (following, reblogging, tagging, and more) combined with Reddit-like features such as sorting and commenting in a fun, friendly single-page design. 
 
 Why not give it a spin? Just click 'login as guest' and you're good to go!
 
@@ -12,25 +12,10 @@ Why not give it a spin? Just click 'login as guest' and you're good to go!
 2. Follow/unfollow blogs to see their posts on your dashboard
 3. Reblog posts to share with your followers
 4. Comment on posts, and Like posts and comments to push them to the top
-5. Edit and delete posts all inline for ease
+5. Edit and delete posts inline for ease
 6. Instant notifications whenever someone follows, reblogs, likes, or comments on your posts
 5. Search through your dash, a blog, or all blogs by tag
-6. Sort posts on your dash or a blog by Recent, Trending (fast-rising in last 24 hours), and Popular (all-time/month/year)
-
-
-##Additional Features
-1. Search and Explore: 
-  * Users can Tag Posts
-  * Explore by Trending (all)
-  * Explore by Tags
-	  * both the most popular posts
-	  * and the most popular blogs in these tags
-2. Comment on Posts
-  * nested dropdown like Reddit
-  * sort by most-liked 
-3. Recommended Blogs to follow widget
-  * inspired by Twitter - refresh
-
+6. Sort posts on your dash or a blog by Recent, Trending (fast-rising in last 24 hours), and Popular (all-time)
 
 ## Basic Usage
 
