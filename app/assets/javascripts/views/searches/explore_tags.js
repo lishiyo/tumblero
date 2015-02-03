@@ -84,6 +84,7 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		var container = document.querySelector(this.searchResPosts.cont);
 		var postCont = '.post-show';
 		$(function(){
+			console.log("initiating masonry");
 			var masonry = new Masonry( container, {
 	// 			columnWidth: 300,
 				itemSelector: '.post-show',
