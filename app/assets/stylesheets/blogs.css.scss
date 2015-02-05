@@ -59,10 +59,7 @@ button#new-blog{
 .blog-profile {
 	background: #fff;
 	text-align: center;
-	padding: 20px 0;
-/* 	float: left; */
-/* 	width: 250px; */
-/* 	margin: 10px auto; */
+	padding: 16px 6px;
 	margin-bottom: 20px;
 	display: block;
 	position: relative; /* to place follow button */
@@ -72,6 +69,12 @@ button#new-blog{
 	}
 	a {
 		color: $foam-green;
+	}
+	small {
+		display: block;
+		margin: 10px auto;
+		color: gray;
+		color: rgba(0,0,0,0.4);
 	}
 }
 
@@ -102,8 +105,9 @@ section.blog-profile {
 
 .blog-profile img {
 	max_width: 300px;
-	max-height: 300px;
-	height: 150px;
+	max-height: 150px;
+	height: 120px;
+	margin-top: 10px;
 }
 
 .image-thumbnails img {

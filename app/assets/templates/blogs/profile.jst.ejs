@@ -1,5 +1,6 @@
 <div class="item blog-profile">
 <h3><a href="#/blogs/<%= blog.id %>"><%= blog.get('name') %></a></h3>
+	<small><%= blog.get('followers_count') %> followers</small>
 	<!-- follow button -->
 	<button class="follow-btn btn btn-info" data-blog-id="<%= blog.id %>" data-initial-follow-state="<%= initialFollowState %>" id="follow-btn-<%= blog.id %>"></button>
 	
