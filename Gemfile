@@ -68,6 +68,7 @@ gem 'js-routes'
 gem 'ejs'
 gem 'pg_search'
 gem "lograge"
+gem 'redis-rails'
 
 group :production do
   gem 'rails_12factor'
