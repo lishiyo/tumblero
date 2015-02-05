@@ -22,7 +22,7 @@ module Tumblero
     config.filepicker_rails.api_key = ENV["fp_secret"]
 		
 		if ENV["REDISTOGO_URL"]
-			config = RedisDemoApp::Application.config
+			config = Tumblero::Application.config
 			uri = URI.parse(ENV["REDISTOGO_URL"])
 
 			config.cache_store = [
