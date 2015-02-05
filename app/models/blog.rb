@@ -80,15 +80,39 @@ class Blog < ActiveRecord::Base
 	end
 		
 	# top five blogs that gained the most followers in 1 day, month, year
-	def self.trending_in(time)
+	def self.trending_in_year
+		Rails.cache.fetch("blogs_trending_week", :expires_in => 600.seconds) do
+			force_trending(1.year.ago)
+		end
+	end
+		
+	def self.trending_in_week
+		Rails.cache.fetch("blogs_trending_week", :expires_in => 600.seconds) do
+			force_trending(1.week.ago)
+		end
+	end
+		
+	def self.trending_in_day
+		Rails.cache.fetch("blogs_trending_week", :expires_in => 60.seconds) do
+			force_trending(1.day.ago)
+		end
+	end
+		
+	def self.force_trending(time)
 		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id')
-				.where('followings.created_at > ?', 1.week.ago)
+				.where('followings.created_at > ?', time)
 				.order('blogs.followers_count DESC')
 				.limit(5)	
 	end
 	
-		# most popular all-time
+	# most popular all-time (all)
 	def self.most_popular
+		Rails.cache.fetch("blogs_most_popular", :expires_in => 600.seconds) do
+			force_most_popular
+		end
+	end
+		
+	def self.force_most_popular
 		Blog.joins('LEFT JOIN followings ON followings.blog_id = blogs.id')
 				.order('blogs.followers_count DESC')
 	end

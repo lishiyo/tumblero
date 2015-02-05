@@ -64,7 +64,8 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 	renderBlogResults: function(){
 		this.searchResBlogs.currPage = this.searchResBlogs._page;
 		this.searchResBlogs.totalPages = this.searchResBlogs.total_pages;
-		this.addBlogsPage(this.searchResBlogs)
+		
+		this.addAllBlogs(this.searchResBlogs);
 	},
 	
 	renderPostResults: function () {
@@ -111,7 +112,7 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		this.addSubview(this.searchResPosts.cont, subview);	
 	},
 	
-	addBlogPageNav: function(coll){		
+	addBlogPageNav: function(coll){			
 		var subview = new Tumblero.Views.PageNav({
 			currPage: coll._page,
 			totalPages: coll.total_pages,

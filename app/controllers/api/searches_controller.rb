@@ -15,14 +15,20 @@ class Api::SearchesController < ApplicationController
 
 	end
 	
+	# GET /explore
 	# SINGLE SEARCH through index of all blogs that are not yours
 	def blogs
 		if params[:query] && params[:query].empty?
-			@search_results = Blog.where(guest: false).where.not(user_id: current_user.id).page(params[:page]).per(4)
+			@search_results = Blog.where(guest: false)
+														.where.not(user_id: current_user.id)
+														.order('followers_count DESC')
+														.page(params[:page]).per(4)
 		else
 			@search_results = Blog.where(guest: false)
 														.where.not(user_id: current_user.id)
-														.search_by_tags(params[:query]).page(params[:page]).per(4)
+														.search_by_tags(params[:query])
+														.order('followers_count DESC')
+														.page(params[:page]).per(4)
 		end
 		
 		render 'single_search'
@@ -33,7 +39,9 @@ class Api::SearchesController < ApplicationController
 		if params[:query] && params[:query].empty?
 			@search_results = Post.where(guest: false).includes(:taggings).page(params[:page])
 		else
-			@search_results = Post.where(guest: false).includes(:taggings).search_by_tags(params[:query]).page(params[:page])
+			@search_results = Post.where(guest: false)
+														.includes(:taggings)
+														.search_by_tags(params[:query]).page(params[:page])
 		end
 		
 		render 'single_search'

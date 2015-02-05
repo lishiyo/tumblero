@@ -31,7 +31,6 @@ Tumblero.Utils.Sortable = {
 	
 	// render this.searchResults for single searches
 	renderSearch: function(){
-		console.log("renderSearch called", this.searchResults);		
 		this.renderPosts(this.searchResults);
 	},
 	
@@ -56,15 +55,14 @@ Tumblero.Utils.Sortable = {
 		
 	},
 	
-	addBlogsPage: function(coll) {		
+	addAllBlogs: function(coll) {
 		this.removeSubviewsFor(coll.cont);
 		this.removeSubviewsFor("#pagination-nav-blog");
 		
 		var currColl = (coll || this.collection);
 		var view = this;
-		var perPage = Tumblero.perPage;
+		var perPage = 4;
 		var startPage = (coll.currPage <= 0) ? 0 : (coll.currPage - 1);
-		var startPost = (startPage==0) ? 0 : (startPage * perPage);
 			
 		currColl = _(currColl.rest(perPage*(startPage)));
 		currColl = _(currColl.first(perPage)); 
@@ -100,6 +98,6 @@ Tumblero.Utils.Sortable = {
 		if (callback) {
 			callback("finished");
 		}
-	},
+	}
 	
 }

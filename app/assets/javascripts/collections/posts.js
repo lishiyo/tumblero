@@ -7,7 +7,6 @@ Tumblero.Collections.Posts = Backbone.Collection.extend({
 			return this.blog.url() + "/posts.json";
 		} 
 	},
-
 	
 	model: Tumblero.Models.Post,
 	
