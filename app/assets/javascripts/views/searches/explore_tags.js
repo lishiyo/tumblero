@@ -76,7 +76,8 @@ Tumblero.Views.ExploreTags = Tumblero.ToggableView.extend({
 		view = this;
 		this.addAllPosts(this.collection, function(res){
 			if (res === "finished") {
-				view.initMasonry();			
+				setTimeout(view.initMasonry(), 1000);
+// 				view.initMasonry();			
 			}
 		});
 	},

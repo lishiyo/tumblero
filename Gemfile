@@ -38,6 +38,9 @@ gem 'unicorn-rails'
 # gem 'capistrano-rails', group: :development
 gem 'figaro'
 gem 'pusher'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
@@ -45,13 +48,14 @@ gem 'better_errors'
 gem 'binding_of_caller'
 gem 'pry-rails'
 gem 'quiet_assets'
+gem "factory_girl_rails", "~> 4.0"
+gem 'faker'
+gem 'cool_faker'
 
 # UI
 gem 'bootstrap-sass',          '3.2.0.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
-# gem 'will_paginate', '~> 3.0.5'
-# gem 'will_paginate-bootstrap'
 gem "font-awesome-rails"
 gem 'formtastic', '~> 3.0'
 gem "mini_magick"
@@ -60,15 +64,13 @@ gem 'bootstrap-wysihtml5-rails'
 gem 'filepicker-rails'
 gem 'kaminari'
 gem 'jquery-ui-rails'
-gem 'faker'
-gem 'cool_faker'
-
 gem 'backbone-on-rails'
 gem 'js-routes'
 gem 'ejs'
 gem 'pg_search'
 gem "lograge"
 gem 'redis-rails'
+
 
 group :production do
   gem 'rails_12factor'

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 		get "search/all", to: "searches#all"
 		get "tags/all", to: "taggings#all"
 		get "dashboard/:id", to: "dashboards#show"
+		get "auth/facebook/callback" => "sessions#create"
 	end
 	
 	root to: "static_pages#index"
