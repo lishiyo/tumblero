@@ -20,6 +20,7 @@
 //= require backbone
 //= require backbone.marionette.min
 //= require bootstrap-wysihtml5
+//= require images_loaded.min
 //= require masonry.min
 //= require bootstrap-confirmation
 
