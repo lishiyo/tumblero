@@ -70,17 +70,17 @@ Tumblero.Models.User = Backbone.Model.extend({
 	parse: function(resp){
 		if (resp.blogs) {
 			this.blogs().set(resp.blogs, { parse: true });
-			delete resp.blogs
+			delete resp.blogs;
 		}	
 		
 		if (resp.notifications) {
 			this.notifications().set(resp.notifications, { parse: true });
-			delete resp.notifications
+			delete resp.notifications;
 		}	
 		
 		if (resp.notes) {
 			this.notes().set(resp.notes, { parse: true });
-			delete resp.notes
+			delete resp.notes;
 		}	
 		
 		return resp;

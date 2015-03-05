@@ -99,7 +99,6 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		event.preventDefault();
 		
 		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
-		console.log("following from post", btnId);
 		
 		Tumblero.FollowChan.commands.execute("followBlog", { 
 			view: this.parentView,

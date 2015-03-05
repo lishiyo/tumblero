@@ -51,8 +51,7 @@ Tumblero.Views.UserShow = Backbone.CompositeView.extend({
 		if (this._currSubview) {
 			this.removeSubview('#settings', this._currSubview);
 		}
-		
-		
+	
 		var blog_id = $(e.currentTarget).data("blog-id");
 		var blog = Tumblero.Collections.blogs.getOrFetch(blog_id);
 		var view = new Tumblero.Views.BlogSettings({
@@ -60,15 +59,12 @@ Tumblero.Views.UserShow = Backbone.CompositeView.extend({
 			model: blog
 		});
 		
-		console.log("blogsettings", view);
-		
 		this.addSubview('#settings', view);
 		this._currSubview = view;
 		this.render();
 	},
 	
-	render: function(){
-		
+	render: function(){		
 		var content = this.template({ user: this.model });
 		this.$el.html(content);
 		this.attachSubviews();

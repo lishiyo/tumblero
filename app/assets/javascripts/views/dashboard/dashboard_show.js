@@ -11,7 +11,6 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	initialize: function(opts){
 		Tumblero.perPage = (Tumblero.perPage || 4); // set to a default
-		view = this;
 		this.currentUser = opts.currentUser;
 		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);

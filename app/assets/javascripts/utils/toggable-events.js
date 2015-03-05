@@ -8,7 +8,7 @@ Tumblero.FollowChan.commands.setHandlers({
 	// send in the button
 	followBlog: function(opts){	
 		
-		var followToggle = opts.view,
+		var followToggle = opts.view, //parentView - dashboard, blog_show
 				$btn = followToggle.$(opts.btnId),
 				user = followToggle.currentUser,
 				blog_id = $btn.data("blog-id"),

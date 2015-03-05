@@ -121,41 +121,39 @@ class User < ActiveRecord::Base
 	
 	def liked_comments_ids
 		User.find(self.id).liked_comments.pluck('id')
-# 		self.liked_comments.map(&:id)
 	end
 	
 	def followed_blogs_ids
 		User.find(self.id).followed_blogs.pluck('id')
-# 		self.followed_blogs.map(&:id)
 	end
 	
 	# USER AUTH
-  def self.generate_session_token
-    SecureRandom.urlsafe_base64
+	
+	def password=(password)
+    @password = password
+    self.password_digest = BCrypt::Password.create(password)
   end
-
-  def reset_session_token!
+	
+	def is_password?(password)
+    BCrypt::Password.new(self.password_digest).is_password?(password)
+  end
+	
+	def reset_session_token!
     self.session_token = User.generate_session_token
     self.save!
 
     self.session_token
   end
+	
+	def self.generate_session_token
+    SecureRandom.urlsafe_base64
+  end 
 
 	def self.find_by_credentials(email, password)
 		user = User.find_by(email: email)
     return nil unless user
 		user.is_password?(password) ? user : nil
   end
-
-  def is_password?(password)
-    BCrypt::Password.new(self.password_digest).is_password?(password)
-  end
-
-  def password=(password)
-    @password = password
-    self.password_digest = BCrypt::Password.create(password)
-  end
-	
 	
   private
 

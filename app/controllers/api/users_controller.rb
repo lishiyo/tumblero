@@ -12,7 +12,6 @@ class Api::UsersController < ApplicationController
 	
 	# destroy guests and associated blogs and posts periodically
 	def create_guest
-# 		old_guest = User.find_by(email: "guest@tumblero.com")
 		custom_params = { 
 			email: Faker::Internet.email, 
 			password: "demodemo",
@@ -20,7 +19,6 @@ class Api::UsersController < ApplicationController
 		}		
 		
 		User.transaction do
-# 			old_guest.destroy!
 			@user = User.new(custom_params)
 			@user.create_dashboard
 		end
