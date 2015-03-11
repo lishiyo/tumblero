@@ -17,7 +17,7 @@ FactoryGirl.define do
 			end
 			
 			after(:create) do |user, evaluator|
-				create_list(:blog, evaluator.blogs_count, user:user)
+				create_list(:blog, evaluator.blogs_count, user: user)
 			end
 			
 		end

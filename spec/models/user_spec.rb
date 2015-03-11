@@ -13,8 +13,8 @@ RSpec.describe User, :type => :model do
 	it { should validate_presence_of(:password_digest) }
  	
 	it "has a valid factory" do
-		build(:user).should be_valid
-		build(:user_with_blog).should be_valid
+		build(:user).should be_valid	
+		create(:user_with_blog).should be_valid
 	end
 	
 	context "when user is valid" do
@@ -23,6 +23,10 @@ RSpec.describe User, :type => :model do
 			
 		end
 		
+	end
+	
+	after(:each) do
+		user_with_blog.destroy
 	end
 	
 end
