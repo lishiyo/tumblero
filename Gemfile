@@ -44,11 +44,6 @@ gem 'omniauth-twitter'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'better_errors'
-gem 'binding_of_caller'
-gem 'pry-rails'
-gem 'quiet_assets'
-gem "factory_girl_rails", "~> 4.0"
 gem 'faker'
 gem 'cool_faker'
 
@@ -71,6 +66,16 @@ gem 'pg_search'
 gem "lograge"
 gem 'redis-rails'
 
+group :development, :test do
+  gem 'rspec-rails'
+	gem 'better_errors'
+	gem 'binding_of_caller'
+	gem 'pry-rails'
+	gem 'quiet_assets'
+	gem "factory_girl_rails", "~> 4.0"
+	gem 'guard-rspec'
+	gem 'capybara'
+end
 
 group :production do
   gem 'rails_12factor'
