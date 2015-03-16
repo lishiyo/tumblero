@@ -92,21 +92,32 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	renderLikedPosts: function(){
 		var dash = this.model;
-		console.log('renderLikedPosts', this.model.liked_posts());
-		dash.fetch({
-			success: function(){
-				console.log("fetced", dash.liked_posts());
-				view.renderPosts(dash.liked_posts());
-			}
-		});				
+		var view = this;
+		
+		$.ajax({
+			url: '/api/dashboard/liked_posts',
+			dataType: 'json',
+			method: 'GET'
+		}).done(function(data){
+			view.likedPosts = new Tumblero.Collections.Posts(data.liked_posts, {
+				dashboard: dash
+			});
+			view.renderPosts(view.likedPosts);
+		}).fail(function( jqXHR, textStatus, error){
+			console.log(textStatus, error);
+		});
+		
 	},
 	
 	renderPosts: function(coll){		
+		
 		if (!coll || coll._taggings) {
-			var currColl = this.collection
+			var currColl = this.collection;
 		} else {
 			var currColl = coll;
 		}
+		
+		console.log("renderPosts currColl:", currColl, coll);
 		
 		this.addAllPosts(currColl);
 	},

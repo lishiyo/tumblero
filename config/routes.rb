@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 			member do
 				get 'posts'
 				get 'tags'
+				get 'liked_posts'
 			end			
 		end
 		

@@ -126,8 +126,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 				this._swapView(view);
 			}.bind(this)
 		});
-		
-		
 	},
 	
 	blogShow: function(blog_id){
