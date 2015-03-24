@@ -38,9 +38,7 @@ Tumblero.Views.BlogShow = Tumblero.ToggableView.extend({
 		this.callFilter("blog", queryTag);
 	},
 	
-	renderPosts: function(coll){
-		console.log("renderPosts", coll);
-		
+	renderPosts: function(coll){		
 		// avoid rendering if coll is a post rather than collection
 		if (!coll || coll._taggings) {
 			var currColl = this.collection;
