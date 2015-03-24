@@ -64,13 +64,17 @@ button#link-post-btn span {
 
 /* ==== SIDEBAR ==== */
 
-#blog-sidebar {
+#sidebar {
 	width: 19%;
 	font-size: 14px;
 	font-family: 'Lato';
 	position: absolute;
 	top: 130px;
 	right: 2%;
+}
+
+#blog-sidebar {
+	display: block;
 	button {
 		width: 100%;
 		text-align: center;
@@ -150,15 +154,9 @@ button#link-post-btn span {
 	}
 }
 
-/* ==== ACCOUNT SIDEBAR ==== */
-
 .account-sidebar {
-	width: 19%;
-	font-size: 14px;
-	font-family: 'Lato';
 	position: absolute;
-	top: 550px;
-	right: 2%;
+	width: 100%;
 	ul li:first-child {
 		background: $foam-green;
 		color: #fff;

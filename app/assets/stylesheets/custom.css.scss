@@ -135,7 +135,7 @@ em {
 
 /** ===== UNIVERSAL ===== **/
 
-/* FLAT */
+/* ELEMENTS */
 
 body {
 	background: $bg-aqua;
@@ -143,6 +143,19 @@ body {
 	color: #34495E;
 	-webkit-font-smoothing: antialiased;
 	text-rendering:optimizeLegibility;
+}
+
+div#main {
+	min-height: 100%;	
+	position: relative;
+}
+
+div.content-wrapper {
+	padding-bottom: 80px;
+}
+
+footer {
+	height: 80px;
 }
 
 a { 
@@ -227,8 +240,6 @@ button {
 	text-align: center;
 }
 
-
-/* SHOOT */
 
 /* LOADING */
 .loading-overlay {

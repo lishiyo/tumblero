@@ -71,7 +71,8 @@ button#guest-sign-in {
 }
 
 button#create-new-blog{
-	width: 700px;
+	width: 75%;
+	height: 50px;
 	border: none;
 	background: #fff;
 	color: $bg-dark;
@@ -81,6 +82,23 @@ button#create-new-blog{
 	}
 	a, i.fa {
 		color: $bg-dark;
+		transition: background 0.25s ease-in-out 0s;
+		-moz-transition: background 0.25s ease-in-out 0s;
+		-webkit-transition: background 0.25s ease-in-out 0s;
+		-o-transition: background 0.25s ease-in-out 0s;
+		-ms-transition: background 0.25s ease-in-out 0s;
+	}
+	transition: background 0.25s ease-in-out 0s;
+	-moz-transition: background 0.25s ease-in-out 0s;
+	-webkit-transition: background 0.25s ease-in-out 0s;
+	-o-transition: background 0.25s ease-in-out 0s;
+	-ms-transition: background 0.25s ease-in-out 0s;
+}
+button#create-new-blog:hover {
+	background: $bg-dark;
+	color: #fff;
+	i.fa, {
+		color: #fff;
 	}
 }
 /** ===== USER PROFILE ==== */
@@ -158,6 +176,11 @@ ul.activity-feed {
 		margin-bottom: 5px;
 		border: 1px solid #fff;
 		color: #fff;
+		transition: background 0.25s ease-in-out 0s;
+		-moz-transition: background 0.25s ease-in-out 0s;
+		-webkit-transition: background 0.25s ease-in-out 0s;
+		-o-transition: background 0.25s ease-in-out 0s;
+		-ms-transition: background 0.25s ease-in-out 0s;
 	}
 	
 	li.Like {
@@ -170,4 +193,11 @@ ul.activity-feed {
 	li.Following {
 		background: #84cbc5;
 	}
+	
+	li:hover, li:active {
+		color: #fff;
+		background: $bg-dark;
+		border: 1px solid $bg-dark;
+	}
+	
 }

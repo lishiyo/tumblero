@@ -2,8 +2,7 @@
 
 <ul class="activity-feed">	
 <% user.notifications().each(function(note){ %>
-	
-		<a href="#/<%= note.escape('notifiable_url') %>"><li class="btn oe-btn oe-btn-inline-icon <%= note.get('notification_type') %>">		
+		<a href="#/<%= note.escape('notifiable_url') %>"><li class="btn oe-btn-inline-icon <%= note.get('notification_type') %>">		
 		<%= note.escape('noter_blog_handle') %> 
 		<%= note.escape('content') %>
  <i class="fa fa-arrow-right"></i>
@@ -17,7 +16,7 @@
 <ul class="activity-feed">
 <% user.notes().each(function(note){ %>
 	<a href="#/<%= note.get('notifiable_url') %>">
-		<li class="btn oe-btn oe-btn-inline-icon <%= note.get('notification_type') %>">
+		<li class="btn oe-btn-inline-icon <%= note.get('notification_type') %>">
 			<%= note.get('noter_content') %>
 		</li>
 	</a>

@@ -11,7 +11,7 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	
 	initialize: function(opts){
 		Tumblero.perPage = (Tumblero.perPage || 4); // set to a default
-		this.currentUser = opts.currentUser;
+		this.currentUser = opts.currentUser || Tumblero.current_user;
 		this.collection = this.model.posts();
 		this.collection.currPage = (this.model._page || 1);
 		
@@ -110,15 +110,12 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 	},
 	
 	renderPosts: function(coll){		
-		
 		if (!coll || coll._taggings) {
 			var currColl = this.collection;
 		} else {
 			var currColl = coll;
 		}
-		
-		console.log("renderPosts currColl:", currColl, coll);
-		
+				
 		this.addAllPosts(currColl);
 	},
 	
@@ -127,10 +124,15 @@ Tumblero.Views.DashboardShow = Tumblero.ToggableView.extend({
 		this.renderFollowButton(this.$('.follow-btn'));
 	},
 	
-	render: function(){
+	render: function(){		
+		var fbc = (this.currentUser && this.currentUser.get('followed_blogs_ids').length) || 0;
+		var lpc = (this.currentUser && this.currentUser.get('liked_posts_ids').length) || 0;
+		
 		var content = this.template({ 
 			dashboard: this.model,
 			user: this.currentUser,
+			followed_blogs_count: fbc,
+			liked_posts_count: lpc,
 			initialFollowState: this.followState
 		});
 		

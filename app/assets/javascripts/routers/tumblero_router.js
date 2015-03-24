@@ -12,7 +12,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	user: function(){
-		return (this.currentUser || Tumblero.current_user);
+		this.currentUser = this.currentUser || Tumblero.current_user;
+		return this.currentUser;
 	},
 	
 	refreshHeader: function(){
@@ -38,7 +39,26 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		"posts/:id": "postShowFull"
 	},
 	
+	checkRedirect: function(){
+		if (!this.user()) {
+			Backbone.history.navigate("sessions/new", { trigger: true });
+			return true;
+		} else {
+			return false;
+		}
+	},
+	
+	checkUser: function() { 
+		if (this.user()){
+			this.userShow();
+		} else {
+			this.sessionNew();
+		}
+	},
+	
 	postShowFull: function(id){
+		if (this.checkRedirect()) return;
+		
 		var post = new Tumblero.Models.Post({ id: id });
 		post.fetch();
 		
@@ -55,6 +75,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	
 	// sorted by popularity
 	exploreTrending: function(){
+		if (this.checkRedirect()) return;
+		
 		var view = new Tumblero.Views.ExploreTags({ 
 			queryStr: "",
 			currentUser: this.user()
@@ -64,6 +86,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	exploreTags: function(query) {
+		if (this.checkRedirect()) return;
+		
 		var queryStr = query.split("+").join(" "); // EX: "Star+Wars"
 		
 		var view = new Tumblero.Views.ExploreTags({
@@ -73,15 +97,6 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 		
 		this._swapView(view);
 		$('body').removeClass().toggleClass('bg-green');
-	},
-	
-	checkUser: function() { 
-		// check if current_user is present and redirect
-		if (this.currentUser){
-			this.userShow();
-		} else {
-			this.userNew();
-		}
 	},
 	
 	userNew: function(){
@@ -104,6 +119,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 
   userShow: function(id){
+		if (this.checkRedirect()) return;
+		
 		var userShowView = new Tumblero.Views.UserShow({ 
 			model: this.user()
 		});
@@ -112,6 +129,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
   },
 	
 	dashboardShow: function(){		
+		if (this.checkRedirect()) return;
+		
 		var user = this.user();	
 		var dashboard = new Tumblero.Models.Dashboard({ 
 			user: user });	
@@ -129,6 +148,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogShow: function(blog_id){
+		if (this.checkRedirect()) return;
+		
 		var blog = Tumblero.Collections.blogs.getOrFetch(blog_id);
 		
 		var blogShowView = new Tumblero.Views.BlogShow({
@@ -140,6 +161,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogNew: function(){
+		if (this.checkRedirect()) return;
+		
 		var blog = new Tumblero.Models.Blog({ user: this.currentUser });
 		var view = new Tumblero.Views.BlogNew({
 			currentUser: this.user(),
@@ -150,7 +173,8 @@ Tumblero.Routers.Router = Backbone.Router.extend({
 	},
 	
 	blogsExplore: function() {
-		// create global
+		if (this.checkRedirect()) return;
+		
 		var blogs = Tumblero.Collections.blogs;
 		
 		blogs.fetch({
