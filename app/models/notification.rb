@@ -31,7 +31,7 @@ class Notification < ActiveRecord::Base
 	
 	# handle of the main blog of the noter following me
 	def noter_blog_handle
-		noter.main_blog.handle
+		noter.main_blog.nil? ? nil : noter.main_blog.handle
 	end
 	
 	# AS NOTER

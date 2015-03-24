@@ -19,8 +19,10 @@
 		<% end %>
 	<% end %>
 
-<%= yield %>
-	
+	<div class="content-wrapper">
+		<%= yield %>
+	</div>
+
 	<div class="modal-container"></div>
 	
 	<div class="follow-up">
@@ -28,6 +30,7 @@
 			<a href="#/blogs/new"><span>create your first blog <i class="fa fa-forward"></i></span></a>
 		</button>
 	</div>
+	
 	<%= render 'layouts/footer' %>
 	
 	<% if current_user.present? %>

@@ -69,7 +69,13 @@ class User < ActiveRecord::Base
 	end
 	
 	def main_blog
-		Blog.find(self.main_blog_id)
+		if self.main_blog_id.nil? 
+			return nil if self.blogs.empty?
+			ensure_main_blog!(self.blogs.first) 
+			main_blog
+		else 
+			Blog.find(self.main_blog_id)
+		end
 	end
 	
 	def blog_ids
@@ -79,8 +85,8 @@ class User < ActiveRecord::Base
 	# NOTIFICATIONS
 	# params = user_id/noter_id, notification_type, notification_id
 	def notify(params)
-		notification = self.notes.create!(params)
-		notification
+		note = self.notes.create!(params)
+		note
 	end
 	
 	def get_notified(params)

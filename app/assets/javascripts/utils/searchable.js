@@ -48,7 +48,6 @@ Tumblero.Utils.Searchable = {
 					var filtered = _.filter(tags, function(tag) {
 						return pattern.test(tag);
 					});
-					console.log("got tags", tags, filtered);
 					cb(filtered);
 				}
 			})

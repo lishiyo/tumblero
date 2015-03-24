@@ -23,16 +23,11 @@ window.Tumblero = {
 		if (!Tumblero.current_user) {
 			return null;
 		} else {
-			Tumblero.current_user.fetch({
-				success: function(model){
-				}.bind(this)
-			});
-			
+			Tumblero.current_user.fetch();
 			return Tumblero.current_user;
 		}
 	},
 	
-	// janky way of navigation
 	bindNavHandlers: function(){
 		$('.logout-btn').on('click', function(e){
 			Tumblero.current_user = null;

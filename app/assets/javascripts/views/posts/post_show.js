@@ -171,7 +171,7 @@ Tumblero.Views.PostShow = Tumblero.ToggableView.extend({
 			return id === view.blog_id
 		}
 		
-		if (this.currentUser.get('blog_ids').some(inBlogs)) {
+		if (this.currentUser && this.currentUser.get('blog_ids').some(inBlogs)) {
 			this.shouldShowFollow = false;
 		} else {
 			this.shouldShowFollow = true;
