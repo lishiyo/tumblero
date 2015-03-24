@@ -12,7 +12,8 @@ Tumblero.FollowChan.commands.setHandlers({
 				$btn = followToggle.$(opts.btnId),
 				user = followToggle.currentUser,
 				blog_id = $btn.data("blog-id"),
-				followState = $btn.data("initial-follow-state");
+				followState = $btn.data("initial-follow-state"),
+				callback = opts.callback || null;
 				
 		if (followState === "followed") {
 			$btn.data("initial-follow-state", "unfollowing");
@@ -23,10 +24,11 @@ Tumblero.FollowChan.commands.setHandlers({
 				dataType: "json",
 				method: "DELETE",
 				success: function (data) {
-					console.log("successful delete", data);
+// 					console.log("successful delete", data);
 					$btn.data("initial-follow-state", "unfollowed");
 					followToggle.currentUser.fetch();
 					followToggle.renderFollowButton(opts.btnId);		
+					callback && callback();
 				},
 				error: function(data) {
 					console.log("error in delete", data);
@@ -41,10 +43,11 @@ Tumblero.FollowChan.commands.setHandlers({
 				dataType: "json",
 				method: "POST",
 				success: function (data) {
-					console.log("successful follow", data);
+// 					console.log("successful follow", data);
 					$btn.data("initial-follow-state", "followed");
 					followToggle.currentUser.fetch();
 					followToggle.renderFollowButton(opts.btnId);
+					callback && callback();
 				},
 				error: function(data) {
 					console.log("error in follow creation", data);

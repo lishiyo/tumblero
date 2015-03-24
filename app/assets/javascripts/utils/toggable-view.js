@@ -93,13 +93,12 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 		}
 	},
 	
-	// FOLLOWINGS (blog_show and blog_profile)
+	// ==== FOLLOWINGS (blog_show and blog_profile) ====
 	
 	followFromPost: function(event){
 		event.preventDefault();
 		
 		var btnId = ".follow-btn-" + $(event.currentTarget).data("blog-id");
-		
 		Tumblero.FollowChan.commands.execute("followBlog", { 
 			view: this.parentView,
 			btnId: btnId
@@ -139,6 +138,8 @@ Tumblero.ToggableView = Backbone.CompositeView.extend({
 	},
 	
 	followBlog: function(event, model_id){
+		console.log("toggable view called", model_id);
+		
 		event.preventDefault();
 		var followToggle = this,
 				$btn = this.$(this.btnId),

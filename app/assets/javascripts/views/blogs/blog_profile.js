@@ -18,7 +18,10 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 		event.preventDefault();
 		Tumblero.FollowChan.commands.execute("followBlog", { 
 			view: this,
-			btnId: this.followBtnId
+			btnId: this.followBtnId,
+			callback: function(){
+				this.model.fetch();
+			}.bind(this)
 		});
 	},
 	
@@ -40,7 +43,7 @@ Tumblero.Views.BlogProfile = Tumblero.ToggableView.extend({
 		return this;
 	},
 	
-})
+});
 
 
 
