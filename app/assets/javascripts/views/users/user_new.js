@@ -19,7 +19,7 @@ Tumblero.Views.UserNew = Backbone.View.extend({
 			type: "GET",
 			url: "api/guest_signup",
 			success: function(response){
-				console.log("successful sign up with user", response);
+				console.log("successful sign up with user", response.id);
 				this.$('.errors').addClass('hidden');
 				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
 				Tumblero.current_user.fetch({
