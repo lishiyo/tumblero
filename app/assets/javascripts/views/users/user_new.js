@@ -22,29 +22,15 @@ Tumblero.Views.UserNew = Backbone.View.extend({
 				console.log("successful sign up with user", response);
 				this.$('.errors').addClass('hidden');
 				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
-				Tumblero.current_user.fetch();
-				
-				Backbone.history.navigate("explore/blogs", {trigger: true});
+				Tumblero.current_user.fetch({
+					success: function(){
+						Backbone.history.navigate("explore/blogs", {trigger: true});
+					}
+				});
 				Tumblero.Header.refresh({ currentUser: Tumblero.current_user });
 			}.bind(this)
 		});
 		
-// 		var formData = {
-// 			email: "guest@tumblero.com",
-// 			password: "demodemo"
-// 		}		
-// 		var newSession = new Tumblero.Models.Session();
-		 
-// 		newSession.save(formData, {
-// 			success:function(response){
-// 				this.$('.errors').addClass('hidden');
-// 				Tumblero.current_user = new Tumblero.Models.User({ id: response.id });
-// 				Tumblero.current_user.fetch();
-				
-//         Backbone.history.navigate("/dashboard", {trigger: true});
-// 				Tumblero.Header.refresh({ currentUser: Tumblero.current_user });				
-// 			}.bind(this)
-// 		})
 	},
 
   createUser: function (event){
