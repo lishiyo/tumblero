@@ -10,7 +10,7 @@ test:
   encoding: UTF8
   database: project_test
   pool: 5
-  host: 0.0.0.0
+  host: localhost
 
 production:
   adapter: postgresql
