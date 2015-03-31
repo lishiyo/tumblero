@@ -72,10 +72,11 @@ group :development, :test do
 	gem 'binding_of_caller'
 	gem 'pry-rails'
 	gem 'quiet_assets'
-	gem "factory_girl_rails", "~> 4.0"
+	gem 'factory_girl_rails', "~> 4.0"
 	gem 'guard-rspec'
 	gem 'capybara'
-	gem "shoulda-matchers"
+	gem 'poltergeist'
+	gem 'shoulda-matchers'
 end
 
 group :production do

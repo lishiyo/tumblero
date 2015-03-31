@@ -1341,3 +1341,285 @@ Completed 200 OK in 236ms (Views: 217.2ms | ActiveRecord: 0.0ms)
   [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 27]]
   [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
   [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (1.9ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'jeramie@rogahn.net' LIMIT 1
+  [1m[36mSQL (2.0ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "B0nrfbB0wCCRxhSk2_4Opg"], ["email", "jeramie@rogahn.net"], ["password_digest", "$2a$10$BRfBAbLXGjHKvo0nkOUGmOvjmIqtmucktV4ZG7ZfkxBfTKEbOE6IW"], ["created_at", "2015-03-31 21:57:04.903384"], ["updated_at", "2015-03-31 21:57:04.903384"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.5ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (2.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'linwood.zulauf@herzogemard.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "6Xk9i8SACmlfnb1hXBEZhA"], ["email", "linwood.zulauf@herzogemard.com"], ["password_digest", "$2a$10$EmP5eDPKbAFg2C4IXt2iHeVo9jfVCNM8oh7SnsySHdkJtxujMz/dW"], ["created_at", "2015-03-31 21:57:04.989977"], ["updated_at", "2015-03-31 21:57:04.989977"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Exists (3.0ms)[0m  SELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = '9nilokw40j' LIMIT 1
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 29], ["name", "lillie.schulist"], ["handle", "9nilokw40j"], ["description", "test description"], ["created_at", "2015-03-31 21:57:05.027941"], ["updated_at", "2015-03-31 21:57:05.027941"]]
+  [1m[35mPgSearch::Document Load (2.2ms)[0m  SELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1  [["searchable_id", 16], ["searchable_type", "Blog"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 16]]
+  [1m[35m (3.6ms)[0m  SELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC  [["blog_id", 16], ["taggable_type", "Post"]]
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["searchable_id", 16], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 21:57:05.110923"], ["updated_at", "2015-03-31 21:57:05.110923"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 29]]
+  [1m[35mPgSearch::Document Load (0.3ms)[0m  SELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1  [["searchable_id", 16], ["searchable_type", "Blog"]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "pg_search_documents" WHERE "pg_search_documents"."id" = $1[0m  [["id", 16]]
+  [1m[35mFollowing Load (1.8ms)[0m  SELECT "followings".* FROM "followings" WHERE "followings"."blog_id" = $1  [["blog_id", 16]]
+  [1m[36mReblog Load (1.7ms)[0m  [1mSELECT "reblogs".* FROM "reblogs" WHERE "reblogs"."blog_id" = $1[0m  [["blog_id", 16]]
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "blogs" WHERE "blogs"."id" = $1  [["id", 16]]
+  [1m[36mDashboard Load (1.2ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 29]]
+  [1m[35mFollowing Load (0.2ms)[0m  SELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1  [["user_id", 29]]
+  [1m[36mBlog Load (0.4ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 29]]
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "users" WHERE "users"."id" = $1  [["id", 29]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'addison@thielschamberger.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["session_token", "cjD23QahrFFtr8dPOBYvFQ"], ["email", "addison@thielschamberger.info"], ["password_digest", "$2a$10$4JNjd1RHMi1ya/cNadijXOvPGhzZvrryNPS1J1cuQnDjnhKVM5Xiq"], ["created_at", "2015-03-31 21:57:05.278760"], ["updated_at", "2015-03-31 21:57:05.278760"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'annalise@nader.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["session_token", "vs8E0R-jVc7ZoJV7IB-Fbw"], ["email", "annalise@nader.biz"], ["password_digest", "$2a$10$csnnt528Ue/l/FKN8aASr.gMLIwIXLeD6h4oqFqQESNQV/UmCgT/W"], ["created_at", "2015-03-31 21:57:05.353792"], ["updated_at", "2015-03-31 21:57:05.353792"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mBlog Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = '6pgpopefra' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["user_id", 31], ["name", "robb"], ["handle", "6pgpopefra"], ["description", "test description"], ["created_at", "2015-03-31 21:57:05.357799"], ["updated_at", "2015-03-31 21:57:05.357799"]]
+  [1m[36mPgSearch::Document Load (0.2ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 17], ["searchable_type", "Blog"]]
+  [1m[35mBlog Load (0.2ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 17]]
+  [1m[36m (0.3ms)[0m  [1mSELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC[0m  [["blog_id", 17], ["taggable_type", "Post"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["searchable_id", 17], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 21:57:05.362983"], ["updated_at", "2015-03-31 21:57:05.362983"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 31]]
+  [1m[36mPgSearch::Document Load (0.2ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 17], ["searchable_type", "Blog"]]
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "pg_search_documents" WHERE "pg_search_documents"."id" = $1  [["id", 17]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."blog_id" = $1[0m  [["blog_id", 17]]
+  [1m[35mReblog Load (0.2ms)[0m  SELECT "reblogs".* FROM "reblogs" WHERE "reblogs"."blog_id" = $1  [["blog_id", 17]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "blogs" WHERE "blogs"."id" = $1[0m  [["id", 17]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 31]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 31]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 31]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 31]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'stefanie.rath@aufderhar.info' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "TIcRHQJIKhp3TItEly85HA"], ["email", "stefanie.rath@aufderhar.info"], ["password_digest", "$2a$10$KZXd6NmvJ5e/bUDkSqoPNeYD0lah7xWEOFV0iY13k.AawoKb1NaOK"], ["created_at", "2015-03-31 21:57:05.449990"], ["updated_at", "2015-03-31 21:57:05.449990"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'nakia@greenfelder.name' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "Dpr0t7y-riqTzVdSQgyLIA"], ["email", "nakia@greenfelder.name"], ["password_digest", "$2a$10$tA/HARSc3DhH6S5QcUpFzu7O30q19GgGZvurxbo8wtmnqPLXCEKV2"], ["created_at", "2015-03-31 21:57:05.525118"], ["updated_at", "2015-03-31 21:57:05.525118"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Exists (0.3ms)[0m  SELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = '3kx3b4pl5k' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 33], ["name", "geovanni"], ["handle", "3kx3b4pl5k"], ["description", "test description"], ["created_at", "2015-03-31 21:57:05.529297"], ["updated_at", "2015-03-31 21:57:05.529297"]]
+  [1m[35mPgSearch::Document Load (0.2ms)[0m  SELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1  [["searchable_id", 18], ["searchable_type", "Blog"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 18]]
+  [1m[35m (0.5ms)[0m  SELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC  [["blog_id", 18], ["taggable_type", "Post"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["searchable_id", 18], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 21:57:05.534579"], ["updated_at", "2015-03-31 21:57:05.534579"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'rosemarie@effertzmills.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (2.9ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alyon_mertz@welch.info' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["session_token", "UlSL0vjEsrAgLmlCenU9Ew"], ["email", "alyon_mertz@welch.info"], ["password_digest", "$2a$10$yntE.lxkt/NRhAQ9HTGig.9rcvibXhG7U5VQzGTQ7xyebbvaoy35y"], ["created_at", "2015-03-31 21:57:05.690453"], ["updated_at", "2015-03-31 21:57:05.690453"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mBlog Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = 'aq0yenjyfw' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["user_id", 34], ["name", "demetrius"], ["handle", "aq0yenjyfw"], ["description", "test description"], ["created_at", "2015-03-31 21:57:05.697112"], ["updated_at", "2015-03-31 21:57:05.697112"]]
+  [1m[36mPgSearch::Document Load (0.3ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 19], ["searchable_type", "Blog"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 19]]
+  [1m[36m (0.5ms)[0m  [1mSELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC[0m  [["blog_id", 19], ["taggable_type", "Post"]]
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["searchable_id", 19], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 21:57:05.705656"], ["updated_at", "2015-03-31 21:57:05.705656"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE ("users"."email" = 'alyon_mertz@welch.info' AND "users"."id" != 34) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 33]]
+  [1m[36mPgSearch::Document Load (0.2ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 18], ["searchable_type", "Blog"]]
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "pg_search_documents" WHERE "pg_search_documents"."id" = $1  [["id", 18]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."blog_id" = $1[0m  [["blog_id", 18]]
+  [1m[35mReblog Load (0.3ms)[0m  SELECT "reblogs".* FROM "reblogs" WHERE "reblogs"."blog_id" = $1  [["blog_id", 18]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "blogs" WHERE "blogs"."id" = $1[0m  [["id", 18]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 33]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 33]]
+  [1m[35mBlog Load (0.4ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 33]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 33]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'marjory_lubowitz@krajcikratke.name' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "y752Ugufr5_QuTmZMiGydw"], ["email", "marjory_lubowitz@krajcikratke.name"], ["password_digest", "$2a$10$PDX4DLG2KST1ToSEv.ySIOFmJH1aH.QyRYPnlme3VetiYGWH06gaa"], ["created_at", "2015-03-31 21:57:05.799364"], ["updated_at", "2015-03-31 21:57:05.799364"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'kristy_klein@jacobi.org' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "5RyX-FZn_W1E_yANtplFbg"], ["email", "kristy_klein@jacobi.org"], ["password_digest", "$2a$10$lYUXEoR1ktI/58yDTNwVtuV3aIE2yVwNh51Zc/KvIU1ZNQ9jg5JMK"], ["created_at", "2015-03-31 21:57:05.874257"], ["updated_at", "2015-03-31 21:57:05.874257"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Exists (0.2ms)[0m  SELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = 'uqgs8gpi8q' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 36], ["name", "edwardo_gulgowski"], ["handle", "uqgs8gpi8q"], ["description", "test description"], ["created_at", "2015-03-31 21:57:05.878356"], ["updated_at", "2015-03-31 21:57:05.878356"]]
+  [1m[35mPgSearch::Document Load (0.2ms)[0m  SELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1  [["searchable_id", 20], ["searchable_type", "Blog"]]
+  [1m[36mBlog Load (0.2ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 20]]
+  [1m[35m (0.3ms)[0m  SELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC  [["blog_id", 20], ["taggable_type", "Post"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["searchable_id", 20], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 21:57:05.883967"], ["updated_at", "2015-03-31 21:57:05.883967"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Load (0.2ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 36]]
+  [1m[36mPgSearch::Document Load (0.2ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 20], ["searchable_type", "Blog"]]
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "pg_search_documents" WHERE "pg_search_documents"."id" = $1  [["id", 20]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."blog_id" = $1[0m  [["blog_id", 20]]
+  [1m[35mReblog Load (0.2ms)[0m  SELECT "reblogs".* FROM "reblogs" WHERE "reblogs"."blog_id" = $1  [["blog_id", 20]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "blogs" WHERE "blogs"."id" = $1[0m  [["id", 20]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 36]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 36]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 36]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 36]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (4.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (2.7ms)[0m  BEGIN
+  [1m[36m (3.7ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (1.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'jerrod.waters@boscokshlerin.net' LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "-jcVBKD463GKF9afFUcjCA"], ["email", "jerrod.waters@boscokshlerin.net"], ["password_digest", "$2a$10$lc0YYFNGJ55b6XasLmGHEupz2/QcQQJCeBySaCNIqYks/NwpKAvGa"], ["created_at", "2015-03-31 22:01:07.733624"], ["updated_at", "2015-03-31 22:01:07.733624"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'shaylee@bahringer.net' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "-riLXGPEKlsRWqVIMuuZFw"], ["email", "shaylee@bahringer.net"], ["password_digest", "$2a$10$Ddf54lGt8Zr157UnkQ3MpORwBwucZPor3emQ/.bziQx6UxjkbtJUC"], ["created_at", "2015-03-31 22:01:07.844585"], ["updated_at", "2015-03-31 22:01:07.844585"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Exists (0.7ms)[0m  SELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = 'tf3v0snyzt' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 38], ["name", "mallory_feil"], ["handle", "tf3v0snyzt"], ["description", "test description"], ["created_at", "2015-03-31 22:01:07.889830"], ["updated_at", "2015-03-31 22:01:07.889830"]]
+  [1m[35mPgSearch::Document Load (0.5ms)[0m  SELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1  [["searchable_id", 21], ["searchable_type", "Blog"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 21]]
+  [1m[35m (0.9ms)[0m  SELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC  [["blog_id", 21], ["taggable_type", "Post"]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["searchable_id", 21], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 22:01:08.007631"], ["updated_at", "2015-03-31 22:01:08.007631"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1[0m  [["user_id", 38]]
+  [1m[35mPgSearch::Document Load (0.3ms)[0m  SELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1  [["searchable_id", 21], ["searchable_type", "Blog"]]
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "pg_search_documents" WHERE "pg_search_documents"."id" = $1[0m  [["id", 21]]
+  [1m[35mFollowing Load (0.5ms)[0m  SELECT "followings".* FROM "followings" WHERE "followings"."blog_id" = $1  [["blog_id", 21]]
+  [1m[36mReblog Load (0.5ms)[0m  [1mSELECT "reblogs".* FROM "reblogs" WHERE "reblogs"."blog_id" = $1[0m  [["blog_id", 21]]
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "blogs" WHERE "blogs"."id" = $1  [["id", 21]]
+  [1m[36mDashboard Load (0.5ms)[0m  [1mSELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1[0m  [["user_id", 38]]
+  [1m[35mFollowing Load (0.3ms)[0m  SELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1  [["user_id", 38]]
+  [1m[36mBlog Load (0.4ms)[0m  [1mSELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1[0m  [["user_id", 38]]
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "users" WHERE "users"."id" = $1  [["id", 38]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'viva_watsica@powlowski.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["session_token", "6REYv0_rexZr1EWkmjIQhA"], ["email", "viva_watsica@powlowski.com"], ["password_digest", "$2a$10$MIk2wFrhuIQsApCBROHIhunKVpm7MWiuqJRhQUvZ7m2Wp4vReMsqe"], ["created_at", "2015-03-31 22:01:08.208515"], ["updated_at", "2015-03-31 22:01:08.208515"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'elvera_oconner@gutmann.biz' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["session_token", "yTmXXugDYsIiqKINaatIWA"], ["email", "elvera_oconner@gutmann.biz"], ["password_digest", "$2a$10$puWdwifjVPEws5RzLTh.fuuoTjwF7zLe9JezXu/kzwkYIlA64d7r."], ["created_at", "2015-03-31 22:01:08.314743"], ["updated_at", "2015-03-31 22:01:08.314743"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mBlog Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = '2oer01eji6' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["user_id", 40], ["name", "emilie"], ["handle", "2oer01eji6"], ["description", "test description"], ["created_at", "2015-03-31 22:01:08.320949"], ["updated_at", "2015-03-31 22:01:08.320949"]]
+  [1m[36mPgSearch::Document Load (0.3ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 22], ["searchable_type", "Blog"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 22]]
+  [1m[36m (0.5ms)[0m  [1mSELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC[0m  [["blog_id", 22], ["taggable_type", "Post"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["searchable_id", 22], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 22:01:08.329122"], ["updated_at", "2015-03-31 22:01:08.329122"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 40]]
+  [1m[36mPgSearch::Document Load (0.2ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 22], ["searchable_type", "Blog"]]
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "pg_search_documents" WHERE "pg_search_documents"."id" = $1  [["id", 22]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."blog_id" = $1[0m  [["blog_id", 22]]
+  [1m[35mReblog Load (0.2ms)[0m  SELECT "reblogs".* FROM "reblogs" WHERE "reblogs"."blog_id" = $1  [["blog_id", 22]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "blogs" WHERE "blogs"."id" = $1[0m  [["id", 22]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 40]]
+  [1m[36mFollowing Load (0.3ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 40]]
+  [1m[35mBlog Load (0.5ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 40]]
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 40]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'ralph@mayerthettinger.info' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "oU5l3Hl_berou6OAE1Y7AQ"], ["email", "ralph@mayerthettinger.info"], ["password_digest", "$2a$10$vIERqDCdT02sSvukdCpRjOgK0xecs24GDxfRRsVJ/bEZdgPeausSG"], ["created_at", "2015-03-31 22:01:08.444649"], ["updated_at", "2015-03-31 22:01:08.444649"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'julian@handortiz.com' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "m7jN_I4wGV9hcKv9uRVSnA"], ["email", "julian@handortiz.com"], ["password_digest", "$2a$10$gOUAxAX7Xqh7uxFmWOPV.e.L48jNAon66BrUEdNGK7pAtwHvMbSn6"], ["created_at", "2015-03-31 22:01:08.528350"], ["updated_at", "2015-03-31 22:01:08.528350"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Exists (0.4ms)[0m  SELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = '0p0adldepw' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 42], ["name", "summer_grimes"], ["handle", "0p0adldepw"], ["description", "test description"], ["created_at", "2015-03-31 22:01:08.534757"], ["updated_at", "2015-03-31 22:01:08.534757"]]
+  [1m[35mPgSearch::Document Load (0.3ms)[0m  SELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1  [["searchable_id", 23], ["searchable_type", "Blog"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 23]]
+  [1m[35m (0.5ms)[0m  SELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC  [["blog_id", 23], ["taggable_type", "Post"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["searchable_id", 23], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 22:01:08.542647"], ["updated_at", "2015-03-31 22:01:08.542647"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'maryjane@wiegandjenkins.name' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  SAVEPOINT active_record_1
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'earl@sporerjacobs.net' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["session_token", "sZZJOqtWtz8JeOtwOOXYoQ"], ["email", "earl@sporerjacobs.net"], ["password_digest", "$2a$10$AJhLievxGO6KfkS6IGbrsucOpIdCOMC51VHZFfTSktQqbkTlYsgnC"], ["created_at", "2015-03-31 22:01:08.704852"], ["updated_at", "2015-03-31 22:01:08.704852"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mBlog Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = 'fc771ud3oh' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["user_id", 43], ["name", "allen"], ["handle", "fc771ud3oh"], ["description", "test description"], ["created_at", "2015-03-31 22:01:08.711068"], ["updated_at", "2015-03-31 22:01:08.711068"]]
+  [1m[36mPgSearch::Document Load (0.3ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 24], ["searchable_type", "Blog"]]
+  [1m[35mBlog Load (0.3ms)[0m  SELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1  [["id", 24]]
+  [1m[36m (0.5ms)[0m  [1mSELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC[0m  [["blog_id", 24], ["taggable_type", "Post"]]
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["searchable_id", 24], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 22:01:08.719181"], ["updated_at", "2015-03-31 22:01:08.719181"]]
+  [1m[36m (0.9ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE ("users"."email" = 'earl@sporerjacobs.net' AND "users"."id" != 43) LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Load (0.3ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 42]]
+  [1m[36mPgSearch::Document Load (0.2ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 23], ["searchable_type", "Blog"]]
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "pg_search_documents" WHERE "pg_search_documents"."id" = $1  [["id", 23]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."blog_id" = $1[0m  [["blog_id", 23]]
+  [1m[35mReblog Load (0.3ms)[0m  SELECT "reblogs".* FROM "reblogs" WHERE "reblogs"."blog_id" = $1  [["blog_id", 23]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "blogs" WHERE "blogs"."id" = $1[0m  [["id", 23]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 42]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 42]]
+  [1m[35mBlog Load (0.4ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 42]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 42]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'abdiel@darehuel.biz' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "SQ6Q0udWrWcyUmOdimaHtA"], ["email", "abdiel@darehuel.biz"], ["password_digest", "$2a$10$NVCcB7n0hwTaVu5.4g8X6.TZweQfKgGwasNCWP6MCsSktJfhq3Lei"], ["created_at", "2015-03-31 22:01:08.819405"], ["updated_at", "2015-03-31 22:01:08.819405"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (3.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'litzy@zieme.name' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("session_token", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["session_token", "Vc-vKqyNA1-ftJkCHSkLOQ"], ["email", "litzy@zieme.name"], ["password_digest", "$2a$10$KArWRi/YzBmi7qt6po6bZ.0P9rRvgOxzAm9XpS1DHnDjpszVj6erK"], ["created_at", "2015-03-31 22:01:08.908112"], ["updated_at", "2015-03-31 22:01:08.908112"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Exists (0.3ms)[0m  SELECT  1 AS one FROM "blogs" WHERE "blogs"."handle" = '6aa7gaktsi' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "blogs" ("user_id", "name", "handle", "description", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 45], ["name", "joaquin_king"], ["handle", "6aa7gaktsi"], ["description", "test description"], ["created_at", "2015-03-31 22:01:08.914647"], ["updated_at", "2015-03-31 22:01:08.914647"]]
+  [1m[35mPgSearch::Document Load (0.2ms)[0m  SELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1  [["searchable_id", 25], ["searchable_type", "Blog"]]
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT  "blogs".* FROM "blogs" WHERE "blogs"."id" = $1 LIMIT 1[0m  [["id", 25]]
+  [1m[35m (0.4ms)[0m  SELECT "taggings"."name" FROM "taggings" INNER JOIN "posts" ON "taggings"."taggable_id" = "posts"."id" WHERE "posts"."blog_id" = $1 AND "taggings"."taggable_type" = $2  ORDER BY "posts"."created_at" DESC  [["blog_id", 25], ["taggable_type", "Post"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "pg_search_documents" ("searchable_id", "searchable_type", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["searchable_id", 25], ["searchable_type", "Blog"], ["content", ""], ["created_at", "2015-03-31 22:01:08.922484"], ["updated_at", "2015-03-31 22:01:08.922484"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mBlog Load (0.4ms)[0m  SELECT "blogs".* FROM "blogs" WHERE "blogs"."user_id" = $1  [["user_id", 45]]
+  [1m[36mPgSearch::Document Load (0.2ms)[0m  [1mSELECT  "pg_search_documents".* FROM "pg_search_documents" WHERE "pg_search_documents"."searchable_id" = $1 AND "pg_search_documents"."searchable_type" = $2 LIMIT 1[0m  [["searchable_id", 25], ["searchable_type", "Blog"]]
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "pg_search_documents" WHERE "pg_search_documents"."id" = $1  [["id", 25]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."blog_id" = $1[0m  [["blog_id", 25]]
+  [1m[35mReblog Load (0.3ms)[0m  SELECT "reblogs".* FROM "reblogs" WHERE "reblogs"."blog_id" = $1  [["blog_id", 25]]
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "blogs" WHERE "blogs"."id" = $1[0m  [["id", 25]]
+  [1m[35mDashboard Load (0.2ms)[0m  SELECT  "dashboards".* FROM "dashboards" WHERE "dashboards"."user_id" = $1 LIMIT 1  [["user_id", 45]]
+  [1m[36mFollowing Load (0.2ms)[0m  [1mSELECT "followings".* FROM "followings" WHERE "followings"."user_id" = $1[0m  [["user_id", 45]]
+  [1m[35mBlog Load (0.4ms)[0m  SELECT "blogs".* FROM "blogs" INNER JOIN "followings" ON "blogs"."id" = "followings"."blog_id" WHERE "followings"."user_id" = $1  [["user_id", 45]]
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 45]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
